@@ -1,0 +1,53 @@
+Note Alex:
+
+film :
+    -Titre
+    -Acteurs* + Rôles
+    -Directeur(s)*
+    -Auteur(s)*
+    -Genre(s)
+    -Langue originale
+    -Pays
+    -Année de création
+    -Note obtenue du film
+
+
+série: 
+    -Nom de la série
+    -Année de début
+    -Année de fin si connue
+    -Nombres de saison
+    -Auteur(s)*
+    -Directeur(s)*
+    -Langue originale
+    -Liste des épisodes*
+    -Note obtenue générale de la série
+*épisode:
+    -Titre de l'épisode
+    -Numéro de saison de l'épisode
+    -Numéro de l'épisode dans la saison
+    -Acteurs* + Rôles
+    Ajout perso : 
+    -Année de diffusion si trouvable.
+    -Pays où diffusé si trouvable.
+    -Photô de l'acteur
+
+*Acteurs, Directeur(s), Auteur(s): 
+    -Nom
+    -Prénom
+    -Genre
+
+
+2 types d'user: 
+    -Anonymous:
+        - readOnly:
+            - Toutes les infos d'un film, série ou épisode.
+            - Recherche sur bases d'informations
+            - Toutes les info d'une personne
+    -Admin:
+        - insertion
+        - suppression
+        - modification
+        - identifiant
+        - password haché par exemple par un SHA-256
+        - login
