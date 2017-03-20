@@ -4,6 +4,7 @@ film :
     -Titre
     -Acteurs* + Rôles
     -Directeur(s)*
+    -Producteur(s)*
     -Auteur(s)*
     -Genre(s)
     -Langue originale
@@ -21,18 +22,19 @@ série:
     -Directeur(s)*
     -Langue originale
     -Liste des épisodes*
-    -Note obtenue générale de la série
+    -Note de l'épisode
 *épisode:
     -Titre de l'épisode
     -Numéro de saison de l'épisode
     -Numéro de l'épisode dans la saison
     -Acteurs* + Rôles
+    -Date de diffusion
     Ajout perso : 
-    -Année de diffusion si trouvable.
     -Pays où diffusé si trouvable.
     -Photô de l'acteur
+    -Note obtenue générale de la série
 
-*Acteurs, Directeur(s), Auteur(s): 
+*Acteurs, Directeur(s), Auteur(s), Producteur(s): 
     -Nom
     -Prénom
     -Genre
