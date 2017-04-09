@@ -8,7 +8,7 @@ wget -r --accept="*.gz" --no-directories --no-host-directories --level 1 ftp://f
 rm -f $FILETODELETE
 
 #unzip des fichiers
-gzip *.gz
+gzip -d *.gz
 
 rm -f *.gz 
 
