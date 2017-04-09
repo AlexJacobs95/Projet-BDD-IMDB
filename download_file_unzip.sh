@@ -10,10 +10,9 @@ rm -f $FILETODELETE
 #unzip des fichiers
 gzip -d *.gz
 
-rm -f *.gz 
-
 echo 'affiche les fichier unzip'
 ls *.list
+
 echo 'voir si pas de gz'
 ls *gz 
 echo "tout est ok !"
