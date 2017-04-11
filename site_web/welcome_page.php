@@ -39,34 +39,9 @@ Page d'acceuill de site web.
 <body id="page-top" class="index">
 
 <!-- Navigation -->
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">IMDB</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a href="href=simple_search.php">Recherche avancée</a>
-                </li>
-                <li>
-                    <a href="administrator_login_page.php">Administrateur</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
+<?php
+    include 'menubar.php';
+?>
 
 <!-- Header -->
 <header>
@@ -120,5 +95,7 @@ Page d'acceuill de site web.
 
 
 </body>
+<script src="./js/jquery-1.12.3.min.js"></script>
+<script src="./js/bootstrap.min.js"></script> 
 
 </html>
