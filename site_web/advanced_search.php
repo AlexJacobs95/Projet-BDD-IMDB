@@ -1,32 +1,23 @@
-<!--
+ <!--
 Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
-Page d'acceuill de site web.
+Page de recherche avancé de site web.
 -->
-
  <?php session_start(); ?>
 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/dashboard.css" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
 	<head>
 		<link href="media/icon_imdb.ico" rel="shortcut icon"/>
-		<title>IMBD Welcome</title>
+		<title>Recherche avancée</title>
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<?php 
+		<?php
 			include 'menubar.php';
 		?>
-		<div class="billboard">
-			<div class="text-wrapper">
-				<h1>IMDB: Internet Movie Data Base</h1> 
-				<p>Bienvenue sur le moteur de recherche cinématographique!</p> 
-			</div>
-		</div>
 	</body>
-	<script src="./js/jquery-1.12.3.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
 </html>
