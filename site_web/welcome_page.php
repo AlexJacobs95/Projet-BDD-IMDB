@@ -59,7 +59,7 @@ Page d'acceuill de site web.
                     <a href="href=simple_search.php">Recherche avancée</a>
                 </li>
                 <li>
-                    <a href="administrator_page.php">Administrateur</a>
+                    <a href="administrator_login_page.php">Administrateur</a>
                 </li>
             </ul>
         </div>
