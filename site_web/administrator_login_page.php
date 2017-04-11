@@ -47,6 +47,7 @@ Page de recherche avancé de site web.
 							    width: 100%;
 							    padding: 12px 20px;
 							    margin: 8px 0;
+							    color: black;
 							    display: inline-block;
 							    border: 1px solid #ccc;
 							    box-sizing: border-box;
@@ -67,7 +68,7 @@ Page de recherche avancé de site web.
 							}
     					</style>
 					    <label><b>Username</b></label>
-					    <input type="text" placeholder="Enter Username" name="Username" required>
+					    <input type="text" placeholder="Enter Email" name="email" required>
 
 					    <label><b>Password</b></label>
 					    <input type="password" placeholder="Enter Password" name="pswd" required>
