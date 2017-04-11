@@ -20,4 +20,6 @@ Page de recherche avancé de site web.
 			include 'menubar.php';
 		?>
 	</body>
+	<script src="./js/jquery-1.12.3.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
 </html>
