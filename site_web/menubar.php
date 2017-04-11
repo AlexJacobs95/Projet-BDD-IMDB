@@ -9,7 +9,7 @@
                 <li><a href="welcome_page.php">Accueil</a></li>
                 <li><a href="simple_search.php">Recherche simple</a></li>
                 <li><a href="advanced_search.php">Recherche avancée</a></li>
-                <li><a href="administrator_page.php">Administrateur</a></li>
+                <li><a href="administrator_login_page.php">Administrateur</a></li>
             </ul>
     </div>
 </div>
