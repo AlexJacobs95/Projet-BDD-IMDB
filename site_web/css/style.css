@@ -1,0 +1,50 @@
+/*html{
+  margin:0;
+  padding:0;
+  background: url(../media/background_welcome_page.png) no-repeat center fixed; 
+  -webkit-background-size: cover;
+  background-size: cover;
+*/
+body{
+	margin:0;
+	padding: 0;
+}
+
+
+.header{
+	height:50px;
+	background-color: #D3D3D3;
+}
+
+.navcontainer{
+	float:right;
+	margin-right:100px;
+}
+
+.billboard{
+height:930px;
+width:100%;
+background-repeat:no-repeat;
+background-size:100%;
+text-align:center;
+background-position:center;
+background-image:url(../media/background_welcome_page.png);
+position:relative;
+}
+
+
+.text-wrapper{
+position:absolute;
+top: 50%;
+left: 50%;
+width: 400px;
+height: 200px;
+margin-left: -200px;
+margin-top: -29px;
+}
+ 
+ h1{
+ color:black;
+ font-family:arial;
+ font-size:25px;
+ }
