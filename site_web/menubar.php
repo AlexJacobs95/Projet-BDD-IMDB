@@ -36,7 +36,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a href="href=advanced_search.php">Recherche avancée</a>
+                    <a href="advanced_search.php">Recherche avancée</a>
                 </li>
                 <li>
                     <a href="administrator_login_page.php">Administrateur</a>
