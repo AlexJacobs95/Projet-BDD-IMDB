@@ -45,29 +45,31 @@ Page de recherche avancé de site web.
     					<style type="text/css">
     						input[type=text], input[type=password] {
 							    width: 100%;
-							    padding: 12px 20px;
-							    margin: 8px 0;
+							    padding: 15px 15px;
+							    margin: 5px 0;
 							    color: black;
-							    display: inline-block;
-							    border: 1px solid #ccc;
+							    display: inline;
+							    border: 2.5px solid yellow;
 							    box-sizing: border-box;
+							    border-radius: 4px;
 							}
 
 							button {
 							    background-color: #4c4cff;
 							    color: black;
-							    padding: 14px 20px;
-							    margin: 8px 0;
+							    padding: 15px 15px;
+							    margin: 5px 0;
 							    border: none;
 							    cursor: default;
 							    width: 100%;
+							    border-radius: 4px;
 							}
 
 							button:hover {
-							    opacity: 0.2;
+							    opacity: 0.5;
 							}
     					</style>
-					    <label><b>Username</b></label>
+					    <label><b>Email</b></label>
 					    <input type="text" placeholder="Enter Email" name="email" required>
 
 					    <label><b>Password</b></label>
