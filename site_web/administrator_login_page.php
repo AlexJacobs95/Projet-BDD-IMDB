@@ -41,7 +41,7 @@ Page de recherche avancé de site web.
 		<header>
     		<div class="container">
     			<div class="intro-text">
-    				<form action="/check_login.php">
+    				<form action="/administrator_action_page.php"><!--  mettre un renvoi vers un check des data entré, mais pour test le display du admin panel pas besoin-->
     					<style type="text/css">
     						input[type=text], input[type=password] {
 							    width: 100%;
@@ -55,7 +55,7 @@ Page de recherche avancé de site web.
 							}
 
 							button {
-							    background-color: #4c4cff;
+							    background-color: #FFD700;
 							    color: black;
 							    padding: 15px 15px;
 							    margin: 5px 0;
