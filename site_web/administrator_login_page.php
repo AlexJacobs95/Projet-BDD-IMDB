@@ -44,13 +44,13 @@ Page de recherche avancé de site web.
                 <div class="intro-text">
                     <div class="intro-heading">Connexion administrateur</div>
 
-                    <form name="search" id="searchForm" action="administrator_action_page.php" novalidate>
+                    <form action="administrator_action_page.php" name="search" id="searchForm">
 
                         <div class="form-group text-center">
-                            <input type="email" class="form-control" placeholder="Adresse mail" id="mail" required>
+                            <input type="email" class="form-control" placeholder="Adresse mail" name="mail" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Mot de passe " id="password" required>
+                            <input type="password" class="form-control" placeholder="Mot de passe " name="password" required>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
