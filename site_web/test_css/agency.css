@@ -111,10 +111,6 @@ fieldset[disabled] .btn-primary.active {
   padding: 20px 40px;
 }
 
-.form-control::-webkit-input-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.form-control:-moz-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.form-control::-moz-placeholder { color: white;font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.form-control:-ms-input-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .btn-xl:hover,
 .btn-xl:focus,
@@ -290,7 +286,7 @@ section {
 section h2.section-heading {
   font-size: 40px;
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 section h3.section-subheading {
   font-size: 16px;
