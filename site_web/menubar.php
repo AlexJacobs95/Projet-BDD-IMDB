@@ -36,7 +36,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#recherche_avancee">Recherche avancée</a>
+                    <a class="page-scroll" href="welcome_page.php#recherche_avancee">Recherche avancée</a>
                 </li>
                 <li>
                     <a href="administrator_login_page.php">Administrateur</a>
