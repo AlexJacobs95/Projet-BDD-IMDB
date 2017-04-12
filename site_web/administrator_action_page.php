@@ -24,7 +24,7 @@ Page de recherche avancé de site web.
 
     <!-- Theme CSS -->
     <link href="test_css/agency.css" rel="stylesheet">
-    
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,142 +41,71 @@ Page de recherche avancé de site web.
 		<header>
     		<div class="container">
                 <div class="intro-text">
-                    <h1>Panneau Admnistrateur</h1>
-                    <style type="text/css">
-                        input[type=text], input[type=email], input[type=password] {
-                            width: 100%;
-                            padding: 15px 15px;
-                            margin: 5px 0;
-                            color: black;
-                            display: inline-block;
-                            border: 2.5px solid yellow;
-                            box-sizing: border-box;
-                            border-radius: 4px;
-                            background-color: white;
-                        }
-
-                        button {
-                            margin: 5px 0;
-                            background-color: #FFD700;
-                            color: black;
-                            border: none;
-                            cursor: default;
-                            border-radius: 4px;
-                        }
-
-                        button:hover {
-                            opacity: 0.5;
-                        }
-                    </style>
-                    <!-- Ajout Supp admin -->
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Admnistrateur</h4>
-                        <label><b>Email</b></label>
-                        <input type="email" name="email" placeholder="Enter a email" required>
-                        <label><b>Password</b></label>
-                        <input type="password" name="pswd" placeholder="Enter a password" required>
-                        <button type="submit">Ajout</button>
-                    </form>
+                <style type="text/css">
+                	.button{
+                		margin: 8px 0; 
+                		border: none;
+                		cursor: default;
+                		border-radius: 4px;
+                	}
+                </style>
+                    <div class="intro-heading">Panneau Administrateur</div> 
                     
-                    <form action="/action_administrator">
-                        <h4>Suppression Admnistrateur</h4>
-                        <label><b>Email</b></label>
-                        <input type="email" name="email" placeholder="Enter a email" required>
-                        <button type="submit">Suppression</button>
-                    </form>
-                    
-                    <!-- ============================================== -->
-
-                    <!-- Opérations sur la base de donnée -->
-
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Film</h4>
-                        <input type="text" name="film_reference" placeholder="Enter the reference" required>
-                        <input type="text" name="film_name" placeholder="Enter the name" required>
-                        <input type="text" name="genre_film" placeholder="Enter the genre" required> 
-                        <input type="text" name="year_film" placeholder="Enter the year(optional)">
-                        <input type="text" name="rating_note_film" placeholder="Enter a rating note (optional)">
-                        <button type="submit">Ajout</button>
-                    </form>
-
-                    <form action="/action_administrator.php">
-                        <h4>Suppression Film</h4>
-                        <input type="text" name="film_reference" placeholder="Enter the reference" required>
-                        <input type="text" name="film_name" placeholder="Enter the name" required>
-                        <button type="submit">Suppression</button>
-                    </form>
-
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Série</h4>
-                        <input type="text" name="serie_reference" placeholder="Enter the reference" required>
-                        <input type="text" name="serie_name" placeholder="Enter the name" required>
-                        <input type="text" name="genre_serie" placeholder="Enter the genre" required>
-                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
-                        <input type="text" name="end_year" placeholder="Enter the end year (optional)">
-                        <input type="text" name="rating_note_serie" placeholder="Enter a rating note(optional)">
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                       <a class="button btn btn-xl" href="#"> Comptes administrateur</a>
+                    </div>
 
 
-                    <form action="/action_administrator.php">
-                        <h4>Suppression Série</h4>
-                        <input type="text" name="serie_reference" placeholder="Enter the reference" required>
-                        <input type="text" name="serie_name" placeholder="Enter the name" required>
-                        <button type="submit">Suppression</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                    	<a class="button btn btn-xl" href="#">Opérations sur Film</a>
+                    </div>
+                                  
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Episode</h4>
-                        <input type="text" name="serie_name" placeholder="Enter the name of the serie" required>
-                        <input type="text" name="episode_name" placeholder="Enter the episode name" required>
-                        <input type="text" name="number_season" placeholder="Enter the number of the season" required>
-                        <input type="text" name="episode_number" placeholder="Enter the episode number" required>
-                        <input type="text" name="rating_note_episode" placeholder="Enter a rating note (optional)">
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Série</a>
+                    </div>    
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Directeur</h4>
-                        <input type="text" name="director_firstname" placeholder="Enter the FirstName" required>
-                        <input type="text" name="director_secondname" placeholder="Enter the SecondName" required>
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Directeur</a>
+                    </div>
+                              
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Ecrivain</a>
+                    </div>
+                              
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Ecrivain</h4>
-                        <input type="text" name="writter_firstname" placeholder="Enter the FirstName" required>
-                        <input type="text" name="writter_secondname" placeholder="Enter the SecondName" required>
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Producteur</a>
+                    </div>
+                              
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Acteur/Actrice</h4>
-                        <input type="text" name="actor_firstname" placeholder="Enter the FirstName" required>
-                        <input type="text" name="actor_secondname" placeholder="Enter the SecondName" required>
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Acteur</a>
+                    </div>
+                              
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Genre</h4>
-                        <input type="text" name="genre" placeholder="Enter a genre" required>
-                        <button type="submit">Ajout</button>
-                    </form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Genre</a>
+                    </div>
+                              
 
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Pays</h4>
-                        <input type="text" name="country" placeholder="Enter a country" required>
-                        <button type="submit">Ajout</button>
-                    </form>
-
-                    <form action="/action_administrator.php">
-                        <h4>Ajout Langue</h4>
-                        <input type="text" name="language" placeholder="Enter a language" required>
-                        <button type="submit">Ajout</button>
-                    </form>
-                    <!-- ============================================== -->
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="button btn btn-xl" href="#">Opérations sur Pays</a>
+                    </div>
+                              
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="btn btn-xl" href="#">Opérations sur Langue</a>
+                    </div>
                 </div>
             </div>
         </header>
@@ -184,3 +113,115 @@ Page de recherche avancé de site web.
     <script src="./js/jquery-1.12.3.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
 </html>
+
+
+<!--
+
+<form action="/action_administrator.php">
+    <h4>Ajout Admnistrateur</h4>
+    <label><b>Email</b></label>
+    <input type="email" name="email" placeholder="Enter a email" required>
+    <label><b>Password</b></label>
+    <input type="password" name="pswd" placeholder="Enter a password" required>
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator">
+    <h4>Suppression Admnistrateur</h4>
+    <label><b>Email</b></label>
+    <input type="email" name="email" placeholder="Enter a email" required>
+    <button type="submit">Suppression</button>
+</form>
+
+
+
+<form action="/action_administrator.php">
+    <h4>Ajout Film</h4>
+    <input type="text" name="film_reference" placeholder="Enter the reference" required>
+    <input type="text" name="film_name" placeholder="Enter the name" required>
+    <input type="text" name="genre_film" placeholder="Enter the genre" required> 
+    <input type="text" name="year_film" placeholder="Enter the year(optional)">
+    <input type="text" name="rating_note_film" placeholder="Enter a rating note (optional)">
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Suppression Film</h4>
+    <input type="text" name="film_reference" placeholder="Enter the reference" required>
+    <input type="text" name="film_name" placeholder="Enter the name" required>
+    <button type="submit">Suppression</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Série</h4>
+    <input type="text" name="serie_reference" placeholder="Enter the reference" required>
+    <input type="text" name="serie_name" placeholder="Enter the name" required>
+    <input type="text" name="genre_serie" placeholder="Enter the genre" required>
+    <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+    <input type="text" name="end_year" placeholder="Enter the end year (optional)">
+    <input type="text" name="rating_note_serie" placeholder="Enter a rating note(optional)">
+    <button type="submit">Ajout</button>
+</form>
+
+
+<form action="/action_administrator.php">
+    <h4>Suppression Série</h4>
+    <input type="text" name="serie_reference" placeholder="Enter the reference" required>
+    <input type="text" name="serie_name" placeholder="Enter the name" required>
+    <button type="submit">Suppression</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Episode</h4>
+    <input type="text" name="serie_name" placeholder="Enter the name of the serie" required>
+    <input type="text" name="episode_name" placeholder="Enter the episode name" required>
+    <input type="text" name="number_season" placeholder="Enter the number of the season" required>
+    <input type="text" name="episode_number" placeholder="Enter the episode number" required>
+    <input type="text" name="rating_note_episode" placeholder="Enter a rating note (optional)">
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Directeur</h4>
+    <input type="text" name="director_firstname" placeholder="Enter the FirstName" required>
+    <input type="text" name="director_secondname" placeholder="Enter the SecondName" required>
+    <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Ecrivain</h4>
+    <input type="text" name="writter_firstname" placeholder="Enter the FirstName" required>
+    <input type="text" name="writter_secondname" placeholder="Enter the SecondName" required>
+    <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Acteur/Actrice</h4>
+    <input type="text" name="actor_firstname" placeholder="Enter the FirstName" required>
+    <input type="text" name="actor_secondname" placeholder="Enter the SecondName" required>
+    <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Genre</h4>
+    <input type="text" name="genre" placeholder="Enter a genre" required>
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Pays</h4>
+    <input type="text" name="country" placeholder="Enter a country" required>
+    <button type="submit">Ajout</button>
+</form>
+
+<form action="/action_administrator.php">
+    <h4>Ajout Langue</h4>
+    <input type="text" name="language" placeholder="Enter a language" required>
+    <button type="submit">Ajout</button>
+</form>
+
+ -->
