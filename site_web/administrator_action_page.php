@@ -45,13 +45,14 @@ Page de recherche avancé de site web.
                     <style type="text/css">
                         input[type=text], input[type=email], input[type=password] {
                             width: 100%;
-                            padding:0;
-                            margin: 0;
+                            padding: 15px 15px;
+                            margin: 5px 0;
                             color: black;
-                            display: inline;
+                            display: inline-block;
                             border: 2.5px solid yellow;
                             box-sizing: border-box;
                             border-radius: 4px;
+                            background-color: white;
                         }
 
                         button {
@@ -76,6 +77,7 @@ Page de recherche avancé de site web.
                         <input type="password" name="pswd" placeholder="Enter a password" required>
                         <button type="submit">Ajout</button>
                     </form>
+                    
                     <form action="/action_administrator">
                         <h4>Suppression Admnistrateur</h4>
                         <label><b>Email</b></label>
@@ -87,7 +89,7 @@ Page de recherche avancé de site web.
 
                     <!-- Opérations sur la base de donnée -->
 
-                    <form action="/action_administrator.php"></form>
+                    <form action="/action_administrator.php">
                         <h4>Ajout Film</h4>
                         <input type="text" name="film_reference" placeholder="Enter the reference" required>
                         <input type="text" name="film_name" placeholder="Enter the name" required>
@@ -97,14 +99,14 @@ Page de recherche avancé de site web.
                         <button type="submit">Ajout</button>
                     </form>
 
-                    <form action="/action_administrator.php"></form>
+                    <form action="/action_administrator.php">
                         <h4>Suppression Film</h4>
                         <input type="text" name="film_reference" placeholder="Enter the reference" required>
                         <input type="text" name="film_name" placeholder="Enter the name" required>
                         <button type="submit">Suppression</button>
                     </form>
 
-                    <form action="/action_administrator.php"></form>
+                    <form action="/action_administrator.php">
                         <h4>Ajout Série</h4>
                         <input type="text" name="serie_reference" placeholder="Enter the reference" required>
                         <input type="text" name="serie_name" placeholder="Enter the name" required>
@@ -116,7 +118,7 @@ Page de recherche avancé de site web.
                     </form>
 
 
-                    <form action="/action_administrator.php"></form>
+                    <form action="/action_administrator.php">
                         <h4>Suppression Série</h4>
                         <input type="text" name="serie_reference" placeholder="Enter the reference" required>
                         <input type="text" name="serie_name" placeholder="Enter the name" required>
