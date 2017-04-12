@@ -22,7 +22,7 @@ Page de recherche avancé de site web.
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    <!-- Theme CSS -->
+    <!-- Themex CSS -->
     <link href="test_css/agency.css" rel="stylesheet">
     
 
@@ -41,6 +41,49 @@ Page de recherche avancé de site web.
 		<header>
     		<div class="container">
     			<div class="intro-text">
+    			<form action="/search_action.php">
+    				<style type="text/css">
+    					input[type=text]{
+							    width: 100%;
+							    padding:0;
+							    margin: 0;
+							    color: black;
+							    display: inline;
+							    border: 2.5px solid yellow;
+							    box-sizing: border-box;
+							    border-radius: 4px;
+							}
+
+							button {
+							    background-color: #FFD700;
+							    color: black;
+							    margin: 10px 0;
+							    border: none;
+							    cursor: default;
+							    width: 100%;
+							    border-radius: 4px;
+							}
+
+							button:hover {
+							    opacity: 0.5;
+							}
+
+    				</style>
+    				<label>Nom du film/série</label>
+    				<input type="text" placeholder="Enter a name" name="film_seri_name">
+    				<label>Date</label>
+    				<input type="text" placeholder="Enter a date" name="date">
+    				<label>Acteur/Actrice</label>
+    				<input type="text" placeholder="Enter an actor" name="actor">
+    				<label>Genre</label>
+    				<input type="text" placeholder="Enter a genre" name="genre">
+    				<label>Producteur</label>
+    				<input type="text" placeholder="Enter a productor" name="productor">
+    				<label>Note</label>
+    				<input type="text" placeholder="Enter a rating note" name="rating_note">
+    				<button type="submit">Search</button>
+
+    			</form>
     			</div>
     		</div>
     	</header>
