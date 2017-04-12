@@ -208,6 +208,38 @@ input[type="date"] {
   transition: width 0.4s ease-in-out;
 }
 
+input[type="email"] {
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #fed136;
+  border-radius: px;
+  font-size: 16px;
+  color : white;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 0px 20px 0px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type="password"] {
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #fed136;
+  border-radius: px;
+  font-size: 16px;
+  color : white;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 0px 20px 0px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;

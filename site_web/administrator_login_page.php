@@ -38,49 +38,46 @@ Page de recherche avancé de site web.
 		<?php
 			include 'menubar.php';
 		?>
-		<header>
-    		<div class="container">
-    			<div class="intro-text">
-    				<form action="/administrator_action_page.php"><!--  mettre un renvoi vers un check des data entré, mais pour test le display du admin panel pas besoin-->
-    					<style type="text/css">
-    						input[type=text], input[type=password] {
-							    width: 100%;
-							    padding: 15px 15px;
-							    margin: 5px 0;
-							    color: black;
-							    display: inline;
-							    border: 2.5px solid yellow;
-							    box-sizing: border-box;
-							    border-radius: 4px;
-							}
 
-							button {
-							    background-color: #FFD700;
-							    color: black;
-							    padding: 15px 15px;
-							    margin: 5px 0;
-							    border: none;
-							    cursor: default;
-							    width: 100%;
-							    border-radius: 4px;
-							}
+        <header>
+            <div class="container">
+                <div class="intro-text">
+                    <div class="intro-heading">Connexion administrateur</div>
 
-							button:hover {
-							    opacity: 0.5;
-							}
-    					</style>
-					    <label><b>Email</b></label>
-					    <input type="text" placeholder="Enter Email" name="email" required>
+                    <form name="search" id="searchForm" novalidate>
 
-					    <label><b>Password</b></label>
-					    <input type="password" placeholder="Enter Password" name="pswd" required>
+                        <div class="form-group text-center">
+                            <input type="email" class="form-control" placeholder="Adresse mail" id="mail">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Mot de passe " id="password">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl">connexion</button>
+                        </div>
+                    </form>
 
-					    <button type="submit">Login</button>
-					</form>
-    			</div>
-    		</div>
-    	</header>
+                </div>
+            </div>
+
+
+        </header>
 	</body>
-	<script src="./js/jquery-1.12.3.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script> 
+
+
+    <!-- jQuery -->
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="test_js/agency.min.js"></script>
+
 </html>
