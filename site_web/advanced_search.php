@@ -38,56 +38,39 @@ Page de recherche avancé de site web.
 		<?php
 			include 'menubar.php';
 		?>
-		<header>
-    		<div class="container">
-    			<div class="intro-text">
-    			<form action="/search_action.php">
-    				<style type="text/css">
-    					input[type=text]{
-							    width: 100%;
-							    padding:0;
-							    margin: 0;
-							    color: black;
-							    display: inline;
-							    border: 2.5px solid yellow;
-							    box-sizing: border-box;
-							    border-radius: 4px;
-							}
+        <header>
+            <div class="container">
+                <div class="intro-text">
+                    <div class="intro-heading">Recherche avancée</div>
 
-							button {
-							    background-color: #FFD700;
-							    color: black;
-							    margin: 10px 0;
-							    border: none;
-							    cursor: default;
-							    width: 100%;
-							    border-radius: 4px;
-							}
+                    <form name="search" id="searchForm" novalidate>
 
-							button:hover {
-							    opacity: 0.5;
-							}
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control" placeholder="Entrez le titre d'un film/série" id="film_serie">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Entrer le nom d'un acteur/actrice" id="acteur">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Entrez le nome d'une personne" id="producteur">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Entrez une date entre 2000 et 2010 (jj/mm/yy)" id="date">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl">Rechercher</button>
+                        </div>
+                    </form>
 
-    				</style>
-    				<label>Nom du film/série</label>
-    				<input type="text" placeholder="Enter a name" name="film_seri_name">
-    				<label>Date</label>
-    				<input type="text" placeholder="Enter a date" name="date">
-    				<label>Acteur/Actrice</label>
-    				<input type="text" placeholder="Enter an actor" name="actor">
-    				<label>Genre</label>
-    				<input type="text" placeholder="Enter a genre" name="genre">
-    				<label>Producteur</label>
-    				<input type="text" placeholder="Enter a productor" name="productor">
-    				<label>Note</label>
-    				<input type="text" placeholder="Enter a rating note" name="rating_note">
-    				<button type="submit">Search</button>
+                </div>
+            </div>
 
-    			</form>
-    			</div>
-    		</div>
-    	</header>
-	</body>
+
+        </header>
+
+    </body>
 	<script src="./js/jquery-1.12.3.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 </html>

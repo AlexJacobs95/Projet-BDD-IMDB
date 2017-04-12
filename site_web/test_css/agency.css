@@ -110,6 +110,12 @@ fieldset[disabled] .btn-primary.active {
   font-size: 18px;
   padding: 20px 40px;
 }
+
+.form-control::-webkit-input-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.form-control:-moz-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.form-control::-moz-placeholder { color: white;font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.form-control:-ms-input-placeholder { color: white; font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .btn-xl:hover,
 .btn-xl:focus,
 .btn-xl:active,
@@ -359,6 +365,12 @@ ul.social-buttons li a:active {
 .btn:active:focus {
   outline: none;
 }
+
+form {
+  display: inline-block;
+  text-align: center;
+}
+
 .portfolio-modal .modal-dialog {
   margin: 0;
   height: 100%;

@@ -52,7 +52,7 @@ Page d'acceuill de site web.
 
             <!-- search bar -->
             <form>
-                <input type="text" name="search" placeholder="Tapez ici votre recherche ...">
+                <input type="text2" name="search" placeholder="Tapez ici votre recherche ...">
             </form>
 
         </div>
@@ -95,7 +95,17 @@ Page d'acceuill de site web.
 
 
 </body>
-<script src="./js/jquery-1.12.3.min.js"></script>
-<script src="./js/bootstrap.min.js"></script> 
+<!-- jQuery -->
+
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+<!-- Theme JavaScript -->
+<script src="test_js/agency.min.js"></script>
 
 </html>

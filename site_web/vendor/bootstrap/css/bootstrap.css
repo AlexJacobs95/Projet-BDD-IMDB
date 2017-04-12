@@ -154,8 +154,14 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
+input[type="search"] {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
 
-input[type="text"] {
+input[type="text2"] {
   width: 600px;
   box-sizing: border-box;
   border: 4px solid #fed136;
@@ -170,12 +176,38 @@ input[type="text"] {
   transition: width 0.4s ease-in-out;
 }
 
-input[type="search"] {
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
-  -webkit-appearance: textfield;
+input[type="text"] {
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #fed136;
+  border-radius: px;
+  font-size: 16px;
+  color : white;
+  background-color: transparent;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 0px 20px 0px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
+
+input[type="date"] {
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #fed136;
+  border-radius: px;
+  font-size: 16px;
+  color : white;
+  background-color: transparent;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 0px 20px 0px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -203,6 +235,8 @@ td,
 th {
   padding: 0;
 }
+
+
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   *,
