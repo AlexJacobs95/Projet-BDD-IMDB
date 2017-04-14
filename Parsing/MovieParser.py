@@ -3,11 +3,13 @@ def pretty_print(dico, name):
     for key in dico:
         print (str(key) + " : " + str(dico[key]))
 
+
 def peek_line(f):
     pos = f.tell()
     line = f.readline()
     f.seek(pos)
     return line
+
 
 def get_name(line):
     name = ""
@@ -21,6 +23,7 @@ def get_name(line):
             name += ch
         counter += 1
     return name
+
 
 def get_name_date_film(line):
     date = line.strip().split("\t")[-1]
@@ -60,6 +63,7 @@ def get_name_date_serie(line):
 
     return name, date_sortie, date_fin
 
+
 def extract_episode_infos(line):
     title = "unknown"
     saison = "unknown"
@@ -74,13 +78,13 @@ def extract_episode_infos(line):
         if char == "}":
             index_end_infos = line.index(char)
     if index_begin_infos != 99999:
-        #Si y a des infos
+        # Si y a des infos
         infos = line[index_begin_infos:index_end_infos]
 
         if infos.find("(#") != -1 and infos[infos.index("(#") + 2].isdigit():
-            saison = infos[infos.index('(#') + 2 : infos.index('.',infos.index('#'), index_end_infos)]
-            numero = infos[infos.index('.',infos.index('#'), index_end_infos)  + 1: infos.index(')',infos.index('#'),
-                                                                                                    index_end_infos )]
+            saison = infos[infos.index('(#') + 2: infos.index('.', infos.index('#'), index_end_infos)]
+            numero = infos[infos.index('.', infos.index('#'), index_end_infos) + 1: infos.index(')', infos.index('#'),
+                                                                                                index_end_infos)]
             if infos.index('(#') != 0:
                 title = infos[0:infos.index('(#') - 1]
         else:
@@ -107,7 +111,7 @@ def main():
     series = {}
     films = {}
     episodes = {}
-    #num_lines = sum(1 for line in open("../IMDB_files/movies.list"))
+    # num_lines = sum(1 for line in open("../IMDB_files/movies.list"))
 
     with open("../IMDB_files/movies.list") as f:
         serie_name = ""
@@ -120,15 +124,14 @@ def main():
 
         for line in content:
             if (line_counter >= 15):
-
                 if extracting_episodes:
                     if get_name(line) == serie_name:
-                        ID+=1
-                        current_episode = {"episodeID" : ID,
-                                           "SID" : SerieID,
-                                           "nom" : extract_episode_infos(line)[0],
-                                           "saison" : extract_episode_infos(line)[1],
-                                           "numero" : extract_episode_infos(line)[2],
+                        ID += 1
+                        current_episode = {"episodeID": ID,
+                                           "SID": SerieID,
+                                           "nom": extract_episode_infos(line)[0],
+                                           "saison": extract_episode_infos(line)[1],
+                                           "numero": extract_episode_infos(line)[2],
                                            "date": extract_episode_infos(line)[3]
                                            }
                         episodes[ID] = current_episode
@@ -138,7 +141,7 @@ def main():
                 if new_oeuvre:
                     ID += 1
                     if line_counter < 2914756:
-                        #Si c est une serie
+                        # Si c est une serie
                         SerieID = ID
                         current_serie = {"serieID": ID,
                                          "nom": get_name_date_serie(line)[0],
@@ -152,7 +155,7 @@ def main():
                         new_oeuvre = False
 
                     else:
-                        #Si c'est juste un film
+                        # Si c'est juste un film
                         current_film = {"filmID": ID,
                                         "nom": get_name_date_film(line)[0],
                                         "dateSortie": get_name_date_film(line)[1],
@@ -169,6 +172,7 @@ def main():
     pretty_print(series, "SERIES")
     print ("\n__________________________\n")
     pretty_print(episodes, "EPISODES")
+
 
 if __name__ == '__main__':
     main()
