@@ -105,6 +105,10 @@ def test():
             line_counter += 1
 
 
+def getRealID(line):
+    return line.split('\t')[0]
+
+
 def main():
     SerieID = -1
     ID = -1
@@ -127,8 +131,8 @@ def main():
                 if extracting_episodes:
                     if get_name(line) == serie_name:
                         ID += 1
-                        current_episode = {"episodeID": ID,
-                                           "SID": SerieID,
+                        current_episode = {"SID": SerieID,
+                                           "realID": getRealID(line),
                                            "nom": extract_episode_infos(line)[0],
                                            "saison": extract_episode_infos(line)[1],
                                            "numero": extract_episode_infos(line)[2],
@@ -142,8 +146,8 @@ def main():
                     ID += 1
                     if line_counter < 2914756:
                         # Si c est une serie
-                        SerieID = ID
-                        current_serie = {"serieID": ID,
+                        SerieID = getRealID(line)
+                        current_serie = {"realID": getRealID(line),
                                          "nom": get_name_date_serie(line)[0],
                                          "dateSortie": get_name_date_serie(line)[1],
                                          "dateFin": get_name_date_serie(line)[2]
@@ -156,7 +160,7 @@ def main():
 
                     else:
                         # Si c'est juste un film
-                        current_film = {"filmID": ID,
+                        current_film = {"realID": getRealID(line),
                                         "nom": get_name_date_film(line)[0],
                                         "dateSortie": get_name_date_film(line)[1],
                                         }
