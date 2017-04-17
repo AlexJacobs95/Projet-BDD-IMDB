@@ -1,10 +1,16 @@
 # coding: latin-1
 
+from BaseParser import *
+
+
 def pretty_print(dico, name):
+    of = open("../SQL_data_files/persons_ok.txt", 'a')
+    of_actors = open("../SQL_data_files/acteurs_ok.txt", 'a')
+
     for key in dico:
-        print (">" + dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["genre"])
+        of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["genre"] + "\n")
         for id_oeuvre, role in dico[key]["oeuvres"]:
-            print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + id_oeuvre + "|" + role)
+            of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + id_oeuvre + "|" + role + "\n")
 
 
 def getRole(line):
@@ -75,32 +81,6 @@ def getOeuvreID(line):
             return long_id.strip()
 
 
-def get_nom_prenom(line):
-    nom = "unknown"
-    prenom = "unknown"
-
-    data = line.strip().split('\t')
-    nom_prenom = data[0]
-
-    if len(nom_prenom.split(',')) == 1:
-        # Si il y a que un nom
-        nom = nom_prenom
-    else:
-        if len(nom_prenom.split(',')) == 2:
-            nom, prenom = nom_prenom.split(',')
-        else:
-            nom = nom_prenom.split(',')[0]
-            prenom = nom_prenom.split(',')[2]
-
-        if '(' in prenom and ')' in prenom:
-            # Si plusieurs personnes avec le meme nom
-            begin = prenom.index('(')
-            end = prenom.index(')')
-            nom += " " + prenom[begin:end + 1]
-            prenom = prenom.replace(prenom[begin:end+1], "")
-    return nom.strip(), prenom.strip()
-
-
 def test():
     line_index = 1082
 
@@ -111,20 +91,6 @@ def test():
                 print(line.split("\t"))
                 return
             line_counter += 1
-
-
-def isBetween2000and2010(oeuvreID):
-    date = ""
-    i = 0
-    date_found = False
-    for char in oeuvreID:
-        if char == '(' and oeuvreID[i + 1:i + 5].isdigit() and oeuvreID[i + 5] == ')':
-            date = oeuvreID[i + 1:i + 5]
-            return 2000 <= int(date) <= 2010
-
-        i += 1
-
-    return False
 
 
 def parse(file):
@@ -159,7 +125,6 @@ def parse(file):
                                      }
                     if isBetween2000and2010(getOeuvreID(line)):
                         current_actor["oeuvres"].append((getOeuvreID(line), getRole(line)))
-                    current_actorID = actorID
 
                 elif line[0] != "\n":
                     # Si on est dans la liste des films dans lesquels un acteur a joue
@@ -171,9 +136,9 @@ def parse(file):
 
 
 def main():
-    #actors = parse("../IMDB_files/actors.list")
-    actresses = parse("../IMDB_files/actresses.list")
-    pretty_print(actresses, "ACTORS")
+    actors = parse("../IMDB_files/actors.list")
+    # actresses = parse("../IMDB_files/actresses.list")
+    pretty_print(actors, "ACTORS")
 
 
 if __name__ == '__main__':

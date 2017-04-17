@@ -1,10 +1,34 @@
 ENDLINE = "--------------------------------------------------------------------------------\n"
 
 
+def output_langues(dico):
+    of = open("../SQL_data_files/langues_ok.txt", 'w')
+    for key in dico:
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["language"]+ "\n")
+
+    of.close()
+
+
+def output_genres(dico):
+    of = open("../SQL_data_files/genres_ok.txt", 'w')
+    for key in dico:
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["genre"]+ "\n")
+
+    of.close()
+
+
+def output_pays(dico):
+    of = open("../SQL_data_files/pays_ok.txt", 'w')
+    for key in dico:
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["country"]+ "\n")
+
+    of.close()
+
+
 def getLanguageInfo(line):
     big_info = line.split("\t")[-1].strip()
-    if len(big_info.split(" ")) > 1:
-        return big_info[0]
+    if big_info[0] == '(':
+        return line.split("\t")[-2].strip()
     return big_info
 
 
@@ -44,19 +68,13 @@ def parse(infIle, infoName, begin_line):
 
 
 def main():
-    print("COUNTRIES")
     countires = parse("../IMDB_files/countries.list", "country", 13)
-    pretty_print(countires, "country")
-    print(countires)
-
-    print("LANAGUAES")
     languages = parse("../IMDB_files/language.list", "language", 41)
-    pretty_print(languages, "language")
+    genres = parse("../IMDB_files/genres.list", "genre", 382)
 
-    print("GENRES")
-    genres = parse("../IMDB_files/genres.list", "genre", 13)
-    pretty_print(genres, "genre")
-
+    output_pays(countires)
+    output_langues(languages)
+    output_genres(genres)
 
 if __name__ == "__main__":
     main()
