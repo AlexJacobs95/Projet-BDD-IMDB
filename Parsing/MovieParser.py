@@ -1,14 +1,22 @@
-def pretty_print(dico, name):
-    print(name)
+def pretty_print_films(dico):
+    print("FILMS")
     for key in dico:
-        print (str(key) + " : " + str(dico[key]))
+        print(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"])
 
 
-def peek_line(f):
-    pos = f.tell()
-    line = f.readline()
-    f.seek(pos)
-    return line
+def pretty_print_series(dico):
+    print("SERIES")
+    for key in dico:
+        print(
+        dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + dico[key]["dateFin"])
+
+
+def pretty_print_episodes(dico):
+    print("EPISODES")
+    for key in dico:
+        print(
+        dico[key]["realID"] + "|" + dico[key]["SID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["titre"] + "|" +
+        dico[key]["saison"] + "|" + dico[key]["numero"] + "|" + dico[key]["date"])
 
 
 def get_name(line):
@@ -105,6 +113,10 @@ def test():
             line_counter += 1
 
 
+def getRealID(line):
+    return line.split('\t')[0]
+
+
 def main():
     SerieID = -1
     ID = -1
@@ -122,56 +134,67 @@ def main():
         content = f.readlines()
         content.pop()
 
+        date_ok = True
         for line in content:
             if (line_counter >= 15):
                 if extracting_episodes:
-                    if get_name(line) == serie_name:
+                    if get_name(line) == serie_name and date_ok:
                         ID += 1
-                        current_episode = {"episodeID": ID,
+                        current_episode = {"realID": getRealID(line),
                                            "SID": SerieID,
-                                           "nom": extract_episode_infos(line)[0],
+                                           "titreS": serie_name,
+                                           "titre": extract_episode_infos(line)[0],
                                            "saison": extract_episode_infos(line)[1],
                                            "numero": extract_episode_infos(line)[2],
                                            "date": extract_episode_infos(line)[3]
                                            }
                         episodes[ID] = current_episode
-                    else:
+
+                    elif get_name(line) != serie_name:
                         new_oeuvre = True
 
+                    else:
+                        # Ici on est dans le cas ou on extrait pas les episodes de la serie
+                        # elle n'a pas ete tournee entre 2000 et 2010
+                        # donc on passe jute les lignes
+                        pass
+
                 if new_oeuvre:
+                    date_ok = False
                     ID += 1
                     if line_counter < 2914756:
                         # Si c est une serie
-                        SerieID = ID
-                        current_serie = {"serieID": ID,
-                                         "nom": get_name_date_serie(line)[0],
+                        SerieID = getRealID(line)
+                        current_serie = {"realID": getRealID(line),
+                                         "titre": get_name_date_serie(line)[0],
                                          "dateSortie": get_name_date_serie(line)[1],
                                          "dateFin": get_name_date_serie(line)[2]
                                          }
 
-                        serie_name = current_serie["nom"]
-                        series[ID] = current_serie
+                        if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2010:
+                            serie_name = current_serie["titre"]
+                            series[ID] = current_serie
+                            date_ok = True
+
                         extracting_episodes = True
                         new_oeuvre = False
 
+
                     else:
                         # Si c'est juste un film
-                        current_film = {"filmID": ID,
-                                        "nom": get_name_date_film(line)[0],
+                        current_film = {"realID": getRealID(line),
+                                        "titre": get_name_date_film(line)[0],
                                         "dateSortie": get_name_date_film(line)[1],
                                         }
-                        films[ID] = current_film
+                        if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2010:
+                            films[ID] = current_film
                         extracting_episodes = False
 
             line_counter += 1
 
-        f.close()
-
-    pretty_print(films, "FILMS")
-    print ("\n__________________________\n")
-    pretty_print(series, "SERIES")
-    print ("\n__________________________\n")
-    pretty_print(episodes, "EPISODES")
+    pretty_print_films(films)
+    pretty_print_series(series)
+    pretty_print_episodes(episodes)
 
 
 if __name__ == '__main__':
