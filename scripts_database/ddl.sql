@@ -10,7 +10,7 @@ SET @@global.innodb_large_prefix = 1;
 CREATE TABLE IF NOT EXISTS `Personne` (
   `Prenom` varchar(32) NOT NULL,
   `Nom` varchar(32) NOT NULL,
-  `Genre` CHAR(1) NOT NULL,
+  `Genre` CHAR(2) NOT NULL,
   PRIMARY KEY (`Prenom`, `Nom`))
   ENGINE = InnoDB;
 
