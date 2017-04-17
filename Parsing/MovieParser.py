@@ -1,22 +1,35 @@
-def pretty_print_films(dico):
-    print("FILMS")
+def output_oeuvres(dico):
+    of = open("../SQL_data_files/oeuvres_ok.txt", 'a')
     for key in dico:
-        print(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"])
+        of.write(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + "0" + "\n")
+
+    of.close()
 
 
-def pretty_print_series(dico):
-    print("SERIES")
+def output_films(dico):
+    of = open("../SQL_data_files/films_ok.txt", 'w')
     for key in dico:
-        print(
-        dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + dico[key]["dateFin"])
+        of.write(dico[key]["realID"]+ "\n")
+
+    of.close()
 
 
-def pretty_print_episodes(dico):
-    print("EPISODES")
+def output_series(dico):
+    of = open("../SQL_data_files/series_ok.txt", 'w')
     for key in dico:
-        print(
-        dico[key]["realID"] + "|" + dico[key]["SID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["titre"] + "|" +
-        dico[key]["saison"] + "|" + dico[key]["numero"] + "|" + dico[key]["date"])
+        of.write(dico[key]["realID"] + "|" + dico[key]["dateFin"]+ "\n")
+
+    of.close()
+
+
+def output_episodes(dico):
+    of = open("../SQL_data_files/episodes_ok.txt", 'w')
+    for key in dico:
+        of.write(
+        dico[key]["realID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["numero"] + "|" +
+        dico[key]["saison"] + "|" + dico[key]["dateSortie"] + "|" + dico[key]["SID"]+ "\n")
+
+    of.close()
 
 
 def get_name(line):
@@ -68,7 +81,8 @@ def get_name_date_serie(line):
                 break
             name += ch
         counter += 1
-
+    if date_fin == '????':
+        date_fin = ""
     return name, date_sortie, date_fin
 
 
@@ -114,7 +128,33 @@ def test():
 
 
 def getRealID(line):
-    return line.split('\t')[0]
+    long_id = line.split('\t')[0]
+    if long_id[0] == '"' and '{' in long_id and '}' in long_id:
+        # Si l oeuvre est une serie (le nom des series commence par des guillemets
+        index = long_id.index('}')
+        long_id = long_id[0:index + 1]
+    else:
+        long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
+
+    return long_id.strip()
+
+
+def getIndexOfDateEnd(long_id):
+    index = 999
+    i = 0
+    for char in long_id:
+        if char == '(':
+            begin_index = i
+            end_index = i + 5
+            if (long_id[begin_index + 1:end_index].isdigit() or long_id[begin_index + 1:end_index] == '????') and (
+                long_id[
+                    end_index] in ("/", ")")):
+                # Si on a une une date
+                if long_id[end_index] == '/':
+                    return long_id.index(')', end_index, len(long_id))
+                else:
+                    return end_index
+        i += 1
 
 
 def main():
@@ -146,7 +186,7 @@ def main():
                                            "titre": extract_episode_infos(line)[0],
                                            "saison": extract_episode_infos(line)[1],
                                            "numero": extract_episode_infos(line)[2],
-                                           "date": extract_episode_infos(line)[3]
+                                           "dateSortie": extract_episode_infos(line)[3]
                                            }
                         episodes[ID] = current_episode
 
@@ -192,9 +232,12 @@ def main():
 
             line_counter += 1
 
-    pretty_print_films(films)
-    pretty_print_series(series)
-    pretty_print_episodes(episodes)
+    for oeuvre in [films, series, episodes]:
+        output_oeuvres(oeuvre)
+
+    output_films(films)
+    output_series(series)
+    output_episodes(episodes)
 
 
 if __name__ == '__main__':
