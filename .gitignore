@@ -1,2 +1,10 @@
 *.xml
 sql script/.idea/sql script.iml
+.idea/
+./IMDB_files/actors.list
+./IMDB_files/actresses.list
+./IMDB_files/plot.list
+./IMDB_files/producers.list
+./IMDB_files/quotes.list
+./IMDB_files/release-dates.list
+./IMDB_files/writers.list
