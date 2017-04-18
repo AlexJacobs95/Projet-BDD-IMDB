@@ -37,6 +37,19 @@ Page de recherche avancé de site web.
 	<body id="page-top" class="index">
 		<?php
 			include 'menubar.php';
+            function check_login(){
+                $email = $_POST[mail];
+                $password = $_POST[password];
+                $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
+                $result = mysqli_query($dbc,$query);
+                
+                if($result){
+                    echo "Login Failed";
+                }
+                else{
+                    header("administrator_action_page.php")
+                }
+            }
 		?>
 
         <header>
@@ -44,7 +57,7 @@ Page de recherche avancé de site web.
                 <div class="intro-text">
                     <div class="intro-heading">Connexion administrateur</div>
 
-                    <form action="administrator_action_page.php" name="search" id="searchForm">
+                    <form action="check_login()" name="search" id="searchForm" method="post">
 
                         <div class="form-group text-center">
                             <input type="email" class="form-control" placeholder="Adresse mail" name="mail" required>
