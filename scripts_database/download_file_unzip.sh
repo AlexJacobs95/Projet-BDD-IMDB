@@ -7,3 +7,4 @@ FILETODELETE="aka-names.list.gz aka-titles.list.gz alternate-versions.list.gz bi
 wget -r --accept="*.gz" --no-directories --no-host-directories --level 1 ftp://ftp.fu-berlin.de/pub/misc/movies/database/
 
 rm -f $FILETODELETE
+gunzip *.gz
