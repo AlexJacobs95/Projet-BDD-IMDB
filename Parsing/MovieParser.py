@@ -198,7 +198,7 @@ def main():
         content = f.readlines()
         content.pop()
 
-            date_ok = True
+        date_ok = True
         for line in content:
             if (line_counter >= 15):
                 if extracting_episodes:
@@ -236,10 +236,10 @@ def main():
                                          }
 
                         if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2010:
-                            serie_name = current_serie["titre"]
                             series[ID] = current_serie
                             date_ok = True
 
+                        serie_name = current_serie["titre"]
                         extracting_episodes = True
                         new_oeuvre = False
 

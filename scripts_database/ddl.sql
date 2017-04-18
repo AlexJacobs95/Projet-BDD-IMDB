@@ -4,6 +4,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 SET @@global.innodb_large_prefix = 1;
 
 
+
 -- -----------------------------------------------------
 -- Table Personne
 -- -----------------------------------------------------
@@ -12,7 +13,9 @@ CREATE TABLE IF NOT EXISTS Personne (
   Nom varchar(128) NOT NULL,
   Genre CHAR(2) NOT NULL,
   PRIMARY KEY (Prenom, Nom))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -24,6 +27,7 @@ CREATE TABLE IF NOT EXISTS Auteur (
   OID VARCHAR(512) NOT NULL,
   FOREIGN KEY (Prenom, Nom) REFERENCES Personne(Prenom, Nom),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
@@ -36,7 +40,9 @@ CREATE TABLE IF NOT EXISTS Directeur (
   OID VARCHAR(512) NOT NULL,
   FOREIGN KEY (Prenom, Nom) REFERENCES Personne(Prenom, Nom),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 
@@ -51,7 +57,9 @@ CREATE TABLE IF NOT EXISTS Acteur (
   PRIMARY KEY (Prenom, Nom, OID, Role),
   FOREIGN KEY (Prenom, Nom) REFERENCES Personne(Prenom, Nom),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -63,7 +71,9 @@ CREATE TABLE IF NOT EXISTS Oeuvre (
   AnneeSortie INT NOT NULL,
   Note INT,
   PRIMARY KEY (ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table Film
@@ -72,7 +82,9 @@ CREATE TABLE IF NOT EXISTS Film (
   FilmID VARCHAR(512) NOT NULL,
   PRIMARY KEY (FilmID),
   FOREIGN KEY (FilmID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table Serie
@@ -82,7 +94,9 @@ CREATE TABLE IF NOT EXISTS Serie (
   AnneeFin INT,
   PRIMARY KEY (SerieID),
   FOREIGN KEY (SerieID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table Episode
@@ -97,7 +111,9 @@ CREATE TABLE IF NOT EXISTS Episode (
   PRIMARY KEY (EpisodeID),
   FOREIGN KEY (EpisodeID) REFERENCES Oeuvre(ID),
   FOREIGN KEY (SID) REFERENCES Serie(SerieID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table Pays
@@ -107,7 +123,9 @@ CREATE TABLE IF NOT EXISTS Pays (
   Pays VARCHAR(256) NOT NULL,
   PRIMARY KEY (ID, Pays),
   FOREIGN KEY (ID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -118,7 +136,9 @@ CREATE TABLE IF NOT EXISTS Genre (
   Genre VARCHAR(64) NOT NULL,
   PRIMARY KEY (ID, Genre),
   FOREIGN KEY (ID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -129,7 +149,9 @@ CREATE TABLE IF NOT EXISTS Langue (
   Langue VARCHAR(256) NOT NULL,
   PRIMARY KEY (ID, Langue),
   FOREIGN KEY (ID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -139,7 +161,9 @@ CREATE TABLE IF NOT EXISTS Administrateur (
   AdresseMail VARCHAR(256) NOT NULL,
   motDePasse VARCHAR(256) NULL,
   PRIMARY KEY (AdresseMail))
+  CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
+
 
 
 

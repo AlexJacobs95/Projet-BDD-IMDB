@@ -1,5 +1,6 @@
 # coding: latin-1
 
+import sys
 from BaseParser import *
 
 
@@ -136,9 +137,18 @@ def parse(file):
 
 
 def main():
-    actors = parse("../IMDB_files/actors.list")
-    #actresses = parse("../IMDB_files/actresses.list")
-    pretty_print(actors, "ACTORS")
+
+    if sys.argv[1] == "-f":
+        data = parse("../IMDB_files/actresses.list")
+
+    elif sys.argv[1] == "-m":
+        data = parse("../IMDB_files/actors.list")
+
+    else:
+        print ("Wrong arguments ! -f for actresses or -m for actors !!!")
+        return
+
+    pretty_print(data, "ACTORS")
 
 
 if __name__ == '__main__':
