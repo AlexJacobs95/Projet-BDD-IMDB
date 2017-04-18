@@ -1,7 +1,7 @@
 def output_oeuvres(dico):
     of = open("../SQL_data_files/oeuvres_ok.txt", 'a')
     for key in dico:
-        of.write(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + "0" + "\n")
+        of.write(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + '0' + "\n")
 
     of.close()
 
@@ -81,16 +81,20 @@ def get_name_date_serie(line):
                 break
             name += ch
         counter += 1
+
     if date_fin == '????':
-        date_fin = ""
+        date_fin = '0'
+    if date_sortie == '????':
+        date_fin = '0'
+
     return name, date_sortie, date_fin
 
 
 def extract_episode_infos(line):
     title = "unknown"
-    saison = "unknown"
-    numero = "unknown"
-    date = "unknown"
+    saison = "-1"
+    numero = "-1"
+    date = '0'
 
     index_begin_infos = 99999
     for char in line:
@@ -104,8 +108,8 @@ def extract_episode_infos(line):
         infos = line[index_begin_infos:index_end_infos]
 
         if infos.find("(#") != -1 and infos[infos.index("(#") + 2].isdigit():
-            saison = infos[infos.index('(#') + 2: infos.index('.', infos.index('#'), index_end_infos)]
-            numero = infos[infos.index('.', infos.index('#'), index_end_infos) + 1: infos.index(')', infos.index('#'),
+            saison = infos[infos.index('(#') + 2: infos.index('.', infos.index('(#'), index_end_infos)]
+            numero = infos[infos.index('.', infos.index('(#'), index_end_infos) + 1: infos.index(')', infos.index('(#'),
                                                                                                 index_end_infos)]
             if infos.index('(#') != 0:
                 title = infos[0:infos.index('(#') - 1]
@@ -113,6 +117,9 @@ def extract_episode_infos(line):
             title = infos
 
         date = line.strip().split("\t")[-1]
+
+        if date == "????":
+            date = '0'
 
     return title, saison, numero, date
 
@@ -131,10 +138,27 @@ def getRealID(line):
     long_id = line.split('\t')[0]
     if long_id[0] == '"' and '{' in long_id and '}' in long_id:
         # Si l oeuvre est une serie (le nom des series commence par des guillemets
-        index = long_id.index('}')
+        index = long_id.rindex('}')
         long_id = long_id[0:index + 1]
+    elif long_id[0] != '"' and '{' in long_id and '}' in long_id:
+        index = long_id.rindex('}')
+        long_id = long_id[0:index + 1]
+
     else:
-        long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
+        if "(V)" in long_id:
+            endIndex = long_id.index("(V)") + 3
+            long_id = long_id[0:endIndex]
+        elif "(TV)" in long_id:
+            endIndex = long_id.index("(TV)") + 4
+            long_id = long_id[0:endIndex]
+        elif "(mini)" in long_id:
+            endIndex = long_id.index("(mini)") + 6
+            long_id = long_id[0:endIndex]
+        elif "(VG)" in long_id:
+            endIndex = long_id.index("(VG)") + 3
+            long_id = long_id[0:endIndex]
+        else:
+            long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
 
     return long_id.strip()
 
@@ -174,7 +198,7 @@ def main():
         content = f.readlines()
         content.pop()
 
-        date_ok = True
+            date_ok = True
         for line in content:
             if (line_counter >= 15):
                 if extracting_episodes:

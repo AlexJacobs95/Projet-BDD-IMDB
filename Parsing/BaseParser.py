@@ -33,8 +33,25 @@ def getOeuvreID(line):
                 # Si l oeuvre est une serie (le nom des series commence par des guillemets
                 index = long_id.index('}')
                 long_id = long_id[0:index + 1]
+            elif long_id[0] != '"' and '{' in long_id and '}' in long_id:
+                index = long_id.rindex('}')
+                long_id = long_id[0:index + 1]
+
             else:
-                long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
+                if "(V)" in long_id:
+                    endIndex = long_id.index("(V)") + 3
+                    long_id = long_id[0:endIndex]
+                elif "(TV)" in long_id:
+                    endIndex = long_id.index("(TV)") + 4
+                    long_id = long_id[0:endIndex]
+                elif "(mini)" in long_id:
+                    endIndex = long_id.index("(mini)") + 6
+                    long_id = long_id[0:endIndex]
+                elif "(VG)" in long_id:
+                    endIndex = long_id.index("(VG)") + 3
+                    long_id = long_id[0:endIndex]
+                else:
+                    long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
 
             return long_id.strip()
 

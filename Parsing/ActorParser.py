@@ -137,7 +137,7 @@ def parse(file):
 
 def main():
     actors = parse("../IMDB_files/actors.list")
-    # actresses = parse("../IMDB_files/actresses.list")
+    #actresses = parse("../IMDB_files/actresses.list")
     pretty_print(actors, "ACTORS")
 
 

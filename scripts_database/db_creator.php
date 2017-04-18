@@ -3,7 +3,6 @@
 
 function createDB($database){
     $tables = file_get_contents('ddl.sql');
-    echo $tables;
     $database->multi_query($tables);
 }
 
@@ -14,10 +13,10 @@ function fillDB($database){
 }
 
 
-$connexion = new mysqli("localhost","root","");
-$connexion->query("CREATE DATABASE database;");
+$connexion = new mysqli("localhost","root","!lanA01");
+$connexion->query("CREATE DATABASE projetDB;");
 $connexion->close();
-$database = new mysqli("localhost","root","","database");
+$database = new mysqli("localhost","root","!lanA01","projetDB");
 
 createDB($database);
 echo "db created";
