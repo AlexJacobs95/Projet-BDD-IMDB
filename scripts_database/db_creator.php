@@ -13,10 +13,10 @@ function fillDB($database){
 }
 
 
-$connexion = new mysqli("localhost","root","!lanA01");
+$connexion = new mysqli("localhost","root","");
 $connexion->query("CREATE DATABASE projetDB;");
 $connexion->close();
-$database = new mysqli("localhost","root","!lanA01","projetDB");
+$database = new mysqli("localhost","root","","projetDB");
 
 createDB($database);
 echo "db created";
