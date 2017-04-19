@@ -8,4 +8,4 @@ wget -r --accept="*.gz" --no-directories --no-host-directories --level 1 ftp://f
 
 rm -f $FILETODELETE
 gunzip *.gz
-mv *.list ./IMDB_files
+mv *.list ../IMDB_files
