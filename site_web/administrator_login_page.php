@@ -40,8 +40,9 @@ Page de recherche avancé de site web.
             function check_login(){
                 $email = $_POST[mail];
                 $password = $_POST[password];
+                $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
                 $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
-                $result = mysqli_query($dbc,$query);
+                $result = mysqli_query($db,$query);
                 
                 if($result){
                     echo "Login Failed";
