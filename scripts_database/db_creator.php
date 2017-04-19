@@ -11,7 +11,7 @@ function fillDB($database){
     $database->multi_query($load_data);
 }
 
-$connexion = new mysqli("localhost","root","mamouche97");
+$connexion = new mysqli("localhost","root","");
 $connexion->query("CREATE DATABASE projetDB;");
 $connexion->close();
 
