@@ -1,10 +1,9 @@
-
 import MySQLdb as mdb
-import datetime
 
 talbes = ["Personne", "Oeuvre", "Pays", "Genre", "Langue", "Film", "Serie", "Auteur", "Directeur", "Episode", "Acteur"]
 
-def executeScriptsFromFile(filename, cursor):
+
+def executeDDLFromFile(filename, cursor):
     # Open and read the file as a single buffer
     fd = open(filename, 'r')
     sqlFile = fd.read()
@@ -13,36 +12,25 @@ def executeScriptsFromFile(filename, cursor):
     sqlCommands = sqlFile.split(';')
 
     # Execute every command from the input file
-    i = 0
 
-    global_time = datetime.datetime.now()
-    print ("Insertion started.")
+    print ("Table creation started.")
     for command in sqlCommands:
-        table_time = datetime.datetime.now()
-        print ("Filling table "  + talbes[i] + " ...")
         try:
             cursor.execute(command)
 
         except mdb.Error, e:
             pass
-        print ("table " + talbes[i] + "filled in " + str(datetime.datetime.now() - table_time) + "s" )
 
-        i+=1
-
-    print ("Insertion done\nDatabase filled in " + str(datetime.datetime.now() - global_time) + "s")
-    size = cursor.execute("SELECT table_schema \"IMBD\", Round(Sum(data_length + index_length) / 1024 / 1024, 1) \"DB Size in MB\" FROM   information_schema.tables GROUP  BY table_schema; ")
-    print ("The DB size is " + str(size))
+    print("Table creation Done.")
 
 
-
-conn = mdb.connect("localhost","root","","")
+conn = mdb.connect("localhost", "root", "", "")
 cur = conn.cursor()
 cur.execute("CREATE DATABASE IMBD;")
 conn.close();
 
-conn = mdb.connect("localhost","root","","IMBD")
+conn = mdb.connect("localhost", "root", "", "IMBD")
 cur = conn.cursor()
+executeDDLFromFile("ddl.sql", cur)
 
-executeScriptsFromFile("ddl.sql", cur)
-executeScriptsFromFile("load_data.sql", cur)
-
+conn.close();
