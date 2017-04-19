@@ -1,8 +1,5 @@
 import MySQLdb as mdb
 
-talbes = ["Personne", "Oeuvre", "Pays", "Genre", "Langue", "Film", "Serie", "Auteur", "Directeur", "Episode", "Acteur"]
-
-
 def executeDDLFromFile(filename, cursor):
     # Open and read the file as a single buffer
     fd = open(filename, 'r')
