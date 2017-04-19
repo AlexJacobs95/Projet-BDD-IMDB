@@ -4,10 +4,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 SET @@global.innodb_large_prefix = 1;
 
 
-
--- -----------------------------------------------------
--- Table Personne
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Personne (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
@@ -17,10 +13,6 @@ CREATE TABLE IF NOT EXISTS Personne (
   ENGINE = InnoDB;
 
 
-
--- -----------------------------------------------------
--- Table Auteur
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Auteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
@@ -31,9 +23,6 @@ CREATE TABLE IF NOT EXISTS Auteur (
   ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table Directeur
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Directeur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
@@ -45,10 +34,6 @@ CREATE TABLE IF NOT EXISTS Directeur (
 
 
 
-
--- -----------------------------------------------------
--- Table Acteur
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Acteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
@@ -62,9 +47,6 @@ CREATE TABLE IF NOT EXISTS Acteur (
 
 
 
--- -----------------------------------------------------
--- Table Oeuvre
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Oeuvre (
   ID VARCHAR(512) NOT NULL,
   Titre VARCHAR(256) NOT NULL,
@@ -75,9 +57,6 @@ CREATE TABLE IF NOT EXISTS Oeuvre (
   ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table Film
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Film (
   FilmID VARCHAR(512) NOT NULL,
   PRIMARY KEY (FilmID),
@@ -86,9 +65,6 @@ CREATE TABLE IF NOT EXISTS Film (
   ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table Serie
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Serie (
   SerieID VARCHAR(512) NOT NULL,
   AnneeFin INT,
@@ -98,9 +74,6 @@ CREATE TABLE IF NOT EXISTS Serie (
   ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table Episode
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Episode (
   EpisodeID VARCHAR(512) NOT NULL,
   TitreS VARCHAR(256),
@@ -115,9 +88,6 @@ CREATE TABLE IF NOT EXISTS Episode (
   ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table Pays
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Pays (
   ID VARCHAR(512) NOT NULL,
   Pays VARCHAR(256) NOT NULL,
@@ -127,10 +97,6 @@ CREATE TABLE IF NOT EXISTS Pays (
   ENGINE = InnoDB;
 
 
-
--- -----------------------------------------------------
--- Table Genre
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Genre (
   ID VARCHAR(512) NOT NULL,
   Genre VARCHAR(64) NOT NULL,
@@ -141,9 +107,6 @@ CREATE TABLE IF NOT EXISTS Genre (
 
 
 
--- -----------------------------------------------------
--- Table Langue
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Langue (
   ID VARCHAR(512) NOT NULL,
   Langue VARCHAR(256) NOT NULL,
@@ -153,10 +116,6 @@ CREATE TABLE IF NOT EXISTS Langue (
   ENGINE = InnoDB;
 
 
-
--- -----------------------------------------------------
--- Table Administrateur
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Administrateur (
   AdresseMail VARCHAR(256) NOT NULL,
   motDePasse VARCHAR(256) NULL,

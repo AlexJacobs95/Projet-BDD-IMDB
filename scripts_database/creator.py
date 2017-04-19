@@ -10,37 +10,32 @@ def executeScriptsFromFile(filename, cursor):
     sqlFile = fd.read()
     fd.close()
 
-    sqlCommands = sqlFile.split(';')
+    sqlCommands = sqlFile.strip().split(';')
 
     # Execute every command from the input file
     i = 0
 
     global_time = datetime.datetime.now()
-    print ("Insertion started.")
+
     for command in sqlCommands:
+        command = command.strip()
         table_time = datetime.datetime.now()
-        print ("Filling table "  + talbes[i] + " ...")
+
         try:
             cursor.execute(command)
 
         except mdb.Error, e:
             pass
-        print ("table " + talbes[i] + "filled in " + str(datetime.datetime.now() - table_time) + "s" )
 
         i+=1
 
-    print ("Insertion done\nDatabase filled in " + str(datetime.datetime.now() - global_time) + "s")
-    size = cursor.execute("SELECT table_schema \"IMBD\", Round(Sum(data_length + index_length) / 1024 / 1024, 1) \"DB Size in MB\" FROM   information_schema.tables GROUP  BY table_schema; ")
-    print ("The DB size is " + str(size))
 
-
-
-conn = mdb.connect("localhost","root","","")
+conn = mdb.connect("localhost","root","!lanA01","")
 cur = conn.cursor()
 cur.execute("CREATE DATABASE IMBD;")
 conn.close();
 
-conn = mdb.connect("localhost","root","","IMBD")
+conn = mdb.connect("localhost","root","!lanA01","IMBD")
 cur = conn.cursor()
 
 executeScriptsFromFile("ddl.sql", cur)
