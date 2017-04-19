@@ -1,4 +1,5 @@
 *.xml
 sql script/.idea/sql script.iml
 .idea/
-./IMDB_files/
+IMDB_files/
+SQL_data_files/
