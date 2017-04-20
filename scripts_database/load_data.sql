@@ -10,3 +10,4 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/auteurs_ok.txt' INTO TABLE Auteur FIEL
 LOAD DATA LOCAL INFILE '../SQL_data_files/directeurs_ok.txt' INTO TABLE Directeur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/episodes_ok.txt' INTO TABLE Episode FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/acteurs_ok.txt' INTO TABLE Acteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/ratings_ok.txt' INTO TABLE Oeuvre FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n" (Note);
