@@ -48,7 +48,7 @@ Page de recherche avancé de site web.
                     echo "Login Failed";
                 }
                 else{
-                    header("administrator_action_page.php")
+                    header("administrator_action_page.php");
                 }
             }
 		?>
