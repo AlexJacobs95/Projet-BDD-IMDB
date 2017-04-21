@@ -7,7 +7,7 @@ SET @@global.innodb_large_prefix = 1;
 CREATE TABLE IF NOT EXISTS Personne (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10) NOT NULL,
+  Numero VARCHAR(10),
   Genre CHAR(2) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Personne (
 CREATE TABLE IF NOT EXISTS Auteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10) NOT NULL,
+  Numero VARCHAR(10),
   OID VARCHAR(512) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Auteur (
 CREATE TABLE IF NOT EXISTS Directeur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10) NOT NULL,
+  Numero VARCHAR(10),
   OID VARCHAR(512) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Directeur (
 CREATE TABLE IF NOT EXISTS Acteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10) NOT NULL,
+  Numero VARCHAR(10),
   OID VARCHAR(512) NOT NULL,
   Role varchar(128) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID, Role),
