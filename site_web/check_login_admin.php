@@ -17,6 +17,9 @@
 	        $result = mysqli_query($db,$query);
 	        mysqli_close($db);
 	        if($result){
+	            
+	            echo "$email";
+	            echo md5($password);
 	            echo "Login Failed";
 	            header("administrator_login_page.php");
 	        }
