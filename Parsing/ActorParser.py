@@ -131,7 +131,7 @@ def getOeuvreID(line):
 
             # Remove role and credit position
             if "[" in long_id:
-                long_id = long_id.replace(long_id[long_id.find("["):long_id.find("]") + 1], "")
+                long_id = long_id.replace(long_id[long_id.rfind("["):long_id.rfind("]") + 1], "")
             if "<" in long_id:
                 long_id = long_id.replace(long_id[long_id.find("<"):long_id.find(">") + 1], "")
 
