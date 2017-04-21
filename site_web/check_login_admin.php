@@ -4,7 +4,7 @@
 	<?php 
         $email = $_POST[mail];
         $password = $_POST[password];
-        $db = mysqli_connect("localhost","root", "imdb", "../scripts_database/projetDB");
+        $db = mysqli_connect("localhost","root", "imdb", "../scripts_database/IMDB");
 	    if (!$db)
 	    {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
