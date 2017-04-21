@@ -9,16 +9,69 @@ def pretty_print(dico, name):
     of_actors = open("../SQL_data_files/acteurs_ok.txt", 'a')
 
     for key in dico:
-        of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["genre"] + "\n")
+        of.write(
+            dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
         for id_oeuvre, role in dico[key]["oeuvres"]:
-            of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + id_oeuvre + "|" + role + "\n")
+            of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key][
+                "numero"] + "|" + id_oeuvre + "|" + role + "\n")
 
 
 def getRole(line):
+    role = ""
     if "[" in line and "]" in line:
-        return line[line.index("[") + 1:line.index("]")]
-    else:
-        return "unknown"
+        role += line[line.index("[") + 1:line.index("]")]
+
+
+    data = line.split("\t")
+    for i in range(1, len(data)):
+        if data[i] != "":
+            long_id = data[i]
+
+            # Add (uncredited)
+            if " (uncredited)" in long_id:
+                role += " (uncredited)"
+            # Add (credit only)
+            if " (credit only)" in long_id:
+                role += " (credit conly)"
+            # Add (archive footage)
+            if "(archive footage)" in long_id:
+                role += " (archive footage)"
+
+            # Add (as...)
+            if " (as " in long_id:
+                index = long_id.index(" (as ")
+                to_add = ""
+                for i in range(index, len(long_id)):
+                    to_add += long_id[i]
+                    if long_id[i] == ")":
+                        break
+                role += to_add
+
+            # Add (also as...)
+            also_as_to_add = " (also as " in long_id
+            _index = 0
+            while also_as_to_add:
+                index = long_id.index(" (also as ", _index, len(long_id))
+                to_add = ""
+                for i in range(index, len(long_id)):
+                    to_add += long_id[i]
+                    if long_id[i] == ")":
+                        _index = i
+                        break
+                role += to_add
+                also_as_to_add = "(also as " in long_id[_index:]
+
+            # Add (voice...)
+            if " (voice" in long_id:
+                index = long_id.index(" (voice")
+                to_add = ""
+                for i in range(index, len(long_id)):
+                    to_add += long_id[i]
+                    if long_id[i] == ")":
+                        break
+                role += to_add
+
+    return role.strip() if role != "" else "unknown"
 
 
 def getOeuvreID(line):
@@ -30,6 +83,9 @@ def getOeuvreID(line):
             # Remove (uncredited)
             if "(uncredited)" in long_id:
                 long_id = long_id.replace("(uncredited)", "")
+
+            if "(credit only)" in long_id:
+                long_id = long_id.replace("(credit only)", "")
 
             # Remove (archive footage)
             if "(archive footage)" in long_id:
@@ -121,6 +177,7 @@ def parse(file):
                     current_actor = {"ID": actorID,
                                      "nom": get_nom_prenom(line)[0],
                                      "prenom": get_nom_prenom(line)[1],
+                                     "numero": get_nom_prenom(line)[2],
                                      "genre": genre,
                                      "oeuvres": [],
                                      }
@@ -137,7 +194,6 @@ def parse(file):
 
 
 def main():
-
     if sys.argv[1] == "-f":
         data = parse("../IMDB_files/actresses.list")
 

@@ -1,7 +1,7 @@
 def output_oeuvres(dico):
     of = open("../SQL_data_files/oeuvres_ok.txt", 'a')
     for key in dico:
-        of.write(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + '0' + "\n")
+        of.write(dico[key]["realID"] + "|" + dico[key]["titre"] + "|" + dico[key]["dateSortie"] + "|" + 'NULL' + "\n")
 
     of.close()
 

@@ -4,7 +4,8 @@ from BaseParser import *
 def pretty_print(dico):
     of = open("../SQL_data_files/persons_ok.txt", 'a')
     for key in dico:
-        of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["genre"] + "\n")
+        of.write(
+            dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
         for id_oeuvre in dico[key]["oeuvres"]:
             print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + id_oeuvre)
     of.close()
@@ -47,6 +48,7 @@ def parse(file):
                     current_writer = {"ID": writerID,
                                       "nom": get_nom_prenom(line)[0],
                                       "prenom": get_nom_prenom(line)[1],
+                                      "numero": get_nom_prenom(line)[2],
                                       "genre": genre,
                                       "oeuvres": [],
                                       }

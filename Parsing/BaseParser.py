@@ -1,6 +1,7 @@
 def get_nom_prenom(line):
     nom = "unknown"
     prenom = "unknown"
+    numero = "NULL"
 
     data = line.strip().split('\t')
     nom_prenom = data[0]
@@ -16,12 +17,14 @@ def get_nom_prenom(line):
             prenom = nom_prenom.split(',')[2]
 
         if '(' in prenom and ')' in prenom:
-            # Si plusieurs personnes avec le meme nom
+            # Si plusieurs personnes avec le meme nom et que donc il y a un chiffre romain en plus
+            # ex : Herry, thierry (IV)
             begin = prenom.index('(')
             end = prenom.index(')')
-            nom += " " + prenom[begin:end + 1]
+            numero = prenom[begin+1:end]
             prenom = prenom.replace(prenom[begin:end + 1], "")
-    return nom.strip(), prenom.strip()
+
+    return nom.strip(), prenom.strip(), numero.strip()
 
 
 def getOeuvreID(line):
