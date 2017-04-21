@@ -29,12 +29,6 @@ def createDB():
     cur.execute("CREATE DATABASE IMBD;")
     conn.close();
 
-
-def fillDB():
-    # calling bash script
-    subprocess.call("fill.sh", shell=True)
-
-
 if __name__ == '__main__':
     createDB()
 
@@ -44,5 +38,3 @@ if __name__ == '__main__':
     executeDDLFromFile("ddl.sql", cur)
     conn.close();
 
-    # Fill Tables
-    fillDB()
