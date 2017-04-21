@@ -9,5 +9,5 @@
 # Creation db
 1) parse les ficher avec parseAll.sh
 2) modifie la ligne 27 de creator.py en y ajoutant ton mdp (ex : conn = mdb.connect("localhost", "root", "monMdp", ""))
-3) modifie la ligne 27 de creator.py en y ajoutant ton mdp (ex : conn = mdb.connect("localhost", "root", "monMdp", "IMBD"))
+3) modifie la ligne 42 de creator.py en y ajoutant ton mdp (ex : conn = mdb.connect("localhost", "root", "monMdp", "IMBD"))
 4) Run le script creator.py
