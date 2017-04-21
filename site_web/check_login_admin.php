@@ -4,7 +4,7 @@
 	<?php 
         $email = $_POST[mail];
         $password = $_POST[password];
-        $db = mysqli_connect("localhost","root", "imdb", "../scripts_database/IMDB");
+        $db = mysqli_connect("localhost","root", "imdb", "IMBD");
 	    if (!$db)
 	    {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -15,7 +15,7 @@
 		else{
 	        $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
 	        $result = mysqli_query($db,$query);
-	        mysql_close($db);
+	        mysqli_close($db);
 	        if($result){
 	            echo "Login Failed";
 	            header("administrator_login_page.php");
