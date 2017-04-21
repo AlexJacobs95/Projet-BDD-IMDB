@@ -1,4 +1,6 @@
 import MySQLdb as mdb
+import subprocess
+
 
 def executeDDLFromFile(filename, cursor):
     # Open and read the file as a single buffer
@@ -21,13 +23,26 @@ def executeDDLFromFile(filename, cursor):
     print("Table creation Done.")
 
 
-conn = mdb.connect("localhost", "root", "", "")
-cur = conn.cursor()
-cur.execute("CREATE DATABASE IMBD;")
-conn.close();
+def createDB():
+    conn = mdb.connect("localhost", "root", "", "")
+    cur = conn.cursor()
+    cur.execute("CREATE DATABASE IMBD;")
+    conn.close();
 
-conn = mdb.connect("localhost", "root", "", "IMBD")
-cur = conn.cursor()
-executeDDLFromFile("ddl.sql", cur)
 
-conn.close();
+def fillDB():
+    # calling bash script
+    subprocess.call("fill.sh", shell=True)
+
+
+if __name__ == '__main__':
+    createDB()
+
+    # Create Tables
+    conn = mdb.connect("localhost", "root", "", "IMBD")
+    cur = conn.cursor()
+    executeDDLFromFile("ddl.sql", cur)
+    conn.close();
+
+    # Fill Tables
+    fillDB()
