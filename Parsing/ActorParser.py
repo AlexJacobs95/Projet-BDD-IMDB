@@ -19,7 +19,7 @@ def pretty_print(dico, name):
 def getRole(line):
     role = ""
     if "[" in line and "]" in line:
-        role += line[line.index("[") + 1:line.index("]")]
+        role += line[line.rindex("[") + 1:line.rindex("]")]
 
 
     data = line.split("\t")
