@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS Auteur (
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10) NOT NULL,
   OID VARCHAR(512) NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero, OID),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
@@ -30,6 +31,7 @@ CREATE TABLE IF NOT EXISTS Directeur (
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10) NOT NULL,
   OID VARCHAR(512) NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero, OID),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
@@ -43,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Acteur (
   Numero VARCHAR(10) NOT NULL,
   OID VARCHAR(512) NOT NULL,
   Role varchar(128) NOT NULL,
-  PRIMARY KEY (Prenom, Nom, OID, Role),
+  PRIMARY KEY (Prenom, Nom, Numero, OID, Role),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
