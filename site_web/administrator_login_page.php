@@ -37,20 +37,6 @@ Page de recherche avancé de site web.
 	<body id="page-top" class="index">
 		<?php
 			include 'menubar.php';
-            function check_login(){
-                $email = $_POST[mail];
-                $password = $_POST[password];
-                $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-                $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
-                $result = mysqli_query($db,$query);
-                
-                if($result){
-                    echo "Login Failed";
-                }
-                else{
-                    header("administrator_action_page.php");
-                }
-            }
 		?>
 
         <header>
@@ -58,13 +44,13 @@ Page de recherche avancé de site web.
                 <div class="intro-text">
                     <div class="intro-heading">Connexion administrateur</div>
 
-                    <form action="check_login()" name="search" id="searchForm" method="post">
+                    <form action="check_login_admin.php" name="search" id="searchForm" method="post">
 
                         <div class="form-group text-center">
                             <input type="email" class="form-control" placeholder="Adresse mail" name="mail" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Mot de passe " name="password" required>
+                            <input type="password" class="form-control" placeholder="Mot de passe " name="password" required> <!-- pour fixer des contraintes sur l'entré utilisateur à mettre dans le input avant "required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" -->
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
