@@ -3,7 +3,9 @@ Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
 Page de recherche avancé de site web.
 -->
- <?php session_start(); ?>
+ <?php 
+    session_start();
+ ?>
 
  <!DOCTYPE html>
 <html>

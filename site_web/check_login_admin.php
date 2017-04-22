@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<?php 
+	<?php
         $email = $_POST["mail"];
         $password = $_POST["password"];
         $password = md5($password);
+        echo "$email";
+        echo "$password";
         $db = mysqli_connect("localhost","root", "imdb", "IMBD");
 	    if (!$db)
 	    {
@@ -15,27 +17,16 @@
 		}
 		else{
 			$query = "SELECT * FROM Administrateur 
-			    WHERE AdresseMail=$email AND motDePasse=$password";
-			    
-			echo "$query";
+			    WHERE AdresseMail=='$email' AND motDePasse=='$password'";
 			$result = mysqli_query($db, $query);
 	        mysqli_close($db);
-	        if($result){
-	        	while($row = mysqli_fetch_assoc($result)){
-				    foreach($row as $cname => $cvalue){
-				        print "$cname: $cvalue\t";
-				    }
-				    print "\r\n";
-				}
-	            // echo "$query";
-	            // echo "$email";
-	            // echo md5($password);
-	            // echo "Login Failed";
-	            header("administrator_login_page.php");
+	        if(!$result){
+	        	echo "false";
+	            // header("Location: ./administrator_login_page.php");
 	        }
 	        else{
-	        	echo "ici";
-	            header("administrator_action_page.php");
+	        	echo "logged";
+	        	// header("Location: ./administrator_action_page.php");    
 	        }
 	    }
 	?>
