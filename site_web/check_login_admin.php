@@ -2,8 +2,9 @@
 <html>
 <body>
 	<?php 
-        $email = $_POST[mail];
-        $password = $_POST[password];
+        $email = $_POST["mail"];
+        $password = $_POST["password"];
+        $password = md5($password);
         $db = mysqli_connect("localhost","root", "imdb", "IMBD");
 	    if (!$db)
 	    {
@@ -13,17 +14,27 @@
 		    exit;
 		}
 		else{
-	        $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
-	        $result = mysqli_query($db,$query);
+			$query = "SELECT * FROM Administrateur 
+			    WHERE AdresseMail=$email AND motDePasse=$password";
+			    
+			echo "$query";
+			$result = mysqli_query($db, $query);
 	        mysqli_close($db);
 	        if($result){
-	            
-	            echo "$email";
-	            echo md5($password);
-	            echo "Login Failed";
+	        	while($row = mysqli_fetch_assoc($result)){
+				    foreach($row as $cname => $cvalue){
+				        print "$cname: $cvalue\t";
+				    }
+				    print "\r\n";
+				}
+	            // echo "$query";
+	            // echo "$email";
+	            // echo md5($password);
+	            // echo "Login Failed";
 	            header("administrator_login_page.php");
 	        }
 	        else{
+	        	echo "ici";
 	            header("administrator_action_page.php");
 	        }
 	    }
