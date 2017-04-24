@@ -7,8 +7,8 @@
         $password = md5($_POST["password"]);
         echo "$email";
         echo "$password";
-        $db = mysqli_connect("localhost","root", "imdb", "IMBD");
-	    if (!$db)
+       	$database = new mysqli("localhost","root","imdb","IMBD");
+	    if (!$database)
 	    {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
 		    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
@@ -16,7 +16,7 @@
 		    exit;
 		}
 		else{
-			$database = new mysqli("localhost","root","imdb","IMBD");
+			
 			$requete = "SELECT  AdresseMail, motDePasse FROM Administrateur
 							WHERE AdresseMail = '$email'";
 			$output = $database->query($requete);

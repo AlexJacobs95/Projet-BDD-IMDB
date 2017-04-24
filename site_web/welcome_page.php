@@ -76,21 +76,43 @@ Page d'acceuill de site web.
             </div>
         </div>
         <div class="row">
+            <?php
+            $database = new mysqli("localhost","root","imdb","IMBD");
+            $number_film = 0;
+            $number_serie = 0;
+            $number_actor =0;
+            if (!$database)
+            {
+                echo "Error: Unable to connect to MySQL." . PHP_EOL;
+                echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+                echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+                exit;
+            }
+            else{
+                $result = $database->query("SELECT count(*) FROM Film");
+                $number_film =  $result;
+                $result = $database->query("SELECT count(*) FROM Serie");
+                $number_serie = $result;
+                $result = $database->query("SELECT disctinct count(*) From Acteur");
+                $number_actor = $result;
+                $result->close();
+            }
+            ?>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>3020394</h3>
-                    <h4>Filmes</h4>
+                    <h3><?php echo "$number_film"; ?></h3>
+                    <h4>Films</h4>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>234987</h3>
+                    <h3><?php echo "$number_serie"; ?></h3>
                     <h4>Séries</h4>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>6523412</h3>
+                    <h3><?php echo "$number_actor"; ?></h3>
                     <h4>Acteurs</h4>
                 </div>
             </div>
