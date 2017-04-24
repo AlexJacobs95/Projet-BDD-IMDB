@@ -89,13 +89,15 @@ Page d'acceuill de site web.
                 exit;
             }
             else{
-                $result = $database->query("SELECT count(*) FROM Film");
-                $number_film =  $result;
-                $result = $database->query("SELECT count(*) FROM Serie");
-                $number_serie = $result;
-                $result = $database->query("SELECT disctinct count(*) From Acteur");
-                $number_actor = $result;
-                $result->close();
+                $result_film = $database->query("SELECT * FROM Film");
+                $number_film =  $result_film->num_rows;
+                $result_serie = $database->query("SELECT * FROM Serie");
+                $number_serie = $result_serie->num_rows;
+                $result_actor = $database->query("SELECT distinct * From Acteur");
+                $number_actor = $result_actor->num_rows;
+                $result_film->close();
+                $result_serie->close();
+                $result_actor->close();
             }
             ?>
             <div class="col-sm-4">
