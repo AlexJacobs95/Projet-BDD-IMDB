@@ -2,6 +2,7 @@
 <html>
 <body>
 	<?php
+		session_start();
         $email = $_POST["mail"];
         $password = md5($_POST["password"]);
         echo "$email";
@@ -25,10 +26,12 @@
 					header("Location: ./administrator_action_page.php");
 				}
 				else{
+					$_SESSION['errors'] = array("Your username or password was incorrect.");
 					header("Location: ./administrator_login_page.php");
 				}
 			}
 			else{
+				$_SESSION['errors'] = array("Your username or password was incorrect.");
 				header("Location: ./administrator_login_page.php");
 			}
 	    }
