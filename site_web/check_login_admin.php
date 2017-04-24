@@ -3,8 +3,7 @@
 <body>
 	<?php
         $email = $_POST["mail"];
-        $password = $_POST["password"];
-        $password = md5($password);
+        $password = md5($_POST["password"]);
         echo "$email";
         echo "$password";
         $db = mysqli_connect("localhost","root", "imdb", "IMBD");
@@ -16,18 +15,22 @@
 		    exit;
 		}
 		else{
-			$query = "SELECT * FROM Administrateur 
-			    WHERE AdresseMail=='$email' AND motDePasse=='$password'";
-			$result = mysqli_query($db, $query);
-	        mysqli_close($db);
-	        if(!$result){
-	        	echo "false";
-	            // header("Location: ./administrator_login_page.php");
-	        }
-	        else{
-	        	echo "logged";
-	        	// header("Location: ./administrator_action_page.php");    
-	        }
+			$database = new mysqli("localhost","root","imdb","IMBD");
+			$requete = "SELECT  AdresseMail, motDePasse FROM Administrateur
+							WHERE AdresseMail = '$email'";
+			$output = $database->query($requete);
+			
+			if($row = $output->fetch_assoc()){
+				if ($row['motDePasse'] == $password){
+					header("Location: ./administrator_action_page.php");
+				}
+				else{
+					header("Location: ./administrator_login_page.php");
+				}
+			}
+			else{
+				header("Location: ./administrator_login_page.php");
+			}
 	    }
 	?>
 </body>
