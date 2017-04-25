@@ -40,7 +40,12 @@ Page d'acceuill de site web.
 
 <!-- Navigation -->
 <?php
-    include 'menubar.php';
+    if(isset($_SESSION['logged'])){
+        include 'menubar_admin.php';
+    }
+    else{
+        include 'menubar.php';
+    }
 ?>
 
 <!-- Header -->

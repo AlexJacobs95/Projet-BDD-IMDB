@@ -23,6 +23,7 @@
 			
 			if($row = $output->fetch_assoc()){
 				if ($row['motDePasse'] == $password){
+					$_SESSION['logged'] = true;
 					header("Location: ./administrator_action_page.php");
 				}
 				else{
