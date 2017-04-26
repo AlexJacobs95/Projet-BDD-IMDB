@@ -1,6 +1,5 @@
 
 <?php
-    session_start();
     if (($_GET['run_function_log_out']) == 'yes'){
         session_destroy();
         header("Location: ./administrator_login_page.php");

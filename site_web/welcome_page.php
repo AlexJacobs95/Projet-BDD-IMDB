@@ -4,7 +4,9 @@ INFO-H-303 : Bases de données - Projet IMBD.
 Page d'acceuill de site web.
 -->
 
- <?php session_start(); ?>
+ <?php
+    session_set_cookie_params(0);
+    session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
