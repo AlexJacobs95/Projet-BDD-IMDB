@@ -11,7 +11,7 @@ def pretty_print(dico, name):
 
     for key in dico:
         of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
-        of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
+        of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] +"\n")
         for id_oeuvre, role in dico[key]["oeuvres"]:
             of_roles.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key][
                 "numero"] + "|" + id_oeuvre + "|" + role + "\n")
