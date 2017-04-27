@@ -27,9 +27,9 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/ratings_ok.txt' INTO TABLE Note_temp F
 UPDATE Oeuvre INNER JOIN Note_temp on Note_temp.ID = Oeuvre.ID SET Oeuvre.Note = Note_temp.Note;
 DROP TEMPORARY TABLE Note_temp;
 \! echo "Inserting data in Auteur...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/auteur_ok.txt' INTO TABLE Auteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/auteurs_ok.txt' INTO TABLE Auteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Directeur...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/directeur_ok.txt' INTO TABLE Directeur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/directeurs_ok.txt' INTO TABLE Directeur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Acteur...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/acteur_ok.txt' INTO TABLE Acteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/acteurs_ok.txt' INTO TABLE Acteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserttion done.\n";
