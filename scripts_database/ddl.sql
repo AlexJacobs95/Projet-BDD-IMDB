@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS Auteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
-  PRIMARY KEY (Prenom, Nom, Numero)),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  PRIMARY KEY (Prenom, Nom, Numero),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
 
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS Directeur (
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
   Genre CHAR(2) NOT NULL,
-  PRIMARY KEY (Prenom, Nom, Numero)),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  PRIMARY KEY (Prenom, Nom, Numero),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
 
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS Acteur (
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
   Genre CHAR(2) NOT NULL,
-  PRIMARY KEY (Prenom, Nom, Numero)),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  PRIMARY KEY (Prenom, Nom, Numero),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
 
