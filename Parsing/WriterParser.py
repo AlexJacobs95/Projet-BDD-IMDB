@@ -3,12 +3,16 @@ from BaseParser import *
 
 def pretty_print(dico):
     of = open("../SQL_data_files/persons_ok.txt", 'a')
+    of_ecrit_par = open("../SQL_data_files/ecritPar.txt", 'w')
     for key in dico:
         of.write(
             dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
+        print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
+
         for id_oeuvre in dico[key]["oeuvres"]:
-            print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + id_oeuvre)
+            of_ecrit_par.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre)
     of.close()
+    of_ecrit_par.close()
 
 
 def test():

@@ -128,8 +128,8 @@ def test():
     with open("../IMDB_files/movies.list") as f:
         line_counter = 0
         for line in f:
-            if line_counter == 2914756:
-                print(line)
+            if line_counter == 2569138:
+                print(getShortID(line))
 
             line_counter += 1
 
@@ -138,8 +138,11 @@ def getRealID(line):
     long_id = line.split('\t')[0]
     if long_id[0] == '"' and '{' in long_id and '}' in long_id:
         # Si l oeuvre est une serie (le nom des series commence par des guillemets
-        index = long_id.rindex('}')
-        long_id = long_id[0:index + 1]
+        if '"' in long_id[long_id.index('{'):]:
+            long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
+        else:
+            index = long_id.rindex('}')
+            long_id = long_id[0:index + 1]
     elif long_id[0] != '"' and '{' in long_id and '}' in long_id:
         index = long_id.rindex('}')
         long_id = long_id[0:index + 1]
@@ -162,6 +165,16 @@ def getRealID(line):
 
     return long_id.strip()
 
+def getShortID(line):
+    short_id = line.split('\t')[0]
+    if '{' in short_id:
+        if '"' in short_id[short_id.index('{'):]:
+            short_id = short_id[0:getIndexOfDateEnd(short_id) + 1]
+        else:
+            short_id = short_id[0:short_id.index('{')]
+        short_id = short_id[0:short_id.rindex(')') + 1]
+    print(short_id)
+    return short_id
 
 def getIndexOfDateEnd(long_id):
     index = 999
@@ -183,6 +196,7 @@ def getIndexOfDateEnd(long_id):
 
 def main():
     SerieID = -1
+    shortSerieId = -1
     ID = -1
     series = {}
     films = {}
@@ -214,7 +228,7 @@ def main():
                                            }
                         episodes[ID] = current_episode
 
-                    elif get_name(line) != serie_name:
+                    elif getShortID(line) != shortSerieId:
                         new_oeuvre = True
 
                     else:
@@ -229,6 +243,7 @@ def main():
                     if line_counter < 2914756:
                         # Si c est une serie
                         SerieID = getRealID(line)
+                        shortSerieId = getShortID(line)
                         current_serie = {"realID": getRealID(line),
                                          "titre": get_name_date_serie(line)[0],
                                          "dateSortie": get_name_date_serie(line)[1],

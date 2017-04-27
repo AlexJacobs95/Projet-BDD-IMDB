@@ -6,14 +6,19 @@ from BaseParser import *
 
 def pretty_print(dico, name):
     of = open("../SQL_data_files/persons_ok.txt", 'a')
+    of_roles = open("../SQL_data_files/roles.txt", 'a')
     of_actors = open("../SQL_data_files/acteurs_ok.txt", 'a')
 
     for key in dico:
-        of.write(
-            dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
+        of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
+        of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
         for id_oeuvre, role in dico[key]["oeuvres"]:
-            of_actors.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key][
+            of_roles.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key][
                 "numero"] + "|" + id_oeuvre + "|" + role + "\n")
+
+    of.close()
+    of_actors.close()
+    of_roles.close()
 
 
 def getRole(line):

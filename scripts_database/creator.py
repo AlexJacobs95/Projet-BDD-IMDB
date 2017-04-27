@@ -24,7 +24,7 @@ def executeDDLFromFile(filename, cursor):
 
 
 def createDB():
-    conn = mdb.connect("localhost", "root", "imdb", "")
+    conn = mdb.connect("localhost", "root", "!lanA01", "")
     cur = conn.cursor()
     cur.execute("CREATE DATABASE IMBD;")
     conn.close();
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     createDB()
 
     # Create Tables
-    conn = mdb.connect("localhost", "root", "imdb", "IMBD")
+    conn = mdb.connect("localhost", "root", "!lanA01", "IMBD")
     cur = conn.cursor()
     executeDDLFromFile("ddl.sql", cur)
     conn.close();
