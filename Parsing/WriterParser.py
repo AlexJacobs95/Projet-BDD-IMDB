@@ -7,7 +7,6 @@ def pretty_print(dico):
     for key in dico:
         of.write(
             dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
-        print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
 
         for id_oeuvre in dico[key]["oeuvres"]:
             of_ecrit_par.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre)
