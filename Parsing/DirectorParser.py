@@ -9,7 +9,7 @@ def pretty_print(dico):
         of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"]+ "\n")
         print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
         for id_oeuvre in dico[key]["oeuvres"]:
-            of_directed_by.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre)
+            of_directed_by.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre + "\n")
 
 
 
