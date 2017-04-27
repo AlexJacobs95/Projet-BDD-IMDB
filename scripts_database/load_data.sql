@@ -19,7 +19,7 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/ecritPar.txt' INTO TABLE EcritPar FIEL
 LOAD DATA LOCAL INFILE '../SQL_data_files/dirigePar.txt' INTO TABLE DirigePar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Episode...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/episodes_ok.txt' INTO TABLE Episode FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
-\! echo "Inserting data in Acteur...\n";
+\! echo "Inserting data in Role...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/roles.txt' INTO TABLE Role FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting Notes...\n";
 CREATE TEMPORARY TABLE Note_temp (ID VARCHAR(512) NOT NULL,Note FLOAT);
