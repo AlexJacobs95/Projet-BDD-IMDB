@@ -173,7 +173,6 @@ def getShortID(line):
         else:
             short_id = short_id[0:short_id.index('{')]
         short_id = short_id[0:short_id.rindex(')') + 1]
-    print(short_id)
     return short_id
 
 def getIndexOfDateEnd(long_id):
