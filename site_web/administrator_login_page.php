@@ -3,7 +3,12 @@ Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
 Page de recherche avancé de site web.
 -->
- <?php session_start(); ?>
+ <?php 
+    session_start();
+    if(isset($_SESSION['logged'])){
+        header("Location: ./administrator_action_page.php");
+    }
+ ?>
 
  <!DOCTYPE html>
 <html>
@@ -43,7 +48,14 @@ Page de recherche avancé de site web.
             <div class="container">
                 <div class="intro-text">
                     <div class="intro-heading">Connexion administrateur</div>
-
+                    <?php if (isset($_SESSION['errors'])): ?>   
+                       <div class="form-errors">
+                            <?php foreach($_SESSION['errors'] as $error): ?>
+                                <p><?php echo $error ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php session_destroy() ?>
                     <form action="check_login_admin.php" name="search" id="searchForm" method="post">
 
                         <div class="form-group text-center">
@@ -52,7 +64,6 @@ Page de recherche avancé de site web.
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Mot de passe " name="password" required> <!-- pour fixer des contraintes sur l'entré utilisateur à mettre dans le input avant "required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" -->
                         </div>
-                        <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
                             <button type="submit" class="btn btn-xl">connexion</button>

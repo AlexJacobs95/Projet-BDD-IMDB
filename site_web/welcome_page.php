@@ -4,7 +4,9 @@ INFO-H-303 : Bases de données - Projet IMBD.
 Page d'acceuill de site web.
 -->
 
- <?php session_start(); ?>
+ <?php
+    session_set_cookie_params(0);
+    session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,7 +42,12 @@ Page d'acceuill de site web.
 
 <!-- Navigation -->
 <?php
-    include 'menubar.php';
+    if(isset($_SESSION['logged'])){
+        include 'menubar_admin.php';
+    }
+    else{
+        include 'menubar.php';
+    }
 ?>
 
 <!-- Header -->
@@ -76,21 +83,45 @@ Page d'acceuill de site web.
             </div>
         </div>
         <div class="row">
+            <?php
+            $database = new mysqli("localhost","root","imdb","IMBD");
+            $number_film = 0;
+            $number_serie = 0;
+            $number_actor =0;
+            if (!$database)
+            {
+                echo "Error: Unable to connect to MySQL." . PHP_EOL;
+                echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+                echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+                exit;
+            }
+            else{
+                $result_film = $database->query("SELECT * FROM Film");
+                $number_film =  $result_film->num_rows;
+                $result_serie = $database->query("SELECT * FROM Serie");
+                $number_serie = $result_serie->num_rows;
+                $result_actor = $database->query("SELECT distinct * From Acteur");
+                $number_actor = $result_actor->num_rows;
+                $result_film->close();
+                $result_serie->close();
+                $result_actor->close();
+            }
+            ?>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>3020394</h3>
-                    <h4>Filmes</h4>
+                    <h3><?php echo "$number_film"; ?></h3>
+                    <h4>Films</h4>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>234987</h3>
+                    <h3><?php echo "$number_serie"; ?></h3>
                     <h4>Séries</h4>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="stat-member">
-                    <h3>6523412</h3>
+                    <h3><?php echo "$number_actor"; ?></h3>
                     <h4>Acteurs</h4>
                 </div>
             </div>

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<?php 
-        $email = $_POST[mail];
-        $password = $_POST[password];
-        $db = mysqli_connect("localhost","root", "imdb", "IMBD");
-	    if (!$db)
+	<?php
+		session_start();
+        $email = $_POST["mail"];
+        $password = md5($_POST["password"]);
+        echo "$email";
+        echo "$password";
+       	$database = new mysqli("localhost","root","imdb","IMBD");
+	    if (!$database)
 	    {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
 		    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
@@ -13,19 +16,25 @@
 		    exit;
 		}
 		else{
-	        $query = "SELECT * FROM Administrateur WHERE AdresseMail = '". mysqli_real_escape_string($email) ."' AND motDePasse = '". mysqli_real_escape_string(md5($password)) ."'" ;
-	        $result = mysqli_query($db,$query);
-	        mysqli_close($db);
-	        if($result){
-	            
-	            echo "$email";
-	            echo md5($password);
-	            echo "Login Failed";
-	            header("administrator_login_page.php");
-	        }
-	        else{
-	            header("administrator_action_page.php");
-	        }
+			
+			$requete = "SELECT  AdresseMail, motDePasse FROM Administrateur
+							WHERE AdresseMail = '$email'";
+			$output = $database->query($requete);
+			
+			if($row = $output->fetch_assoc()){
+				if ($row['motDePasse'] == $password){
+					$_SESSION['logged'] = true;
+					header("Location: ./administrator_action_page.php");
+				}
+				else{
+					$_SESSION['errors'] = array("Your username or password was incorrect.");
+					header("Location: ./administrator_login_page.php");
+				}
+			}
+			else{
+				$_SESSION['errors'] = array("Your username or password was incorrect.");
+				header("Location: ./administrator_login_page.php");
+			}
 	    }
 	?>
 </body>
