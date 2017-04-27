@@ -18,15 +18,35 @@ CREATE TABLE IF NOT EXISTS Auteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
-  OID VARCHAR(512) NOT NULL,
-  PRIMARY KEY (Prenom, Nom, Numero, OID),
+  PRIMARY KEY (Prenom, Nom, Numero)),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
-  FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Directeur (
+  Prenom varchar(128) NOT NULL,
+  Nom varchar(128) NOT NULL,
+  Numero VARCHAR(10),
+  Genre CHAR(2) NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero)),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  CHARACTER SET latin1 COLLATE latin1_bin
+  ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS Acteur (
+  Prenom varchar(128) NOT NULL,
+  Nom varchar(128) NOT NULL,
+  Numero VARCHAR(10),
+  Genre CHAR(2) NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero)),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  CHARACTER SET latin1 COLLATE latin1_bin
+  ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS EcritPar (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
@@ -38,8 +58,19 @@ CREATE TABLE IF NOT EXISTS Directeur (
   ENGINE = InnoDB;
 
 
+CREATE TABLE IF NOT EXISTS DirigePar (
+  Prenom varchar(128) NOT NULL,
+  Nom varchar(128) NOT NULL,
+  Numero VARCHAR(10),
+  OID VARCHAR(512) NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero, OID),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero),
+  FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
+  CHARACTER SET latin1 COLLATE latin1_bin
+  ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS Acteur (
+
+CREATE TABLE IF NOT EXISTS Role (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
@@ -50,7 +81,6 @@ CREATE TABLE IF NOT EXISTS Acteur (
   FOREIGN KEY (OID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
-
 
 
 CREATE TABLE IF NOT EXISTS Oeuvre (
@@ -110,7 +140,6 @@ CREATE TABLE IF NOT EXISTS Genre (
   FOREIGN KEY (ID) REFERENCES Oeuvre(ID))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
-
 
 
 CREATE TABLE IF NOT EXISTS Langue (
