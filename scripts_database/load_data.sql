@@ -26,6 +26,7 @@ CREATE TEMPORARY TABLE Note_temp (ID VARCHAR(512) NOT NULL,Note FLOAT);
 LOAD DATA LOCAL INFILE '../SQL_data_files/ratings_ok.txt' INTO TABLE Note_temp FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 UPDATE Oeuvre INNER JOIN Note_temp on Note_temp.ID = Oeuvre.ID SET Oeuvre.Note = Note_temp.Note;
 DROP TEMPORARY TABLE Note_temp;
+INSERT INTO Administrateur (AdresseMail, motDePasse) VALUES ('admin@imdb.be', '21232f297a57a5a743894a0e4a801fc3');
 \! echo "Inserting data in Auteur...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/auteurs_ok.txt' INTO TABLE Auteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Directeur...\n";

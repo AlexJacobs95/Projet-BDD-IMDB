@@ -84,7 +84,7 @@ Page d'acceuill de site web.
         </div>
         <div class="row">
             <?php
-            $database = new mysqli("localhost","root","imdb","IMBD");
+            $database = new mysqli("localhost","root","imdb","IMDB");
             $number_film = 0;
             $number_serie = 0;
             $number_actor =0;
@@ -100,7 +100,7 @@ Page d'acceuill de site web.
                 $number_film =  $result_film->num_rows;
                 $result_serie = $database->query("SELECT * FROM Serie");
                 $number_serie = $result_serie->num_rows;
-                $result_actor = $database->query("SELECT distinct * From Acteur");
+                $result_actor = $database->query("SELECT * From Acteur");
                 $number_actor = $result_actor->num_rows;
                 $result_film->close();
                 $result_serie->close();

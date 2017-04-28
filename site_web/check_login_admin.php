@@ -7,7 +7,7 @@
         $password = md5($_POST["password"]);
         echo "$email";
         echo "$password";
-       	$database = new mysqli("localhost","root","imdb","IMBD");
+       	$database = new mysqli("localhost","root","imdb","IMDB");
 	    if (!$database)
 	    {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
