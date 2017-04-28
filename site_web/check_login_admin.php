@@ -24,6 +24,7 @@
 			if($row = $output->fetch_assoc()){
 				if ($row['motDePasse'] == $password){
 					$_SESSION['logged'] = true;
+					$_SESSION['pseudo_admin'] = $row['AdresseMail'];
 					header("Location: ./administrator_action_page.php");
 				}
 				else{
