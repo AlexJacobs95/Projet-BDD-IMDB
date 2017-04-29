@@ -13,14 +13,8 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/langues_ok.txt' INTO TABLE Langue FIEL
 LOAD DATA LOCAL INFILE '../SQL_data_files/films_ok.txt' INTO TABLE Film FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Serie...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/series_ok.txt' INTO TABLE Serie FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
-\! echo "Inserting data in EcritPar...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/ecritPar.txt' INTO TABLE EcritPar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
-\! echo "Inserting data in DirigePar...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/dirigePar.txt' INTO TABLE DirigePar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Episode...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/episodes_ok.txt' INTO TABLE Episode FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
-\! echo "Inserting data in Role...\n";
-LOAD DATA LOCAL INFILE '../SQL_data_files/roles.txt' INTO TABLE Role FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting Notes...\n";
 CREATE TEMPORARY TABLE Note_temp (ID VARCHAR(512) NOT NULL,Note FLOAT);
 LOAD DATA LOCAL INFILE '../SQL_data_files/ratings_ok.txt' INTO TABLE Note_temp FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
@@ -33,4 +27,10 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/auteurs_ok.txt' INTO TABLE Auteur FIEL
 LOAD DATA LOCAL INFILE '../SQL_data_files/directeurs_ok.txt' INTO TABLE Directeur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Acteur...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/acteurs_ok.txt' INTO TABLE Acteur FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+\! echo "Inserting data in EcritPar...\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/ecritPar.txt' INTO TABLE EcritPar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+\! echo "Inserting data in DirigePar...\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/dirigePar.txt' INTO TABLE DirigePar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+\! echo "Inserting data in Role...\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/roles.txt' INTO TABLE Role FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserttion done.\n";

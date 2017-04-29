@@ -1,3 +1,3 @@
 #!/bin/bash
 python creator.py
-mysql -u root -p IMDB < load_data.sql
+cat load_data.sql indexes.sql | mysql -u root -p IMDB
