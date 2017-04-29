@@ -42,10 +42,10 @@ Page de recherche avancé de site web.
     		<div class="container">
                 <div class="intro-text">
                 <style type="text/css">
-                	.button{
+                	.btn{
                 		margin: 8px 0; 
                 		border: none;
-                		cursor: default;
+                		cursor: pointer;
                 		border-radius: 4px;
                 	}
                 </style>
@@ -53,53 +53,53 @@ Page de recherche avancé de site web.
                     
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                       <a class="button btn btn-xl" href="#"> Comptes administrateur</a>
+                       <a class="btn btn-xl" href="#op_compte_admin"> Comptes administrateur</a>
                     </div>
 
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                    	<a class="button btn btn-xl" href="#">Opérations sur Film</a>
+                    	<a class="btn btn-xl" href="#">Opérations sur Film</a>
                     </div>
                                   
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Série</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Série</a>
                     </div>    
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Directeur</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Directeur</a>
                     </div>
                               
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Ecrivain</a>
-                    </div>
-                              
-
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Producteur</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Ecrivain</a>
                     </div>
                               
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Acteur</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Producteur</a>
                     </div>
                               
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Genre</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Acteur</a>
                     </div>
                               
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="button btn btn-xl" href="#">Opérations sur Pays</a>
+                        <a class="btn btn-xl" href="#">Opérations sur Genre</a>
+                    </div>
+                              
+
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <a class="btn btn-xl" href="#">Opérations sur Pays</a>
                     </div>
                               
                     <div class="clearfix"></div>
@@ -109,6 +109,39 @@ Page de recherche avancé de site web.
                 </div>
             </div>
         </header>
+        <section id= "op_compte_admin">
+            <div class="container text-center"> 
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Comptes Administrateur</h2>
+                    <h4>Ajout</h4>
+                </div>
+                <form action="/action_administrator.php">
+                    <div class="form-group text-center">
+                        <input type="email" name="email" placeholder="Enter a email" required>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="password" name="pswd" placeholder="Enter a password" required>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" class="btn btn-xl">Ajout</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container text-center"> 
+                <div class="col-lg-12 text-center">
+                    <h4>Suppression</h4>
+                </div>
+                <form action="/action_administrator.php">
+                    <div class="form-group text-center">
+                        <input type="email" name="email" placeholder="Enter a email" required>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" class="btn btn-xl">Suppression</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
     </body>
     <script src="./js/jquery-1.12.3.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
