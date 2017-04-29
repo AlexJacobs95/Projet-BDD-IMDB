@@ -114,8 +114,24 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Comptes Administrateur</h2>
                     <h4>Ajout</h4>
+                </div>    
+                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <div class="form-errors">
+                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                        <p><?php echo $succes ?></p>
+                    <?php endforeach; ?>
+                    <?php $_SESSION["query_succes_add"] = null;  ?>
                 </div>
-                <form action="/action_administrator.php">
+                <?php endif; ?>
+                <?php if(isset($_SESSION['error_add'])): ?>
+                <div class="form-errors">
+                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                        <p><?php echo $error ?></p>
+                    <?php endforeach; ?>
+                    <?php $_SESSION["error_add"] = null;  ?>
+                </div>
+                <?php endif; ?>
+                <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="email" name="email" placeholder="Enter a email" required>
                     </div>
@@ -123,7 +139,7 @@ Page de recherche avancé de site web.
                         <input type="password" name="pswd" placeholder="Enter a password" required>
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl">Ajout</button>
+                        <button type="submit" class="btn btn-xl" name ="admin_add">Ajout</button>
                     </div>
                 </form>
             </div>
@@ -131,12 +147,30 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h4>Suppression</h4>
                 </div>
-                <form action="/action_administrator.php">
+
+                <?php if(isset($_SESSION['query_succes_delete'])): ?>
+                <div class="form-errors">
+                    <?php foreach($_SESSION['query_succes_delete'] as $succes): ?>
+                        <p><?php echo $succes ?></p>
+                    <?php endforeach; ?>
+                    <?php $_SESSION["query_succes_delete"] = null;  ?>
+                </div>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['error_delete'])) : ?>
+                <div class="form-errors">
+                    <?php foreach($_SESSION['error_delete'] as $error): ?>
+                        <p><?php echo $error ?></p>
+                    <?php endforeach; ?>
+                    <?php $_SESSION["error_delete"] = null;  ?>
+                </div>
+                <?php endif; ?>
+
+                <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="email" name="email" placeholder="Enter a email" required>
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl">Suppression</button>
+                        <button type="submit" class="btn btn-xl" name="admin_delete">Suppression</button>
                     </div>
                 </form>
 

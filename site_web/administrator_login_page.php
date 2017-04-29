@@ -54,8 +54,8 @@ Page de recherche avancé de site web.
                                 <p><?php echo $error ?></p>
                             <?php endforeach; ?>
                         </div>
+                        <?php $_SESSION['errors']= null; ?>
                     <?php endif; ?>
-                    <?php session_destroy() ?>
                     <form action="check_login_admin.php" name="search" id="searchForm" method="post">
 
                         <div class="form-group text-center">
