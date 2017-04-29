@@ -57,7 +57,7 @@ Page d'acceuill de site web.
             <div class="intro-heading">Recherchez un film, une série, un acteur et plus</div>
 
             <!-- search bar -->
-            <form>
+            <form action="search_results.php" method="post">
                 <input type="text2" name="search" placeholder="Tapez ici votre recherche ...">
             </form>
 
