@@ -105,6 +105,7 @@ Page d'acceuill de site web.
                 $result_serie->close();
                 $result_actor->close();
             }
+            $database->close();
             ?>
             <div class="col-sm-4">
                 <div class="stat-member">

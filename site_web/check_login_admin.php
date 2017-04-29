@@ -34,4 +34,5 @@
 			header("Location: ./administrator_login_page.php");
 		}
     }
+    $database->close();
 ?>
