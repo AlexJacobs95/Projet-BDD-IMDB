@@ -1,6 +1,6 @@
 
 <?php
-    if (($_GET['run_function_log_out']) == 'yes'){
+    if (isset($_GET['run_function_log_out'])){
         session_destroy();
         header("Location: ./administrator_login_page.php");
     }
@@ -54,7 +54,7 @@
                 </li>
 
                 <li>
-                    <a href="?run_function_log_out=yes">Déconnexion</a>
+                    <a href="?run_function_log_out">Déconnexion</a>
                 </li>
             </ul>
         </div>
