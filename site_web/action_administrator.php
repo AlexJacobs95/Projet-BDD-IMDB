@@ -23,7 +23,7 @@
 
 	function addAdmin($email, $pswd){
 		if (checkAdminExistDb($email)){
-			$_SESSION['error_add'] =array("Admin Already Exist");
+			$_SESSION['error_add_admin'] =array("Admin Already Exist");
 		}
 		else{
 			global $database;
@@ -32,7 +32,7 @@
 			} 
 			else{
 				global $query_succes_add;
-				$_SESSION["query_succes_add"] = array($query_succes_add);
+				$_SESSION["query_succes_add_admin"] = array($query_succes_add);
 			}
 		}
 		header("Location: ./administrator_action_page.php#op_compte_admin");
@@ -40,7 +40,7 @@
 
 	function deleteAdmin($email){
 		if (!checkAdminExistDb($email)){
-			$_SESSION['error_delete'] =array("Admin Not Exist.");
+			$_SESSION['error_delete_admin'] =array("Admin Not Exist.");
 		}
 		else{
 			global $database;
@@ -53,6 +53,61 @@
 			}
 		}
 		header("Location: ./administrator_action_page.php#op_compte_admin");
+	}
+
+	function checkInDb($data, $type){
+		global $database;
+		$result = false;
+		if($type == "language"){
+			$requete = "SELECT  Langue FROM Langue
+						WHERE Langue = '$data'";
+		}
+		else if($type == "genre"){
+			$requete = "SELECT  Genre FROM Genre
+						WHERE Genre = '$data'";
+		}
+		else if($type == "country"){
+			$requete = "SELECT  Pays FROM Pays
+						WHERE Pays = '$data'";
+		}
+		$output = $database->query($requete);
+		if($row = $output->fetch_assoc()){
+			$result = true;
+		}
+		return $result;
+	}
+
+	function addGenre($genre){
+		global $database;
+		if(checkInDb($genre, "genre")){
+			$_SESSION["error_add_genre"]=array("Genre Already in Db");
+		}
+		else{
+			pass;
+		}
+		header("Location: ./administrator_action_page.php#op_on_genre");
+	}
+
+	function addCountry($country){
+		global $database;
+		if(checkInDb($country, "country")){
+			$_SESSION["error_add_country"]=array("Country Already in Db");
+		}
+		else{
+			pass;
+		}
+		header("Location: ./administrator_action_page.php#op_on_country");
+	}
+
+	function addLanguage($language){
+		global $database;
+		if(checkInDb($language, "language")){
+			$_SESSION["error_add_language"]=array("language Already in Db");
+		}
+		else{
+			pass;
+		}
+		header("Location: ./administrator_action_page.php#op_on_language");
 	}
 
 	if(isset($_POST['admin_add'])){
@@ -86,13 +141,13 @@
 		addActor();
 	}
 	else if(isset($_POST['genre_add'])){
-		addGenre();
+		addGenre($_POST['genre']);
 	}
 	else if(isset($_POST['country_add'])){
-		addCountry();
+		addCountry($_POST['country']);
 	}
 	else if(isset($_POST['language_add'])){
-		addLanguage();
+		addLanguage($_POST['language']);
 	}
 	$database->close();
 ?>
