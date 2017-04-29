@@ -5,9 +5,6 @@ Page de recherche avancé de site web.
 -->
  <?php 
     session_start();
-    if(isset($_SESSION['logged'])){
-        header("Location: ./administrator_action_page.php");
-    }
  ?>
 
  <!DOCTYPE html>

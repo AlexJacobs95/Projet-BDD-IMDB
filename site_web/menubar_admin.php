@@ -50,7 +50,7 @@
                 </li>
                 
                 <li>
-                    <a href="administrator_login_page.php">Administrateur</a>
+                    <a href="administrator_action_page.php">Administrateur</a>
                 </li>
 
                 <li>

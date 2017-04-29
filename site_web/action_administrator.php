@@ -61,7 +61,38 @@
 	else if(isset($_POST['admin_delete'])){
 		deleteAdmin($_POST['email']);
 	}
-
-
+	else if(isset($_POST['film_add'])){
+		addFilm();
+	}
+	else if(isset($_POST['film_delete'])){
+		deleteFilm();
+	}
+	else if(isset($_POST['serie_add'])){
+		addSerie();
+	}
+	else if(isset($_POST['serie_delete'])){
+		deleteSerie();
+	}
+	else if(isset($_POST['episode_add'])){
+		addEpisode();
+	}
+	else if(isset($_POST['director_add'])){
+		addDirector();
+	}
+	else if(isset($_POST['writter_add'])){
+		addWritter();
+	}
+	else if(isset($_POST['actor_add'])){
+		addActor();
+	}
+	else if(isset($_POST['genre_add'])){
+		addGenre();
+	}
+	else if(isset($_POST['country_add'])){
+		addCountry();
+	}
+	else if(isset($_POST['language_add'])){
+		addLanguage();
+	}
 	$database->close();
 ?>
