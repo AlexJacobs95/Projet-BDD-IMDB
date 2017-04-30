@@ -259,34 +259,31 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Série</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_serie'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_serie"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_serie'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_serie"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="serie_reference" placeholder="Enter the reference" required>
-                    </div>
-                    <div class="form-group text-center">
                         <input type="text" name="serie_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="genre_serie" placeholder="Enter the genre" required>
+                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+                        <input type="text" name="genre_serie" placeholder="Enter the genre (optional)">
                     </div>
                     <div class="form-group text-center">
                         <input type="text" name="end_year" placeholder="Enter the end year (optional)">
@@ -304,30 +301,33 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete'])): ?>
+                <?php if(isset($_SESSION['query_succes_delete_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_delete_serie'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete"] = null;  ?>
+                    <?php $_SESSION["query_succes_delete_serie"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete'])) : ?>
+                <?php if(isset($_SESSION['error_delete_serie'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete'] as $error): ?>
+                    <?php foreach($_SESSION['error_delete_serie'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_delete"] = null;  ?>
+                    <?php $_SESSION["error_delete_serie"] = null;  ?>
                 </div>
                 <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                        <input type="text" name="serie_reference" placeholder="Enter the reference" required>
-                    </div>
+
                     <div class="form-group text-center">
                         <input type="text" name="serie_name" placeholder="Enter the name" required>
                     </div>
+
+                    <div class="form-group text-center">
+                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+                    </div>
+
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name="serie_delete">Suppression</button>
                     </div>

@@ -66,6 +66,27 @@
         header("Location: ./administrator_action_page.php#op_on_film");
     }
 
+    function addSerie($data){
+        global $database;
+        $res_serie = checkInDb($data, $data["type"]);
+        if($res_serie){
+            $_SESSION["error_add_serie"] = array('Serie already in Db');
+        }
+        else{
+            // insert into serie
+        }
+        header("Location: ./administrator_action_page.php#op_on_serie");
+    }
+
+    function deleteSerie($data){
+        global $database;
+        $res_serie = checkInDb($data, $data['type']);
+        if(!$res_serie){
+            $_SESSION["error_delete_serie"] = array("Serie not exist in Db");
+        }
+        header("Location: ./administrator_action_page.php#op_on_serie");
+    }
+
 	function addDirector($dataPerson)
     {
 	    global $database;
@@ -130,6 +151,11 @@
             $title = $data["title"];
 		    $requete = "select * from Film f, Oeuvre o where f.FilmID = \"$id\" and f.FilmID = o.ID and o.Titre = \"$title\"";
         }
+        else if ($type = "serie"){
+            $id = $data["ID"];
+            $requete = "select * from Serie s, Oeuvre o where s.SerieID = '$id' and s.SerieID = o.ID";
+        }
+
 		if($type == "director"){
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
@@ -235,10 +261,32 @@
 		deleteFilm($data);
 	}
 	else if(isset($_POST['serie_add'])){
-		addSerie();
+	    $name = $_POST['serie_name'];
+        $id = "\"$name\""." (".$_POST["begin_year"].")";
+        $data = array(
+            "title" => $_POST["serie_name"],
+            "beginyear" => $_POST["begin_year"],
+            "endyear" => "0",
+            "genre" => $_POST["genre_serie"],
+            "rating" => $_POST["rating_note_serie"],
+            "ID" => $id,
+            "type" => "serie"
+        );
+        if($_POST["end_year"] !=""){
+            $data['endyear'] = $_POST["end_year"];
+        }
+		addSerie($data);
 	}
 	else if(isset($_POST['serie_delete'])){
-		deleteSerie();
+        $name = $_POST['serie_name'];
+        $id = "\"$name\""." (".$_POST["begin_year"].")";
+        $data = array(
+            "title" => $_POST["serie_name"],
+            "beginyear" => $_POST["begin_year"],
+            "ID" => $id,
+            "type" => "serie"
+        );
+		deleteSerie($data);
 	}
 	else if(isset($_POST['episode_add'])){
 		addEpisode();
