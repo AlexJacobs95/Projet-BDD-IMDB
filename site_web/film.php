@@ -42,6 +42,85 @@ if (!$database) {
 
     $directors = $database->query($querry);
 
+    //fetch countries
+    $querry = "SELECT Pays
+                FROM Pays
+                WHERE ID = '$id'";
+
+    $pays = $database->query($querry);
+
+    //fetch languages
+    $querry = "SELECT Langue
+                FROM Langue
+                WHERE ID = '$id'";
+
+    $languages = $database->query($querry);
+
+    //fetch genres
+    $querry = "SELECT Genre
+                FROM Genre
+                WHERE ID = '$id'";
+
+    $genres = $database->query($querry);
+
+
+    function extractGenres($array)
+    {
+        $genres = "";
+        $i = 0;
+        $len = mysqli_num_rows($array);
+        while ($table = mysqli_fetch_assoc($array)) {
+
+            if ($i != $len - 1) {
+                $genres .= $table['Genre'] . ' - ';
+            } else {
+                $genres .= $table['Genre'];
+            }
+
+            $i++;
+        }
+
+        echo $genres;
+    }
+
+    function extractLanguages($array)
+    {
+        $languages = "";
+        $i = 0;
+        $len = mysqli_num_rows($array);
+        while ($table = mysqli_fetch_array($array)) {
+
+            if ($i != $len - 1) {
+                $languages .= $table['Langue'] . ' - ';
+            } else {
+                $languages .= $table['Langue'];
+            }
+
+            $i++;
+        }
+
+        echo $languages;
+    }
+
+    function extractCoutries($array)
+    {
+        $countries = "";
+        $i = 0;
+        $len = mysqli_num_rows($array);
+        while ($table = mysqli_fetch_array($array)) {
+
+            if ($i != $len - 1) {
+                $countries .= $table['Pays'] . ' - ';
+            } else {
+                $countries .= $table['Pays'];
+            }
+
+            $i++;
+        }
+
+        echo $countries;
+    }
+
 
 }
 
@@ -57,7 +136,6 @@ if (!$database) {
     <title>IMD - International movie database</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -101,12 +179,14 @@ $tire = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
-$note_fomat = '%g/10'
+$note_fomat = '%g/10';
+
 ?>
 <header>
     <div class="container">
         <div class="intro-text">
             <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+            <div class=infos><?php extractGenres($genres) ?></div>
             <div class=intro-lead-in><?php if ($note != _ - 1) echo sprintf($note_fomat, $note); ?></div>
         </div>
     </div>
@@ -152,7 +232,7 @@ $note_fomat = '%g/10'
         </div>
 
         <?php
-        echo "<table class='directors' >    
+        echo "<table class='directorsAndWriters' >    
             <tr>
                 <th>Directeur</th>
             </tr>";
@@ -171,18 +251,18 @@ $note_fomat = '%g/10'
 </section>
 
 
-<section id="Writers">
+<section id="Writers" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Ecrivains</h2>
+                <h2 class="section-heading">Auteurs</h2>
             </div>
         </div>
 
         <?php
-        echo "<table class='writers' >    
+        echo "<table class='directorsAndWriters' >    
             <tr>
-                <th>Ecrvains</th>
+                <th>Auteurs</th>
             </tr>";
 
         while ($writers_row = mysqli_fetch_array($writers)) {
@@ -195,6 +275,30 @@ $note_fomat = '%g/10'
         }
         echo "</table>";
         ?>
+    </div>
+</section>
+
+<section id="Details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Détails</h2>
+            </div>
+        </div>
+        <div id="div_1">
+            <div class="details-member">
+                <h3><?php echo "Pays"; ?></h3>
+                <h4><?php extractCoutries($pays) ?></h4>
+            </div>
+        </div>
+
+        <div id="div_2">
+            <div class="details-member">
+                <h3><?php echo "Langues"; ?></h3>
+                <h4><?php extractLanguages($languages) ?></h4>
+            </div>
+        </div>
+
     </div>
 </section>
 

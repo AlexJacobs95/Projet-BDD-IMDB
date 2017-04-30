@@ -20,8 +20,19 @@ header .intro-text .intro-heading {
     margin-bottom: 10px;
 }
 
+header .intro-text .infos {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
 table {
 
+    border: 1px solid transparent;
+    border-collapse: collapse;
     color: black;
     font-size: 24px;
     margin-left: 350px;
@@ -33,14 +44,20 @@ table.directorsAndWriters {
     border: 1px solid transparent;
     border-collapse: collapse;
     width: 100%;
-    color: white;
+    color: black;
     font-size: 24px;
+    margin-left: 470px;
+
 }
 
 
 
 th {
     display: none;
+}
+
+.center {
+    margin: auto;
 }
 
 td {
@@ -55,5 +72,35 @@ td:first-child {
     padding-right: 0;
 }
 
+.details-member {
+    text-align: center;
+    margin-bottom: 50px;
+}
 
+.details-member h4 {
+    margin-top: 15px;
+    margin-bottom: 0;
+    text-transform: none;
+}
 
+#div_1 {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    position: relative;
+    left: 50%;
+    margin-left: -200px;
+    float: left;
+    clear: none;
+}
+
+#div_2 {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    position: relative;
+    right: 50%;
+    margin-right: -200px;
+    float: right;
+    clear: none;
+}
