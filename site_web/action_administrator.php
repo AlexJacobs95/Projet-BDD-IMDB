@@ -70,7 +70,7 @@
             }
 
         }
-        header("Location: ./administrator_action_page#op_on_dir");
+        header("Location: ./administrator_action_page.php#op_on_dir");
     }
 
 	function checkInDb($data, $type){
@@ -80,9 +80,9 @@
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = Prenom and Nom = '$nom' and p.Numero = d.Numero and p.Genre = '$gender'";
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = d.Prenom and d.Nom = '$nom'"; // and p.Numero = d.Numero and p.Genre = '$gender'";
         }
-        else if(){
+        else if($type == "Personne"){
             $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $genre = $data['gender'];
