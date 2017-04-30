@@ -143,7 +143,7 @@ $note_fomat = '%g/10'
 </section>
 
 
-<section id="Directeurs" class="bg-light-gray">
+<section id="Directeurs">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -152,18 +152,45 @@ $note_fomat = '%g/10'
         </div>
 
         <?php
-        echo "<table >    
+        echo "<table class='directors' >    
             <tr>
-                <th>Acteur Role</th>
+                <th>Directeur</th>
             </tr>";
 
-        while ($actors_row = mysqli_fetch_array($roles)) {
-            $fn = $actors_row['Prenom'];
-            $ln = $actors_row['Nom'];
-            $num = $actors_row['Numero'];
-            $role = $actors_row['Role'];
-            $nom = sprintf('%s %s', $fn, $ln);
-            echo "<tr><td >" . $nom . "</td><td >" . $role . "</td></tr>";
+        while ($directors_row = mysqli_fetch_array($directors)) {
+            $fn = $directors_row['Prenom'];
+            $ln = $directors_row['Nom'];
+            $num = $directors_row['Numero'];
+            $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
+            echo "<tr><td >" . $nom . "</td></tr>";
+            //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
+        }
+        echo "</table>";
+        ?>
+    </div>
+</section>
+
+
+<section id="Writers">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Ecrivains</h2>
+            </div>
+        </div>
+
+        <?php
+        echo "<table class='writers' >    
+            <tr>
+                <th>Ecrvains</th>
+            </tr>";
+
+        while ($writers_row = mysqli_fetch_array($writers)) {
+            $fn = $writers_row['Prenom'];
+            $ln = $writers_row['Nom'];
+            $num = $writers_row['Numero'];
+            $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
+            echo "<tr><td >" . $nom . "</td></tr>";
             //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
         echo "</table>";
