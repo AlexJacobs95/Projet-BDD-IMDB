@@ -36,11 +36,23 @@
 			} 
 			else{
 			global $query_succes_delete;
-			$_SESSION["query_succes_delete"] = array($query_succes_delete);
+			$_SESSION["query_succes_delete_admin"] = array($query_succes_delete);
 			}
 		}
 		header("Location: ./administrator_action_page.php#op_compte_admin");
 	}
+
+	function addFilm($data){
+	    global $database;
+	    $res_film = checkInDb($data, $data["type"]);
+	    if($res_film){
+	        $_SESSION["error_add_film"] = array("Film Already in Db");
+        }
+        else{
+	        //add query insert table film
+        }
+        header("Location: ./administrator_action_page.php#op_on_film");
+    }
 
 	function addDirector($dataPerson)
     {
@@ -100,6 +112,11 @@
 		if ($type == "admin"){
             $requete = "SELECT  AdresseMail FROM Administrateur
 						WHERE AdresseMail = '$data'";
+        }
+        else if($type == "film"){
+		    $id = $data["ID"];
+            $title = $data["title"];
+		    $requete = "select * from Film f, Oeuvre o where f.FilmID = \"$id\" and f.FilmID = o.ID and o.Titre = \"$title\"";
         }
 		if($type == "director"){
 		    $prenom = $data['firstName'];
@@ -184,7 +201,16 @@
 		deleteAdmin($_POST['email']);
 	}
 	else if(isset($_POST['film_add'])){
-		addFilm();
+	    $id = $_POST['film_name']." (".$_POST["year_film"].")";
+	    $data = array(
+	      "title" => $_POST["film_name"],
+            "year" => $_POST["year_film"],
+            "genre" => $_POST["genre_film"],
+          "rating" => $_POST["rating_note_film"],
+          "ID" => $id,
+          "type" => "film"
+        );
+		addFilm($data);
 	}
 	else if(isset($_POST['film_delete'])){
 		deleteFilm();

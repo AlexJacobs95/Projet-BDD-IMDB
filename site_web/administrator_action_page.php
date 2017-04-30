@@ -148,12 +148,12 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete'])): ?>
+                <?php if(isset($_SESSION['query_succes_delete_admin'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_delete_admin'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete"] = null;  ?>
+                    <?php $_SESSION["query_succes_delete_admin"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_delete_admin'])) : ?>
@@ -183,34 +183,31 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Film</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_film'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_film'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_film"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_film'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_film'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_film"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="film_reference" placeholder="Enter the reference" required>
-                    </div>
-                    <div class="form-group text-center">
                         <input type="text" name="film_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="genre_film" placeholder="Enter the genre" required> 
+                        <input type="text" name="year_film" placeholder="Enter the year" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="year_film" placeholder="Enter the year(optional)">
+                        <input type="text" name="genre_film" placeholder="Enter the genre(optional)">
                     </div>
                     <div class="form-group text-center">
                         <input type="text" name="rating_note_film" placeholder="Enter a rating note (optional)">
