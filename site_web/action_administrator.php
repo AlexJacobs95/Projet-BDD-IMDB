@@ -68,7 +68,7 @@
 	            pass;
 	            //add in table personne
             }
-
+            //add in table directeur
         }
         header("Location: ./administrator_action_page.php#op_on_dir");
     }
@@ -85,11 +85,28 @@
                 pass;
                 //add in table personne
             }
-
+            //add in table acteur
         }
         header("Location: ./administrator_action_page.php#op_on_actor");
     }
 
+    function addWriter($data){
+        global $database;
+        $res_person = checkInDb($data, "Personne");
+        $res_writer = checkInDb($data, $data["typeofperson"]);
+        if($res_writer){
+            $_SESSION['error_add_writer'] = array("Writer Already In Db");
+        }
+        else{
+            if(!$res_person){
+                pass;
+                //add in table personne
+            }
+            //add in table auteur
+        }
+        header("Location: ./administrator_action_page.php#op_on_writer");
+    }
+    
 	function checkInDb($data, $type){
 		global $database;
 		$result = false;
@@ -98,6 +115,12 @@
             $nom = $data['secondName'];
             $gender = $data['gender'];
 		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = d.Prenom and d.Nom = '$nom'"; // and p.Numero = d.Numero and p.Genre = '$gender'";
+        }
+        else if($type == "writer"){
+            $prenom = $data['firstName'];
+            $nom = $data['secondName'];
+            $gender = $data['gender'];
+            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Auteur a, Personne p WHERE '$prenom' = a.Prenom and a.Nom = '$nom' and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = '$gender'";
         }
         else if($type == "actor"){
             $prenom = $data['firstName'];
@@ -196,8 +219,17 @@
         }
 		addDirector($dataPerson);
 	}
-	else if(isset($_POST['writter_add'])){
-		addWritter();
+	else if(isset($_POST['writer_add'])){
+        $dataPerson = array(
+            'firstName' => $_POST['writer_firstname'],
+            'secondName' => $_POST['writer_secondname'],
+            'gender' => "None",
+            'typeofperson' => 'writer'
+        );
+        if($_POST['gender'] != ""){
+            $dataPerson['gender'] = $_POST['gender'];
+        }
+		addWriter($dataPerson);
 	}
 	else if(isset($_POST['actor_add'])){
         $dataPerson = array(

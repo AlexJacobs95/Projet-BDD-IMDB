@@ -83,7 +83,7 @@ Page de recherche avancé de site web.
                               
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_writter">Opérations sur Auteur</a>
+                        <a class="btn btn-xl" href="#op_on_writer">Opérations sur Auteur</a>
                     </div>  
 
                     <div class="clearfix"></div>
@@ -419,7 +419,7 @@ Page de recherche avancé de site web.
             </div>
         </section>
 
-        <section id="op_on_writter">
+        <section id="op_on_writer">
             <div class="container text-center"> 
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Auteur</h2>
@@ -433,26 +433,26 @@ Page de recherche avancé de site web.
                     <?php $_SESSION["query_succes_add"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_writer'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_writer'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_writer"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                         <input type="text" name="writter_firstname" placeholder="Enter the FirstName" required>
+                         <input type="text" name="writer_firstname" placeholder="Enter the FirstName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="writter_secondname" placeholder="Enter the SecondName" required>
+                        <input type="text" name="writer_secondname" placeholder="Enter the SecondName" required>
                     </div>
                     <div class="form-group text-center">
                         <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="writter_add">Ajout</button>
+                        <button type="submit" class="btn btn-xl" name ="writer_add">Ajout</button>
                     </div>
                 </form>
             </div>
