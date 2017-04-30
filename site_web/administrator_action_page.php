@@ -222,29 +222,29 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete'])): ?>
+                <?php if(isset($_SESSION['query_succes_delete_film'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_delete_film'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete"] = null;  ?>
+                    <?php $_SESSION["query_succes_delete_film"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete'])) : ?>
+                <?php if(isset($_SESSION['error_delete_film'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete'] as $error): ?>
+                    <?php foreach($_SESSION['error_delete_film'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_delete"] = null;  ?>
+                    <?php $_SESSION["error_delete_film"] = null;  ?>
                 </div>
                 <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="film_reference" placeholder="Enter the reference" required>
+                        <input type="text" name="film_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="film_name" placeholder="Enter the name" required>
+                        <input type="text" name="year_film" placeholder="Enter the year" required>
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name="film_delete">Suppression</button>

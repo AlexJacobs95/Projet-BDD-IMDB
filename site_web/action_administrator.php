@@ -54,6 +54,18 @@
         header("Location: ./administrator_action_page.php#op_on_film");
     }
 
+    function deleteFilm($data){
+        global $database;
+        $res_film = checkInDb($data, $data["type"]);
+        if(!$res_film){
+            $_SESSION["error_delete_film"] = array("Film not exist in Db");
+        }
+        else{
+            //add query delete in table film
+        }
+        header("Location: ./administrator_action_page.php#op_on_film");
+    }
+
 	function addDirector($dataPerson)
     {
 	    global $database;
@@ -213,7 +225,14 @@
 		addFilm($data);
 	}
 	else if(isset($_POST['film_delete'])){
-		deleteFilm();
+        $id = $_POST['film_name']." (".$_POST["year_film"].")";
+        $data = array(
+            "title" => $_POST["film_name"],
+            "year" => $_POST["year_film"],
+            "ID" => $id,
+            "type" => "film"
+        );
+		deleteFilm($data);
 	}
 	else if(isset($_POST['serie_add'])){
 		addSerie();
