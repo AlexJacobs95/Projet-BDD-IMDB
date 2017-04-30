@@ -341,20 +341,20 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Episode</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_episode'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_episode'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_episode"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_episode'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_episode'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_episode"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">
@@ -362,16 +362,13 @@ Page de recherche avancé de site web.
                         <input type="text" name="serie_name" placeholder="Enter the name of the serie" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
-                    </div>
-                    <div class="form-group text-center">
                         <input type="text" name="episode_name" placeholder="Enter the episode name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="season_number" placeholder="Enter the season number" required>
+                        <input type="text" name="season_number" placeholder="Enter the season number">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="episode_number" placeholder="Enter the episode number" required>
+                        <input type="text" name="episode_number" placeholder="Enter the episode number">
                     </div>
                     <div class="form-group text-center">
                         <input type="text" name="rating_note_episode" placeholder="Enter a rating note (optional)">
