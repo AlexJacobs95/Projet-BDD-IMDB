@@ -51,7 +51,6 @@ Page de recherche avancé de site web.
                     input[type=text]{
                         color: black;
                     }
-                    }
                 </style>
                     <div class="intro-heading">Panneau Administrateur</div> 
                     
@@ -387,20 +386,20 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Directeur</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_dir'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_dir'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_dir"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_dir'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_dir'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_dir"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">

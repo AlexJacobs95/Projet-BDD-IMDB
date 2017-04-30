@@ -55,9 +55,39 @@
 		header("Location: ./administrator_action_page.php#op_compte_admin");
 	}
 
+	function addDirector($dataPerson)
+    {
+	    global $database;
+	    $res_person = checkInDb($dataPerson, "Personne");
+	    $res_dir = checkInDb($dataPerson, $dataPerson['typeofperson']);
+	    if($res_dir){
+	        $_SESSION['error_add_dir'] = array("Director Already In Db");
+        }
+        else{
+	        if(!$res_person){
+	            pass;
+	            //add in table personne
+            }
+
+        }
+        header("Location: ./administrator_action_page#op_on_dir");
+    }
+
 	function checkInDb($data, $type){
 		global $database;
 		$result = false;
+		if($type == "director"){
+		    $prenom = $data['firstName'];
+            $nom = $data['secondName'];
+            $gender = $data['gender'];
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = Prenom and Nom = '$nom' and p.Numero = d.Numero and p.Genre = '$gender'";
+        }
+        else if(){
+            $prenom = $data['firstName'];
+            $nom = $data['secondName'];
+            $genre = $data['gender'];
+            $requete = "SELECT Prenom, Nom, Genre From Personne WHERE '$prenom' = Prenom and Nom = '$nom' and Genre = '$genre' ";
+        }
 		if($type == "language"){
 			$requete = "SELECT  Langue FROM Langue
 						WHERE Langue = '$data'";
@@ -132,7 +162,16 @@
 		addEpisode();
 	}
 	else if(isset($_POST['director_add'])){
-		addDirector();
+        $dataPerson = array(
+            'firstName' => $_POST['director_firstname'],
+            'secondName' => $_POST['director_secondname'],
+            'gender' => "None",
+            'typeofperson' => 'director'
+        );
+        if($_POST['gender'] != ""){
+            $dataPerson['gender'] = $_POST['gender'];
+        }
+		addDirector($dataPerson);
 	}
 	else if(isset($_POST['writter_add'])){
 		addWritter();
