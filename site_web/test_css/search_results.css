@@ -1,0 +1,53 @@
+header {
+    background-color: #2D3E50;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    text-align: center;
+    color: white;
+
+    padding-top: 120px;
+    padding-bottom: 50px;
+
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 0px;
+}
+
+body {
+    background-color: #2D3E50;
+
+}
+
+.blue {
+    background-color: #2D3E50;
+}
+
+.titre-section {
+    color: white;
+}
+
+table {
+    border: 1px solid transparent;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+}
+
+th {
+    display: none;
+}
+
+td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border-bottom: 1px solid #ddd;
+}

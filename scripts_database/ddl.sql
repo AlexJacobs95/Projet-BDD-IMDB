@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS Directeur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
-  Genre CHAR(2) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
@@ -39,7 +38,6 @@ CREATE TABLE IF NOT EXISTS Acteur (
   Prenom varchar(128) NOT NULL,
   Nom varchar(128) NOT NULL,
   Numero VARCHAR(10),
-  Genre CHAR(2) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin

@@ -250,11 +250,11 @@ header .intro-text .intro-lead-in {
   line-height: 22px;
   margin-bottom: 25px;
 }
+
 header .intro-text .intro-heading {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-weight: 100
-;
+    font-weight: 100;
   font-size: 25px;
   line-height: 25px;
   margin-bottom: 25px;
@@ -288,6 +288,14 @@ section h2.section-heading {
   margin-top: 0;
   margin-bottom: 30px;
 }
+
+section h2.section-heading-2 {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
 section h3.section-subheading {
   font-size: 16px;
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -457,4 +465,8 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #fed136;
+}
+
+.search {
+    background-color: #2D3E50;
 }

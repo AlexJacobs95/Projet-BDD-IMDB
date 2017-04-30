@@ -51,7 +51,7 @@ def getOeuvreID(line):
                     endIndex = long_id.index("(mini)") + 6
                     long_id = long_id[0:endIndex]
                 elif "(VG)" in long_id:
-                    endIndex = long_id.index("(VG)") + 3
+                    endIndex = long_id.index("(VG)") + 4
                     long_id = long_id[0:endIndex]
                 else:
                     long_id = long_id[0:getIndexOfDateEnd(long_id) + 1]
