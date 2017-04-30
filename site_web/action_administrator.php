@@ -8,21 +8,8 @@
 	    echo "Echec lors de la connexion à MySQL : (" . $database->connect_errno . ") " . $database->connect_error;
 	}
 
-	function checkAdminExistDb($email){
-		global $database;
-		$result = false;
-		$requete = "SELECT  AdresseMail FROM Administrateur
-						WHERE AdresseMail = '$email'";
-		$output = $database->query($requete);
-		
-		if($row = $output->fetch_assoc()){
-			$result = true;
-		}
-		return $result;
-	}
-
 	function addAdmin($email, $pswd){
-		if (checkAdminExistDb($email)){
+		if (checkInDb($email, "admin")){
 			$_SESSION['error_add_admin'] =array("Admin Already Exist");
 		}
 		else{
@@ -39,7 +26,7 @@
 	}
 
 	function deleteAdmin($email){
-		if (!checkAdminExistDb($email)){
+		if (!checkInDb($email, "admin")){
 			$_SESSION['error_delete_admin'] =array("Admin Not Exist.");
 		}
 		else{
@@ -110,6 +97,10 @@
 	function checkInDb($data, $type){
 		global $database;
 		$result = false;
+		if ($type == "admin"){
+            $requete = "SELECT  AdresseMail FROM Administrateur
+						WHERE AdresseMail = '$data'";
+        }
 		if($type == "director"){
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
