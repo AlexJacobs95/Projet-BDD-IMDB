@@ -87,6 +87,18 @@
         header("Location: ./administrator_action_page.php#op_on_serie");
     }
 
+    function addEpisode($data){
+        global $database;
+        $res_episode = checkInDb($data, $data["type"]);
+        if($res_episode){
+            $_SESSION["error_add_episode"] = array("Episode Already in Db");
+        }
+        else{
+            // insert episode into table Episode
+        }
+        header("Location : ./administrator_action_page.php#op_on_episode");
+    }
+
 	function addDirector($dataPerson)
     {
 	    global $database;
@@ -144,53 +156,57 @@
 		$result = false;
 		if ($type == "admin"){
             $requete = "SELECT  AdresseMail FROM Administrateur
-						WHERE AdresseMail = '$data'";
+						WHERE AdresseMail = \"$data\"";
         }
         else if($type == "film"){
 		    $id = $data["ID"];
             $title = $data["title"];
-		    $requete = "select * from Film f, Oeuvre o where f.FilmID = \"$id\" and f.FilmID = o.ID and o.Titre = \"$title\"";
+		    $requete = "select f.FilmID from Film f, Oeuvre o where f.FilmID = \"$id\" and f.FilmID = o.ID and o.Titre = \"$title\"";
         }
         else if ($type = "serie"){
             $id = $data["ID"];
-            $requete = "select * from Serie s, Oeuvre o where s.SerieID = '$id' and s.SerieID = o.ID";
+            $requete = "select s.SerieID from Serie s, Oeuvre o where s.SerieID = \"$id\" and s.SerieID = o.ID";
         }
-
+        else if($type == "episode"){
+            $title = $data['episodetitle'];
+            $serie = $data['serietitle'];
+            $requete = "select e.EpisodeID from Serie s, Episode e, Oeuvre o where s.SerieID = e.SID and e.TitreS = \"$serie\" and o.ID = e.EpisodeID and o.Titre = \"$title\"";
+        }
 		if($type == "director"){
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = d.Prenom and d.Nom = '$nom'"; // and p.Numero = d.Numero and p.Genre = '$gender'";
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\"";
         }
         else if($type == "writer"){
             $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Auteur a, Personne p WHERE '$prenom' = a.Prenom and a.Nom = '$nom' and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = '$gender'";
+            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Auteur a, Personne p WHERE \"$prenom\" = a.Prenom and a.Nom = \"$nom\" and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = \"$gender\"";
         }
         else if($type == "actor"){
             $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Acteur a, Personne p WHERE '$prenom' = a.Prenom and a.Nom = '$nom' and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = '$gender'";
+            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Acteur a, Personne p WHERE \"$prenom\" = a.Prenom and a.Nom = \"$nom\" and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = \"$gender\"";
         }
         else if($type == "Personne"){
             $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $genre = $data['gender'];
-            $requete = "SELECT Prenom, Nom, Genre From Personne WHERE '$prenom' = Prenom and Nom = '$nom' and Genre = '$genre' ";
+            $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
         }
 		if($type == "language"){
 			$requete = "SELECT  Langue FROM Langue
-						WHERE Langue = '$data'";
+						WHERE Langue = \"$data\"";
 		}
 		else if($type == "genre"){
 			$requete = "SELECT  Genre FROM Genre
-						WHERE Genre = '$data'";
+						WHERE Genre = \"$data\"";
 		}
 		else if($type == "country"){
 			$requete = "SELECT  Pays FROM Pays
-						WHERE Pays = '$data'";
+						WHERE Pays = \"$data\"";
 		}
 		$output = $database->query($requete);
 		if($row = $output->fetch_assoc()){
@@ -289,16 +305,20 @@
 		deleteSerie($data);
 	}
 	else if(isset($_POST['episode_add'])){
-        $name = $_POST['serie_name'];
-        $id = "\"$name\""." (".$_POST["begin_year"].") {".$_POST["episode_name"]."("..")}";
 	    $data = array(
 	        "serietitle" => $_POST['serie_name'],
             "episodetitle" => $_POST['episode_name'],
-            "episodeNumber" => $_POST["episode_number"],
-            "seasonNumber" => $_POST["season_number"],
-            "ID" => ""
+            "episodeNumber" => "NA",
+            "seasonNumber" => "NA",
+            "type" => "episode"
         );
-		addEpisode();
+	    if($_POST["episode_number"] != ""){
+	        $data['episodeNumber'] = $_POST['episode_number'];
+        }
+        if($_POST["season_number"]!=""){
+	        $data['seasonNumber'] = $_POST['season_number'];
+        }
+		addEpisode($data);
 	}
 	else if(isset($_POST['director_add'])){
         $dataPerson = array(
