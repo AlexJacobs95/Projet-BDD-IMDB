@@ -73,6 +73,23 @@
         header("Location: ./administrator_action_page.php#op_on_dir");
     }
 
+    function addActor($data){
+	    global $database;
+	    $res_person = checkInDb($data, "Personne");
+	    $res_actor = checkInDb($data, $data["typeofperson"]);
+        if($res_actor){
+            $_SESSION['error_add_actor'] = array("Actor Already In Db");
+        }
+        else{
+            if(!$res_person){
+                pass;
+                //add in table personne
+            }
+
+        }
+        header("Location: ./administrator_action_page.php#op_on_actor");
+    }
+
 	function checkInDb($data, $type){
 		global $database;
 		$result = false;
@@ -81,6 +98,12 @@
             $nom = $data['secondName'];
             $gender = $data['gender'];
 		    $requete = "SELECT d.Prenom, d.Nom, d.Numero, p.Numero, p.Genre From Directeur d, Personne p WHERE '$prenom' = d.Prenom and d.Nom = '$nom'"; // and p.Numero = d.Numero and p.Genre = '$gender'";
+        }
+        else if($type == "actor"){
+            $prenom = $data['firstName'];
+            $nom = $data['secondName'];
+            $gender = $data['gender'];
+            $requete = "SELECT a.Prenom, a.Nom, a.Numero From Acteur a, Personne p WHERE '$prenom' = a.Prenom and a.Nom = '$nom' and a.Prenom = p.Prenom and a.Nom = p.Nom and p.Numero = a.Numero and p.Genre = '$gender'";
         }
         else if($type == "Personne"){
             $prenom = $data['firstName'];
@@ -177,7 +200,16 @@
 		addWritter();
 	}
 	else if(isset($_POST['actor_add'])){
-		addActor();
+        $dataPerson = array(
+            'firstName' => $_POST['actor_firstname'],
+            'secondName' => $_POST['actor_secondname'],
+            'gender' => "None",
+            'typeofperson' => 'actor'
+        );
+        if($_POST['gender'] != ""){
+            $dataPerson['gender'] = $_POST['gender'];
+        }
+		addActor($dataPerson);
 	}
 	else if(isset($_POST['genre_add'])){
 		addGenre($_POST['genre']);

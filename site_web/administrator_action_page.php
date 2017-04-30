@@ -472,12 +472,12 @@ Page de recherche avancé de site web.
                     <?php $_SESSION["query_succes_add"] = null;  ?>
                 </div>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['error_add'])): ?>
+                <?php if(isset($_SESSION['error_add_actor'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add'] as $error): ?>
+                    <?php foreach($_SESSION['error_add_actor'] as $error): ?>
                         <p><?php echo $error ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["error_add"] = null;  ?>
+                    <?php $_SESSION["error_add_actor"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <form action="/action_administrator.php" method="post">
