@@ -289,6 +289,15 @@
 		deleteSerie($data);
 	}
 	else if(isset($_POST['episode_add'])){
+        $name = $_POST['serie_name'];
+        $id = "\"$name\""." (".$_POST["begin_year"].") {".$_POST["episode_name"]."("..")}";
+	    $data = array(
+	        "serietitle" => $_POST['serie_name'],
+            "episodetitle" => $_POST['episode_name'],
+            "episodeNumber" => $_POST["episode_number"],
+            "seasonNumber" => $_POST["season_number"],
+            "ID" => ""
+        );
 		addEpisode();
 	}
 	else if(isset($_POST['director_add'])){

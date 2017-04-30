@@ -362,7 +362,13 @@ Page de recherche avancé de site web.
                         <input type="text" name="serie_name" placeholder="Enter the name of the serie" required>
                     </div>
                     <div class="form-group text-center">
+                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+                    </div>
+                    <div class="form-group text-center">
                         <input type="text" name="episode_name" placeholder="Enter the episode name" required>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text" name="season_number" placeholder="Enter the season number" required>
                     </div>
                     <div class="form-group text-center">
                         <input type="text" name="episode_number" placeholder="Enter the episode number" required>
