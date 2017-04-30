@@ -9,6 +9,28 @@ session_start()
 ?>
 
 
+<?php
+function isFilm($id)
+{
+    return $id[0] != '"';
+}
+
+
+function isSerie($id)
+{
+    return $id[0] == '"' and strpos($id, '{') == false;
+}
+
+function isEpisode($id)
+{
+    return $id[0] == '"' and strpos($id, '{') == true;
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -82,14 +104,24 @@ if (isset($_SESSION['logged'])) {
                                 WHERE Titre = '$search_content'";
 
                     $oeuvres = $database->query($requete);
-                    echo "<table cellspacing='10'>
+                    echo "<table>
                     <tr>
                     <th>ID</th>
                     </tr>";
 
                     while ($row = mysqli_fetch_array($oeuvres)) {
                         echo "<tr>";
-                        echo "<td>" . $row['ID'] . "</td>";
+                        echo "<td>";
+
+                        if (isFilm($row['ID'])) {
+                            echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                        } elseif (isEpisode($row['ID'])) {
+                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                        } else {
+                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                        }
+
+                        echo "</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
@@ -102,7 +134,6 @@ if (isset($_SESSION['logged'])) {
     </div>
 </section>
 
-<!-- Stats Section -->
 <section id="Personnes" class="blue">
     <div class="container">
         <div class="row">
