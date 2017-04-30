@@ -1,7 +1,7 @@
 def get_nom_prenom(line):
     nom = "unknown"
     prenom = "unknown"
-    numero = "NULL"
+    numero = "NA"
 
     data = line.strip().split('\t')
     nom_prenom = data[0]
