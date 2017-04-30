@@ -35,7 +35,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="welcome_page.php">IMDB Hello <?php echo $_SESSION['pseudo_admin']?></a>
+            <a class="navbar-brand page-scroll" href="welcome_page.php">IMDB</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,9 +52,12 @@
                 <li>
                     <a href="administrator_action_page.php">Administrateur</a>
                 </li>
-
                 <li>
-                    <a href="?run_function_log_out">Déconnexion</a>
+                    <a><?php echo $_SESSION['pseudo_admin'] ?></a>
+                    <ul>
+                        <a href="?run_function_log_out">Déconnexion</a>
+                    </ul>
+
                 </li>
             </ul>
         </div>

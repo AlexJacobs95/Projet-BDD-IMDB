@@ -162,6 +162,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-custom .navbar-brand.active {
   color: #fec503;
 }
+
 .navbar-custom .navbar-collapse {
   border-color: rgba(255, 255, 255, 0.02);
 }
@@ -177,12 +178,33 @@ fieldset[disabled] .btn-xl.active {
 .navbar-custom .navbar-toggle:focus {
   background-color: #fed136;
 }
+
+.navbar-custom .nav li:last-child {
+
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: white;
+}
 .navbar-custom .nav li a {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 1px;
   color: white;
+}
+
+.nav ul {
+    position: absolute;
+    left: -999em;
+    top: 2em;
+    list-style: none;
+}
+
+.nav li:hover ul {
+    left: 0;
+    top: auto;
 }
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus {
