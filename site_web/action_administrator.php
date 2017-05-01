@@ -49,7 +49,27 @@
 	        $_SESSION["error_add_film"] = array("Film Already in Db");
         }
         else{
-	        //add query insert table film
+	        $id = $data["ID"];
+	        $title = $data["title"];
+	        $year = $data["year"];
+	        $rate = $data["rating"];
+	        $genre = $data["genre"];
+	        $requete = "INSERT INTO Oeuvre(ID, Titre,  AnneeSortie, Note) VALUES ('$id', '$title', '$year', '$rate')";
+	        if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "INSERT INTO Fiml(FilmID) VALUES ('$id')";
+	        if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+
+            }
+            if($genre !="" ){
+	            if(!$database->query("INSERT INTO Genre(ID, Genre) VALUES ('$id', $genre)")){
+                    echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+                }
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_add_film"] = $query_succes_add;
         }
         header("Location: ./administrator_action_page.php#op_on_film");
     }
