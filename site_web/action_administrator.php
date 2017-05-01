@@ -95,7 +95,7 @@
             global $query_succes_add;
             $_SESSION["query_succes_add_film"] = array($query_succes_add);
         }
-        //header("Location: ./administrator_action_page.php#op_on_film");
+        header("Location: ./administrator_action_page.php#op_on_film");
     }
 
     function addSerie($data){
