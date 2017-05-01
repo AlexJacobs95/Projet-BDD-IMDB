@@ -177,11 +177,11 @@ input[type="text2"] {
 }
 
 input[type="text"] {
-  width: 500px;
-  height: 50px;
+  width: 250px;
+  height: 40px;
   box-sizing: border-box;
   border: 2px solid #fed136;
-  border-radius: px;
+  border-radius: 0px;
   font-size: 16px;
   color : white;
   background-color: transparent;
@@ -229,7 +229,7 @@ input[type="password"] {
   height: 50px;
   box-sizing: border-box;
   border: 2px solid #fed136;
-  border-radius: px;
+  border-radius: 0px;
   font-size: 16px;
   color : black;
   background-color: white;

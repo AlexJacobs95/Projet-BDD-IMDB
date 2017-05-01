@@ -188,6 +188,75 @@ if (isset($_SESSION['logged'])) {
 </section>
 
 
+<section id="Written">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Auteur</h2>
+            </div>
+        </div>
+
+        <?php
+        echo "<table class='directorsAndWriters' >    
+            <tr>
+                <th>Oeuvre</th>
+            </tr>";
+
+        while ($written_row = mysqli_fetch_array($written)) {
+            $id = $written_row['OID'];
+            $title = titleFromID($id, $database);
+            echo "<tr>";
+            echo "<td >";
+
+            if (isFilm($id)) {
+                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            } elseif (isSerie($id)) {
+                echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            } else {
+                echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            }
+            echo "</td></tr>";
+        }
+        echo "</table>";
+        ?>
+    </div>
+</section>
+
+<section id="Directed" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Directeur</h2>
+            </div>
+        </div>
+
+        <?php
+        echo "<table class='directorsAndWriters' >    
+            <tr>
+                <th>Oeuvre</th>
+            </tr>";
+
+        while ($directed_row = mysqli_fetch_array($directed)) {
+            $id = $directed_row['OID'];
+            $title = titleFromID($id, $database);
+            echo "<tr>";
+            echo "<td >";
+
+            if (isFilm($id)) {
+                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            } elseif (isSerie($id)) {
+                echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            } else {
+                echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
+            }
+            echo "</td></tr>";
+        }
+        echo "</table>";
+        ?>
+    </div>
+</section>
+
+
 </body>
 <!-- jQuery -->
 

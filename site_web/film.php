@@ -131,7 +131,7 @@ $note_fomat = '%g/10';
         <div class="intro-text">
             <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
             <div class=infos><?php extractGenres($genres) ?></div>
-            <div class=intro-lead-in><?php if ($note != _ - 1) echo sprintf($note_fomat, $note); ?></div>
+            <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
         </div>
     </div>
 
