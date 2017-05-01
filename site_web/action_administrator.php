@@ -158,10 +158,8 @@
         }
         else{
             if(!$res_person){
-                pass;
-                //add in table personne
+
             }
-            //add in table acteur
         }
         header("Location: ./administrator_action_page.php#op_on_actor");
     }
@@ -208,7 +206,7 @@
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\"";
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d, Personne  p WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\", p.Numero = d.Numero and p.Genre = \"$gender\"";
         }
         else if($type == "writer"){
             $prenom = $data['firstName'];
@@ -362,7 +360,7 @@
         $dataPerson = array(
             'firstName' => $_POST['director_firstname'],
             'secondName' => $_POST['director_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'director'
         );
         if($_POST['gender'] != ""){
@@ -374,7 +372,7 @@
         $dataPerson = array(
             'firstName' => $_POST['writer_firstname'],
             'secondName' => $_POST['writer_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'writer'
         );
         if($_POST['gender'] != ""){
@@ -386,7 +384,7 @@
         $dataPerson = array(
             'firstName' => $_POST['actor_firstname'],
             'secondName' => $_POST['actor_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'actor'
         );
         if($_POST['gender'] != ""){
