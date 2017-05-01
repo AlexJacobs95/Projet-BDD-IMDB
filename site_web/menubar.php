@@ -41,6 +41,11 @@
                 <li>
                     <a href="administrator_login_page.php">Administrateur</a>
                 </li>
+                <li>
+                    <form action="search_results.php" method="post">
+                        <input type="text" name="search" placeholder="Recherche...">
+                    </form>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
