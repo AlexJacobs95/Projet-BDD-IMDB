@@ -124,14 +124,15 @@ a:visited {
 
 /* mouse over link */
 a:hover {
-    color: yellow;
+    color: #fec503;
 }
 
 /* selected link */
 a:active {
-    color: yellow;
+    color: #fec503;
 }
 
 .nav-pills a{
     color: black !important;
 }
+

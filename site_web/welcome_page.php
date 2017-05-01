@@ -28,6 +28,7 @@ Page d'acceuill de site web.
     <!-- Theme CSS -->
     <link href="test_css/agency.css" rel="stylesheet">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,12 +58,19 @@ Page d'acceuill de site web.
             <div class="intro-heading">Recherchez un film, une série, un acteur et plus</div>
 
             <!-- search bar -->
-            <form action="search_results.php" method="post">
-                <input type="text2" name="search" placeholder="Tapez ici votre recherche ...">
+            <form action="search_results.php" method="post" style="display: inline-block">
+
+                <input type="text2" name="search" placeholder="Tapez ici votre recherche ..." style="display: block; height: 60px; margin-right: 20px; padding: 10px; float: left; border: 5px solid #fed136">
+                <button class="btn btn-primary" id="search-button" type="submit" value="Find" style="display: block; margin: 0px;  width: 90px; height: 62px; padding: 0px; ">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+
             </form>
 
         </div>
     </div>
+
+
 
 
 </header>

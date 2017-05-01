@@ -7,13 +7,13 @@
     <form action="search.php" name="search" id="searchForm" novalidate>
 
         <div class="form-group text-center">
-            <input type="text" class="form-control" placeholder="Entrez le titre d'un film/série" name="film_serie">
+            <input type="text3" class="form-control" placeholder="Entrez le titre d'un film/série" name="film_serie">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Entrer le nom d'un acteur/actrice" name="acteur">
+            <input type="text3" class="form-control" placeholder="Entrer le nom d'un acteur/actrice" name="acteur">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Entrez le nome d'une personne" name="producteur">
+            <input type="text3" class="form-control" placeholder="Entrez le nome d'une personne" name="producteur">
         </div>
         <div class="form-group">
             <input type="date" class="form-control" placeholder="Entrez une date entre 2000 et 2010 (jj/mm/yy)" name="date">

@@ -199,7 +199,23 @@ input[type="date"] {
   border: 2px solid #fed136;
   border-radius: px;
   font-size: 16px;
-  color : white;
+  color : black;
+  background-color: transparent;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 0px 20px 0px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type="text3"] {
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #fed136;
+  border-radius: px;
+  font-size: 16px;
+  color : black;
   background-color: transparent;
   background-position: 10px 10px;
   background-repeat: no-repeat;

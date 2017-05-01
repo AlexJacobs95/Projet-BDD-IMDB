@@ -169,12 +169,44 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                 ?>
             </div>
             <div class=infos><?php extractGenres($genres) ?></div>
-            <div class=intro-lead-in><?php if ($note != _ - 1) echo sprintf($note_fomat, $note); ?></div>
+            <div class=intro-lead-in><?php if ($note != '_' - 1) echo sprintf($note_fomat, $note); ?></div>
         </div>
     </div>
 
 
 </header>
+
+<section id="Details" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Détails</h2>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="details-member">
+                <h3>Saisons</h3>
+                <h4><?php echo sprintf("%d", $num ); ?></h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="details-member">
+                <h3>Pays</h3>
+                <h4><?php extractCoutries($pays) ?></h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="details-member">
+                <h3>Langues</h3>
+                <h4><?php extractLanguages($languages) ?></h4>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
 
 <section id="Saisons">
     <div class="container">
@@ -230,36 +262,6 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     </div>
 </section>
 
-<section id="Details" class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Détails</h2>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="details-member">
-                <h3>Saisons</h3>
-                <h4><?php echo sprintf("%d", $num ); ?></h4>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="details-member">
-                <h3>Pays</h3>
-                <h4><?php extractCoutries($pays) ?></h4>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="details-member">
-                <h3>Langues</h3>
-                <h4><?php extractLanguages($languages) ?></h4>
-            </div>
-        </div>
-
-
-    </div>
-</section>
 
 
 
