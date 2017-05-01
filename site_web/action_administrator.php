@@ -80,9 +80,22 @@
             $_SESSION["error_delete_film"] = array("Film not exist in Db");
         }
         else{
-            //add query delete in table film
+            $id = $data["ID"];
+            $requete = "Delete From Film WHERE  FilmID = \"$id\"";
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            if(!$database->query("Delete From Genre WHERE  ID = \"$id\"")){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "Delete From Oeuvre WHERE  ID = \"$id\"" ;
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_add_film"] = array($query_succes_add);
         }
-        header("Location: ./administrator_action_page.php#op_on_film");
+        //header("Location: ./administrator_action_page.php#op_on_film");
     }
 
     function addSerie($data){
@@ -278,11 +291,17 @@
 	    $data = array(
 	      "title" => $_POST["film_name"],
             "year" => $_POST["year_film"],
-            "genre" => $_POST["genre_film"],
-          "rating" => $_POST["rating_note_film"],
+            "genre" => "NA",
+          "rating" => "-1",
           "ID" => $id,
           "type" => "film"
         );
+	    if($_POST["genre_film"] != ""){
+	        $data["genre"] = $_POST["genre_film"];
+        }
+        if($_POST["rating_note_film"] != ""){
+            $data["rating"] = $_POST["rating_note_film"];
+        }
 		addFilm($data);
 	}
 	else if(isset($_POST['film_delete'])){
