@@ -49,7 +49,26 @@
 	        $_SESSION["error_add_film"] = array("Film Already in Db");
         }
         else{
-	        //add query insert table film
+            $id = $data["ID"];
+            $title = $data["title"];
+            $year = $data["year"];
+            $rate = $data["rating"];
+            $genre = $data["genre"];
+            $requete = "INSERT INTO Oeuvre(ID, Titre,  AnneeSortie, Note) VALUES ('$id', '$title', '$year', '$rate')";
+            if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "INSERT INTO Film(FilmID) VALUES ('$id')";
+            if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            if($genre !="" ){
+                if(!$database->query("INSERT INTO Genre(ID, Genre) VALUES ('$id', '$genre')")){
+                    echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+                }
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_add_film"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_film");
     }
@@ -61,7 +80,20 @@
             $_SESSION["error_delete_film"] = array("Film not exist in Db");
         }
         else{
-            //add query delete in table film
+            $id = $data["ID"];
+            $requete = "Delete From Film WHERE  FilmID = \"$id\"";
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            if(!$database->query("Delete From Genre WHERE  ID = \"$id\"")){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "Delete From Oeuvre WHERE  ID = \"$id\"" ;
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_delete_film"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_film");
     }
@@ -126,10 +158,8 @@
         }
         else{
             if(!$res_person){
-                pass;
-                //add in table personne
+
             }
-            //add in table acteur
         }
         header("Location: ./administrator_action_page.php#op_on_actor");
     }
@@ -176,7 +206,7 @@
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\"";
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d, Personne  p WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\", p.Numero = d.Numero and p.Genre = \"$gender\"";
         }
         else if($type == "writer"){
             $prenom = $data['firstName'];
@@ -259,11 +289,17 @@
 	    $data = array(
 	      "title" => $_POST["film_name"],
             "year" => $_POST["year_film"],
-            "genre" => $_POST["genre_film"],
-          "rating" => $_POST["rating_note_film"],
+            "genre" => "NA",
+          "rating" => "-1",
           "ID" => $id,
           "type" => "film"
         );
+	    if($_POST["genre_film"] != ""){
+	        $data["genre"] = $_POST["genre_film"];
+        }
+        if($_POST["rating_note_film"] != ""){
+            $data["rating"] = $_POST["rating_note_film"];
+        }
 		addFilm($data);
 	}
 	else if(isset($_POST['film_delete'])){
@@ -324,7 +360,7 @@
         $dataPerson = array(
             'firstName' => $_POST['director_firstname'],
             'secondName' => $_POST['director_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'director'
         );
         if($_POST['gender'] != ""){
@@ -336,7 +372,7 @@
         $dataPerson = array(
             'firstName' => $_POST['writer_firstname'],
             'secondName' => $_POST['writer_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'writer'
         );
         if($_POST['gender'] != ""){
@@ -348,7 +384,7 @@
         $dataPerson = array(
             'firstName' => $_POST['actor_firstname'],
             'secondName' => $_POST['actor_secondname'],
-            'gender' => "None",
+            'gender' => "NA",
             'typeofperson' => 'actor'
         );
         if($_POST['gender'] != ""){
