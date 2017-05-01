@@ -4,7 +4,7 @@ INFO-H-303 : Bases de données - Projet IMBD.
 -->
 
 <?php
-include "extract.php";
+include "tools.php";
 
 session_start();
 $id = urldecode($_GET['id']);
@@ -16,6 +16,7 @@ if (!$database) {
     exit;
 } else {
 
+
     //fecth the Serie
     $querry = "SELECT Titre, AnneeSortie, Note
                 FROM Oeuvre
@@ -25,8 +26,8 @@ if (!$database) {
     //fetch the episodes
     $querry = "SELECT * 
                FROM Episode
-               WHERE SID ='$id'
-               order by Saison, NumeroE";
+               WHERE SID ='$id'"
+;
     $episodes = $database->query($querry);
 
     //fetch saisons number
@@ -56,6 +57,16 @@ if (!$database) {
     $querry = "SELECT Langue
                 FROM Langue
                 WHERE ID = '$id'";
+
+    $languages = $database->query($querry);
+
+
+    //fetch genres
+    $querry = "SELECT Genre
+                FROM Genre
+                WHERE ID = '$id'";
+
+    $genres = $database->query($querry);
 
 
 }
@@ -112,9 +123,9 @@ if (isset($_SESSION['logged'])) {
 <!-- Header -->
 <?php
 $_numSaisons = mysqli_fetch_array($numSaisons);
-$num = $_numSaisons['Saison'];
 $movie_infos = mysqli_fetch_array($oeuvre);
 $serie_infos = mysqli_fetch_array($serie);
+$num = $_numSaisons['Saison'];
 $date_fin = $serie_infos['AnneeFin'];
 $tire = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
@@ -123,7 +134,26 @@ $saison_format = '%d saison(s)';
 $titre_format1 = '%s (%d-%d)';
 $titre_format2 = '%s (%d-)';
 
-$note_fomat = '%g/10'
+$note_fomat = '%g/10';
+
+$res = [];
+foreach(range(1, $num ) as $current) {
+    $res[$current] = array();
+}
+
+while ($episodes_row = mysqli_fetch_array($episodes)) {
+    $sn = $episodes_row['Saison'];
+    $eID = $episodes_row['EpisodeID'];
+    if ($sn and $eID != -1) {
+        $title = titleFromID($eID, $database);
+        array_push($res[$sn], utf8_encode($title));
+    }
+
+
+}
+
+
+
 ?>
 <header>
     <div class="container">
@@ -134,8 +164,11 @@ $note_fomat = '%g/10'
                 } else {
 
                     echo sprintf($titre_format2, $tire, $date);
-                } ?>
+                }
+                ;
+                ?>
             </div>
+            <div class=infos><?php extractGenres($genres) ?></div>
             <div class=intro-lead-in><?php if ($note != _ - 1) echo sprintf($note_fomat, $note); ?></div>
         </div>
     </div>
@@ -143,7 +176,61 @@ $note_fomat = '%g/10'
 
 </header>
 
-<section id="Details">
+<section id="Saisons">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Saisons</h2>
+            </div>
+        </div>
+
+        <?php
+            echo "<ul class=\"nav nav-pills nav-justified\">";
+        foreach(range(1, $num ) as $current) {
+            echo "<li><a data-toggle=\"pill\" onClick=getEpisodes($current)>$current</a></li>";
+        }
+        echo "</ul>";
+
+        ?>
+
+        <div id="episodes_place"></div>
+
+
+        <script>
+
+
+            function getEpisodes(saison)
+            {
+
+                var array = <?php echo json_encode($res); ?>;
+                console.log(array);
+
+                var div = document.getElementById('episodes_place');
+
+                ul = document.createElement('ul'); // create an arbitrary ul element
+                ul.setAttribute("class", "list-group text-center");
+
+                for(var i in array[saison]) {
+                    // create an arbitrary li element
+                    var li = document.createElement('li'),
+                        content = document.createTextNode(Number(i) + 1 + " - " + array[saison][i]); // create a textnode to the document
+                    li.setAttribute("class", "list-group-item");
+
+                    li.appendChild(content); // append the created textnode above to the li element
+                    ul.appendChild(li); // append the created li element above to the ul element
+                }
+
+                div.innerHTML='';
+                div.appendChild(ul); // finally the ul element to the div with an id of placeholder
+            }
+        </script>
+
+
+
+    </div>
+</section>
+
+<section id="Details" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -151,23 +238,30 @@ $note_fomat = '%g/10'
             </div>
         </div>
 
-        <div id="div_1">
+        <div class="col-sm-4">
             <div class="details-member">
-                <h3><?php echo "Saison"; ?></h3>
+                <h3>Saisons</h3>
                 <h4><?php echo sprintf("%d", $num ); ?></h4>
             </div>
         </div>
-
-        <div id="div_2">
+        <div class="col-sm-4">
             <div class="details-member">
-                <h3><?php echo "Pays"; ?></h3>
+                <h3>Pays</h3>
                 <h4><?php extractCoutries($pays) ?></h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="details-member">
+                <h3>Langues</h3>
+                <h4><?php extractLanguages($languages) ?></h4>
             </div>
         </div>
 
 
     </div>
 </section>
+
+
 
 
 </body>

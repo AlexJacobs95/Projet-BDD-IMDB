@@ -29,16 +29,9 @@ header .intro-text .infos {
     margin-bottom: 10px;
 }
 
-#content {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle
-}
-
 table {
     border: 1px solid transparent;
     border-collapse: collapse;
-    border-spacing: 0;
     color: black;
     font-size: 24px;
     margin-left: 350px;
@@ -137,4 +130,8 @@ a:hover {
 /* selected link */
 a:active {
     color: yellow;
+}
+
+.nav-pills a{
+    color: black !important;
 }

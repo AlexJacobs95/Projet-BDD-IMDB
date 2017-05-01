@@ -4,7 +4,7 @@ INFO-H-303 : Bases de données - Projet IMBD.
 -->
 
 <?php
-include "extract.php";
+include "tools.php";
 
 session_start();
 $id = urldecode($_GET['id']);

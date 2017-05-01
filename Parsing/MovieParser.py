@@ -103,6 +103,7 @@ def extract_episode_infos(line):
 
         if char == "}":
             index_end_infos = line.index(char)
+
     if index_begin_infos != 99999:
         # Si y a des infos
         infos = line[index_begin_infos:index_end_infos]
@@ -215,7 +216,11 @@ def main():
         for line in content:
             if (line_counter >= 15):
                 if extracting_episodes:
-                    if get_name(line) == serie_name and date_ok:
+
+                    if getShortID(line) != shortSerieId:
+                        new_oeuvre = True
+
+                    elif getShortID(line) == shortSerieId and date_ok:
                         ID += 1
                         current_episode = {"realID": getRealID(line),
                                            "SID": SerieID,
@@ -227,8 +232,7 @@ def main():
                                            }
                         episodes[ID] = current_episode
 
-                    elif getShortID(line) != shortSerieId:
-                        new_oeuvre = True
+
 
                     else:
                         # Ici on est dans le cas ou on extrait pas les episodes de la serie

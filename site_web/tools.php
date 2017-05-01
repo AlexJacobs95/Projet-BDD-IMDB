@@ -56,4 +56,19 @@ function extractCoutries($array)
 
     echo $countries;
 }
+
+function titleFromID($id, $db)
+{
+
+
+    $id_ok = mysqli_real_escape_string($db, $id);
+
+    $querry = "SELECT Titre 
+               FROM Oeuvre 
+               WHERE ID = '$id_ok'";
+    $result = $db->query($querry);
+    $row = mysqli_fetch_array($result);
+
+    return $row['Titre'];
+}
 ?>

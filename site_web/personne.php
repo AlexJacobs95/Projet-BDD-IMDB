@@ -6,6 +6,7 @@ Page d'acceuill de site web.
 
 <?php
 include "type.php";
+include "tools.php";
 session_start();
 $id = urldecode($_GET['id']);
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
@@ -75,16 +76,7 @@ function printCategories($roles, $directed, $written)
 }
 
 
-function titleFromID($id, $db)
-{
-    $querry = "SELECT Titre 
-               FROM Oeuvre 
-               WHERE ID = '$id'";
-    $result = $db->query($querry);
-    $row = mysqli_fetch_array($result);
 
-    return $row['Titre'];
-}
 
 
 ?>
