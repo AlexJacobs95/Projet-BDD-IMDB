@@ -131,20 +131,68 @@
         header("Location : ./administrator_action_page.php#op_on_episode");
     }
 
+    function checkSameData($dataPerson){
+        global $database;
+        $result = "NA";
+        $nom = $dataPerson['secondName'];
+        $prenom = $dataPerson['firstName'];
+        $requete = "Select * From Personne p  WHERE p.Nom = \"$nom\" and p.Prenom = \"$prenom\" ";
+        $output = $database->query($requete);
+        if($row = $output->fetch_assoc()){
+            $num = $row['Numero'];
+            while($row = $output->fetch_assoc()){
+                $num = $row['Numero'];
+            }
+            echo $num;
+            if($num == "NA"){
+                $requete = "UPDATE Personne SET Numero  = 'I' WHERE Nom = \"$nom\" and Prenom = \"$prenom\" ";
+                if(!$database->query($requete)) {
+                    echo "Echec lors de l'update dans la table : (" . $database->errno . ") " . $database->error;
+                }
+                $result  = "II";
+            }
+            else {
+                $result = $num."I";
+            }
+        }
+        return $result;
+    }
+
+    function getNumero($data){
+        global $database;
+        $prenom = $data['firstName'];
+        $nom = $data['secondName'];
+        $genre = $data['gender'];
+        $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
+        $output = $database->query($requete);
+        $row = $output->fetch_assoc();
+        $num = $row['Numero'];
+        return $num;
+    }
+
 	function addDirector($dataPerson)
     {
 	    global $database;
+        $prenom = $dataPerson['firstName'];
+        $nom = $dataPerson['secondName'];
+        $genre = $dataPerson['gender'];
 	    $res_person = checkInDb($dataPerson, "Personne");
 	    $res_dir = checkInDb($dataPerson, $dataPerson['typeofperson']);
-	    if($res_dir){
+        if($res_dir){
 	        $_SESSION['error_add_dir'] = array("Director Already In Db");
         }
         else{
 	        if(!$res_person){
-	            pass;
-	            //add in table personne
+	            $result = checkSameData($dataPerson);
+	            $requete = "INSERT INTO Personne(Prenom, Nom, Numero, Genre) VALUES ('$prenom', '$nom','$result', '$genre')";
+	            $database->query($requete);
             }
-            //add in table directeur
+            else{
+                $result = getNumero($dataPerson);
+            }
+            $requete = "INSERT INTO Directeur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
+            $database->query($requete);
+
         }
         header("Location: ./administrator_action_page.php#op_on_dir");
     }
@@ -182,7 +230,7 @@
     }
     
 	function checkInDb($data, $type){
-		global $database;
+        global $database;
 		$result = false;
 		if ($type == "admin"){
             $requete = "SELECT  AdresseMail FROM Administrateur
@@ -193,7 +241,7 @@
             $title = $data["title"];
 		    $requete = "select f.FilmID from Film f, Oeuvre o where f.FilmID = \"$id\" and f.FilmID = o.ID and o.Titre = \"$title\"";
         }
-        else if ($type = "serie"){
+        else if ($type == "serie"){
             $id = $data["ID"];
             $requete = "select s.SerieID from Serie s, Oeuvre o where s.SerieID = \"$id\" and s.SerieID = o.ID";
         }
@@ -202,11 +250,12 @@
             $serie = $data['serietitle'];
             $requete = "select e.EpisodeID from Serie s, Episode e, Oeuvre o where s.SerieID = e.SID and e.TitreS = \"$serie\" and o.ID = e.EpisodeID and o.Titre = \"$title\"";
         }
-		if($type == "director"){
+		else if($type == "director"){
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
             $gender = $data['gender'];
-		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d, Personne  p WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\", p.Numero = d.Numero and p.Genre = \"$gender\"";
+            echo "genre \n $gender \n";
+		    $requete = "SELECT d.Prenom, d.Nom, d.Numero From Directeur d, Personne  p WHERE \"$prenom\" = d.Prenom and d.Nom = \"$nom\" and d.Prenom = p.Prenom and d.Nom = p.Nom and p.Numero = d.Numero and p.Genre = \"$gender\"";
         }
         else if($type == "writer"){
             $prenom = $data['firstName'];
@@ -226,7 +275,7 @@
             $genre = $data['gender'];
             $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
         }
-		if($type == "language"){
+		else if($type == "language"){
 			$requete = "SELECT  Langue FROM Langue
 						WHERE Langue = \"$data\"";
 		}
@@ -366,7 +415,7 @@
         if($_POST['gender'] != ""){
             $dataPerson['gender'] = $_POST['gender'];
         }
-		addDirector($dataPerson);
+        addDirector($dataPerson);
 	}
 	else if(isset($_POST['writer_add'])){
         $dataPerson = array(
