@@ -29,10 +29,16 @@ header .intro-text .infos {
     margin-bottom: 10px;
 }
 
-table {
+#content {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle
+}
 
+table {
     border: 1px solid transparent;
     border-collapse: collapse;
+    border-spacing: 0;
     color: black;
     font-size: 24px;
     margin-left: 350px;
@@ -72,6 +78,14 @@ td:first-child {
     padding-right: 0;
 }
 
+td.col1 {
+    width: 5em;
+}
+
+td.col2 {
+    width: 5em;
+}
+
 .details-member {
     text-align: center;
     margin-bottom: 50px;
@@ -103,4 +117,24 @@ td:first-child {
     margin-right: -200px;
     float: right;
     clear: none;
+}
+
+/* unvisited link */
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: yellow;
+}
+
+/* selected link */
+a:active {
+    color: yellow;
 }
