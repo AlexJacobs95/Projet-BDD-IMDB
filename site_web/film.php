@@ -124,10 +124,8 @@ $note_fomat = '%g/10';
 
 ?>
 <header>
-    <div id="background">
-        <div class="container">
-            <div class="intro-text" id="intro">
-
+    <div class="container">
+        <div class="intro-text" id="intro">
                 <div class="col-lg-4" style="display: block; margin: auto">
                     <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
                 </div>
@@ -137,11 +135,7 @@ $note_fomat = '%g/10';
                 <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             </div>
         </div>
-
-
-    </div>
 </header>
-
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">
         <div class="row">

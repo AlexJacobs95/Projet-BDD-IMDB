@@ -8,9 +8,8 @@ function getImagesFromAPI(title, date) {
         $('img').attr('src', posterPath);
 
         const path = 'url(' + backDropPath + ')';
-        $("#background").css("background-image", path);
-        $("#background").css("opacity", 1);
-        $('header').css("opacity", 1);
+        $("header").css("background-image", path);
+        $("header").css("opacity", 0.9);
 
 
     }, function (error) {
