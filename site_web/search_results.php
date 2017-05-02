@@ -72,7 +72,7 @@ include 'menubar.php';
                     if ($_POST['requete'] == "Requete 6") {
                     }
                 }
-                else{
+                else {
                     $search_content = $_POST["search"];
 
                     $database = new mysqli("localhost", "root", "imdb", "IMDB");
@@ -109,6 +109,7 @@ include 'menubar.php';
                         }
                         echo "</table>";
                     }
+                }
                 ?>
             </div>
         </div>
