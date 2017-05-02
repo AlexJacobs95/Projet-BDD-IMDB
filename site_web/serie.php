@@ -160,6 +160,11 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
     <div class="container">
         <div class="intro-text" id = "intro" style="display: none">
+
+            <div class="col-lg-4" style="display: block; margin: auto">
+                <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
+            </div>
+
             <div class="intro-heading"><?php
                 if ($date_fin != 0) {
                     echo sprintf($titre_format1, $tire, $date, $date_fin);
@@ -182,10 +187,9 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     <div class="container">
         <div class="col-lg-12 text-center">
             <ul class="nav nav-pills nav-justified">
-                <li><a data-toggle=\"pill\">Hey</a></li>
-                <li><a data-toggle=\"pill\">Hoy</a></li>
-                <li><a data-toggle=\"pill\">Hu</a></li>
-                <li><a data-toggle=\"pill\">Har</a></li>
+                <li><a class="page-scroll" href="#Details" data-toggle=\"pill\">Détails</a></li>
+                <li><a class="page-scroll" href="#Saisons" data-toggle=\"pill\">Saisons</a></li>
+
             </ul>
         </div>
     </div>
@@ -308,6 +312,27 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         console.log("hi");
         $("#intro").fadeIn(2000);
     });
+
+</script>
+
+<script>
+    function apiCall(titre, date) {
+
+        $.getJSON("http://www.omdbapi.com/?t=" + encodeURI(titre) + "&y=" + 2005).then(function (response) {
+            var image = response.Poster;
+            console.log(image);
+            if (image !== "N/A") {
+                $('img').attr('src', image);
+            }
+        });
+
+    }
+    var titre = "<?php echo $tire;?>";
+    var date = "<?php echo $date;?>";
+    $(document).ready(function () {
+        apiCall(titre, date)
+    });
+
 
 </script>
 

@@ -159,6 +159,13 @@ a:active {
 
 }
 
+img {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+
 td {
     width: 250px;
     text-align: center;

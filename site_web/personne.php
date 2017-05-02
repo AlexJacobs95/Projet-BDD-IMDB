@@ -166,7 +166,7 @@ include 'menubar.php';
             echo "<td >";
 
             if (isFilm($id)) {
-                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="film_episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } elseif (isSerie($id)) {
                 echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } else {
@@ -176,7 +176,7 @@ include 'menubar.php';
 
             echo "</td>";
             echo "<td >" . $role . "</td></tr>";
-            //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
+            //echo '<a href="film_episode.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
         echo "</table>";
         ?>
@@ -205,7 +205,7 @@ include 'menubar.php';
             echo "<td >";
 
             if (isFilm($id)) {
-                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="film_episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } elseif (isSerie($id)) {
                 echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } else {
@@ -239,7 +239,7 @@ include 'menubar.php';
             echo "<td >";
 
             if (isFilm($id)) {
-                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="film_episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } elseif (isSerie($id)) {
                 echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } else {
