@@ -107,6 +107,8 @@ if (!$database) {
             crossorigin="anonymous"></script>
     <![endif]-->
 
+
+
 </head>
 
 <body id="page-top" class="index">
@@ -149,13 +151,11 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 
 }
-
-
-
 ?>
 <header>
+
     <div class="container">
-        <div class="intro-text">
+        <div class="intro-text" id = "intro" style="display: none">
             <div class="intro-heading"><?php
                 if ($date_fin != 0) {
                     echo sprintf($titre_format1, $tire, $date, $date_fin);
@@ -259,8 +259,13 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                         content = document.createTextNode(Number(i) + 1 + " - " + array[saison][i]); // create a textnode to the document
                     li.setAttribute("class", "list-group-item");
 
-                    li.appendChild(content); // append the created textnode above to the li element
-                    ul.appendChild(li); // append the created li element above to the ul element
+                    li.appendChild(content);
+                    var a = document.createElement('a'),
+                        content2 = li;
+                    a.appendChild(content2)
+                    a.setAttribute("class", "episode");
+
+                    ul.appendChild(a); // append the created li element above to the ul element
                 }
 
                 div.innerHTML='';
@@ -279,7 +284,6 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 </body>
 <!-- jQuery -->
-
 <script src="vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
@@ -292,5 +296,15 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("hi");
+        $("#intro").fadeIn(5000);
+    });
+
+</script>
+
+
 
 </html>
