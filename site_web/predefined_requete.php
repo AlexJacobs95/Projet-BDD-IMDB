@@ -54,7 +54,7 @@ include 'menubar.php';
     <div class="container">
         <div class="intro-text" id="intro" style="display: none">
             <div class="intro-heading" id ="sous-titre">Requêtes Prédéfinies</div>
-            <form method = "post">
+            <form action="./search_results.php" method = "post">
                 <select class="form-control" name ="requete" id="requete">
                     <?php
                     for ($i=1; $i < 7; $i++) {

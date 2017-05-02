@@ -65,43 +65,51 @@ include 'menubar.php';
             <div class="col-lg-12 text-center">
                 <h2 class="titre-section">Oeuvres</h2>
                 <?php
-                session_start();
 
-                $search_content = $_POST["search"];
-                $database = new mysqli("localhost", "root", "imdb", "IMDB");
-                if (!$database) {
-                    echo "Error: Unable to connect to MySQL." . PHP_EOL;
-                    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-                    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-                    exit;
-                } else {
-                    $requete = "SELECT ID
-                                FROM Oeuvre
-                                WHERE Titre = '$search_content'";
-
-                    $oeuvres = $database->query($requete);
-                    echo "<table>
-                    <tr>
-                    <th>ID</th>
-                    </tr>";
-
-                    while ($row = mysqli_fetch_array($oeuvres)) {
-                        echo "<tr>";
-                        echo "<td>";
-
-                        if (isFilm($row['ID'])) {
-                            echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        } elseif (isEpisode($row['ID'])) {
-                            echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        } else {
-                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        }
-
-                        echo "</td>";
-                        echo "</tr>";
+                if (isset($_POST['requete'])) {
+                    if ($_POST['requete'] == "Requete 4") {
+                        $requete = "select distinct e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID";
                     }
-                    echo "</table>";
+                    if ($_POST['requete'] == "Requete 6") {
+                    }
+                }
+                else {
+                    $search_content = $_POST["search"];
 
+                    $database = new mysqli("localhost", "root", "imdb", "IMDB");
+                    if (!$database) {
+                        echo "Error: Unable to connect to MySQL." . PHP_EOL;
+                        echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+                        echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+                        exit;
+                    } else {
+                        $requete = "SELECT ID
+                                    FROM Oeuvre
+                                    WHERE Titre = '$search_content'";
+
+                        $oeuvres = $database->query($requete);
+                        echo "<table>
+                        <tr>
+                        <th>ID</th>
+                        </tr>";
+
+                        while ($row = mysqli_fetch_array($oeuvres)) {
+                            echo "<tr>";
+                            echo "<td>";
+
+                            if (isFilm($row['ID'])) {
+                                echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                            } elseif (isEpisode($row['ID'])) {
+                                echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                            } else {
+                                echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                            }
+
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    }
                 }
                 ?>
             </div>
@@ -115,6 +123,20 @@ include 'menubar.php';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="titre-section">Personnes</h2>
+                <?php
+                if (isset($_POST['requete'])) {
+                    if ($_POST['requete'] == "Requete 1") {
+                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Acteur a where 5 = (Select count(*) From Oeuvre o where o.AnneeSortie >='2003' and o.AnneeSortie <= '2007' and a.OID = o.ID)";
+                    }
+                    if ($_POST['requete'] == "Requete 2") {
+                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = o.ID having by count(a.OID) >= 2";
+                    }
+                    if ($_POST['requete'] == "Requete 3") {
+                    }
+                    if ($_POST['requete'] == "Requete 5") {
+                    }
+                }
+                ?>
             </div>
         </div>
 
