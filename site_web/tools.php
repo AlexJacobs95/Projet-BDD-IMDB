@@ -19,6 +19,23 @@ function extractGenres($array)
     echo $genres;
 }
 
+function extractEpInfos($array) {
+    $episode_infos = mysqli_fetch_array($array);
+    $serie_ID = $episode_infos['SID'];
+    $titreS = $episode_infos['TitreS'];
+    $epNum = $episode_infos['NumeroE'];
+    $saisonNum = $episode_infos['Saison'];
+
+    $string = '<a style= "color: white;" href="serie.php?id=' . urlencode($serie_ID) .'">' . $titreS . '</a>';
+    if ($epNum != -1) {
+        $string .=  ' | episode ' .$epNum;
+    }
+    if ($saisonNum != -1) {
+        $string .= ' | saison ' . $saisonNum;
+    }
+    echo $string;
+}
+
 function extractLanguages($array)
 {
     $languages = "";

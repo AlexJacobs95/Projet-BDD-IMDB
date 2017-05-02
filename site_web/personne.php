@@ -127,7 +127,7 @@ include 'menubar.php';
 
 <header>
     <div class="container">
-        <div class="intro-text">
+        <div class="intro-text" id="intro">
             <div class="intro-heading">
                 <?php echo $firstname . ' ' . $lastname;
 
@@ -268,5 +268,13 @@ include 'menubar.php';
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("hi");
+        $("#intro").fadeIn(2000);
+    });
+
+</script>
 
 </html>

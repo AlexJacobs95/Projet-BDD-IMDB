@@ -157,7 +157,7 @@ include 'menubar.php';
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("hi");
-        $("#intro").fadeIn(5000);
+        $("#intro").fadeIn(2000);
     });
 
 </script>

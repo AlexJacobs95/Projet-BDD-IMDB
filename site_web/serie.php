@@ -16,6 +16,7 @@ if (!$database) {
     exit;
 } else {
 
+    $id = mysqli_real_escape_string($database, $id);
 
     //fecth the Serie
     $querry = "SELECT Titre, AnneeSortie, Note
@@ -144,9 +145,12 @@ foreach(range(1, $num ) as $current) {
 while ($episodes_row = mysqli_fetch_array($episodes)) {
     $sn = $episodes_row['Saison'];
     $eID = $episodes_row['EpisodeID'];
+    $eNum = $episodes_row['NumeroE'];
     if ($sn and $eID != -1) {
         $title = titleFromID($eID, $database);
-        array_push($res[$sn], utf8_encode($title));
+        $res[$sn][(string)$eNum] = array();
+        $res[$sn][(string)$eNum]["id"] = utf8_encode($eID);
+        $res[$sn][(string)$eNum]["title"] = utf8_encode($title);
     }
 
 
@@ -255,13 +259,15 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
                 for(var i in array[saison]) {
                     // create an arbitrary li element
+                    console.log(array[saison][i]['title']);
                     var li = document.createElement('li'),
-                        content = document.createTextNode(Number(i) + 1 + " - " + array[saison][i]); // create a textnode to the document
+                        content = document.createTextNode(Number(i)+ " - " + array[saison][i]["title"]); // create a textnode to the document
                     li.setAttribute("class", "list-group-item");
 
                     li.appendChild(content);
                     var a = document.createElement('a'),
                         content2 = li;
+                    a.setAttribute("href", "episode.php?id=" + encodeURIComponent(array[saison][i]["id"]));
                     a.appendChild(content2)
                     a.setAttribute("class", "episode");
 
@@ -300,7 +306,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("hi");
-        $("#intro").fadeIn(5000);
+        $("#intro").fadeIn(2000);
     });
 
 </script>

@@ -18,54 +18,59 @@ if (!$database) {
     $id = mysqli_real_escape_string($database, $id);
 
     //fecth the movie
-    $querry = "SELECT Titre, AnneeSortie, Note
+    $query = "SELECT Titre, AnneeSortie, Note
                 FROM Oeuvre
                 WHERE ID = '$id'";
-    $movie = $database->query($querry);
+    $movie = $database->query($query);
 
     //fecth the roles
-    $querry = "SELECT Prenom, Nom, Numero, Role 
+    $query = "SELECT Prenom, Nom, Numero, Role 
                 FROM Role
                 WHERE OID = '$id'";
 
-    $roles = $database->query($querry);
+    $roles = $database->query($query);
 
     //fecth the writers
-    $querry = "SELECT Prenom, Nom, Numero 
+    $query = "SELECT Prenom, Nom, Numero 
                 FROM EcritPar
                 WHERE OID = '$id'";
 
-    $writers = $database->query($querry);
+    $writers = $database->query($query);
 
     //fecth the directors
-    $querry = "SELECT Prenom, Nom, Numero
+    $query = "SELECT Prenom, Nom, Numero
                 FROM DirigePar
                 WHERE OID = '$id'";
 
-    $directors = $database->query($querry);
+    $directors = $database->query($query);
 
     //fetch countries
-    $querry = "SELECT Pays
+    $query = "SELECT Pays
                 FROM Pays
                 WHERE ID = '$id'";
 
-    $pays = $database->query($querry);
+    $pays = $database->query($query);
 
     //fetch languages
-    $querry = "SELECT Langue
+    $query = "SELECT Langue
                 FROM Langue
                 WHERE ID = '$id'";
 
-    $languages = $database->query($querry);
+    $languages = $database->query($query);
 
     //fetch genres
-    $querry = "SELECT Genre
+    $query = "SELECT Genre
                 FROM Genre
                 WHERE ID = '$id'";
 
-    $genres = $database->query($querry);
+    $genres = $database->query($query);
 
+    //fetch ep infos
+    $query = "SELECT TitreS, NumeroE, Saison, SID
+              FROM Episode
+              WHERE EpisodeID = '$id'";
 
+    $ep_infos = $database->query($query);
 
 }
 
@@ -120,15 +125,23 @@ $tire = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
+
+
 $note_fomat = '%g/10';
 
+echo $saisonNum;
 ?>
+
 <header>
     <div class="container">
         <div class="intro-text" id = "intro">
             <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+            <div class="infos"><?php extractEpInfos($ep_infos); ?></div>
+
             <div class=infos><?php extractGenres($genres) ?></div>
             <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+            <div class=infos><?php sprintf($ep_infos_format, $titreS, $epNum, $saisonNum); ?></div>
+
         </div>
     </div>
 

@@ -1,4 +1,9 @@
+#intro {
+    display: none;
+}
+
 header {
+
     background-color: #2D3E50;;
     color: white;
 }
@@ -40,12 +45,8 @@ table {
 }
 
 table.directorsAndWriters {
-    border: 1px solid transparent;
-    border-collapse: collapse;
-    width: 100%;
-    color: black;
-    font-size: 24px;
-    margin-left: 470px;
+    width: 250px;
+    text-align: center;
 
 }
 
@@ -156,6 +157,16 @@ a:active {
     cursor: pointer;
     color: black;
 
+}
+
+td {
+    width: 250px;
+    text-align: center;
+}
+
+tr {
+    border: solid;
+    border-width: 1px 0;
 }
 
 
