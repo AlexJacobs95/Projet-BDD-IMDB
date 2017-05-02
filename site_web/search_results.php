@@ -120,21 +120,20 @@ include 'menubar.php';
 <section id="Personnes" class="blue">
     <div class="container">
         <div class="row">
-
-            <?php
-            if (isset($_POST['requete'])) {
-                if ($_POST['requete'] == "Requete 1") {
-                }
-                if ($_POST['requete'] == "Requete 2") {
-                }
-                if ($_POST['requete'] == "Requete 3") {
-                }
-                if ($_POST['requete'] == "Requete 5") {
-                }
-            }
-            ?>
             <div class="col-lg-12 text-center">
                 <h2 class="titre-section">Personnes</h2>
+                <?php
+                if (isset($_POST['requete'])) {
+                    if ($_POST['requete'] == "Requete 1") {
+                    }
+                    if ($_POST['requete'] == "Requete 2") {
+                    }
+                    if ($_POST['requete'] == "Requete 3") {
+                    }
+                    if ($_POST['requete'] == "Requete 5") {
+                    }
+                }
+                ?>
             </div>
         </div>
 
