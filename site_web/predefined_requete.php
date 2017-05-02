@@ -1,12 +1,7 @@
 <!--
-
-Fichier qui va contenir un onglet déroulant permettant la sélection des requete préfinie à faire pour le projet :)
--->
-
-<!--
 Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
-Page d'acceuill de site web.
+Page avec menu déroulant pour requetes prédéfinies.
 -->
 
 <?php

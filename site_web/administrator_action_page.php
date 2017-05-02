@@ -36,7 +36,7 @@ Page de recherche avancé de site web.
 </head>
 	<body id="page-top" class="index">
 		<?php
-			include 'menubar_admin.php';
+			include 'menubar.php';
 		?>
 		<header>
     		<div class="container">

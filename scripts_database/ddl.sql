@@ -113,7 +113,6 @@ CREATE TABLE IF NOT EXISTS Episode (
   TitreS VARCHAR(256),
   NumeroE INT,
   Saison INT,
-  DateSortie INT,
   SID VARCHAR(256) NOT NULL,
   PRIMARY KEY (EpisodeID),
   FOREIGN KEY (EpisodeID) REFERENCES Oeuvre(ID),
