@@ -68,7 +68,7 @@ include 'menubar.php';
 
                 if (isset($_POST['requete'])) {
                     if ($_POST['requete'] == "Requete 4") {
-                        $requete = "select distinct e.Title, e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID";
+                        $requete = "select distinct e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID";
                     }
                     if ($_POST['requete'] == "Requete 6") {
                     }

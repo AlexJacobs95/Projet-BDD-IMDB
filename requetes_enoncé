@@ -10,7 +10,7 @@ Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = 
 R3:
 	wtf je sais pas :p 
 R4:
-	select distinct e.Title, e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID);
+	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID);
 
 R5: :'(
 
