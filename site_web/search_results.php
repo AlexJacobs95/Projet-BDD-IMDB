@@ -68,6 +68,7 @@ include 'menubar.php';
 
                 if (isset($_POST['requete'])) {
                     if ($_POST['requete'] == "Requete 4") {
+                        $requete = "select distinct e.Title, e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID";
                     }
                     if ($_POST['requete'] == "Requete 6") {
                     }
@@ -125,8 +126,10 @@ include 'menubar.php';
                 <?php
                 if (isset($_POST['requete'])) {
                     if ($_POST['requete'] == "Requete 1") {
+                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Acteur a where 5 = (Select count(*) From Oeuvre o where o.AnneeSortie >='2003' and o.AnneeSortie <= '2007' and a.OID = o.ID)";
                     }
                     if ($_POST['requete'] == "Requete 2") {
+                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = o.ID having by count(a.OID) >= 2";
                     }
                     if ($_POST['requete'] == "Requete 3") {
                     }
