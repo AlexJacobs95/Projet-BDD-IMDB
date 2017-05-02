@@ -128,6 +128,11 @@ include 'menubar.php';
 <header>
     <div class="container">
         <div class="intro-text" id="intro">
+
+            <div class="col-lg-4" style="display: block; margin: auto">
+                <img src="">
+            </div>
+
             <div class="intro-heading">
                 <?php echo $firstname . ' ' . $lastname;
 
@@ -153,10 +158,7 @@ include 'menubar.php';
         </div>
 
         <?php
-        echo "<table >    
-            <tr>
-                <th>film Role</th>
-            </tr>";
+        echo "<table>";
 
         while ($roles_row = mysqli_fetch_array($roles)) {
             $id = $roles_row['OID'];
@@ -193,10 +195,7 @@ include 'menubar.php';
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' >    
-            <tr>
-                <th>Oeuvre</th>
-            </tr>";
+        echo "<table class='directorsAndWriters' > ";
 
         while ($written_row = mysqli_fetch_array($written)) {
             $id = $written_row['OID'];
@@ -227,10 +226,7 @@ include 'menubar.php';
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' >    
-            <tr>
-                <th>Oeuvre</th>
-            </tr>";
+        echo "<table class='directorsAndWriters' >";
 
         while ($directed_row = mysqli_fetch_array($directed)) {
             $id = $directed_row['OID'];
@@ -273,6 +269,19 @@ include 'menubar.php';
     $(document).ready(function () {
         console.log("hi");
         $("#intro").fadeIn(2000);
+    });
+
+</script>
+
+<script src="themoviedb.js"></script>
+<script src="API.js"></script>
+
+<script>
+
+    var firstname = "<?php echo $firstname;?>";
+    var lastname = "<?php echo $lastname;?>";
+    $(document).ready(function () {
+        getPersonPic(firstname, lastname)
     });
 
 </script>

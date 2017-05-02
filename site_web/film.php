@@ -129,7 +129,7 @@ $note_fomat = '%g/10';
             <div class="intro-text" id="intro">
 
                 <div class="col-lg-4" style="display: block; margin: auto">
-                    <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
+                    <img src="">
                 </div>
 
                 <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
@@ -151,10 +151,7 @@ $note_fomat = '%g/10';
         </div>
 
         <?php
-        echo "<table border=1 frame=void rules=rows>    
-            <tr>
-                <th>Acteur Role</th>
-            </tr>";
+        echo "<table border=1 frame=void rules=rows>";
 
         while ($actors_row = mysqli_fetch_array($roles)) {
             $fn = $actors_row['Prenom'];
@@ -184,10 +181,7 @@ $note_fomat = '%g/10';
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' border=1 frame=void rules=rows>    
-            <tr>
-                <th>Directeur</th>
-            </tr>";
+        echo "<table class='directorsAndWriters' border=1 frame=void rules=rows>";
 
         while ($directors_row = mysqli_fetch_array($directors)) {
             $fn = $directors_row['Prenom'];
@@ -216,10 +210,7 @@ $note_fomat = '%g/10';
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' >    
-            <tr>
-                <th>Auteurs</th>
-            </tr>";
+        echo "<table class='directorsAndWriters' >";
 
         while ($writers_row = mysqli_fetch_array($writers)) {
             $fn = $writers_row['Prenom'];

@@ -162,7 +162,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         <div class="intro-text" id = "intro" style="display: none">
 
             <div class="col-lg-4" style="display: block; margin: auto">
-                <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
+                <img src="">
             </div>
 
             <div class="intro-heading"><?php
@@ -315,24 +315,16 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 </script>
 
+<script src="themoviedb.js"></script>
+<script src="API.js"></script>
+
 <script>
-    function apiCall(titre, date) {
 
-        $.getJSON("http://www.omdbapi.com/?t=" + encodeURI(titre) + "&y=" + 2005).then(function (response) {
-            var image = response.Poster;
-            console.log(image);
-            if (image !== "N/A") {
-                $('img').attr('src', image);
-            }
-        });
-
-    }
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
-        apiCall(titre, date)
+        getImagesFromAPI(titre, date)
     });
-
 
 </script>
 
