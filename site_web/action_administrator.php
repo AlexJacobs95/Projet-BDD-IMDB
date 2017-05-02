@@ -193,7 +193,7 @@
             $requete = "INSERT INTO Directeur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
             $database->query($requete);
             global $query_succes_add;
-            $_SESSION["query_succes_add_director"] = array($query_succes_add);
+            $_SESSION["query_succes_add_dir"] = array($query_succes_add);
 
         }
         header("Location: ./administrator_action_page.php#op_on_dir");
