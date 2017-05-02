@@ -122,7 +122,7 @@ def extract_episode_infos(line):
         if date == "????":
             date = '0'
 
-    return title, saison, numero, date
+    return title, saison, numero
 
 
 def test():
@@ -222,13 +222,13 @@ def main():
 
                     elif getShortID(line) == shortSerieId and date_ok:
                         ID += 1
+                        data = extract_episode_infos(line)
                         current_episode = {"realID": getRealID(line),
                                            "SID": SerieID,
                                            "titreS": serie_name,
-                                           "titre": extract_episode_infos(line)[0],
-                                           "saison": extract_episode_infos(line)[1],
-                                           "numero": extract_episode_infos(line)[2],
-                                           "dateSortie": extract_episode_infos(line)[3]
+                                           "titre": data[0],
+                                           "saison": data[1],
+                                           "numero": data[2]
                                            }
                         episodes[ID] = current_episode
 
@@ -247,10 +247,11 @@ def main():
                         # Si c est une serie
                         SerieID = getRealID(line)
                         shortSerieId = getShortID(line)
+                        data = get_name_date_serie(line)
                         current_serie = {"realID": getRealID(line),
-                                         "titre": get_name_date_serie(line)[0],
-                                         "dateSortie": get_name_date_serie(line)[1],
-                                         "dateFin": get_name_date_serie(line)[2]
+                                         "titre": data[0],
+                                         "dateSortie": data[1],
+                                         "dateFin": data[2]
                                          }
 
                         if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2010:
@@ -264,9 +265,10 @@ def main():
 
                     else:
                         # Si c'est juste un film
+                        data = get_name_date_serie(line)
                         current_film = {"realID": getRealID(line),
-                                        "titre": get_name_date_film(line)[0],
-                                        "dateSortie": get_name_date_film(line)[1],
+                                        "titre": data[0],
+                                        "dateSortie": data[1],
                                         }
                         if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2010:
                             films[ID] = current_film
