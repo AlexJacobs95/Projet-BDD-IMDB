@@ -27,7 +27,7 @@ def output_episodes(dico):
     for key in dico:
         of.write(
         dico[key]["realID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["numero"] + "|" +
-        dico[key]["saison"] + "|" + dico[key]["dateSortie"] + "|" + dico[key]["SID"]+ "\n")
+        dico[key]["saison"] + "|" + "|" + dico[key]["SID"]+ "\n")
 
     of.close()
 
@@ -122,7 +122,7 @@ def extract_episode_infos(line):
         if date == "????":
             date = '0'
 
-    return title, saison, numero
+    return title, saison, numero, date
 
 
 def test():
@@ -228,7 +228,8 @@ def main():
                                            "titreS": serie_name,
                                            "titre": data[0],
                                            "saison": data[1],
-                                           "numero": data[2]
+                                           "numero": data[2],
+                                           "dateSortie": data[3]
                                            }
                         episodes[ID] = current_episode
 
