@@ -7,8 +7,30 @@ Page d'acceuill de site web.
 <?php
 session_start();
 include "type.php";
-?>
 
+$search_content = $_POST["search"];
+
+$database = new mysqli("localhost", "root", "imdb", "IMDB");
+if (!$database) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+} else {
+$requete = "SELECT ID
+            FROM Oeuvre
+            WHERE Titre = '$search_content'";
+
+$result_oeuvres = $database->query($requete);
+
+
+$requete = "SELECT Prenom, Nom, Numero 
+            FROM Personne
+            WHERE CONCAT( Prenom,  ' ', Nom ) LIKE  '%$search_content%'";
+
+
+$result_personnes = $database->query($requete);
+?>
 
 
 <!DOCTYPE html>
@@ -74,42 +96,28 @@ include 'menubar.php';
                     }
                 }
                 else {
-                    $search_content = $_POST["search"];
+                    echo "<table>
+                    <tr>
+                    <th>ID</th>
+                    </tr>";
 
-                    $database = new mysqli("localhost", "root", "imdb", "IMDB");
-                    if (!$database) {
-                        echo "Error: Unable to connect to MySQL." . PHP_EOL;
-                        echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-                        echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-                        exit;
-                    } else {
-                        $requete = "SELECT ID
-                                    FROM Oeuvre
-                                    WHERE Titre = '$search_content'";
+                    while ($row = mysqli_fetch_array($result_oeuvres)) {
+                        echo "<tr>";
+                        echo "<td>";
 
-                        $oeuvres = $database->query($requete);
-                        echo "<table>
-                        <tr>
-                        <th>ID</th>
-                        </tr>";
-
-                        while ($row = mysqli_fetch_array($oeuvres)) {
-                            echo "<tr>";
-                            echo "<td>";
-
-                            if (isFilm($row['ID'])) {
-                                echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                            } elseif (isEpisode($row['ID'])) {
-                                echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                            } else {
-                                echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                            }
-
-                            echo "</td>";
-                            echo "</tr>";
+                        if (isFilm($row['ID'])) {
+                            echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                        } elseif (isEpisode($row['ID'])) {
+                            echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                        } else {
+                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
                         }
-                        echo "</table>";
+
+                        echo "</td>";
+                        echo "</tr>";
                     }
+                    echo "</table>";
+                }
                 }
                 ?>
             </div>
@@ -135,7 +143,26 @@ include 'menubar.php';
                     }
                     if ($_POST['requete'] == "Requete 5") {
                     }
+                } else {
+                    echo "<table>
+                    <tr>
+                    <th>ID</th>
+                    </tr>";
+
+                    while ($row = mysqli_fetch_array($result_personnes)) {
+                        $fn = $row['Prenom'];
+                        $ln = $row['Nom'];
+                        $num = $row['Numero'];
+                        $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
+                        echo "<tr>";
+                        echo "<td >";
+                        echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
                 }
+
                 ?>
             </div>
         </div>
