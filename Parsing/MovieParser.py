@@ -27,7 +27,7 @@ def output_episodes(dico):
     for key in dico:
         of.write(
         dico[key]["realID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["numero"] + "|" +
-        dico[key]["saison"] + "|" + "|" + dico[key]["SID"]+ "\n")
+        dico[key]["saison"] + "|" + dico[key]["SID"]+ "\n")
 
     of.close()
 
