@@ -124,20 +124,22 @@ $note_fomat = '%g/10';
 
 ?>
 <header>
-    <div class="container">
-        <div class="intro-text" id = "intro">
+    <div id="background">
+        <div class="container">
+            <div class="intro-text" id="intro">
 
-            <div class="col-lg-4" style="display: block; margin: auto">
-                <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
+                <div class="col-lg-4" style="display: block; margin: auto">
+                    <img src="https://pleper.com/html/assets/img/no-image-found.jpg">
+                </div>
+
+                <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+                <div class=infos><?php extractGenres($genres) ?></div>
+                <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             </div>
-
-            <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
-            <div class=infos><?php extractGenres($genres) ?></div>
-            <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
         </div>
+
+
     </div>
-
-
 </header>
 
 <section id="Acteurs" class="bg-light-gray">

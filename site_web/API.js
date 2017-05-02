@@ -6,9 +6,12 @@ function getImagesFromAPI(title, date) {
         const backDropPath = "https://image.tmdb.org/t/p/w1000" + data_ok[0]["backdrop_path"];
 
         $('img').attr('src', posterPath);
-        $('header').css("background-image", backDropPath);
-        console.log(posterPath)
-        console.log(backDropPath)
+
+        const path = 'url(' + backDropPath + ')';
+        $("#background").css("background-image", path);
+        $("#background").css("opacity", 1);
+        $('header').css("opacity", 1);
+
 
     }, function (error) {
     })

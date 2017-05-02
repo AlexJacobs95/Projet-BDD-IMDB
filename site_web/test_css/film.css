@@ -2,9 +2,9 @@
     display: none;
 }
 
-header {
+#background {
 
-    background: none;
+    background-image: none;
     color: white;
 }
 
