@@ -284,26 +284,18 @@ $note_fomat = '%g/10';
 
 </script>
 
+<script src="themoviedb.js"></script>
+<script src="API.js"></script>
+
 <script>
-    function apiCall(titre, date) {
-
-        $.getJSON("http://www.omdbapi.com/?t=" + encodeURI(titre) + "&y=" + date).then(function (response) {
-            var image = response.Poster;
-            console.log(image);
-            if (image !== "N/A") {
-                $('img').attr('src', image);
-            }
-        })
-
-    }
 
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
-        apiCall(titre, date);
+        getImagesFromAPI(titre, date)
     });
 
-
 </script>
+
 
 </html>
