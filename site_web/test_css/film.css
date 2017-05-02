@@ -150,12 +150,12 @@ a:active {
     color: black !important;
 }
 
-.nav-justified > li > a {
-    height: 56px;
-    display: block;
-    text-align: center;
+.episode {
+    cursor: pointer;
+    color: black;
 
 }
+
 
 
 
