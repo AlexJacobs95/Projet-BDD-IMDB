@@ -123,18 +123,23 @@ $titre_format = '%s (%d)';
 $note_fomat = '%g/10';
 
 ?>
-<header>
-    <div class="container">
-        <div class="intro-text" id="intro">
-                <div class="col-lg-4" style="display: block; margin: auto">
-                    <img src="">
-                </div>
+<header style>
+    <div class="top">
+        <div class="container">
 
-                <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
-                <div class=infos><?php extractGenres($genres) ?></div>
-                <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+            <div class="intro-text" id="intro">
+                <div id = "image"></div>
+
+                <div class="col-lg-4" style="display: block; margin: auto">
+                        <img src="">
+                    </div>
+
+                    <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+                    <div class=infos><?php extractGenres($genres) ?></div>
+                    <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             </div>
         </div>
+
 </header>
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">

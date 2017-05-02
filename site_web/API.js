@@ -8,9 +8,8 @@ function getImagesMovie(title, date) {
 
         $('img').attr('src', posterPath);
 
-        const path = 'url(' + backDropPath + ')';
+        const path = 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%), url(' + backDropPath + ')';
         $("header").css("background-image", path);
-        $("header").css("opacity", 0.9);
 
 
     }, function (error) {
@@ -27,9 +26,8 @@ function getImagesTvShow(title, date) {
 
         $('img').attr('src', posterPath);
 
-        const path = 'url(' + backDropPath + ')';
+        const path = 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%), url(' + backDropPath + ')';
         $("header").css("background-image", path);
-        $("header").css("opacity", 0.9);
 
 
     }, function (error) {

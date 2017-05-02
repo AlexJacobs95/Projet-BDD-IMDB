@@ -27,6 +27,7 @@ if (isset($_GET['run_function_log_out'])) {
 <![endif]-->
 
 <!-- Navigation -->
+
 <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->

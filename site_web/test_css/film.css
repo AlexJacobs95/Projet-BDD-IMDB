@@ -2,8 +2,9 @@
     display: none;
 }
 
-header {
-    background-size: 100%;
+
+div.top {
+    filter: opacity(92%);
 }
 
 header .intro-text .intro-lead-in {
