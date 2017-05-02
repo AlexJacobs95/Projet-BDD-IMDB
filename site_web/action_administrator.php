@@ -192,6 +192,8 @@
             }
             $requete = "INSERT INTO Directeur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
             $database->query($requete);
+            global $query_succes_add;
+            $_SESSION["query_succes_add_director"] = array($query_succes_add);
 
         }
         header("Location: ./administrator_action_page.php#op_on_dir");
@@ -199,6 +201,9 @@
 
     function addActor($data){
 	    global $database;
+        $prenom = $data['firstName'];
+        $nom = $data['secondName'];
+        $genre = $data['gender'];
 	    $res_person = checkInDb($data, "Personne");
 	    $res_actor = checkInDb($data, $data["typeofperson"]);
         if($res_actor){
@@ -206,14 +211,26 @@
         }
         else{
             if(!$res_person){
-
+                $result = checkSameData($data);
+                $requete = "INSERT INTO Personne(Prenom, Nom, Numero, Genre) VALUES ('$prenom', '$nom','$result', '$genre')";
+                $database->query($requete);
             }
+            else{
+                $result = getNumero($data);
+            }
+            $requete = "INSERT INTO Acteur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
+            $database->query($requete);
+            global $query_succes_add;
+            $_SESSION["query_succes_add_actor"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_actor");
     }
 
     function addWriter($data){
         global $database;
+        $prenom = $data['firstName'];
+        $nom = $data['secondName'];
+        $genre = $data['gender'];
         $res_person = checkInDb($data, "Personne");
         $res_writer = checkInDb($data, $data["typeofperson"]);
         if($res_writer){
@@ -221,10 +238,17 @@
         }
         else{
             if(!$res_person){
-                pass;
-                //add in table personne
+                $result = checkSameData($data);
+                $requete = "INSERT INTO Personne(Prenom, Nom, Numero, Genre) VALUES ('$prenom', '$nom','$result', '$genre')";
+                $database->query($requete);
             }
-            //add in table auteur
+            else{
+                $result = getNumero($data);
+            }
+            $requete = "INSERT INTO Auteur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
+            $database->query($requete);
+            global $query_succes_add;
+            $_SESSION["query_succes_add_writer"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_writer");
     }

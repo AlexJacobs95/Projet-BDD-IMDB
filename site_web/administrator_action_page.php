@@ -425,12 +425,12 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Auteur</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_writer'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_writer'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_writer"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_add_writer'])): ?>
@@ -464,12 +464,12 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Acteur/Actrice</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_actor'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_actor'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_actor"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_add_actor'])): ?>
@@ -503,12 +503,12 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Genre</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_genre'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_genre'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_genre"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_add_genre'])): ?>
@@ -535,12 +535,12 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Pays</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_country'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_country'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_country"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_add_country'])): ?>
@@ -567,12 +567,12 @@ Page de recherche avancé de site web.
                     <h2 class="section-heading">Opérations sur Langues</h2>
                     <h4>Ajout</h4>
                 </div>    
-                <?php if(isset($_SESSION['query_succes_add'])): ?>
+                <?php if(isset($_SESSION['query_succes_add_language'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add'] as $succes): ?>
+                    <?php foreach($_SESSION['query_succes_add_language'] as $succes): ?>
                         <p><?php echo $succes ?></p>
                     <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add"] = null;  ?>
+                    <?php $_SESSION["query_succes_add_language"] = null;  ?>
                 </div>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error_add_language'])): ?>
