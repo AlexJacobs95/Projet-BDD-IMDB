@@ -2,10 +2,8 @@
     display: none;
 }
 
-#background {
-
-    background-image: none;
-    color: white;
+header {
+    background-size: 100%;
 }
 
 header .intro-text .intro-lead-in {
@@ -14,6 +12,7 @@ header .intro-text .intro-lead-in {
     font-size: 22px;
     line-height: 22px;
     margin-bottom: 10px;
+
 }
 
 header .intro-text .intro-heading {
