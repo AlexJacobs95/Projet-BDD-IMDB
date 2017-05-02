@@ -35,6 +35,26 @@ Page d'acceuill de site web.
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
+    <!-- jQuery -->
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="test_js/agency.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("hi");
+            $("#intro").fadeIn(5000);
+        });
+
+    </script>
 
 </head>
 
@@ -47,12 +67,16 @@ include 'menubar.php';
 
 ?>
 
+
+
+
 <!-- Header -->
-<header>
+<header >
+
     <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in">Bienvenue sur IMDB!</div>
-            <div class="intro-heading">Recherchez un film, une série, un acteur et plus</div>
+        <div class="intro-text" id="intro" style="display: none">
+            <div class="intro-lead-in" id="bienvenue"  >Bienvenue sur IMDB!</div>
+            <div class="intro-heading" id ="sous-titre">Recherchez un film, une série, un acteur et plus</div>
 
             <!-- search bar -->
             <form action="search_results.php" method="post" style="display: inline-block">
@@ -135,17 +159,6 @@ include 'menubar.php';
 </section>
 
 </body>
-<!-- jQuery -->
 
-<script src="vendor/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
-
-<!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
 
 </html>
