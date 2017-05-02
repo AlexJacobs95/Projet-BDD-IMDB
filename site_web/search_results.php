@@ -122,14 +122,15 @@ include 'menubar.php';
         <div class="row">
 
             <?php
-            if (isset($_POST['requete'])){
-            if ($_POST['requete'] == "Requete 1"){
-            }
-            if ($_POST['requete'] == "Requete 2"){
-            }
-            if ($_POST['requete'] == "Requete 3"){
-            }
-            if ($_POST['requete'] == "Requete 5"){
+            if (isset($_POST['requete'])) {
+                if ($_POST['requete'] == "Requete 1") {
+                }
+                if ($_POST['requete'] == "Requete 2") {
+                }
+                if ($_POST['requete'] == "Requete 3") {
+                }
+                if ($_POST['requete'] == "Requete 5") {
+                }
             }
             ?>
             <div class="col-lg-12 text-center">
