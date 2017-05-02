@@ -147,7 +147,9 @@ a:active {
 
 .nav-pills a{
 
-    color: black !important;
+    color: #a3a3a3;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
 .episode {
