@@ -42,12 +42,9 @@ Page d'acceuill de site web.
 
 <!-- Navigation -->
 <?php
-    if(isset($_SESSION['logged'])){
-        include 'menubar_admin.php';
-    }
-    else{
-        include 'menubar.php';
-    }
+
+include 'menubar.php';
+
 ?>
 
 <!-- Header -->

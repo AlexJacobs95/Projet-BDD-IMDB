@@ -113,11 +113,9 @@ if (!$database) {
 
 <!-- Navigation -->
 <?php
-if (isset($_SESSION['logged'])) {
-    include 'menubar_admin.php';
-} else {
-    include 'menubar.php';
-}
+
+include 'menubar.php';
+
 ?>
 
 <!-- Header -->
@@ -175,6 +173,19 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 
 </header>
+
+<section id="Tabs">
+    <div class="container">
+        <div class="col-lg-12 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li><a data-toggle=\"pill\">Hey</a></li>
+                <li><a data-toggle=\"pill\">Hoy</a></li>
+                <li><a data-toggle=\"pill\">Hu</a></li>
+                <li><a data-toggle=\"pill\">Har</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 <section id="Details" class="bg-light-gray">
     <div class="container">

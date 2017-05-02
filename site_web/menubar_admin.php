@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     <form action="search_results.php" method="post">
-                        <input type="text" name="search" placeholder="Recherche">
+                        <input type="text" name="search" placeholder="Recherche...">
                     </form>
                 </li>
             </ul>

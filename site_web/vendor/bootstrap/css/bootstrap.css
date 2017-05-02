@@ -4081,7 +4081,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 15px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -4210,10 +4210,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-justified > li {
   float: none;
 }
-.nav-justified > li > a {
-  margin-bottom: 5px;
-  text-align: center;
-}
+
 .nav-justified > .dropdown .dropdown-menu {
   top: auto;
   left: auto;

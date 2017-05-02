@@ -50,11 +50,7 @@ include "type.php";
 
 <!-- Navigation -->
 <?php
-if (isset($_SESSION['logged'])) {
-    include 'menubar_admin.php';
-} else {
-    include 'menubar.php';
-}
+include 'menubar.php';
 ?>
 
 <!-- Header -->
@@ -96,7 +92,7 @@ if (isset($_SESSION['logged'])) {
                         if (isFilm($row['ID'])) {
                             echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
                         } elseif (isEpisode($row['ID'])) {
-                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
+                            echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
                         } else {
                             echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
                         }
