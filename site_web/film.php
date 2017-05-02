@@ -279,7 +279,7 @@ $note_fomat = '%g/10';
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
-        getImagesFromAPI(titre, date)
+        getImagesMovie(titre, date)
     });
 
 </script>

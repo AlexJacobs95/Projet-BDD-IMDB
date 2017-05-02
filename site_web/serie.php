@@ -323,7 +323,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
-        getImagesFromAPI(titre, date)
+        getImagesTvShow(titre, date)
     });
 
 </script>
