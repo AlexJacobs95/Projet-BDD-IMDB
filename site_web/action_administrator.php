@@ -163,7 +163,7 @@
         $prenom = $data['firstName'];
         $nom = $data['secondName'];
         $genre = $data['gender'];
-        $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
+        $requete = "SELECT * From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
         $output = $database->query($requete);
         $row = $output->fetch_assoc();
         $num = $row['Numero'];
