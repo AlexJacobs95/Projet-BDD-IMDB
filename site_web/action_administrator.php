@@ -163,7 +163,7 @@
         $prenom = $data['firstName'];
         $nom = $data['secondName'];
         $genre = $data['gender'];
-        $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
+        $requete = "SELECT * From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
         $output = $database->query($requete);
         $row = $output->fetch_assoc();
         $num = $row['Numero'];
@@ -193,7 +193,7 @@
             $requete = "INSERT INTO Directeur(Prenom, Nom, Numero) VALUES ('$prenom', '$nom','$result')";
             $database->query($requete);
             global $query_succes_add;
-            $_SESSION["query_succes_add_director"] = array($query_succes_add);
+            $_SESSION["query_succes_add_dir"] = array($query_succes_add);
 
         }
         header("Location: ./administrator_action_page.php#op_on_dir");
