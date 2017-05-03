@@ -11,25 +11,36 @@ include "type.php";
 $search_content = $_POST["search"];
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
+
+$start_time = time();
+
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 } else {
-$requete = "SELECT ID
+
+$content = strtolower($search_content);
+$requete = "SELECT *
             FROM Oeuvre
-            WHERE Titre = '$search_content'";
+            WHERE  LOWER(Titre) LIKE '%$content%'
+            ORDER BY (CASE WHEN LOWER(Titre) = '$content' THEN 1 WHEN Titre LIKE '$content%' THEN 2 ELSE 3 END) LIMIT 100";
+
 
 $result_oeuvres = $database->query($requete);
-
+$nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 
 $requete = "SELECT Prenom, Nom, Numero 
             FROM Personne
-            WHERE CONCAT( Prenom,  ' ', Nom ) LIKE  '%$search_content%'";
-
+            WHERE CONCAT( LOWER(Prenom),  ' ', LOWER(Nom) ) LIKE  '%$content%' LIMIT 100";
 
 $result_personnes = $database->query($requete);
+$nb_res_personnes = mysqli_num_rows($result_personnes);
+
+
+$duration = time() - $start_time;
+
 ?>
 
 
@@ -77,7 +88,13 @@ include 'menubar.php';
 
 <!-- Header -->
 <header>
-    Résultats
+    Résultats (<?php
+    echo $nb_res_oeuvre;
+    echo ' Oeuvres | ';
+    echo $nb_res_personnes;
+    echo ' Personnes) -';
+    echo $duration
+    ?> s
 
 </header>
 
