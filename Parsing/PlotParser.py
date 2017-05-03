@@ -21,7 +21,7 @@ def is_new_mv(line):
 
 
 def get_text(line):
-    return line.strip().split(":")[1].strip()
+    return line[4:].strip()
 
 
 def is_plot(line):

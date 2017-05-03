@@ -48,15 +48,17 @@ def get_name(line):
 
 def get_name_date_film(line):
     date = line.strip().split("\t")[-1]
+    id = line.strip().split("\t")[0].strip()
     name = ""
-
-    for char in line:
-        if char == '(':
-            name = name[:name.__len__() - 1]
+    i = 0
+    for char in id:
+        if char == '(' and id[i + 5] in ('/',')'):
             break
-        name += char
+        name+=char
+        i+=1
 
-    return name, date
+
+    return name.strip(), date
 
 
 def get_name_date_serie(line):
@@ -266,7 +268,7 @@ def main():
 
                     else:
                         # Si c'est juste un film
-                        data = get_name_date_serie(line)
+                        data = get_name_date_film(line)
                         current_film = {"realID": getRealID(line),
                                         "titre": data[0],
                                         "dateSortie": data[1],
@@ -283,7 +285,6 @@ def main():
     output_films(films)
     output_series(series)
     output_episodes(episodes)
-
 
 if __name__ == '__main__':
     main()
