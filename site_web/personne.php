@@ -130,7 +130,7 @@ include 'menubar.php';
         <div class="intro-text" id="intro">
 
             <div class="col-lg-4" style="display: block; margin: auto">
-                <img src="">
+                <img src="https://www.velvetjobs.com/assets/noavatar-profile.jpg">
             </div>
 
             <div class="intro-heading">

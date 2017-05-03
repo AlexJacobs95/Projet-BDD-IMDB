@@ -160,7 +160,8 @@ a:active {
 }
 
 img {
-    height: 600px;
+    height: 300px;
+    width: 200px;
     display: block;
     margin: 0 auto;
     padding-bottom: 100px;

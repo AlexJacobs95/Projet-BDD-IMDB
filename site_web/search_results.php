@@ -12,7 +12,7 @@ $search_content = $_POST["search"];
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 
-$start_time = time();
+$start_time = round(microtime(true) * 1000);;
 
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -39,7 +39,7 @@ $result_personnes = $database->query($requete);
 $nb_res_personnes = mysqli_num_rows($result_personnes);
 
 
-$duration = time() - $start_time;
+$duration = (round(microtime(true) * 1000) - $start_time) / 1000;
 
 ?>
 
@@ -92,7 +92,7 @@ include 'menubar.php';
     echo $nb_res_oeuvre;
     echo ' Oeuvres | ';
     echo $nb_res_personnes;
-    echo ' Personnes) -';
+    echo ' Personnes) ';
     echo $duration
     ?> s
 

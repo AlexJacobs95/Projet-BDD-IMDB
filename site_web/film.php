@@ -131,7 +131,7 @@ $note_fomat = '%g/10';
                 <div id = "image"></div>
 
                 <div class="col-lg-4" style="display: block; margin: auto">
-                        <img src="">
+                    <img src="http://www.novelupdates.com/img/noimagefound.jpg">
                     </div>
 
                     <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
