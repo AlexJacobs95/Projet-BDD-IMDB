@@ -33,4 +33,6 @@ LOAD DATA LOCAL INFILE '../SQL_data_files/ecritPar.txt' INTO TABLE EcritPar FIEL
 LOAD DATA LOCAL INFILE '../SQL_data_files/dirigePar.txt' INTO TABLE DirigePar FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Role...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/roles.txt' INTO TABLE Role FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+\! echo "Inserting data in Plots...\n";
+LOAD DATA LOCAL INFILE '../SQL_data_files/plots_ok.txt' INTO TABLE Plots FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserttion done.\n";

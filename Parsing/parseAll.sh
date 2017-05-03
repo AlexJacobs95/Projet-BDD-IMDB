@@ -33,4 +33,8 @@ echo "Parsing Ratings..."
 python RatingParser.py
 echo "Parsing ratings done."
 
+echo "Parsing Plots..."
+python PlotParser.py
+echo "Parsing plots done."
+
 echo "All parsing done."
