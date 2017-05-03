@@ -161,7 +161,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     <div class="container">
         <div class="intro-text" id = "intro" style="display: none">
 
-            <div class="col-lg-4" style="display: block; margin: auto">
+            <div class="col-lg-4" style="display: block; margin: auto" >
                 <img src="">
             </div>
 
