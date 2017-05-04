@@ -8,11 +8,22 @@ Page d'acceuill de site web.
 session_start();
 include "type.php";
 
+function build_search($content)
+{
+    $search = "";
+    $terms = explode(" ", $content);
+    foreach ($terms as $word) {
+        $search .= '+' . $word . '* ';
+    }
+
+    return $search;
+}
+
 $search_content = $_POST["search"];
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 
-$start_time = round(microtime(true) * 1000);;
+$start_time = round(microtime(true) * 1000);
 
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -21,13 +32,13 @@ if (!$database) {
     exit;
 } else {
 
+$search = build_search($search_content);
 
 $requete = "SELECT *
             FROM Oeuvre
             WHERE MATCH (Titre)
-            AGAINST ('$search_content' IN BOOLEAN MODE)";
-
-
+            AGAINST ('$search' IN BOOLEAN MODE)
+            ORDER BY MATCH(Titre) against('$search' IN BOOLEAN MODE)";
 
 
 $result_oeuvres = $database->query($requete);
@@ -36,7 +47,7 @@ $nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 $requete = "SELECT *
              FROM Personne
              WHERE MATCH (Prenom, Nom)
-             AGAINST ('$search_content' IN BOOLEAN MODE)";
+             AGAINST ('$search' IN BOOLEAN MODE)";
 
 $result_personnes = $database->query($requete);
 $nb_res_personnes = mysqli_num_rows($result_personnes);
