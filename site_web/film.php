@@ -65,6 +65,13 @@ if (!$database) {
 
     $genres = $database->query($querry);
 
+    //fetch plot
+    $querry = "SELECT Plot
+               FROM Plots
+               WHERE ID = '$id'";
+
+    $plot_res = $database->query($querry);
+
 
 
 }
@@ -116,12 +123,13 @@ include 'menubar.php';
 <!-- Header -->
 <?php
 $movie_infos = mysqli_fetch_array($movie);
+$plot_info = mysqli_fetch_array($plot_res);
 $tire = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
 $note_fomat = '%g/10';
-
+$plot = $plot_info['Plot']
 ?>
 <header style>
     <div class="top">
@@ -132,11 +140,10 @@ $note_fomat = '%g/10';
 
                 <div class="col-lg-4" style="display: block; margin: auto">
                     <img src="http://www.novelupdates.com/img/noimagefound.jpg">
-                    </div>
-
-                    <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
-                    <div class=infos><?php extractGenres($genres) ?></div>
-                    <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+                </div>
+                <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+                <div class=infos><?php extractGenres($genres) ?></div>
+                <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             </div>
         </div>
 
