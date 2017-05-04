@@ -1,3 +1,3 @@
 \! echo "Indexing...\n";
-CREATE index TitreOeuvre on Oeuvre(Titre);
-CREATE index NomPersonne on Personne(Nom);
+CREATE fulltext index titreIndex on Oeuvre(Titre);
+CREATE fulltext index nomIndex on Personne(Prenom,Nom);
