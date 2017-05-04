@@ -21,19 +21,22 @@ if (!$database) {
     exit;
 } else {
 
-$content = strtolower($search_content);
+
 $requete = "SELECT *
             FROM Oeuvre
-            WHERE  LOWER(Titre) LIKE '%$content%'
-            ORDER BY (CASE WHEN LOWER(Titre) = '$content' THEN 1 WHEN Titre LIKE '$content%' THEN 2 ELSE 3 END) LIMIT 100";
+            WHERE MATCH (Titre)
+            AGAINST ('$search_content' IN BOOLEAN MODE)";
+
+
 
 
 $result_oeuvres = $database->query($requete);
 $nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 
-$requete = "SELECT Prenom, Nom, Numero 
-            FROM Personne
-            WHERE CONCAT( LOWER(Prenom),  ' ', LOWER(Nom) ) LIKE  '%$content%' LIMIT 100";
+$requete = "SELECT *
+             FROM Personne
+             WHERE MATCH (Prenom, Nom)
+             AGAINST ('$search_content' IN BOOLEAN MODE)";
 
 $result_personnes = $database->query($requete);
 $nb_res_personnes = mysqli_num_rows($result_personnes);
@@ -173,7 +176,8 @@ include 'menubar.php';
                         $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
                         echo "<tr>";
                         echo "<td >";
-                        echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
+                        echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom;
+                        if ($num !== 'NA') echo ' (' . $num . ')' . '</a>';
                         echo "</td>";
                         echo "</tr>";
                     }
