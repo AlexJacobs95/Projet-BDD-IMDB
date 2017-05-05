@@ -151,7 +151,7 @@ $plot = $plot_info['Plot']
 </header>
 
 
-<section id="Resume"
+<section id="Resume">
 ">
 <div class="container">
     <div class="row">
