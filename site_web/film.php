@@ -150,9 +150,17 @@ $plot = $plot_info['Plot']
 
 </header>
 
+<section id="Trailers">
+    <div class="container">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Bande-Annonce VO</h2>
+        </div>
+        <iframe src="http://www.novelupdates.com/img/noimagefound.jpg" align="middle">
+        </iframe>
+    </div>
+</section>
 
 <section id="Resume">
-">
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
@@ -220,7 +228,6 @@ $plot = $plot_info['Plot']
         ?>
     </div>
 </section>
-
 
 <section id="Writers" class="bg-light-gray">
     <div class="container">
@@ -298,7 +305,8 @@ $plot = $plot_info['Plot']
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
-        getImagesMovie(titre, date)
+        getImagesMovie(titre, date);
+        getTrailersMovie(titre, date)
     });
 
 </script>

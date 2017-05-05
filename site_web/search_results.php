@@ -34,11 +34,15 @@ if (!$database) {
 
     $search = build_search($search_content);
 
+
     $requete = "SELECT *
-            FROM Oeuvre
-            WHERE MATCH (Titre)
-            AGAINST ('$search' IN BOOLEAN MODE)
-            ORDER BY MATCH(Titre) against('$search' IN BOOLEAN MODE)";
+                FROM Oeuvre
+                WHERE MATCH (Titre)
+                AGAINST ('$search' IN BOOLEAN MODE)
+                ORDER BY 
+                MATCH(Titre) against('$search' IN BOOLEAN MODE)";
+
+    
     $result_oeuvres = $database->query($requete);
     $nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 
