@@ -149,6 +149,20 @@ $plot = $plot_info['Plot']
         </div>
 
 </header>
+
+
+<section id="Resume"
+">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Résumé</h2>
+            <h3> <?php echo $plot ?> </h3>
+        </div>
+    </div>
+</div>
+</section>
+
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">
         <div class="row">
