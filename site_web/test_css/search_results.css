@@ -69,9 +69,11 @@ td:first-child {
     padding-right: 0;
 }
 
-#more_oeuvres_button, #more_personnes_button {
+#more_personnes_button, #more_oeuvres_button, #back_personnes_button, #back_oeuvres_button{
     margin-top: 30px;
     margin-bottom: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 
@@ -81,6 +83,17 @@ section {
     padding-right: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
+}
+
+#buttons_div_personnes, #buttons_div_oeuvres {
+    display:inline-block;
+    padding-bottom: 20px;
+}
+
+#back_oeuvre_button {
+    margin-top: 30px;
+    margin-bottom: 50px;
+
 }
 
 

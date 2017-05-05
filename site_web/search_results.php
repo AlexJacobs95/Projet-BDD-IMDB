@@ -32,7 +32,7 @@ if (!$database) {
     exit;
 } else {
 
-$search = build_search($search_content);
+    $search = build_search($search_content);
 
     $requete = "SELECT *
             FROM Oeuvre
@@ -172,6 +172,8 @@ while ($row = mysqli_fetch_array($result_personnes)) {
     var MAX_RESULT_NUMBER = 10;
     var current_result_p_counter = 0;
     var current_result_o_counter = 0;
+    var prec_pers_added = false;
+    var prec_oeuvre_added = false;
 
 
     function createSection(titre) {
@@ -199,9 +201,10 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
 
     $(document).ready(function () {
+
         var oeuvres_array = <?php echo json_encode(array_values($oeuvres_array)); ?>;
         var personnes_array = <?php echo json_encode(array_values($personne_array)); ?>;
-        console.log(oeuvres_array.length)
+
         if (oeuvres_array.length > 0) {
             createSection("Oeuvres");
             table = document.createElement("table");
@@ -216,7 +219,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                 var markup;
                 if (oeuvres_array[i]["type"] == "film") {
                     markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
-                } else if (oeuvres_array[i]["type"] == "episode"){
+                } else if (oeuvres_array[i]["type"] == "episode") {
                     markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
                 } else if (oeuvres_array[i]["type"] == "serie") {
                     markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
@@ -229,17 +232,21 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             }
 
             if (current_result_o_counter < oeuvres_array.length) {
+                buttons_div = document.createElement("div");
+                buttons_div.setAttribute("id", "buttons_div_oeuvres");
                 button = document.createElement("button");
                 button.setAttribute("id", "more_oeuvres_button");
                 button.setAttribute("class", "btn btn-xl");
                 button.innerHTML = "Suivants";
-                document.getElementById("table_container_Oeuvres").appendChild(button);
+                buttons_div.appendChild(button);
+                document.getElementById("table_container_Oeuvres").appendChild(buttons_div);
 
 
             }
 
-        } if (personnes_array.length > 0) {
-            createSection("Personnes")
+        }
+        if (personnes_array.length > 0) {
+            createSection("Personnes");
             table = document.createElement("table");
             table.setAttribute("id", "personnes_table");
 
@@ -248,7 +255,6 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
             for (var i in personnes_array) {
                 var data = personnes_array[i];
-                console.log(data)
                 if (data["numero"] != "NA") {
                     var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + ' (' + data["numero"] + ')' + "</a>" + "</td></tr>";
                 } else {
@@ -261,11 +267,14 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             }
 
             if (current_result_p_counter < personnes_array.length) {
+                buttons_div = document.createElement("div");
+                buttons_div.setAttribute("id", "buttons_div_personnes");
                 button = document.createElement("button");
                 button.setAttribute("id", "more_personnes_button");
                 button.setAttribute("class", "btn btn-xl");
                 button.innerHTML = "Suivants";
-                document.getElementById("table_container_Personnes").appendChild(button);
+                buttons_div.appendChild(button);
+                document.getElementById("table_container_Personnes").appendChild(buttons_div);
 
 
             }
@@ -273,10 +282,9 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
         }
 
-        $("#more_oeuvres_button").click(function() {
+        $("#more_oeuvres_button").click(function () {
 
             $("#oeuvres_table").find("tr").remove();
-
 
             if (current_result_o_counter + MAX_RESULT_NUMBER > oeuvres_array.length) {
                 num = oeuvres_array.length - current_result_o_counter;
@@ -291,30 +299,71 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                 var data = slice[i];
                 var markup;
                 if (oeuvres_array[i]["type"] == "film") {
-                    markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
-                } else if (oeuvres_array[i]["type"] == "episode"){
-                    markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
+                    markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
+                } else if (oeuvres_array[i]["type"] == "episode") {
+                    markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
                 } else if (oeuvres_array[i]["type"] == "serie") {
-                    markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
+                    markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
 
                 }
 
                 $('#oeuvres_table').find('tbody').append(markup);
                 current_result_o_counter++;
-
             }
 
             if (current_result_o_counter == oeuvres_array.length) {
                 $("#more_oeuvres_button").remove();
-            } else {
-                console.log("nope")
+            }
+
+            if (!prec_oeuvre_added) {
+                prec_oeuvre_added = true;
+                button = document.createElement("button");
+                button.setAttribute("id", "back_oeuvre_button");
+                button.setAttribute("class", "btn btn-xl");
+                button.innerHTML = "Précédents";
+                div = document.getElementById("buttons_div_oeuvres");
+                div.insertBefore(button, div.firstChild);
+
+                $("#back_oeuvre_button").bind("click", function () {
+
+                    $("#oeuvres_table").find("tr").remove();
+                    var from = current_result_o_counter - 2 * MAX_RESULT_NUMBER;
+                    var to = current_result_o_counter - MAX_RESULT_NUMBER;
+
+                    var slice = oeuvres_array.slice(current_result_o_counter - 2 * MAX_RESULT_NUMBER, current_result_o_counter - MAX_RESULT_NUMBER);
+                    console.log(slice);
+
+                    for (var i in slice) {
+                        var data = slice[i];
+                        var markup;
+                        if (oeuvres_array[i]["type"] == "film") {
+                            markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
+                        } else if (oeuvres_array[i]["type"] == "episode") {
+                            markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
+                        } else if (oeuvres_array[i]["type"] == "serie") {
+                            markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + data["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
+
+                        }
+
+                        $('#oeuvres_table').find('tbody').append(markup);
+                        current_result_o_counter--;
+                    }
+
+                    if (current_result_o_counter == 10) {
+                        prec_oeuvre_added = false
+                        $("#back_oeuvre_button").remove();
+                    }
+
+                    return false;
+
+                });
             }
 
         });
 
-        $("#more_personnes_button").click(function() {
+        $("#more_personnes_button").click(function () {
 
-            $("#personnes_tables").find("tr").remove();
+            $("#personnes_table").find("tr").remove();
 
 
             if (current_result_p_counter + MAX_RESULT_NUMBER > personnes_array.length) {
@@ -339,12 +388,56 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             }
 
             if (current_result_p_counter == oeuvres_array.length) {
-                $("#more_oeuvres_button").remove();
-            } else {
-                console.log("nope")
+                $("#more_personnes_button").remove();
             }
 
+            if (!prec_pers_added){
+                prec_pers_added = true;
+                button = document.createElement("button");
+                button.setAttribute("id", "back_personnes_button");
+                button.setAttribute("class", "btn btn-xl");
+                button.innerHTML = "Précédents";
+                div = document.getElementById("buttons_div_personnes");
+                div.insertBefore(button, div.firstChild);
+
+                $("#back_personnes_button").bind( "click",function () {
+
+                    $("#personnes_table").find("tr").remove();
+                    var from = current_result_p_counter - 2 * MAX_RESULT_NUMBER;
+                    var to = current_result_p_counter - MAX_RESULT_NUMBER;
+
+                    console.log(from, to);
+                    var slice = personnes_array.slice(current_result_p_counter - 2 * MAX_RESULT_NUMBER, current_result_p_counter - MAX_RESULT_NUMBER);
+
+                    for (var i in slice) {
+                        var data = slice[i];
+                        if (data["numero"] != "NA") {
+                            var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + ' (' + data["numero"] + ')' + "</a>" + "</td></tr>";
+                        } else {
+                            var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + "</a>" + "</td></tr>";
+                        }
+                        $('#personnes_table').find('tbody').append(markup);
+                        current_result_p_counter--;
+
+                    }
+
+                    if (current_result_p_counter == 10) {
+                        prec_pers_added = false
+                        $("#back_personnes_button").remove();
+                    }
+
+                    return false;
+
+                });
+
+            }
+            return false;
+
+
         });
+
+
+
     });
 
 

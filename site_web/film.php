@@ -289,15 +289,6 @@ $plot = $plot_info['Plot']
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        console.log("hi");
-        $("#intro").fadeIn(2000);
-    });
-
-</script>
-
 <script src="themoviedb.js"></script>
 <script src="API.js"></script>
 
@@ -306,6 +297,7 @@ $plot = $plot_info['Plot']
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
+        $("#intro").fadeIn(2000);
         getImagesMovie(titre, date)
     });
 
