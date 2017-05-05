@@ -26,7 +26,10 @@ function getTrailersMovie(title, date) {
         console.log(data);
         const videoPath = "https://www.youtube.com/embed/"+ data_ok[0]["key"]+"?controls=1";
         if (data_ok[0]["key"] != null) {
-            //mettre dans la page
+            $("iframe").attr("src", videoPath);
+            $("iframe").attr("height", '800');
+            $("iframe").attr("width", "500");
+            $("iframe").attr("align", "middle");
         }
     }, function (error) {
     })
