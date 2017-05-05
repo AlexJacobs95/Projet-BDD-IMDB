@@ -162,7 +162,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         <div class="intro-text" id = "intro" style="display: none">
 
             <div class="col-lg-4" style="display: block; margin: auto" >
-                <img src="">
+                <img src="http://www.novelupdates.com/img/noimagefound.jpg">
             </div>
 
             <div class="intro-heading"><?php

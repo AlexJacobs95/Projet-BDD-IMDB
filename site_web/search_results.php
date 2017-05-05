@@ -6,7 +6,6 @@ Page d'acceuill de site web.
 
 <?php
 session_start();
-include "type.php";
 
 function build_search($content)
 {
@@ -22,6 +21,7 @@ function build_search($content)
 $search_content = $_POST["search"];
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
+$search_content = mysqli_real_escape_string($database, $_POST["search"]);
 
 $start_time = round(microtime(true) * 1000);
 
@@ -34,27 +34,25 @@ if (!$database) {
 
 $search = build_search($search_content);
 
-$requete = "SELECT *
+    $requete = "SELECT *
             FROM Oeuvre
             WHERE MATCH (Titre)
             AGAINST ('$search' IN BOOLEAN MODE)
             ORDER BY MATCH(Titre) against('$search' IN BOOLEAN MODE)";
+    $result_oeuvres = $database->query($requete);
+    $nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 
-
-$result_oeuvres = $database->query($requete);
-$nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
-
-$requete = "SELECT *
+    $requete = "SELECT *
              FROM Personne
              WHERE MATCH (Prenom, Nom)
              AGAINST ('$search' IN BOOLEAN MODE)";
 
-$result_personnes = $database->query($requete);
-$nb_res_personnes = mysqli_num_rows($result_personnes);
+    $result_personnes = $database->query($requete);
+    $nb_res_personnes = mysqli_num_rows($result_personnes);
 
 
-$duration = (round(microtime(true) * 1000) - $start_time) / 1000;
-
+    $duration = (round(microtime(true) * 1000) - $start_time) / 1000;
+}
 ?>
 
 
@@ -96,8 +94,46 @@ $duration = (round(microtime(true) * 1000) - $start_time) / 1000;
 <body id="page-top" class="index">
 
 <!-- Navigation -->
+
 <?php
 include 'menubar.php';
+?>
+
+<?php
+
+include "type.php";
+
+$oeuvres_array = array();
+$i = 0;
+while ($row = mysqli_fetch_array($result_oeuvres)) {
+    $oeuvres_array[$i] = [
+        "id" => utf8_encode($row['ID']),
+        "titre" => utf8_encode($row['Titre']),
+        "type" => getOeuvreType($row['ID']),
+        "date" => utf8_encode($row['AnneeSortie']),
+        "url" => urlencode($row['ID'])
+    ];
+    $i = $i + 1;
+
+
+}
+
+$personne_array = array();
+$i = 0;
+while ($row = mysqli_fetch_array($result_personnes)) {
+    $fn = utf8_encode($row['Prenom']);
+    $ln = utf8_encode($row['Nom']);
+    $num = utf8_encode($row['Numero']);
+    $personne_array[$i] = [
+        "nom" => $ln,
+        "prenom" => $fn,
+        "numero" => $num,
+        "url" => urlencode($fn . ';' . $ln . ';' . $num)
+    ];
+    $i = $i + 1;
+
+}
+
 ?>
 
 <!-- Header -->
@@ -112,95 +148,6 @@ include 'menubar.php';
 
 </header>
 
-<section id="Oeuvres" class="blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="titre-section">Oeuvres</h2>
-                <?php
-
-                if (isset($_POST['requete'])) {
-                    if ($_POST['requete'] == "Requete 4") {
-                        $requete = "select distinct e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID";
-                    }
-                    if ($_POST['requete'] == "Requete 6") {
-                    }
-                }
-                else {
-                    echo "<table>
-                    <tr>
-                    <th>ID</th>
-                    </tr>";
-
-                    while ($row = mysqli_fetch_array($result_oeuvres)) {
-                        echo "<tr>";
-                        echo "<td>";
-
-                        if (isFilm($row['ID'])) {
-                            echo '<a href="film.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        } elseif (isEpisode($row['ID'])) {
-                            echo '<a href="episode.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        } else {
-                            echo '<a href="serie.php?id=' . urlencode($row['ID']) . '">' . $row['ID'] . '</a>';
-                        }
-
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                }
-                }
-                ?>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section id="Personnes" class="blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="titre-section">Personnes</h2>
-                <?php
-                if (isset($_POST['requete'])) {
-                    if ($_POST['requete'] == "Requete 1") {
-                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Acteur a where 5 = (Select count(*) From Oeuvre o where o.AnneeSortie >='2003' and o.AnneeSortie <= '2007' and a.OID = o.ID)";
-                    }
-                    if ($_POST['requete'] == "Requete 2") {
-                        $requete = "Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = o.ID having by count(a.OID) >= 2";
-                    }
-                    if ($_POST['requete'] == "Requete 3") {
-                    }
-                    if ($_POST['requete'] == "Requete 5") {
-                    }
-                } else {
-                    echo "<table>
-                    <tr>
-                    <th>ID</th>
-                    </tr>";
-
-                    while ($row = mysqli_fetch_array($result_personnes)) {
-                        $fn = $row['Prenom'];
-                        $ln = $row['Nom'];
-                        $num = $row['Numero'];
-                        $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
-                        echo "<tr>";
-                        echo "<td >";
-                        echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom;
-                        if ($num !== 'NA') echo ' (' . $num . ')' . '</a>';
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                }
-
-                ?>
-            </div>
-        </div>
-
-    </div>
-</section>
 
 </body>
 <!-- jQuery -->
@@ -219,3 +166,187 @@ include 'menubar.php';
 <script src="test_js/agency.min.js"></script>
 
 </html>
+
+<script type="text/javascript">
+
+    var MAX_RESULT_NUMBER = 10;
+    var current_result_p_counter = 0;
+    var current_result_o_counter = 0;
+
+
+    function createSection(titre) {
+        var oeuvre_section = document.createElement("SECTION");
+        oeuvre_section.setAttribute('id', titre);
+        oeuvre_section.setAttribute('class', "blue");
+
+        div_container = document.createElement('div');
+        div_row = document.createElement('div');
+        div_text = document.createElement('div');
+        div_text.setAttribute("class", "col-lg-12 text-center");
+        div_text.setAttribute("id", "table_container_" + titre);
+
+        h2 = document.createElement('h2');
+        h2.setAttribute("class", "titre-section");
+        h2.innerHTML = titre;
+
+        div_text.appendChild(h2);
+        div_row.appendChild(div_text);
+        div_container.appendChild(div_row);
+        oeuvre_section.appendChild(div_container);
+        document.body.appendChild(oeuvre_section);
+
+    }
+
+
+    $(document).ready(function () {
+        var oeuvres_array = <?php echo json_encode(array_values($oeuvres_array)); ?>;
+        var personnes_array = <?php echo json_encode(array_values($personne_array)); ?>;
+        console.log(oeuvres_array.length)
+        if (oeuvres_array.length > 0) {
+            createSection("Oeuvres");
+            table = document.createElement("table");
+            table.setAttribute("id", "oeuvres_table");
+
+            document.getElementById("table_container_Oeuvres").appendChild(table);
+            $('#oeuvres_table').append("<tbody>...</tbody>");
+
+
+            for (var i in oeuvres_array) {
+                var data = oeuvres_array[i];
+                var markup;
+                if (oeuvres_array[i]["type"] == "film") {
+                    markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
+                } else if (oeuvres_array[i]["type"] == "episode"){
+                    markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
+                } else if (oeuvres_array[i]["type"] == "serie") {
+                    markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
+
+                }
+
+                $('#oeuvres_table').find('tbody').append(markup);
+                current_result_o_counter++;
+                if (current_result_o_counter % MAX_RESULT_NUMBER == 0) break;
+            }
+
+            if (current_result_o_counter < oeuvres_array.length) {
+                button = document.createElement("button");
+                button.setAttribute("id", "more_oeuvres_button");
+                button.setAttribute("class", "btn btn-xl");
+                button.innerHTML = "Suivants";
+                document.getElementById("table_container_Oeuvres").appendChild(button);
+
+
+            }
+
+        } if (personnes_array.length > 0) {
+            createSection("Personnes")
+            table = document.createElement("table");
+            table.setAttribute("id", "personnes_table");
+
+            document.getElementById("table_container_Personnes").appendChild(table);
+            $('#personnes_table').append("<tbody>...</tbody>");
+
+            for (var i in personnes_array) {
+                var data = personnes_array[i];
+                console.log(data)
+                if (data["numero"] != "NA") {
+                    var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + ' (' + data["numero"] + ')' + "</a>" + "</td></tr>";
+                } else {
+                    var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + "</a>" + "</td></tr>";
+                }
+
+                $('#personnes_table').find('tbody').append(markup);
+                current_result_p_counter++;
+                if (current_result_p_counter % MAX_RESULT_NUMBER == 0) break;
+            }
+
+            if (current_result_p_counter < personnes_array.length) {
+                button = document.createElement("button");
+                button.setAttribute("id", "more_personnes_button");
+                button.setAttribute("class", "btn btn-xl");
+                button.innerHTML = "Suivants";
+                document.getElementById("table_container_Personnes").appendChild(button);
+
+
+            }
+
+
+        }
+
+        $("#more_oeuvres_button").click(function() {
+
+            $("#oeuvres_table").find("tr").remove();
+
+
+            if (current_result_o_counter + MAX_RESULT_NUMBER > oeuvres_array.length) {
+                num = oeuvres_array.length - current_result_o_counter;
+            } else if (current_result_o_counter + MAX_RESULT_NUMBER <= oeuvres_array.length) {
+                num = MAX_RESULT_NUMBER
+            }
+
+
+            var slice = oeuvres_array.slice(current_result_o_counter, current_result_o_counter + num)
+
+            for (var i in slice) {
+                var data = slice[i];
+                var markup;
+                if (oeuvres_array[i]["type"] == "film") {
+                    markup = "<tr><td>" + "<a href=film.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Film" + "</a>" + "</td></tr>";
+                } else if (oeuvres_array[i]["type"] == "episode"){
+                    markup = "<tr><td>" + "<a href=episode.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Episode" + "</a>" + "</td></tr>";
+                } else if (oeuvres_array[i]["type"] == "serie") {
+                    markup = "<tr><td>" + "<a href=serie.php?id=" + data["url"] + ">" + data["titre"] + ' (' + oeuvres_array[i]["date"] + ')' + " - " + "Serie" + "</a>" + "</td></tr>";
+
+                }
+
+                $('#oeuvres_table').find('tbody').append(markup);
+                current_result_o_counter++;
+
+            }
+
+            if (current_result_o_counter == oeuvres_array.length) {
+                $("#more_oeuvres_button").remove();
+            } else {
+                console.log("nope")
+            }
+
+        });
+
+        $("#more_personnes_button").click(function() {
+
+            $("#personnes_tables").find("tr").remove();
+
+
+            if (current_result_p_counter + MAX_RESULT_NUMBER > personnes_array.length) {
+                num = oeuvres_array.length - current_result_o_counter;
+            } else if (current_result_p_counter + MAX_RESULT_NUMBER <= personnes_array.length) {
+                num = MAX_RESULT_NUMBER
+            }
+
+
+            var slice = personnes_array.slice(current_result_p_counter, current_result_p_counter + num)
+
+            for (var i in slice) {
+                var data = slice[i];
+                if (data["numero"] != "NA") {
+                    var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + ' (' + data["numero"] + ')' + "</a>" + "</td></tr>";
+                } else {
+                    var markup = "<tr><td>" + "<a href=personne.php?id=" + data["url"] + ">" + data["prenom"] + " " + data["nom"] + "</a>" + "</td></tr>";
+                }
+                $('#personnes_table').find('tbody').append(markup);
+                current_result_p_counter++;
+
+            }
+
+            if (current_result_p_counter == oeuvres_array.length) {
+                $("#more_oeuvres_button").remove();
+            } else {
+                console.log("nope")
+            }
+
+        });
+    });
+
+
+
+</script>

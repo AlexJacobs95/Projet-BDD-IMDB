@@ -14,6 +14,8 @@ $database = new mysqli("localhost", "root", "imdb", "IMDB");
 $keywords = preg_split('[;]', $id);
 $firstname = $keywords[0];
 $lastname = $keywords[1];
+$firstname_escape = mysqli_real_escape_string($database, $keywords[0]);
+$lastname_escape = mysqli_real_escape_string($database, $keywords[1]);
 $numero = $keywords[2];
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -25,21 +27,21 @@ if (!$database) {
     //fetch his roles
     $querry = "SELECT OID, Role 
               FROM Role 
-              WHERE Prenom = '$firstname' AND Nom = '$lastname'AND Numero = '$numero'";
+              WHERE Prenom = '$firstname_escape' AND Nom = '$lastname_escape'AND Numero = '$numero'";
     $roles = $database->query($querry);
 
 
     // fetch his directed movies
     $querry = "SELECT OID 
                FROM DirigePar 
-               WHERE Prenom = '$firstname' AND Nom = '$lastname'AND Numero = '$numero'";
+               WHERE Prenom = '$firstname_escape' AND Nom = '$lastname_escape'AND Numero = '$numero'";
     $directed = $database->query($querry);
 
 
     // fetch his written movies
     $querry = "SELECT OID 
                FROM EcritPar 
-               WHERE Prenom = '$firstname' AND Nom = '$lastname'AND Numero = '$numero'";
+               WHERE Prenom = '$firstname_escape' AND Nom = '$lastname_escape'AND Numero = '$numero'";
     $written = $database->query($querry);
 
 

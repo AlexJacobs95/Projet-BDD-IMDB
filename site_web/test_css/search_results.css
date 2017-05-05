@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+h2{
+    padding-bottom: 20px;
+}
+
 header {
     background-color: #2D3E50;
     background-repeat: no-repeat;
@@ -56,6 +60,7 @@ td {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 20px;
+
 }
 
 td:first-child {
@@ -63,3 +68,19 @@ td:first-child {
     padding-left: 0px;
     padding-right: 0;
 }
+
+#more_oeuvres_button, #more_personnes_button {
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+}
+
+section {
+    padding: 0px 0;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+
+
