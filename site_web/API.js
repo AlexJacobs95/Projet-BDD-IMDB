@@ -24,7 +24,7 @@ function getTrailersMovie(title, date) {
         data = JSON.parse(data); //parse the data
         const data_ok = data["results"];
         console.log(data);
-        const videoPath = "https://www.youtube.com/embed/"+ data_ok["key"]+"?controls=1";
+        const videoPath = "https://www.youtube.com/embed/"+ data_ok[0]["key"]+"?controls=1";
         if (data_ok[0]["key"] != null) {
             //mettre dans la page
         }
