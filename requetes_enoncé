@@ -2,7 +2,18 @@ Requetes SQL:
 
 R1:
 
-Select distinct a.Nom, a.Prenom, a.Numero From Acteur a where 5 = (Select count(*) From Oeuvre o where o.AnneeSortie >=2003 and o.AnneeSortie <= 2007 and a.OID = o.ID);
+#Compter le nombre de fois qu'un acteur apparait dans la table t à une année distincte
+
+SELECT Nom, Prenom, Numero
+FROM Acteur a
+WHERE (SELECT count(distinct AnneeSortie)
+	   FROM (
+			SELECT AnneeSortie, Nom, Prenom, Numero
+			FROM Oeuvre o INNER JOIN Role r
+			ON ID = OID
+			WHERE AnneeSortie BETWEEN 2003 AND 2007) t
+	   WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5;
+
 
 R2:
 Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = o.ID having by count(a.OID) >= 2;
