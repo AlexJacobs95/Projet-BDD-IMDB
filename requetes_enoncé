@@ -11,6 +11,16 @@ WHERE (SELECT count(distinct AnneeSortie)
 			WHERE AnneeSortie BETWEEN 2003 AND 2007) t
 	   WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5;
 
+R1 bis:
+SELECT Nom, Prenom, Numero
+FROM (
+	SELECT AnneeSortie, Nom, Prenom, Numero
+	FROM Oeuvre o INNER JOIN Role r
+	ON ID = OID
+	WHERE AnneeSortie BETWEEN 2003 AND 2007) t
+group by Nom, Prenom, Numero
+having count(distinct AnneeSortie) = 5
+
 
 R2 Alex:
 Select  a.Nom, a.Prenom, a.Numero
