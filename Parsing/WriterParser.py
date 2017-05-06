@@ -60,14 +60,14 @@ def parse(file):
                                       "oeuvres": [],
                                       }
                     id_oeuvre = getOeuvreID(line)
-                    if isBetween2000and2016(writer_data):
-                        current_writer["oeuvres"].append((writer_data))
+                    if isBetween2000and2016(id_oeuvre):
+                        current_writer["oeuvres"].append((id_oeuvre))
 
                 elif line[0] != "\n":
                     # Si on est dans la liste des films dans lesquels un acteur a joue
                     id_oeuvre = getOeuvreID(line)
-                    if isBetween2000and2016(writer_data):
-                        current_writer["oeuvres"].append((writer_data))
+                    if isBetween2000and2016(id_oeuvre):
+                        current_writer["oeuvres"].append((id_oeuvre))
 
             line_counter += 1
     return writers
