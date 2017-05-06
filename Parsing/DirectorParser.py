@@ -47,20 +47,23 @@ def parse(file):
                         directors[directorID - 1] = current_director
 
                     director_done = True
+                    director_data = get_nom_prenom(line)
                     current_director = {"ID": directorID,
-                                      "nom": get_nom_prenom(line)[0],
-                                      "prenom": get_nom_prenom(line)[1],
-                                      "numero": get_nom_prenom(line)[2],
+                                      "nom": director_data[0],
+                                      "prenom": director_data[1],
+                                      "numero": director_data[2],
                                       "genre": genre,
                                       "oeuvres": [],
                                       }
-                    if isBetween2000and2016(getOeuvreID(line)):
-                        current_director["oeuvres"].append((getOeuvreID(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_director["oeuvres"].append((id_oeuvre))
 
                 elif line[0] != "\n":
                     # Si on est dans la liste des films dans lesquels un acteur a joue
-                    if isBetween2000and2016(getOeuvreID(line)):
-                        current_director["oeuvres"].append((getOeuvreID(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_director["oeuvres"].append((id_oeuvre))
 
             line_counter += 1
     return directors

@@ -218,11 +218,11 @@ def main():
         for line in content:
             if (line_counter >= 15):
                 if extracting_episodes:
-
-                    if getShortID(line) != shortSerieId:
+                    shortID = getShortID(line)
+                    if shortID != shortSerieId:
                         new_oeuvre = True
 
-                    elif getShortID(line) == shortSerieId and date_ok:
+                    elif shortID == shortSerieId and date_ok:
                         ID += 1
                         data = extract_episode_infos(line)
                         current_episode = {"realID": getRealID(line),
@@ -239,7 +239,7 @@ def main():
 
                     else:
                         # Ici on est dans le cas ou on extrait pas les episodes de la serie
-                        # elle n'a pas ete tournee entre 2000 et 2010
+                        # elle n'a pas ete tournee entre 2000 et 2016
                         # donc on passe jute les lignes
                         pass
 
@@ -251,13 +251,13 @@ def main():
                         SerieID = getRealID(line)
                         shortSerieId = getShortID(line)
                         data = get_name_date_serie(line)
-                        current_serie = {"realID": getRealID(line),
+                        current_serie = {"realID": SerieID,
                                          "titre": data[0],
                                          "dateSortie": data[1],
                                          "dateFin": data[2]
                                          }
 
-                        if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2010:
+                        if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2016:
                             series[ID] = current_serie
                             date_ok = True
 
@@ -273,7 +273,7 @@ def main():
                                         "titre": data[0],
                                         "dateSortie": data[1],
                                         }
-                        if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2010:
+                        if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2016:
                             films[ID] = current_film
                         extracting_episodes = False
 
