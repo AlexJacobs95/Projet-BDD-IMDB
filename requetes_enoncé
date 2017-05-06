@@ -1,9 +1,6 @@
 Requetes SQL:
 
 R1:
-
-#Compter le nombre de fois qu'un acteur apparait dans la table t à une année distincte
-
 SELECT Nom, Prenom, Numero
 FROM Acteur a
 WHERE (SELECT count(distinct AnneeSortie)
@@ -15,12 +12,22 @@ WHERE (SELECT count(distinct AnneeSortie)
 	   WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5;
 
 
-R2:
+R2 Alex:
 Select  a.Nom, a.Prenom, a.Numero
 From EcritPar a, Film f
 where a.OID = f.FilmID
 group by a.Nom, a.Prenom, a.Numero
 having count(a.OID) >= 2;
+
+R2 Benj:
+SELECT distinct Nom, Prenom, Numero
+FROM(
+	SELECT distinct AnneeSortie, Nom,Prenom, Numero
+	FROM Oeuvre o
+	INNER JOIN Film f ON o.ID = f.FilmID
+	INNER JOIN EcritPar ON ID = OID
+	group by AnneeSortie, Nom, Prenom, Numero
+	having count(*) >=2 )t
 
 R3:
 	wtf je sais pas :p 
