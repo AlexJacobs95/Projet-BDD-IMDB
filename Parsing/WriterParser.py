@@ -42,7 +42,7 @@ def parse(file):
         for line in f:
             if line == '---------------------------------------------------------------------\n' and line_counter > 10000:
                 return writers
-            if line_counter > first_line_index:
+            if line_counter >= first_line_index:
                 if line[0] != " " and line[0] != "\t" and line[0] != "" and line[0] != "\n":
                     # Si on est sur un nouvel acteur
 
