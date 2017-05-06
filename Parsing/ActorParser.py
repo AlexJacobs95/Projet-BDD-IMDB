@@ -179,20 +179,23 @@ def parse(file):
                         actors[actorID - 1] = current_actor
 
                     actor_done = True
+                    actor_data = get_nom_prenom(line)
                     current_actor = {"ID": actorID,
-                                     "nom": get_nom_prenom(line)[0],
-                                     "prenom": get_nom_prenom(line)[1],
-                                     "numero": get_nom_prenom(line)[2],
+                                     "nom": actor_data[0],
+                                     "prenom": actor_data[1],
+                                     "numero": actor_data[2],
                                      "genre": genre,
                                      "oeuvres": [],
                                      }
-                    if isBetween2000and2010(getOeuvreID(line)):
-                        current_actor["oeuvres"].append((getOeuvreID(line), getRole(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_actor["oeuvres"].append((id_oeuvre, getRole(line)))
 
                 elif line[0] != "\n":
                     # Si on est dans la liste des films dans lesquels un acteur a joue
-                    if isBetween2000and2010(getOeuvreID(line)):
-                        current_actor["oeuvres"].append((getOeuvreID(line), getRole(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_actor["oeuvres"].append((id_oeuvre, getRole(line)))
 
             line_counter += 1
     return actors

@@ -16,12 +16,16 @@ WHERE (SELECT count(distinct AnneeSortie)
 
 
 R2:
-Select distinct a.Nom, a.Prenom, a.Numero From Auteur a, Oeuvre o where a.OID = o.ID having by count(a.OID) >= 2;
+Select  a.Nom, a.Prenom, a.Numero
+From EcritPar a, Film f
+where a.OID = f.FilmID
+group by a.Nom, a.Prenom, a.Numero
+having count(a.OID) >= 2;
 
 R3:
 	wtf je sais pas :p 
 R4:
-	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select * from Acteur a, Personne p where p.Numero = a.Numero and p.Genre = 'm' and a.OID = e.SID);
+	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select a.OID from Role a, Personne p where p.Numero = a.Numero and a.Nom = P.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
 
 R5: :'(
 

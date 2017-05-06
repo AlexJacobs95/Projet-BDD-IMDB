@@ -24,7 +24,7 @@ def test():
         line_counter = 0
         for line in f:
             if line_counter == line_index:
-                print(getOeuvreID(line))
+                print(writer_data)
                 return
             line_counter += 1
 
@@ -42,7 +42,7 @@ def parse(file):
         for line in f:
             if line == '---------------------------------------------------------------------\n' and line_counter > 10000:
                 return writers
-            if line_counter > first_line_index:
+            if line_counter >= first_line_index:
                 if line[0] != " " and line[0] != "\t" and line[0] != "" and line[0] != "\n":
                     # Si on est sur un nouvel acteur
 
@@ -51,20 +51,23 @@ def parse(file):
                         writers[writerID - 1] = current_writer
 
                     writer_done = True
+                    writer_data = get_nom_prenom(line)
                     current_writer = {"ID": writerID,
-                                      "nom": get_nom_prenom(line)[0],
-                                      "prenom": get_nom_prenom(line)[1],
-                                      "numero": get_nom_prenom(line)[2],
+                                      "nom":writer_data[0],
+                                      "prenom":writer_data[1],
+                                      "numero":writer_data[2],
                                       "genre": genre,
                                       "oeuvres": [],
                                       }
-                    if isBetween2000and2010(getOeuvreID(line)):
-                        current_writer["oeuvres"].append((getOeuvreID(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_writer["oeuvres"].append((id_oeuvre))
 
                 elif line[0] != "\n":
                     # Si on est dans la liste des films dans lesquels un acteur a joue
-                    if isBetween2000and2010(getOeuvreID(line)):
-                        current_writer["oeuvres"].append((getOeuvreID(line)))
+                    id_oeuvre = getOeuvreID(line)
+                    if isBetween2000and2016(id_oeuvre):
+                        current_writer["oeuvres"].append((id_oeuvre))
 
             line_counter += 1
     return writers
