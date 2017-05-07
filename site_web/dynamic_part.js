@@ -33,7 +33,7 @@ function add_resizable_table(number_roles) {
         wrapper.appendChild(toWrap);
         var link_div = document.createElement('div');
         var link = document.createElement('a');
-        var linkText = document.createTextNode("Show more");
+        var linkText = document.createTextNode("Show all");
         link.appendChild(linkText);
         link.href = "#Acteurs";
         link_div.appendChild(link);
