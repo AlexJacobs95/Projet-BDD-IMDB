@@ -40,7 +40,15 @@ FROM(
 	having count(*) >=2 )t
 
 R3:
-	wtf je sais pas :p 
+SELECT distinct R2.Nom, R2.Prenom, R2.Numero
+FROM(
+	SELECT distinct R1.Prenom, R1.Nom, R1.Numero, R1.OID
+	FROM (
+		SELECT *
+		FROM Role
+		WHERE Nom = 'Willis' and Prenom = 'Bruce' and Numero = 'NA') as T INNER JOIN Role R1 on T.OID = R1.OID) as T2
+INNER JOIN Role R2 on T2.OID = R2.OID
+
 R4:
 	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select a.OID from Role a, Personne p where p.Numero = a.Numero and a.Nom = P.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
 
