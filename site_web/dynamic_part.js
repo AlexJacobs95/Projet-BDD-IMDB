@@ -58,7 +58,14 @@ function add_plots(havePlot) {
         link_div.className += "show-more-plot";
         parent.appendChild(link_div);
     } else {
+
         $('#plot').find('span').text('Aucun résumé disponible');
+        $('#plot.content.hideContent-plot').height("auto");
+        $('#Resume').css("padding-top", 50);
+        $('#Resume').css("padding-bottom", 50);
+        $('#resume_block').css("padding-bottom", 0);
+        $('#resume_block').css("padding-top", 0);
+
     }
 
 }
