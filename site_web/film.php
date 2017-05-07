@@ -130,7 +130,9 @@ $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
 $note_fomat = '%g/10';
-$plot = $plot_info['Plot']
+$plot = $plot_info['Plot'];
+$nb_roles = mysqli_num_rows($roles);
+$havePlot = mysqli_num_rows($plot_res);
 ?>
 <header style>
     <div class="top">
@@ -155,43 +157,40 @@ $plot = $plot_info['Plot']
 <section id="Resume">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center" id=resume_block>
                 <h2 class="section-heading">Résumé</h2>
-                <div class="content hideContent" id="plot"> <?php echo $plot ?> </div>
-                <div class="show-more" id="more"><a href="#Resume">Show more</a>
-                </div>
+                <div class="content hideContent-plot" id="plot"><span> <?php echo $plot ?> </span></div>
+
             </div>
         </div>
     </div>
 </section>
 
-
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center" id="actors">
                 <h2 class="section-heading">Acteurs</h2>
+                <?php
+                echo "<table border=1 frame=void rules=rows id = \"actors_table\">";
+
+                while ($actors_row = mysqli_fetch_array($roles)) {
+                    $fn = $actors_row['Prenom'];
+                    $ln = $actors_row['Nom'];
+                    $num = $actors_row['Numero'];
+                    $role = $actors_row['Role'];
+                    $nom = sprintf('%s %s', $fn, $ln);
+                    echo "<tr>";
+                    echo "<td >";
+                    echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
+                    echo "</td>";
+                    echo "<td >" . $role . "</td></tr>";
+                    //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
+                }
+                echo "</table>";
+                ?>
             </div>
         </div>
-
-        <?php
-        echo "<table border=1 frame=void rules=rows>";
-
-        while ($actors_row = mysqli_fetch_array($roles)) {
-            $fn = $actors_row['Prenom'];
-            $ln = $actors_row['Nom'];
-            $num = $actors_row['Numero'];
-            $role = $actors_row['Role'];
-            $nom = sprintf('%s %s', $fn, $ln);
-            echo "<tr>";
-            echo "<td >";
-            echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
-            echo "</td>";
-            echo "<td >" . $role . "</td></tr>";
-            //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
-        }
-        echo "</table>";
-        ?>
     </div>
 </section>
 
@@ -305,25 +304,12 @@ $plot = $plot_info['Plot']
 
 </script>
 
+<script src="dynamic_part.js"></script>
+
 <script>
-    $(".show-more a").on("click", function () {
-        var $this = $(this);
-        var $content = $this.parent().prev("div.content");
-        var linkText = $this.text().toUpperCase();
-
-        if (linkText === "SHOW MORE") {
-            linkText = "Show less";
-            $content.addClass('showContent').removeClass('hideContent');
-        } else {
-            linkText = "Show more";
-            $content.addClass('hideContent').removeClass('showContent');
-        }
-        ;
-
-
-        $this.text(linkText);
-    });
-
+    var havePlot = "<?php echo $havePlot;?>";
+    var number_roles = "<?php echo $nb_roles;?>";
+    add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
 

@@ -185,10 +185,16 @@ tr {
     margin-right: 40px;
 }
 
-.hideContent {
+.hideContent-actors {
     overflow: hidden;
-    line-height: 1.7em;
-    height: 7em;
+    line-height: 2em;
+    height: 20em;
+}
+
+.hideContent-plot {
+    overflow: hidden;
+    line-height: 2em;
+    height: 8em;
 }
 
 .showContent {
@@ -197,7 +203,9 @@ tr {
 }
 
 .show-more {
+    margin-top: 15px;
     padding: 10px 0;
+    font-size: 20px;
     text-align: center;
 }
 

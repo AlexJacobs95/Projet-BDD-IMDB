@@ -145,6 +145,7 @@ $titre_format2 = '%s (%d-)';
 
 $note_fomat = '%g/10';
 $plot = $plot_info['Plot'];
+$havePlot = mysqli_num_rows($plot_res);
 
 $res = [];
 foreach(range(1, $num ) as $current) {
@@ -207,11 +208,10 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 <section id="Resume">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center" id=resume_block>
                 <h2 class="section-heading">Résumé</h2>
-                <div class="content hideContent" id="plot"> <?php echo $plot ?> </div>
-                <div class="show-more" id="more"><a href="#Resume">Show more</a>
-                </div>
+                <div class="content hideContent-plot" id="plot"><span> <?php echo $plot ?> </span></div>
+
             </div>
         </div>
     </div>
@@ -351,26 +351,13 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 </script>
 
+<script src="dynamic_part.js"></script>
+
 <script>
-    $(".show-more a").on("click", function () {
-        var $this = $(this);
-        var $content = $this.parent().prev("div.content");
-        var linkText = $this.text().toUpperCase();
-
-        if (linkText === "SHOW MORE") {
-            linkText = "Show less";
-            $content.addClass('showContent').removeClass('hideContent');
-        } else {
-            linkText = "Show more";
-            $content.addClass('hideContent').removeClass('showContent');
-        }
-        ;
-
-        $this.text(linkText);
-    });
+    var havePlot = "<?php echo $havePlot;?>";
+    add_dynamic_part_series(havePlot, 'hideContent-plot')
 
 </script>
-
 
 
 </html>
