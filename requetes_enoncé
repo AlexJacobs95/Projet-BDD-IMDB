@@ -39,15 +39,41 @@ FROM(
 	group by AnneeSortie, Nom, Prenom, Numero
 	having count(*) >=2 )t
 
-R3:
-SELECT distinct R2.Nom, R2.Prenom, R2.Numero
+R3 dans les oeuvres:
+SELECT distinct Nom, Prenom, Numero
 FROM(
-	SELECT distinct R1.Prenom, R1.Nom, R1.Numero, R1.OID
-	FROM (
-		SELECT *
-		FROM Role
-		WHERE Nom = 'Willis' and Prenom = 'Bruce' and Numero = 'NA') as T INNER JOIN Role R1 on T.OID = R1.OID) as T2
-INNER JOIN Role R2 on T2.OID = R2.OID
+	SELECT R2.OID
+		FROM(
+			SELECT R1.Prenom, R1.Nom, R1.Numero, R1.OID
+			FROM (
+				SELECT *
+				FROM Role
+				WHERE Nom = 'Willis' and Prenom = 'Bruce' and Numero = 'NA') as T
+            JOIN Role R1 ON T.OID = R1.OID) as T2
+    JOIN Role R2 ON T2.Prenom = R2.Prenom AND T2.Nom = R2.Nom AND T2.Numero = R2.Numero) as T3
+JOIN Role R3 ON T3.OID = R3.OID
+
+R3 que dans les films:
+SELECT distinct Nom, Prenom, Numero
+FROM(
+	SELECT OID
+	FROM(
+		SELECT 	R2.OID
+		FROM(
+			SELECT T2.Nom, T2.Prenom, T2.Numero, T2.OID
+			FROM(
+					SELECT R1.Prenom, R1.Nom, R1.Numero, R1.OID
+					FROM (
+						SELECT *
+						FROM Role
+						WHERE Nom = 'Willis' and Prenom = 'Bruce' and Numero = 'NA') as T
+						JOIN Role R1 ON T.OID = R1.OID) as T2
+			INNER JOIN Film F on F.FilmID = T2.OID) as T3
+		JOIN Role R2 ON T3.Prenom = R2.Prenom AND T3.Nom = R2.Nom AND T3.Numero = R2.Numero) as T4
+	INNER JOIN Film F2 on F2.FilmID = T4.OID) as T5
+JOIN Role R3 ON T5.OID = R3.OID
+
+
 
 R4:
 	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select a.OID from Role a, Personne p where p.Numero = a.Numero and a.Nom = P.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
