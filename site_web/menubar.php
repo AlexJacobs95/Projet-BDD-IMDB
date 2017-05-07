@@ -59,7 +59,7 @@ if (isset($_GET['run_function_log_out'])) {
                 }
                 ?>
                 <li>
-                    <form action="search_results.php" method="post">
+                    <form action="search_results_2.php" method="post">
                         <input type="text" name="search" placeholder="Recherche...">
                     </form>
                 </li>

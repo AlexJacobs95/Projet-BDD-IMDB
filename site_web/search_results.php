@@ -211,6 +211,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
     var current_result_o_counter = 0;
     var prec_pers_added = false;
     var prec_oeuvre_added = false;
+    var last_num_o;
 
 
     function createSection(titre) {
@@ -322,13 +323,12 @@ while ($row = mysqli_fetch_array($result_personnes)) {
         $("#more_oeuvres_button").click(function () {
 
             $("#oeuvres_table").find("tr").remove();
-
             if (current_result_o_counter + MAX_RESULT_NUMBER > oeuvres_array.length) {
                 num = oeuvres_array.length - current_result_o_counter;
             } else if (current_result_o_counter + MAX_RESULT_NUMBER <= oeuvres_array.length) {
                 num = MAX_RESULT_NUMBER
             }
-
+            last_num_o = num;
 
             var slice = oeuvres_array.slice(current_result_o_counter, current_result_o_counter + num)
 
@@ -347,6 +347,8 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                 $('#oeuvres_table').find('tbody').append(markup);
                 current_result_o_counter++;
             }
+            console.log(current_result_o_counter)
+
 
             if (current_result_o_counter == oeuvres_array.length) {
                 $("#more_oeuvres_button").hide();
@@ -364,11 +366,11 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                 $("#back_oeuvre_button").bind("click", function () {
 
                     $("#oeuvres_table").find("tr").remove();
-                    var from = current_result_o_counter - 2 * MAX_RESULT_NUMBER;
+                    var from = current_result_o_counter - (2*MAX_RESULT_NUMBER);
                     var to = current_result_o_counter - MAX_RESULT_NUMBER;
 
-                    var slice = oeuvres_array.slice(current_result_o_counter - 2 * MAX_RESULT_NUMBER, current_result_o_counter - MAX_RESULT_NUMBER);
-                    console.log(slice);
+                    var slice = oeuvres_array.slice(from, to);
+                    console.log(from, to);
 
                     for (var i in slice) {
                         var data = slice[i];
@@ -382,11 +384,14 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
                         }
 
-                        $('#oeuvres_table').find('tbody').append(markup);
-                        current_result_o_counter--;
-                    }
 
-                    if (current_result_o_counter == 10) {
+                        $('#oeuvres_table').find('tbody').append(markup);
+                    }
+                    current_result_o_counter = to;
+                    console.log(current_result_o_counter)
+
+
+                    if (to == 10) {
                         prec_oeuvre_added = false
                         $("#back_oeuvre_button").remove();
                     }
@@ -407,7 +412,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
 
             if (current_result_p_counter + MAX_RESULT_NUMBER > personnes_array.length) {
-                num = oeuvres_array.length - current_result_o_counter;
+                num = personnes_array.length - current_result_o_counter;
             } else if (current_result_p_counter + MAX_RESULT_NUMBER <= personnes_array.length) {
                 num = MAX_RESULT_NUMBER
             }

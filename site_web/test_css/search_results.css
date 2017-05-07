@@ -3,9 +3,16 @@
     margin: 0;
 }
 
+select{
+    margin: 0;
+    color: #fec503;
+}
+
+
 h2{
     padding-bottom: 20px;
 }
+
 
 header {
     background-color: #2D3E50;
@@ -22,52 +29,25 @@ header {
     padding-top: 120px;
     padding-bottom: 50px;
 
+}
+
+header .intro-heading {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 100;
-    font-size: 25px;
+    font-size: 30px;
     line-height: 25px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
-body {
-    background-color: #2D3E50;
 
-}
-
-.blue {
-    background-color: #2D3E50;
-}
 
 .titre-section {
-    color: white;
+    margin-top: 40px;
+    font-size: 40px;
+    color: black;
 }
 
-
-table {
-    border: 1px solid transparent;
-    border-collapse: collapse;
-    width: 100%;
-    color: white;
-    font-size: 24px;
-}
-
-th {
-    display: none;
-}
-
-td {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-
-}
-
-td:first-child {
-    padding-top: 20px;
-    padding-left: 0px;
-    padding-right: 0;
-}
 
 #more_personnes_button, #more_oeuvres_button, #back_personnes_button, #back_oeuvres_button{
     margin-top: 30px;
@@ -96,4 +76,99 @@ section {
 
 }
 
+table {
+    color: black;
+    font-size: 24px;
+    max-width: 1500px;
+    margin: 0 auto;
+    table-layout: fixed;
 
+}
+
+
+#table_container_Oeuvres.tblHeaders{
+    background-color: white;
+    color:black;
+
+}
+
+th{
+    text-align: center;
+}
+
+tr {
+    color:black;
+}
+
+td {
+    color:black;
+
+}
+
+#table_container_Oeuvres td {
+    background-color: white;
+}
+
+#table_container_Personnes td {
+    background-color: #eeeeee;
+}
+
+
+
+#table_container_Oeuvres {
+    background-color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 50px;
+}
+#table_container_Personnes {
+    margin-top: 20px;
+    margin-bottom: 80px;
+    background-color: #eeeeee;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+#Oeuvres{
+    padding-top: 30px;
+}
+
+#table_container_Personnes.tblHeaders{
+    color: #eeeeee;
+}
+
+#table_container_Oeuvres table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+    background-color: white;
+}
+
+#table_container_Oeuvres table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+    background-color: white;
+}
+
+#table_container_Personnes table tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+    background-color: #eeeeee;
+}
+
+#table_container_Personnes table#table_container_Personnes tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+    background-color: #eeeeee;
+}
+
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: #fec503;
+}
+
+/* selected link */
+a:active {
+    color: #fec503;
+}
