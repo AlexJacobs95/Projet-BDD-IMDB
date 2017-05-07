@@ -18,12 +18,25 @@ function build_search($content)
     return $search;
 }
 
+function allOneLetter($content)
+{
+    $terms = explode(' ', $content);
+    foreach ($terms as $word) {
+        if (strlen($word) > 1) {
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
 $search_content = $_POST["search"];
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 $search_content = mysqli_real_escape_string($database, $_POST["search"]);
 
-$start_time = round(microtime(true) * 1000);
+
 
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -32,26 +45,46 @@ if (!$database) {
     exit;
 } else {
 
-    $search = build_search($search_content);
+    $start_time = round(microtime(true) * 1000);
 
 
-    $requete = "SELECT *
-                FROM Oeuvre
-                WHERE MATCH (Titre)
-                AGAINST ('$search' IN BOOLEAN MODE)
-                ORDER BY 
-                MATCH(Titre) against('$search' IN BOOLEAN MODE)";
+    if (allOneLetter($search_content)) { // check if all words of the content have only one letter
 
-    
-    $result_oeuvres = $database->query($requete);
+        $requete_oeuvre = "SELECT *
+                           FROM Oeuvre
+                           WHERE Titre = '$search_content'
+                           COLLATE LATIN1_GENERAL_CI";
+
+        $requete_personne = "SELECT *
+                             FROM Personne
+                             WHERE fullname = '$search_content'
+                             COLLATE LATIN1_GENERAL_CI";
+
+
+    } else {
+        $search = build_search($search_content);
+
+
+        $requete_oeuvre = "SELECT *
+                           FROM Oeuvre
+                           WHERE MATCH (Titre)
+                           AGAINST ('$search' IN BOOLEAN MODE)
+                           ORDER BY 
+                           MATCH(Titre) against('$search' IN BOOLEAN MODE)";
+
+
+        $requete_personne = "SELECT *
+                             FROM Personne
+                             WHERE MATCH (Prenom, Nom)
+                             AGAINST ('$search' IN BOOLEAN MODE)";
+
+
+    }
+
+    $result_oeuvres = $database->query($requete_oeuvre);
     $nb_res_oeuvre = mysqli_num_rows($result_oeuvres);
 
-    $requete = "SELECT *
-             FROM Personne
-             WHERE MATCH (Prenom, Nom)
-             AGAINST ('$search' IN BOOLEAN MODE)";
-
-    $result_personnes = $database->query($requete);
+    $result_personnes = $database->query($requete_personne);
     $nb_res_personnes = mysqli_num_rows($result_personnes);
 
 
