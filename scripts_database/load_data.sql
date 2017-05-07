@@ -1,6 +1,8 @@
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 \! echo "Inserting data in Persone...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/persons_ok.txt' INTO TABLE Personne FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
+UPDATE Personne
+SET fullname = CONCAT(Prenom, ' ', Nom);
 \! echo "Inserting data in Oeuvre...\n";
 LOAD DATA LOCAL INFILE '../SQL_data_files/oeuvres_ok.txt' INTO TABLE Oeuvre FIELDS TERMINATED BY "|" LINES TERMINATED BY "\n";
 \! echo "Inserting data in Pays...\n";

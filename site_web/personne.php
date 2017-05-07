@@ -9,8 +9,9 @@ include "type.php";
 include "tools.php";
 session_start();
 $id = urldecode($_GET['id']);
-$database = new mysqli("localhost", "root", "imdb", "IMDB");
 
+$database = new mysqli("localhost", "root", "imdb", "IMDB");
+$id = mysqli_real_escape_string($database, $id);
 $keywords = preg_split('[;]', $id);
 $firstname = $keywords[0];
 $lastname = $keywords[1];
@@ -166,15 +167,19 @@ include 'menubar.php';
             $id = $roles_row['OID'];
             $role = $roles_row['Role'];
             $title = titleFromID($id, $database);
+            $date = dateFromID($id, $database);
+            if ($date === 0) {
+                $date = '?';
+            }
             echo "<tr>";
             echo "<td >";
 
             if (isFilm($id)) {
-                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . ' (' . $date . ')' . '</a>';
             } elseif (isSerie($id)) {
-                echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . ' (' . $date . ')' . '</a>';
             } else {
-                echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . ' (' . $date . ')' . '</a>';
             }
 
 
@@ -237,7 +242,7 @@ include 'menubar.php';
             echo "<td >";
 
             if (isFilm($id)) {
-                echo '<a href="film_episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
+                echo '<a href="film.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } elseif (isSerie($id)) {
                 echo '<a href="serie.php?id=' . urlencode($id) . '">' . $title . '</a>';
             } else {
