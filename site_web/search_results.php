@@ -316,7 +316,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             }
 
             if (current_result_o_counter == oeuvres_array.length) {
-                $("#more_oeuvres_button").remove();
+                $("#more_oeuvres_button").hide();
             }
 
             if (!prec_oeuvre_added) {
@@ -357,6 +357,9 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                         prec_oeuvre_added = false
                         $("#back_oeuvre_button").remove();
                     }
+                    if (current_result_o_counter != oeuvres_array.length) {
+                        $("#more_oeuvres_button").show();
+                    }
 
                     return false;
 
@@ -390,9 +393,9 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                 current_result_p_counter++;
 
             }
-
-            if (current_result_p_counter == oeuvres_array.length) {
-                $("#more_personnes_button").remove();
+            console.log(current_result_p_counter)
+            if (current_result_p_counter == personnes_array.length) {
+                $("#more_personnes_button").hide();
             }
 
             if (!prec_pers_added){
@@ -428,6 +431,9 @@ while ($row = mysqli_fetch_array($result_personnes)) {
                     if (current_result_p_counter == 10) {
                         prec_pers_added = false
                         $("#back_personnes_button").remove();
+                    }
+                    if (current_result_p_counter != personnes_array.length) {
+                        $("#more_personnes_button").show();
                     }
 
                     return false;
