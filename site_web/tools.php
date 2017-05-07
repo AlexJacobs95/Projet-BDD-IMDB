@@ -88,4 +88,19 @@ function titleFromID($id, $db)
 
     return $row['Titre'];
 }
+
+function DateFromID($id, $db)
+{
+
+
+    $id_ok = mysqli_real_escape_string($db, $id);
+
+    $querry = "SELECT AnneeSortie 
+               FROM Oeuvre 
+               WHERE ID = '$id_ok'";
+    $result = $db->query($querry);
+    $row = mysqli_fetch_array($result);
+
+    return $row['AnneeSortie'];
+}
 ?>
