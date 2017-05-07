@@ -150,26 +150,21 @@ $plot = $plot_info['Plot']
 
 </header>
 
-<section id="Trailers">
+
+
+<section id="Resume">
     <div class="container">
-        <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Bande-Annonce VO</h2>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Résumé</h2>
+                <div class="content hideContent" id="plot"> <?php echo $plot ?> </div>
+                <div class="show-more" id="more"><a href="#Resume">Show more</a>
+                </div>
+            </div>
         </div>
-        <iframe src="http://www.novelupdates.com/img/noimagefound.jpg" align="middle">
-        </iframe>
     </div>
 </section>
 
-<section id="Resume">
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Résumé</h2>
-            <h3> <?php echo $plot ?> </h3>
-        </div>
-    </div>
-</div>
-</section>
 
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">
@@ -250,7 +245,6 @@ $plot = $plot_info['Plot']
             echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
             echo "</td>";
             echo "</tr>";
-            //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
         echo "</table>";
         ?>
@@ -307,6 +301,27 @@ $plot = $plot_info['Plot']
         $("#intro").fadeIn(2000);
         getImagesMovie(titre, date);
         getTrailersMovie(titre, date)
+    });
+
+</script>
+
+<script>
+    $(".show-more a").on("click", function () {
+        var $this = $(this);
+        var $content = $this.parent().prev("div.content");
+        var linkText = $this.text().toUpperCase();
+
+        if (linkText === "SHOW MORE") {
+            linkText = "Show less";
+            $content.addClass('showContent').removeClass('hideContent');
+        } else {
+            linkText = "Show more";
+            $content.addClass('hideContent').removeClass('showContent');
+        }
+        ;
+
+
+        $this.text(linkText);
     });
 
 </script>

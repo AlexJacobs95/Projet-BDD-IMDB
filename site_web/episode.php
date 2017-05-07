@@ -72,6 +72,13 @@ if (!$database) {
 
     $ep_infos = $database->query($query);
 
+    //fetch plot
+    $querry = "SELECT Plot
+               FROM Plots
+               WHERE ID = '$id'";
+
+    $plot_res = $database->query($querry);
+
 }
 
 ?>
@@ -121,6 +128,7 @@ include 'menubar.php';
 <!-- Header -->
 <?php
 $movie_infos = mysqli_fetch_array($movie);
+$plot_info = mysqli_fetch_array($plot_res);
 $titre = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
@@ -128,6 +136,7 @@ $titre_format = '%s (%d)';
 
 
 $note_fomat = '%g/10';
+$plot = $plot_info['Plot']
 
 
 ?>
@@ -147,6 +156,19 @@ $note_fomat = '%g/10';
 
 
 </header>
+
+<section id="Resume">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Résumé</h2>
+                <div class="content hideContent" id="plot"> <?php echo $plot ?> </div>
+                <div class="show-more" id="more"><a href="#Resume">Show more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="Acteurs" class="bg-light-gray">
     <div class="container">
@@ -279,6 +301,26 @@ $note_fomat = '%g/10';
     $(document).ready(function () {
         console.log("hi");
         $("#intro").fadeIn(2000);
+    });
+
+</script>
+
+<script>
+    $(".show-more a").on("click", function () {
+        var $this = $(this);
+        var $content = $this.parent().prev("div.content");
+        var linkText = $this.text().toUpperCase();
+
+        if (linkText === "SHOW MORE") {
+            linkText = "Show less";
+            $content.addClass('showContent').removeClass('hideContent');
+        } else {
+            linkText = "Show more";
+            $content.addClass('hideContent').removeClass('showContent');
+        }
+        ;
+
+        $this.text(linkText);
     });
 
 </script>

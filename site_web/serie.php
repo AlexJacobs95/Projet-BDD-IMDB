@@ -69,6 +69,13 @@ if (!$database) {
 
     $genres = $database->query($querry);
 
+    //fetch plot
+    $querry = "SELECT Plot
+               FROM Plots
+               WHERE ID = '$id'";
+
+    $plot_res = $database->query($querry);
+
 
 }
 
@@ -125,6 +132,7 @@ include 'menubar.php';
 <?php
 $_numSaisons = mysqli_fetch_array($numSaisons);
 $movie_infos = mysqli_fetch_array($oeuvre);
+$plot_info = mysqli_fetch_array($plot_res);
 $serie_infos = mysqli_fetch_array($serie);
 $num = $_numSaisons['Saison'];
 $date_fin = $serie_infos['AnneeFin'];
@@ -136,6 +144,7 @@ $titre_format1 = '%s (%d-%d)';
 $titre_format2 = '%s (%d-)';
 
 $note_fomat = '%g/10';
+$plot = $plot_info['Plot'];
 
 $res = [];
 foreach(range(1, $num ) as $current) {
@@ -183,7 +192,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 </header>
 
-<section id="Tabs">
+<section id="Tabs" class="bg-light-gray">
     <div class="container">
         <div class="col-lg-12 text-center">
             <ul class="nav nav-pills nav-justified">
@@ -194,6 +203,20 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         </div>
     </div>
 </section>
+
+<section id="Resume">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Résumé</h2>
+                <div class="content hideContent" id="plot"> <?php echo $plot ?> </div>
+                <div class="show-more" id="more"><a href="#Resume">Show more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <section id="Details" class="bg-light-gray">
     <div class="container">
@@ -324,6 +347,26 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
         getImagesTvShow(titre, date)
+    });
+
+</script>
+
+<script>
+    $(".show-more a").on("click", function () {
+        var $this = $(this);
+        var $content = $this.parent().prev("div.content");
+        var linkText = $this.text().toUpperCase();
+
+        if (linkText === "SHOW MORE") {
+            linkText = "Show less";
+            $content.addClass('showContent').removeClass('hideContent');
+        } else {
+            linkText = "Show more";
+            $content.addClass('hideContent').removeClass('showContent');
+        }
+        ;
+
+        $this.text(linkText);
     });
 
 </script>

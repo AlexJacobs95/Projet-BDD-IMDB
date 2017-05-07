@@ -148,8 +148,8 @@ a:active {
 
 .nav-pills a{
 
-    color: #a3a3a3;
-    font-size: 1.1em;
+    color: black;
+    font-size: 1.6em;
     font-weight: 600;
 }
 
@@ -178,8 +178,28 @@ tr {
     border-width: 1px 0;
 }
 
+.content {
+    font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
 
+.hideContent {
+    overflow: hidden;
+    line-height: 1.7em;
+    height: 7em;
+}
 
+.showContent {
+    line-height: 2em;
+    height: auto;
+}
+
+.show-more {
+    padding: 10px 0;
+    text-align: center;
+}
 
 
 
