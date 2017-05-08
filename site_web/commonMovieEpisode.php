@@ -1,4 +1,4 @@
-<section id="Resume" class="bg-light-gray">
+<section id="Resume">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id=resume_block>
