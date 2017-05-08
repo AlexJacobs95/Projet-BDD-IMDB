@@ -3,7 +3,16 @@ Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
 Page de recherche avancé de site web.
 -->
- <?php session_start(); ?>
+ <?php session_start();
+ function displayMessage($key){
+     if(isset($_SESSION[$key])) {
+         foreach ($_SESSION[$key] as $succes) {
+             echo "<p> $succes </p>";
+         }
+         $_SESSION[$key] = null;
+     }
+ }
+ ?>
 
  <!DOCTYPE html>
 <html>
@@ -109,23 +118,14 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Comptes Administrateur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_admin'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_admin'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_admin"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_admin'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_admin'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_admin"] = null;  ?>
+                    <?php displayMessage("query_succes_add_admin"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_admin") ?>
+                </div>
+
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="email" class="form-control" name="email" placeholder="Enter a email" required>
@@ -143,22 +143,12 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_admin'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_admin'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_admin"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_admin"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_admin'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_admin'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_admin"] = null;  ?>
+                    <?php  displayMessage("error_delete_admin") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
@@ -177,23 +167,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Film</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_film'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_film'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_film"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_film'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_film'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_film"] = null;  ?>
-                </div>
-                <?php endif; ?>
+                 <div class="form-errors">
+                     <?php displayMessage("query_succes_add_film"); ?>
+                 </div>
+                 <div class="form-errors">
+                     <?php  displayMessage("error_add_film") ?>
+                 </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="text_field" class="form-control" name="film_name" placeholder="Enter the name" required>
@@ -217,22 +197,12 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_film'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_film'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_film"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_film"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_film'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_film'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_film"] = null;  ?>
+                    <?php  displayMessage("error_delete_film") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
@@ -253,23 +223,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Série</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_serie'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_serie'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_serie"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_serie'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_serie"] = null;  ?>
+                    <?php displayMessage("query_succes_add_serie"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_serie") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name" required>
@@ -296,22 +256,12 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_serie'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_serie"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_serie"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_serie'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_serie'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_serie"] = null;  ?>
+                    <?php  displayMessage("error_delete_serie") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
 
@@ -335,23 +285,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Episode</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_episode'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_episode'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_episode"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_episode'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_episode'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_episode"] = null;  ?>
+                    <?php displayMessage("query_succes_add_episode"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_episode") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name of the serie" required>
@@ -380,23 +320,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Directeur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_dir'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_dir'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_dir"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_dir'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_dir'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_dir"] = null;  ?>
+                    <?php displayMessage("query_succes_add_dir"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_dir") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input type="text_field" class="form-control" name="director_firstname" placeholder="Enter the FirstName" required>
@@ -419,23 +349,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Auteur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_writer'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_writer'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_writer"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_writer'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_writer'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_writer"] = null;  ?>
+                    <?php displayMessage("query_succes_add_writer"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_writer") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                          <input type="text_field" class="form-control" name="writer_firstname" placeholder="Enter the FirstName" required>
@@ -458,23 +378,13 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Acteur/Actrice</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_actor'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_actor'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_actor"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_actor'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_actor'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_actor"] = null;  ?>
+                    <?php displayMessage("query_succes_add_actor"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_actor") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                          <input type="text_field" class="form-control" name="actor_firstname" placeholder="Enter the FirstName" required>
