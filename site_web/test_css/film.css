@@ -50,8 +50,6 @@ table.directorsAndWriters {
 
 }
 
-
-
 th {
     display: none;
 }
@@ -92,13 +90,10 @@ tr:last-child {
     padding-top: 0px;
     padding-bottom: 0px;
     height: auto;
+    background-color: #fed136;
 
 }
 
-#Tabs.ul.li {
-    text-align: center;
-    vertical-align: middle;
-}
 
 #div_1 {
     width: 200px;
@@ -177,6 +172,8 @@ tr {
     border: solid;
     border-width: 1px 0;
 }
+
+
 
 .content {
     font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -308,6 +305,15 @@ input[type=text3] {
     cursor: pointer;
     border-radius: 5px
 }
+.navbar-top {
+    background-color: #fed136;
+    z-index: 100;
+    top:35px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 35px);
+}
+
 
 
 

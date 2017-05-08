@@ -83,6 +83,36 @@ function add_dynamic_part_filmAndEp(havePlot, number_roles, hideContent_plot, hi
 
 }
 
+function add_navbar(args) {
+    var body = document.getElementsByTagName("body");
+
+    var section = document.createElement("section");
+    section.setAttribute("id", "Tabs");
+    section.setAttribute("class", "bg-light-gray");
+
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "container");
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "col-lg-12 text-center");
+
+    var ul = document.createElement("ul");
+    ul.setAttribute("class", "nav nav-pills nav-justified");
+    ul.setAttribute("id", "nav_bar");
+
+    for (var arg in args) {
+        console.log(arg)
+        ul.innerHTML += "<li><a class=\"page-scroll\" href=#" + args[arg][1]  +" " + "data-toggle=\"pill\">" + args[arg][0] + "</a></li>"
+    }
+
+    div2.appendChild(ul);
+    div1.appendChild(div2);
+    section.appendChild(div1);
+    document.body.insertBefore(section, body.firstChild);
+
+
+}
+
 
 // FOR ADMIN
 

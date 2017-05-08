@@ -110,6 +110,9 @@ if (!$database) {
             crossorigin="anonymous"></script>
     <![endif]-->
 
+    <script src="dynamic_part.js"></script>
+
+
 </head>
 
 <body id="page-top" class="index">
@@ -150,6 +153,25 @@ $havePlot = mysqli_num_rows($plot_res);
         </div>
 
 </header>
+
+<script>
+    add_navbar([["Trailer", "Trailers"],
+                ["Résumé", "Resume"], ["Acteur", "Acteurs"],
+                ["Directeur", "Directeurs"], ["Auteur", "Writers"],
+                ["Détails", "Details"]])
+</script>
+
+<section id="Resume" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center" id=resume_block>
+                <h2 class="section-heading">Résumé</h2>
+                <div class="content hideContent-plot" id="plot"><span> <?php echo $plot ?> </span></div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="Trailers">
     <div class="container">
@@ -192,6 +214,18 @@ $havePlot = mysqli_num_rows($plot_res);
         $("#intro").fadeIn(2000);
         getImagesMovie(titre, date);
         getTrailersMovie(titre, date)
+        $(window).scroll(function () {
+
+            console.log($(window).scrollTop());
+
+            if ($(window).scrollTop() > 892 - 61) {
+                $('#nav_bar').addClass('navbar-top');
+            }
+
+            if ($(window).scrollTop() < 892 -60) {
+                $('#nav_bar').removeClass('navbar-top');
+            }
+        });
     });
 
 </script>
