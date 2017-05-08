@@ -1,5 +1,5 @@
-<section id="Resume">
-    <div class="container" class="bg-light-gray">
+<section id="Resume" class="bg-light-gray">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id=resume_block>
                 <h2 class="section-heading" id="resume-title">Résumé</h2>

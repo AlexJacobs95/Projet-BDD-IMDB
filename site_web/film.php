@@ -161,13 +161,17 @@ $havePlot = mysqli_num_rows($plot_res);
                 ["Détails", "Details"]])
 </script>
 
+
+<section id="Trailer">
     <div class="container">
-        <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Bande-Annonce VO</h2>
-        </div>
-        <div align = "center">
-            <iframe src="http://www.dlclassifieds.com/admin/photos/no-video-available.jpg" allowfullscreen>
-            </iframe>
+        <div class="row">
+            <div class="col-lg-12 text-center" id=trailer-block>
+                <h2 class="section-heading" id="trailer-title">Trailer</h2>
+                <div align="center">
+                    <iframe src="http://www.dlclassifieds.com/admin/photos/no-video-available.jpg" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
         </div>
     </div>
 </section>
