@@ -62,7 +62,7 @@ include 'menubar.php';
             <!-- search bar -->
             <form action="search_results_2.php" method="post" style="display: inline-block">
 
-                <input type="text2" name="search" placeholder="Tapez ici votre recherche ..." style="display: block; height: 60px; margin-right: 20px; padding: 10px; float: left; border: 5px solid #fed136">
+                <input type="text2" name="search" placeholder="Tapez ici votre recherche ..." style="display: block; height: 60px; margin-right: 20px; padding: 10px; float: left; border: 5px solid #fed136" required>
                 <button class="btn btn-primary" id="search-button" type="submit" value="Find" style="display: block; margin: 0px;  width: 90px; height: 62px; padding: 0px; ">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
@@ -156,7 +156,6 @@ include 'menubar.php';
 
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("hi");
         $("#intro").fadeIn(2000);
     });
 

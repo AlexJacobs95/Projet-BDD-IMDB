@@ -274,7 +274,6 @@ include 'menubar.php';
 
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("hi");
         $("#intro").fadeIn(2000);
     });
 
