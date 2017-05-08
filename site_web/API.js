@@ -2,7 +2,6 @@ function getImagesMovie(title, date) {
     theMovieDb.search.getMovie({"query": encodeURI(title), "year": date}, function (data) {
         data = JSON.parse(data); // parse the data
         const data_ok = data['results'];
-        console.log(data);
         const posterPath = "https://image.tmdb.org/t/p/w500" + data_ok[0]["poster_path"];
         const backDropPath = "https://image.tmdb.org/t/p/w1000" + data_ok[0]["backdrop_path"];
 
@@ -23,17 +22,21 @@ function getImagesMovie(title, date) {
 }
 
 function getTrailersMovie(title, date) {
-    theMovieDb.search.getTrailers({"query": encodeURI(title), "year": date}, function(data) {
+    theMovieDb.search.getMovie({"query": encodeURI(title), "year": date}, function(data) {
         data = JSON.parse(data); //parse the data
-        const data_ok = data["results"];
-        console.log(data);
-        const videoPath = "https://www.youtube.com/embed/"+ data_ok[0]["key"]+"?controls=1";
-        if (data_ok[0]["key"] != null) {
-            $("iframe").attr("src", videoPath);
-            $("iframe").attr("height", '800');
-            $("iframe").attr("width", "500");
-            $("iframe").attr("align", "middle");
-        }
+        const id = data["results"][0]["id"];
+        console.log(id);
+        theMovieDb.movies.getTrailers({"id": id}, function(datat){
+            data = JSON.parse(datat); //parse the data
+            const videoPath = "https://www.youtube.com/embed/"+ data["youtube"][0]["source"]+"?controls=1";
+            console.log(videoPath);
+            if (data["youtube"][0]["source"] != null) {
+                $("iframe").attr("src", videoPath);
+                $("iframe").attr("height", '500');
+                $("iframe").attr("width", "800");
+                $("iframe").attr("align", "middle");
+            }
+        }, function (error) {})
     }, function (error) {
     })
 }

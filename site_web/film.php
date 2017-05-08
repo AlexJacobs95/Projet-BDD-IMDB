@@ -152,7 +152,15 @@ $havePlot = mysqli_num_rows($plot_res);
 
 </header>
 
-
+<section id="Trailers">
+    <div class="container">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Bande-Annonce VO</h2>
+        </div>
+        <iframe src="http://www.novelupdates.com/img/noimagefound.jpg" align="middle">
+        </iframe>
+    </div>
+</section>
 
 <section id="Resume">
     <div class="container">
