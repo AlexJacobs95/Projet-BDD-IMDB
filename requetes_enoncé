@@ -75,8 +75,17 @@ JOIN Role R3 ON T5.OID = R3.OID
 
 
 
-R4:
-	select distinct e.EpisodeID, e.SID From Episode e where no exists( Select a.OID from Role a, Personne p where p.Numero = a.Numero and a.Nom = P.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
+R4 Alex:
+	select distinct e.EpisodeID, e.SID From Episode e where not exists( Select a.OID from Role a, Personne p where p.Numero = a.Numero and a.Nom = p.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
+
+R4 Benj:
+SELECT distinct EpisodeID
+FROM Episode e
+WHERE NOT EXISTS(
+	SELECT Genre, EpisodeID
+	FROM Role INNER Join Personne on  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
+	WHERE genre = 'm' AND OID = e.EpisodeID
+    )
 
 R5: :'(
 

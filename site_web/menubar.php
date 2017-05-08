@@ -45,7 +45,7 @@ if (isset($_GET['run_function_log_out'])) {
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a href="predefined_requete.php"> Requêtes Prédéfinies</a>
+                    <a href="welcome_page.php#predefined_query"> Requêtes Prédéfinies</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="welcome_page.php#recherche_avancee">Recherche avancée</a>
@@ -63,7 +63,7 @@ if (isset($_GET['run_function_log_out'])) {
                 ?>
                 <li>
                     <form action="search_results_2.php" method="post">
-                        <input type="text" name="search" placeholder="Recherche...">
+                        <input type="text" name="search" placeholder="Recherche..." required>
                     </form>
                 </li>
 

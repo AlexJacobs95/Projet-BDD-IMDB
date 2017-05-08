@@ -62,7 +62,7 @@
             if(!$database->query($requete)){
                 echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
             }
-            if($genre !="" ){
+            if($genre !="NA" ){
                 if(!$database->query("INSERT INTO Genre(ID, Genre) VALUES ('$id', '$genre')")){
                     echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
                 }
@@ -100,21 +100,57 @@
 
     function addSerie($data){
         global $database;
+        $id = $data["ID"];
+        $title = $data["title"];
+        $by = $data["beginyear"];
+        $ey = $data["endyear"];
+        $genre = $data["genre"];
+        $rating = $data["rating"];
         $res_serie = checkInDb($data, $data["type"]);
         if($res_serie){
             $_SESSION["error_add_serie"] = array('Serie already in Db');
         }
         else{
-            // insert into serie
+            $requete = "INSERT INTO Oeuvre(ID, Titre,  AnneeSortie, Note) VALUES ('$id', '$title', '$by', '$rating')";
+            if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "INSERT INTO Serie(SerieID, AnneeFin) VALUES ('$id', '$ey')";
+            if(!$database->query($requete)){
+                echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            if($genre !="NA" ){
+                if(!$database->query("INSERT INTO Genre(ID, Genre) VALUES ('$id', '$genre')")){
+                    echo "Echec lors de l'insertion dans la table : (" . $database->errno . ") " . $database->error;
+                }
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_add_serie"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_serie");
     }
 
     function deleteSerie($data){
         global $database;
+        $id = $data["ID"];
         $res_serie = checkInDb($data, $data['type']);
         if(!$res_serie){
             $_SESSION["error_delete_serie"] = array("Serie not exist in Db");
+        }
+        else{
+            $requete = "Delete From Serie WHERE  SerieID = \"$id\"";
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            if(!$database->query("Delete From Genre WHERE  ID = \"$id\"")){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            $requete = "Delete From Oeuvre WHERE  ID = \"$id\"" ;
+            if(!$database->query($requete)){
+                echo "Echec lors de la suppression dans la table : (" . $database->errno . ") " . $database->error;
+            }
+            global $query_succes_add;
+            $_SESSION["query_succes_delete_serie"] = array($query_succes_add);
         }
         header("Location: ./administrator_action_page.php#op_on_serie");
     }
@@ -126,7 +162,7 @@
             $_SESSION["error_add_episode"] = array("Episode Already in Db");
         }
         else{
-            // insert episode into table Episode
+
         }
         header("Location : ./administrator_action_page.php#op_on_episode");
     }
@@ -347,13 +383,19 @@
             "title" => $_POST["serie_name"],
             "beginyear" => $_POST["begin_year"],
             "endyear" => "0",
-            "genre" => $_POST["genre_serie"],
-            "rating" => $_POST["rating_note_serie"],
+            "genre" => "NA",
+            "rating" => "-1",
             "ID" => $id,
             "type" => "serie"
         );
         if($_POST["end_year"] !=""){
             $data['endyear'] = $_POST["end_year"];
+        }
+        if($_POST["genre_serie"] != ""){
+            $data["genre"] = $_POST["genre_serie"];
+        }
+        if($_POST["rating_note_serie"] != ""){
+            $data["rating"] = $_POST["rating_note_serie"];
         }
 		addSerie($data);
 	}
@@ -369,9 +411,11 @@
 		deleteSerie($data);
 	}
 	else if(isset($_POST['episode_add'])){
+        $name = $_POST['serie_name'];
+        $id = "\"$name\""." (".$_POST["begin_year"].")";
 	    $data = array(
-	        "serietitle" => $_POST['serie_name'],
-            "episodetitle" => $_POST['episode_name'],
+	        "serieID" => $id,
+            "episodeID" =>"", // ne vois pas comment le recréer
             "episodeNumber" => "NA",
             "seasonNumber" => "NA",
             "type" => "episode"

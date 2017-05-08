@@ -3,7 +3,16 @@ Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
 Page de recherche avancé de site web.
 -->
- <?php session_start(); ?>
+ <?php session_start();
+ function displayMessage($key){
+     if(isset($_SESSION[$key])) {
+         foreach ($_SESSION[$key] as $succes) {
+             echo "<p> $succes </p>";
+         }
+         $_SESSION[$key] = null;
+     }
+ }
+ ?>
 
  <!DOCTYPE html>
 <html>
@@ -48,9 +57,19 @@ Page de recherche avancé de site web.
                 		cursor: pointer;
                 		border-radius: 4px;
                 	}
-                    input[type=text]{
+                    input[type="text_field"]{
+                        width: 500px;
+                        height: 50px;
+                        box-sizing: border-box;
+                        border: 2px solid #fed136;
+                        font-size: 16px;
                         color: black;
-                        width: 100%;
+                        background-color: white;
+                        background-position: 10px 10px;
+                        background-repeat: no-repeat;
+                        padding: 0px 20px 0px 40px;
+                        -webkit-transition: width 0.4s ease-in-out;
+                        transition: width 0.4s ease-in-out;
                     }
                 </style>
                     <div class="intro-heading">Panneau Administrateur</div> 
@@ -99,29 +118,20 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Comptes Administrateur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_admin'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_admin'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_admin"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_admin'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_admin'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_admin"] = null;  ?>
+                    <?php displayMessage("query_succes_add_admin"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_admin") ?>
+                </div>
+
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="email" name="email" placeholder="Enter a email" required>
+                        <input type="email" class="form-control" name="email" placeholder="Enter a email" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="password" name="pswd" placeholder="Enter a password" required>
+                        <input type="password" class="form-control" name="pswd" placeholder="Enter a password" required>
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="admin_add">Ajout</button>
@@ -133,26 +143,16 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_admin'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_admin'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_admin"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_admin"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_admin'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_admin'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_admin"] = null;  ?>
+                    <?php  displayMessage("error_delete_admin") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="email" name="email" placeholder="Enter a email" required>
+                        <input type="email" class="form-control" name="email" placeholder="Enter a email" required>
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name="admin_delete">Suppression</button>
@@ -167,35 +167,25 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Film</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_film'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_film'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_film"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_film'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_film'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_film"] = null;  ?>
-                </div>
-                <?php endif; ?>
+                 <div class="form-errors">
+                     <?php displayMessage("query_succes_add_film"); ?>
+                 </div>
+                 <div class="form-errors">
+                     <?php  displayMessage("error_add_film") ?>
+                 </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="film_name" placeholder="Enter the name" required>
+                        <input type="text_field" class="form-control" name="film_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="year_film" placeholder="Enter the year" required>
+                        <input type="text_field" class="form-control" name="year_film" placeholder="Enter the year" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="genre_film" placeholder="Enter the genre(optional)">
+                        <input type="text_field" class="form-control" name="genre_film" placeholder="Enter the genre(optional)">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="rating_note_film" placeholder="Enter a rating note (optional)">
+                        <input type="text_field" class="form-control" name="rating_note_film" placeholder="Enter a rating note (optional)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="film_add">Ajout</button>
@@ -207,29 +197,19 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_film'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_film'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_film"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_film"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_film'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_film'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_film"] = null;  ?>
+                    <?php  displayMessage("error_delete_film") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="film_name" placeholder="Enter the name" required>
+                        <input type="text_field" class="form-control" name="film_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="year_film" placeholder="Enter the year" required>
+                        <input type="text_field" class="form-control" name="year_film" placeholder="Enter the year" required>
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name="film_delete">Suppression</button>
@@ -243,38 +223,28 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Série</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_serie'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_serie'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_serie"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_serie'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_serie"] = null;  ?>
+                    <?php displayMessage("query_succes_add_serie"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_serie") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="serie_name" placeholder="Enter the name" required>
+                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="genre_serie" placeholder="Enter the genre (optional)">
+                        <input type="text_field" class="form-control" name="genre_serie" placeholder="Enter the genre (optional)">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="end_year" placeholder="Enter the end year (optional)">
+                        <input type="text_field" class="form-control" name="end_year" placeholder="Enter the end year (optional)">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="rating_note_serie" placeholder="Enter a rating note(optional)">
+                        <input type="text_field" class="form-control" name="rating_note_serie" placeholder="Enter a rating note(optional)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="serie_add">Ajout</button>
@@ -286,31 +256,21 @@ Page de recherche avancé de site web.
                     <h4>Suppression</h4>
                 </div>
 
-                <?php if(isset($_SESSION['query_succes_delete_serie'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_delete_serie'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_delete_serie"] = null;  ?>
+                    <?php displayMessage("query_succes_delete_serie"); ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_delete_serie'])) : ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_delete_serie'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_delete_serie"] = null;  ?>
+                    <?php  displayMessage("error_delete_serie") ?>
                 </div>
-                <?php endif; ?>
 
                 <form action="/action_administrator.php" method="post">
 
                     <div class="form-group text-center">
-                        <input type="text" name="serie_name" placeholder="Enter the name" required>
+                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name" required>
                     </div>
 
                     <div class="form-group text-center">
-                        <input type="text" name="begin_year" placeholder="Enter the begin year" required>
+                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year" required>
                     </div>
 
                     <div class="col-lg-12 text-center">
@@ -325,38 +285,31 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Episode</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_episode'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_episode'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_episode"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_episode'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_episode'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_episode"] = null;  ?>
+                    <?php displayMessage("query_succes_add_episode"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_episode") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="serie_name" placeholder="Enter the name of the serie" required>
+                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name of the serie" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="episode_name" placeholder="Enter the episode name" required>
+                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year of the serie name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="season_number" placeholder="Enter the season number">
+                        <input type="text_field" class="form-control" name="episode_name" placeholder="Enter the episode name" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="episode_number" placeholder="Enter the episode number">
+                        <input type="text_field" class="form-control" name="season_number" placeholder="Enter the season number">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="rating_note_episode" placeholder="Enter a rating note (optional)">
+                        <input type="text_field" class="form-control" name="episode_number" placeholder="Enter the episode number">
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text_field" class="form-control" name="rating_note_episode" placeholder="Enter a rating note (optional)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="episode_add">Ajout</button>
@@ -370,32 +323,22 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Directeur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_dir'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_dir'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_dir"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_dir'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_dir'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_dir"] = null;  ?>
+                    <?php displayMessage("query_succes_add_dir"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_dir") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text" name="director_firstname" placeholder="Enter the FirstName" required>
+                        <input type="text_field" class="form-control" name="director_firstname" placeholder="Enter the FirstName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="director_secondname" placeholder="Enter the SecondName" required>
+                        <input type="text_field" class="form-control" name="director_secondname" placeholder="Enter the SecondName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="director_add">Ajout</button>
@@ -409,32 +352,22 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Auteur</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_writer'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_writer'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_writer"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_writer'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_writer'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_writer"] = null;  ?>
+                    <?php displayMessage("query_succes_add_writer"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_writer") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                         <input type="text" name="writer_firstname" placeholder="Enter the FirstName" required>
+                         <input type="text_field" class="form-control" name="writer_firstname" placeholder="Enter the FirstName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="writer_secondname" placeholder="Enter the SecondName" required>
+                        <input type="text_field" class="form-control" name="writer_secondname" placeholder="Enter the SecondName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="writer_add">Ajout</button>
@@ -448,32 +381,22 @@ Page de recherche avancé de site web.
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Opérations sur Acteur/Actrice</h2>
                     <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_actor'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_actor'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_actor"] = null;  ?>
                 </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_actor'])): ?>
                 <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_actor'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_actor"] = null;  ?>
+                    <?php displayMessage("query_succes_add_actor"); ?>
                 </div>
-                <?php endif; ?>
+                <div class="form-errors">
+                    <?php  displayMessage("error_add_actor") ?>
+                </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                         <input type="text" name="actor_firstname" placeholder="Enter the FirstName" required>
+                         <input type="text_field" class="form-control" name="actor_firstname" placeholder="Enter the FirstName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="actor_secondname" placeholder="Enter the SecondName" required>
+                        <input type="text_field" class="form-control" name="actor_secondname" placeholder="Enter the SecondName" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="actor_add">Ajout</button>

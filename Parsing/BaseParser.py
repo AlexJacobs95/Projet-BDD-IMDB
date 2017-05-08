@@ -9,6 +9,13 @@ def get_nom_prenom(line):
     if len(nom_prenom.split(',')) == 1:
         # Si il y a que un nom
         nom = nom_prenom
+        if '(' in nom and ')' in nom:
+            # Si plusieurs personnes avec le meme nom et que donc il y a un chiffre romain en plus
+            # ex : Herry, thierry (IV)
+            begin = nom.index('(')
+            end = nom.index(')')
+            numero = nom[begin+1:end]
+            nom = nom.replace(nom[begin:end + 1], "")
     else:
         if len(nom_prenom.split(',')) == 2:
             nom, prenom = nom_prenom.split(',')

@@ -1,5 +1,5 @@
 ENDLINE = "--------------------------------------------------------------------------------\n"
-
+from BaseParser import *
 
 def output_langues(dico):
     of = open("../SQL_data_files/langues_ok.txt", 'w')
@@ -61,7 +61,8 @@ def parse(infIle, infoName, begin_line):
                                     infoName: getSimpleInfo(line)
                                     }
 
-                    resDic[ID] = dicEntry
+                    if isBetween2000and2016(dicEntry["OeuvreID"]):
+                        resDic[ID] = dicEntry
             line_number += 1
 
     return resDic
