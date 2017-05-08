@@ -33,7 +33,7 @@ function add_resizable_table(number_roles) {
         wrapper.appendChild(toWrap);
         var link_div = document.createElement('div');
         var link = document.createElement('a');
-        var linkText = document.createTextNode("Show all");
+        var linkText = document.createTextNode("Show more");
         link.appendChild(linkText);
         link.href = "#Acteurs";
         link_div.appendChild(link);
@@ -61,8 +61,7 @@ function add_plots(havePlot) {
 
         $('#plot').find('span').text('Aucun résumé disponible');
         $('#plot.content.hideContent-plot').height("auto");
-        $('#Resume').css("padding-top", 50);
-        $('#Resume').css("padding-bottom", 50);
+
         $('#resume_block').css("padding-bottom", 0);
         $('#resume_block').css("padding-top", 0);
 
