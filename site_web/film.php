@@ -204,8 +204,6 @@ $havePlot = mysqli_num_rows($plot_res);
         getTrailersMovie(titre, date)
         $(window).scroll(function () {
 
-            console.log($(window).scrollTop());
-
             if ($(window).scrollTop() > 892 - 61) {
                 $('#nav_bar').addClass('navbar-top');
             }
@@ -235,7 +233,7 @@ if (isset($_SESSION['logged'])) {
 
 <script>
 
-    var plot = "<?php echo $plot;?>";
+    var plot = "<?php echo addslashes($plot);?>";
     var logged = "<?php echo $logged;?>";
     console.log(logged);
     if (logged === 1) {

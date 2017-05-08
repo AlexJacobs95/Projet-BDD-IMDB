@@ -101,7 +101,6 @@ function add_navbar(args) {
     ul.setAttribute("id", "nav_bar");
 
     for (var arg in args) {
-        console.log(arg)
         ul.innerHTML += "<li><a class=\"page-scroll\" href=#" + args[arg][1]  +" " + "data-toggle=\"pill\">" + args[arg][0] + "</a></li>"
     }
 
