@@ -1,3 +1,5 @@
+from BaseParser import *
+
 def output_ratings(dico):
     of = open("../SQL_data_files/ratings_ok.txt", 'w')
     for key in dico:
@@ -34,10 +36,11 @@ def test():
 
 def parse():
     ratings = {}
-    ID = 0
+    ID = -1
     with open("../IMDB_files/ratings.list") as f:
         line_counter = 0
         for line in f:
+            ID += 1
             if line_counter > 27:
                 if line == "------------------------------------------------------------------------------\n" and \
                    line_counter > 1000:
@@ -47,10 +50,8 @@ def parse():
                         note = {"ID": get_id(line),
                                 "note": get_note(line)
                                 }
-
-                        ratings[ID] = note
-                        ID += 1
-
+                        if isBetween2000and2016(note["ID"]):
+                            ratings[ID] = note
             line_counter +=1
 
 
