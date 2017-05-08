@@ -50,6 +50,7 @@ Page de recherche avancé de site web.
                 	}
                     input[type=text]{
                         color: black;
+                        width: 100%;
                     }
                 </style>
                     <div class="intro-heading">Panneau Administrateur</div> 
