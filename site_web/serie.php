@@ -147,20 +147,23 @@ $note_fomat = '%g/10';
 $plot = $plot_info['Plot'];
 $havePlot = mysqli_num_rows($plot_res);
 
-$res = [];
-foreach(range(1, $num ) as $current) {
-    $res[$current] = array();
-}
-
+$i = 0;
 while ($episodes_row = mysqli_fetch_array($episodes)) {
     $sn = $episodes_row['Saison'];
     $eID = $episodes_row['EpisodeID'];
     $eNum = $episodes_row['NumeroE'];
-    if ($sn and $eID != -1) {
+    if ($sn != -1 ) {
         $title = titleFromID($eID, $database);
         $res[$sn][(string)$eNum] = array();
         $res[$sn][(string)$eNum]["id"] = utf8_encode($eID);
         $res[$sn][(string)$eNum]["title"] = utf8_encode($title);
+    } else {
+        $i++;
+        $inconnue = true;
+        $res["inconnue"][(string)$i] = array();
+        $res["inconnue"][(string)$i]["id"] = utf8_encode($eID);
+        $res["inconnue"][(string)$i]["title"] = utf8_encode($title);
+
     }
 
 
@@ -229,7 +232,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         <div class="col-sm-4">
             <div class="details-member">
                 <h3>Saisons</h3>
-                <h4><?php echo sprintf("%d", $num ); ?></h4>
+                <h4><?php if ($num != -1){echo sprintf("%d", $num );} else {echo "1";} ?></h4>
             </div>
         </div>
         <div class="col-sm-4">
@@ -259,10 +262,17 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         </div>
 
         <?php
+        if ($num != 0) {
             echo "<ul class=\"nav nav-pills nav-justified\">";
-        foreach(range(1, $num ) as $current) {
-            echo "<li><a data-toggle=\"pill\" onClick=getEpisodes($current)>$current</a></li>";
-        }
+            foreach (range(1, $num) as $current) {
+                echo "<li><a data-toggle=\"pill\" onClick=getEpisodes($current)>$current</a></li>";
+            }
+            if ($inconnue){
+                echo "<li><a data-toggle=\"pill\" onClick=getEpisodes(\"inconnue\")>Inconnue</a></li>";
+
+            }
+        } else echo "<div style='font-family: \"Roboto Slab\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;
+    font-size: 20px;' align='center'>Aucune Saison disponible</div>";
         echo "</ul>";
 
         ?>
@@ -272,23 +282,23 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
         <script>
 
-
+            console.log(<?php echo json_encode($res); ?>);
             function getEpisodes(saison)
             {
 
                 var array = <?php echo json_encode($res); ?>;
-                console.log(array);
+                console.log(array[saison]);
 
                 var div = document.getElementById('episodes_place');
 
                 ul = document.createElement('ul'); // create an arbitrary ul element
                 ul.setAttribute("class", "list-group text-center");
 
-                for(var i in array[saison]) {
+                for (var i in array[saison]) {
                     // create an arbitrary li element
                     console.log(array[saison][i]['title']);
                     var li = document.createElement('li'),
-                        content = document.createTextNode(Number(i)+ " - " + array[saison][i]["title"]); // create a textnode to the document
+                        content = document.createTextNode(Number(i) + " - " + array[saison][i]["title"]); // create a textnode to the document
                     li.setAttribute("class", "list-group-item");
 
                     li.appendChild(content);
@@ -299,10 +309,10 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                     a.setAttribute("class", "episode");
 
                     ul.appendChild(a); // append the created li element above to the ul element
-                }
 
-                div.innerHTML='';
+                div.innerHTML = '';
                 div.appendChild(ul); // finally the ul element to the div with an id of placeholder
+                }
             }
         </script>
 
