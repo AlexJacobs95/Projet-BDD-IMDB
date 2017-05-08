@@ -82,14 +82,11 @@ R4 Benj:
 SELECT distinct EpisodeID
 FROM Episode e
 WHERE NOT EXISTS(
-	SELECT *
-    FROM(
-		SELECT Personne.Genre, EpisodeID
-		FROM(
-			SELECT Nom, Prenom, Numero, EpisodeID
-			From Role INNER JOIN Episode on Role.OID = EpisodeID) as T
-		INNER Join Personne on  T.Nom  = Personne.Nom AND T.Prenom  = Personne.Prenom AND T.Numero  = Personne.Numero) AS T
-	WHERE Genre ='m' AND EpisodeID = e.EpisodeID)
+	SELECT Genre, EpisodeID
+	FROM Role INNER Join Personne on  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
+	WHERE genre = 'm' AND OID = e.EpisodeID
+    )
+
 R5: :'(
 
 R6: :'(
