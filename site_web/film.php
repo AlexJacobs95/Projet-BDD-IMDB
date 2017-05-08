@@ -110,6 +110,9 @@ if (!$database) {
             crossorigin="anonymous"></script>
     <![endif]-->
 
+    <script src="dynamic_part.js"></script>
+
+
 </head>
 
 <body id="page-top" class="index">
@@ -151,7 +154,14 @@ $havePlot = mysqli_num_rows($plot_res);
 
 </header>
 
-<section id="Trailers">
+<script>
+    add_navbar([["Trailer", "Trailers"],
+                ["Résumé", "Resume"], ["Acteur", "Acteurs"],
+                ["Directeur", "Directeurs"], ["Auteur", "Writers"],
+                ["Détails", "Details"]])
+</script>
+
+<section id="Trailers" class="bg-light-gray">
     <div class="container">
         <div class="col-lg-12 text-center">
             <h2 class="section-heading">Bande-Annonce VO</h2>
@@ -192,6 +202,18 @@ $havePlot = mysqli_num_rows($plot_res);
         $("#intro").fadeIn(2000);
         getImagesMovie(titre, date);
         getTrailersMovie(titre, date)
+        $(window).scroll(function () {
+
+            console.log($(window).scrollTop());
+
+            if ($(window).scrollTop() > 892 - 61) {
+                $('#nav_bar').addClass('navbar-top');
+            }
+
+            if ($(window).scrollTop() < 892 -60) {
+                $('#nav_bar').removeClass('navbar-top');
+            }
+        });
     });
 
 </script>
@@ -213,8 +235,9 @@ if (isset($_SESSION['logged'])) {
 
 <script>
 
-    var plot = "<?php echo addslashes($plot);?>";
-    var logged = <?php echo $logged;?>;
+    var plot = "<?php echo $plot;?>";
+    var logged = "<?php echo $logged;?>";
+    console.log(logged);
     if (logged === 1) {
         addAdminElementsFilmEpisode(plot);
     }
