@@ -332,7 +332,6 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("hi");
         $("#intro").fadeIn(2000);
     });
 
@@ -346,7 +345,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
-        getImagesTvShow(titre, date)
+        getImagesTvShow(titre, date);
     });
 
 </script>
