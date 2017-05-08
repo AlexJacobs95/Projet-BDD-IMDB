@@ -70,7 +70,7 @@
     <!-- Popup Div Starts Here -->
     <div class="popupAdd">
         <!-- Contact Us Form -->
-        <form class="form_popup" action="#" id="formDetails" method="post" name="form">
+        <form class="form_popup" action="#" id="formResume" method="post" name="form">
             <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerResume')">
             <h2 class="h2popup">Modifier le résumé </h2>
             <hr class="hrpopup">
