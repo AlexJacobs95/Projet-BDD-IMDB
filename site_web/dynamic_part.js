@@ -131,7 +131,12 @@ function addAdminElements(section) {
     button.className += "addButton";
     button.id += section.id;
     const add = document.createElement('img');
-    add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAUklEQVRYhe3UuwkAIBAE0e1aDsHaLMkSTE4wEgU/CDOwmRwvUiL6vCQpvgRkHwAAAABsL3XHRyu+mbe2AogHAGEFMFs7/iwAAAAAMB364YiuVQFsWj2TcHi9tAAAAABJRU5ErkJggg==";
+    if (section.id == "resume-title"){
+        add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA50lEQVRYR82XQQ7DIAwEycvbvLyVoxBBMbDYa9RccgFmbEDZHGnP874x+f1Qjw18gb5uzplSqiSiBUp4rrWSiBTQ4I1ElMAIXklECCDwR4ItsAIXiZMpsAyXG8ESMMGlBQwBM5wh4IJ7BdxwjwAFbhWgwS0CVPiqAB2+IhACRwXC4IhAKHwmEA5nCjRRC416s28B0gUzvNcBgZbBEYpWaMW/47QOfCQoABKuyrNIT+BKKwMJCry3BdIBNUIXQs0PBnsLyvVo1WqSoy3YIjG7htbOwvP+UqA8hHAlwEC1WPQMAOtPh6gCX5L0PiE3hQmGAAAAAElFTkSuQmCC";
+    } else {
+        add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADMklEQVRYR8XXSaiWZRQH8N8No6I0a5PrBlKkdBNEVEjYQFlERmYtmmiAWigRGi0SF1HRALXJBigqW1UOURgNWjYuzAYjaHIbZRqVqYjE//K88vL1vfc+771iZ/MtvvOc83/P+D8j6mUqFuACzMHJmFae/4GfsRXv4Q38VWN6pELpNCzHYhyD/fgWPyCOI8cjerMwBbuxGg8VvU43YwGIs5VYgiOwHi/gHfzZYTFRugg3lGgF7GNYgT3D3nQBOBWv4Qy8ibvxXUW02iqzi/MA+hJX4adBG8MAzMUGHIc78XxPx4Pqt+KJkq6A+aqtMAggX/4RjsRl+GSSzpvn55bCTBrOaUeiDSA5/wynYP4hdN6AOA9vl1Sejb35ow3gYdyDmw5B2LsCdzuewoO4tw0gLZTWCsKEvlZSJ5Gqni+66aLzS8v+2ETgOdyIVG6fal+HA7iyFnHprHTFs7gtANK7v5Sv72MoPjcWx/N6AIjqW0hNnBQAmXCZWunT13samiiAa/EKFgXAMyX8J/TM5WQiEF+/xXcAfI6jyoLpGYAJpyB+Ums7AyBINmFhX++TqIG4ysY8KwD24SXc3AEgrZYaaVZvWy1jO5I1PCi7Sn3902H3RVxTCyAApw8xNBaA33E9xgXwKz74P1OQIjwaZx7mGjhYhE+X+X/iGESjC9tE50B8JfKjbdgMhavxas8oTBRAM/xGizBVnlH8Lq44TABCeMILZjTLKNPwlrIotvUAsaYso4zxWknnfIFVuKMBECaUdRxKfUmtpcKSo97VasNMvV++fmaofJuQhCQsy4os+6EHjmrVu/AkHsB9edUGkFb8FKfjQmyuNlunmJWd3H9TIvAfShYzuXY+LnPhcnxYZ3tcrThfi7+L8+3Ni2G0PAMp1CzXTo6SFMtkJGF/FDtwMb5uG+s6TBKJzIRUbNpz6eDDCkR5+zjy9VvKqD/45WNFoPkvNXF/uYpy7yV/Oc3yu7MDQCZcvjL8MkdINu0j5cQbzfmg1BynuRPSHdfh2NL335ejswEShpNWDrvOHRmW/HI5TnM1d0oNgOZxJualA+d5s6Kz+3P3he2Gdod0puDGlX8BJ+erZNd+SnYAAAAASUVORK5CYII=";
+
+    }
     button.appendChild(add);
     section.insertBefore(button, section.children[1]);
     button.addEventListener("click", function () {

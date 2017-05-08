@@ -161,7 +161,6 @@ $havePlot = mysqli_num_rows($plot_res);
                 ["Détails", "Details"]])
 </script>
 
-<section id="Trailers" class="bg-light-gray">
     <div class="container">
         <div class="col-lg-12 text-center">
             <h2 class="section-heading">Bande-Annonce VO</h2>
@@ -236,7 +235,7 @@ if (isset($_SESSION['logged'])) {
     var plot = "<?php echo addslashes($plot);?>";
     var logged = <?php echo $logged;?>;
     console.log(logged);
-    if (logged === 1) {
+    if (logged == 1) {
         addAdminElementsFilmEpisode(plot);
     }
 </script>
