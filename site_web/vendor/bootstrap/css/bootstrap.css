@@ -209,7 +209,7 @@ input[type="date"] {
 }
 
 input[type="text3"] {
-  width: 500px;
+  width: 400px;
   height: 50px;
   box-sizing: border-box;
   border: 2px solid #fed136;
@@ -5943,7 +5943,7 @@ button.list-group-item-danger.active:focus {
   color: #000;
   text-shadow: 0 1px 0 #fff;
   filter: alpha(opacity=20);
-  opacity: .2;
+  opacity: .7;
 }
 .close:hover,
 .close:focus {
@@ -5951,7 +5951,7 @@ button.list-group-item-danger.active:focus {
   text-decoration: none;
   cursor: pointer;
   filter: alpha(opacity=50);
-  opacity: .5;
+  opacity: 1;
 }
 button.close {
   -webkit-appearance: none;

@@ -308,6 +308,7 @@ section {
   padding: 100px 0;
 }
 section h2.section-heading {
+  display: inline-block;
   font-size: 40px;
   margin-top: 0;
   margin-bottom: 30px;

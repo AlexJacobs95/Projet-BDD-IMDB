@@ -6,9 +6,9 @@ function getImagesMovie(title, date) {
         const backDropPath = "https://image.tmdb.org/t/p/w1000" + data_ok[0]["backdrop_path"];
 
         if (data_ok[0]["poster_path"] != null) {
-            $('img').attr('src', posterPath);
-            $("img").css("height", 600);
-            $("img").css("width", 'auto');
+            $('.poster').attr('src', posterPath);
+            $('.poster').css("height", 600);
+            $('.poster').css("width", 'auto');
 
 
         }
@@ -25,11 +25,9 @@ function getTrailersMovie(title, date) {
     theMovieDb.search.getMovie({"query": encodeURI(title), "year": date}, function(data) {
         data = JSON.parse(data); //parse the data
         const id = data["results"][0]["id"];
-        console.log(id);
         theMovieDb.movies.getTrailers({"id": id}, function(datat){
             data = JSON.parse(datat); //parse the data
             const videoPath = "https://www.youtube.com/embed/"+ data["youtube"][0]["source"]+"?controls=1";
-            console.log(videoPath);
             if (data["youtube"][0]["source"] != null) {
                 $("iframe").attr("src", videoPath);
                 $("iframe").attr("height", '500');
@@ -47,8 +45,6 @@ function getImagesTvShow(title, date) {
         const data_ok = data['results'];
         const posterPath = "https://image.tmdb.org/t/p/w500" + data_ok[0]["poster_path"];
         const backDropPath = "https://image.tmdb.org/t/p/w1000" + data_ok[0]["backdrop_path"];
-        console.log(backDropPath);
-        console.log(data_ok[0]["poster_path"]);
 
         if (data_ok[0]["poster_path"] != null) {
             $('img').attr('src', posterPath);
@@ -70,7 +66,6 @@ function getPersonPic(firstname, lastname) {
     theMovieDb.search.getPerson({"query": encodeURI(firstname + ' ' + lastname)}, function (data) {
         data = JSON.parse(data); // parse the data
         const data_ok = data['results'];
-        console.log(data_ok)
         if (data_ok[0]["profile_path"] != null) {
             const profilePic = "https://image.tmdb.org/t/p/w500" + data_ok[0]["profile_path"];
             $('img').attr('src', profilePic);

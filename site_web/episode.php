@@ -171,7 +171,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id="actors">
-                <h2 class="section-heading">Acteurs</h2>
+                <h2 class="section-heading" id="actor-title">Acteurs</h2>
                 <?php
                 echo "<table border=1 frame=void rules=rows id = \"actors_table\">";
 
@@ -200,7 +200,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Directeurs</h2>
+                <h2 class="section-heading" id="director-title">Directeurs</h2>
             </div>
         </div>
 
@@ -225,11 +225,11 @@ $havePlot = mysqli_num_rows($plot_res);
 </section>
 
 
-<section id="Writers" class="bg-light-gray">
+<section id="Auteurs" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Auteurs</h2>
+                <h2 class="section-heading" id="writer-title">Auteurs</h2>
             </div>
         </div>
 
@@ -246,7 +246,6 @@ $havePlot = mysqli_num_rows($plot_res);
             echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
             echo "</td>";
             echo "</tr>";
-            //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
         echo "</table>";
         ?>
@@ -257,7 +256,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Détails</h2>
+                <h2 class="section-heading" id="detail-title">Détails</h2>
             </div>
         </div>
         <div id="div_1">
@@ -276,6 +275,10 @@ $havePlot = mysqli_num_rows($plot_res);
 
     </div>
 </section>
+
+<?php
+include "popUpForm.php";
+?>
 
 </body>
 <!-- jQuery -->
@@ -307,6 +310,15 @@ $havePlot = mysqli_num_rows($plot_res);
     var number_roles = "<?php echo $nb_roles;?>";
     add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
+
+<?php
+if (isset($_SESSION['logged'])) {
+    echo "<script>";
+    echo "addAdminElementsFilmEpisode()";
+    echo "</script>";
+}
+
+?>
 
 
 </html>

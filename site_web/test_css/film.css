@@ -159,9 +159,9 @@ a:active {
 
 }
 
-img {
-    height: 300px;
-    width: 200px;
+.poster {
+    height: 500px;
+    width: auto;
     display: block;
     margin: 0 auto;
     padding-bottom: 100px;
@@ -209,6 +209,101 @@ tr {
     text-align: center;
 }
 
+.addButton {
+    background: transparent;
+    padding: 10px;
+    border: none;
+}
+
+.formContainer {
+    width: 100%;
+    height: 100%;
+    opacity: .95;
+    top: 0;
+    left: 0;
+    display: none;
+    position: fixed;
+    background-color: #313131;
+    overflow: auto
+}
+
+img.close {
+    position: absolute;
+    right: -17px;
+    top: -15px;
+    cursor: pointer
+}
+
+div.popupAdd {
+    position: absolute;
+    left: 50%;
+    top: 17%;
+    margin-left: -202px;
+    font-family: 'Raleway', sans-serif
+}
+
+.form_popup {
+    max-width: 500px;
+    min-width: 250px;
+    padding: 10px 50px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    font-family: raleway;
+    background-color: #fff
+}
+
+p {
+    margin-top: 30px
+}
+
+.h2popup {
+    background-color: #D7D7D7;
+    padding: 20px 35px;
+    margin: -10px -50px;
+    text-align: center;
+    border-radius: 10px 10px 0 0
+}
+
+.hrpopup {
+    margin: 10px -50px;
+    border: 0;
+    border-top: 1px solid #ccc
+}
+
+input[type=text3] {
+    padding: 10px;
+    color: black;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    padding-left: 40px;
+    font-size: 16px;
+    font-family: raleway
+}
+
+#name {
+    background-repeat: no-repeat;
+    background-position: 5px 7px
+}
+
+#email {
+    background-repeat: no-repeat;
+    background-position: 5px 7px
+}
+
+.submit_form {
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    background-color: #FFBC00;
+    color: #fff;
+    border: 1px solid #FFCB00;
+    padding: 10px 0;
+    margin-top: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px
+}
 
 
 

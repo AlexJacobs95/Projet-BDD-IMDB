@@ -5,10 +5,8 @@ INFO-H-303 : Bases de données - Projet IMBD.
 
 <?php
 include "tools.php";
-
 session_start();
 $id = urldecode($_GET['id']);
-echo $id;
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -142,7 +140,8 @@ $havePlot = mysqli_num_rows($plot_res);
                 <div id = "image"></div>
 
                 <div class="col-lg-4" style="display: block; margin: auto">
-                    <img src="http://www.novelupdates.com/img/noimagefound.jpg">
+                    <img class="poster"
+                         src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
                 </div>
                 <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
                 <div class=infos><?php extractGenres($genres) ?></div>
@@ -180,7 +179,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id="actors">
-                <h2 class="section-heading">Acteurs</h2>
+                <h2 class="section-heading" id="actor-title">Acteurs</h2>
                 <?php
                 echo "<table border=1 frame=void rules=rows id = \"actors_table\">";
 
@@ -209,7 +208,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Directeurs</h2>
+                <h2 class="section-heading" id="director-title">Directeurs</h2>
             </div>
         </div>
 
@@ -233,11 +232,11 @@ $havePlot = mysqli_num_rows($plot_res);
     </div>
 </section>
 
-<section id="Writers" class="bg-light-gray">
+<section id="Auteurs" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Auteurs</h2>
+                <h2 class="section-heading" id="writer-title">Auteurs</h2>
             </div>
         </div>
 
@@ -264,7 +263,7 @@ $havePlot = mysqli_num_rows($plot_res);
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Détails</h2>
+                <h2 class="section-heading" id="detail-title">Détails</h2>
             </div>
         </div>
         <div id="div_1">
@@ -284,6 +283,9 @@ $havePlot = mysqli_num_rows($plot_res);
     </div>
 </section>
 
+<?php
+include "popUpForm.php";
+?>
 </body>
 <!-- jQuery -->
 
@@ -322,5 +324,13 @@ $havePlot = mysqli_num_rows($plot_res);
     add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
+<?php
+if (isset($_SESSION['logged'])) {
+    echo "<script>";
+    echo "addAdminElementsFilmEpisode()";
+    echo "</script>";
+}
+
+?>
 
 </html>
