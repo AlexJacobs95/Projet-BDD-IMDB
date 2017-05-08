@@ -114,6 +114,7 @@ if (!$database) {
             integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
             crossorigin="anonymous"></script>
     <![endif]-->
+    <script src="dynamic_part.js"></script>
 
 
 
@@ -196,17 +197,9 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 </header>
 
-<section id="Tabs" class="bg-light-gray">
-    <div class="container">
-        <div class="col-lg-12 text-center">
-            <ul class="nav nav-pills nav-justified">
-                <li><a class="page-scroll" href="#Details" data-toggle=\"pill\">Détails</a></li>
-                <li><a class="page-scroll" href="#Saisons" data-toggle=\"pill\">Saisons</a></li>
-
-            </ul>
-        </div>
-    </div>
-</section>
+<script>
+add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons"]]);
+</script>
 
 <section id="Resume">
     <div class="container">
@@ -264,11 +257,15 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         <?php
         if ($num != 0) {
             echo "<ul class=\"nav nav-pills nav-justified\">";
+            $i = 0;
             foreach (range(1, $num) as $current) {
+
                 echo "<li><a data-toggle=\"pill\" onClick=getEpisodes($current)>$current</a></li>";
+
             }
             if ($inconnue){
                 echo "<li><a data-toggle=\"pill\" onClick=getEpisodes(\"inconnue\")>Inconnue</a></li>";
+
 
             }
         } else echo "<div style='font-family: \"Roboto Slab\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;
@@ -294,6 +291,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                 ul = document.createElement('ul'); // create an arbitrary ul element
                 ul.setAttribute("class", "list-group text-center");
 
+                var i = 0;
                 for (var i in array[saison]) {
                     // create an arbitrary li element
                     console.log(array[saison][i]['title']);
@@ -339,32 +337,34 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#intro").fadeIn(2000);
-    });
-
-</script>
-
 <script src="themoviedb.js"></script>
 <script src="API.js"></script>
+
 
 <script>
 
     var titre = "<?php echo $tire;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
+        $("#intro").fadeIn(2000);
         getImagesTvShow(titre, date);
+        $(window).scroll(function () {
+
+            console.log($(window).scrollTop());
+
+            if ($(window).scrollTop() > 892 - 61) {
+                $('#nav_bar').addClass('navbar-top');
+            }
+
+            if ($(window).scrollTop() < 892 -60) {
+                $('#nav_bar').removeClass('navbar-top');
+            }
+        });
+
     });
 
-</script>
-
-<script src="dynamic_part.js"></script>
-
-<script>
     var havePlot = "<?php echo $havePlot;?>";
-    add_dynamic_part_series(havePlot, 'hideContent-plot')
+    add_dynamic_part_series(havePlot, 'hideContent-plot');
 
 </script>
 
