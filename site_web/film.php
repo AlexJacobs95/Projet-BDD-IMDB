@@ -204,6 +204,13 @@ $havePlot = mysqli_num_rows($plot_res);
     add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
+<script>
+    var value = '@Request.RequestContext.HttpContext.Session["logged"]';
+    if (value != null) {
+
+    }
+</script>
+
 <?php
 if (isset($_SESSION['logged'])) {
 
