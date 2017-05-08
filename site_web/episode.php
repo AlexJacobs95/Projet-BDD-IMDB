@@ -189,13 +189,19 @@ $havePlot = mysqli_num_rows($plot_res);
 </script>
 
 <?php
+$logged = 0;
 if (isset($_SESSION['logged'])) {
-    echo "<script>";
-    echo "addAdminElementsFilmEpisode()";
-    echo "</script>";
+    $logged = 1;
 }
-
 ?>
 
+<script>
+
+    var plot = "<?php echo addslashes($plot);?>";
+    var logged = <?php echo $logged;?>;
+    if (logged === 1) {
+        addAdminElementsFilmEpisode(plot);
+    }
+</script>
 
 </html>

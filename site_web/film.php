@@ -204,8 +204,6 @@ $havePlot = mysqli_num_rows($plot_res);
     add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
-
-
 <?php
 $logged = 0;
 if (isset($_SESSION['logged'])) {
@@ -214,8 +212,6 @@ if (isset($_SESSION['logged'])) {
 ?>
 
 <script>
-
-    console.log("hi");
 
     var plot = "<?php echo addslashes($plot);?>";
     var logged = <?php echo $logged;?>;
