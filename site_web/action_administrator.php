@@ -299,56 +299,11 @@
             $genre = $data['gender'];
             $requete = "SELECT Prenom, Nom, Genre From Personne WHERE \"$prenom\" = Prenom and Nom = \"$nom\" and Genre = \"$genre\"";
         }
-		else if($type == "language"){
-			$requete = "SELECT  Langue FROM Langue
-						WHERE Langue = \"$data\"";
-		}
-		else if($type == "genre"){
-			$requete = "SELECT  Genre FROM Genre
-						WHERE Genre = \"$data\"";
-		}
-		else if($type == "country"){
-			$requete = "SELECT  Pays FROM Pays
-						WHERE Pays = \"$data\"";
-		}
 		$output = $database->query($requete);
 		if($row = $output->fetch_assoc()){
 			$result = true;
 		}
 		return $result;
-	}
-
-	function addGenre($genre){
-		global $database;
-		if(checkInDb($genre, "genre")){
-			$_SESSION["error_add_genre"]=array("Genre Already in Db");
-		}
-		else{
-			pass;
-		}
-		header("Location: ./administrator_action_page.php#op_on_genre");
-	}
-
-	function addCountry($country){
-		global $database;
-		if(checkInDb($country, "country")){
-			$_SESSION["error_add_country"]=array("Country Already in Db");
-		}
-		else{
-			pass;
-		}
-		header("Location: ./administrator_action_page.php#op_on_country");
-	}
-
-	function addLanguage($language){
-		global $database;
-		if(checkInDb($language, "language")){
-			$_SESSION["error_add_language"]=array("language Already in Db");
-		}
-		else{
-			pass;
-		}
-		header("Location: ./administrator_action_page.php#op_on_language");
 	}
 
 	if(isset($_POST['admin_add'])){
@@ -464,15 +419,6 @@
             $dataPerson['gender'] = $_POST['gender'];
         }
 		addActor($dataPerson);
-	}
-	else if(isset($_POST['genre_add'])){
-		addGenre($_POST['genre']);
-	}
-	else if(isset($_POST['country_add'])){
-		addCountry($_POST['country']);
-	}
-	else if(isset($_POST['language_add'])){
-		addLanguage($_POST['language']);
 	}
 	$database->close();
 ?>

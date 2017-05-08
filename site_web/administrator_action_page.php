@@ -91,22 +91,6 @@ Page de recherche avancé de site web.
                     <div class="col-lg-12 text-center">
                         <a class="btn btn-xl" href="#op_on_actor">Opérations sur Acteur</a>
                     </div>
-                              
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_genre">Opérations sur Genre</a>
-                    </div>
-                              
-
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_country">Opérations sur Pays</a>
-                    </div>
-                              
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_language">Opérations sur Langue</a>
-                    </div>
                 </div>
             </div>
         </header>
@@ -497,103 +481,6 @@ Page de recherche avancé de site web.
                 </form>
             </div>
         </section>
-
-        <section id="op_on_genre">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Genre</h2>
-                    <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_genre'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_genre'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_genre"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_genre'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_genre'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_genre"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                         <input type="text" name="genre" placeholder="Enter a genre" required>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="genre_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section id="op_on_country">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Pays</h2>
-                    <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_country'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_country'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_country"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_country'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_country'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_country"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                         <input type="text" name="country" placeholder="Enter a country" required>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="country_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section id="op_on_language">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Langues</h2>
-                    <h4>Ajout</h4>
-                </div>    
-                <?php if(isset($_SESSION['query_succes_add_language'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['query_succes_add_language'] as $succes): ?>
-                        <p><?php echo $succes ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["query_succes_add_language"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['error_add_language'])): ?>
-                <div class="form-errors">
-                    <?php foreach($_SESSION['error_add_language'] as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                    <?php $_SESSION["error_add_language"] = null;  ?>
-                </div>
-                <?php endif; ?>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                         <input type="text" name="language" placeholder="Enter a language" required>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="language_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
     </body>
     <!-- jQuery -->
 
