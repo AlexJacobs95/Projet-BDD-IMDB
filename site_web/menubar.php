@@ -51,7 +51,15 @@ if (isset($_GET['run_function_log_out'])) {
                     <a class="page-scroll" href="welcome_page.php#recherche_avancee">Recherche avancée</a>
                 </li>
                 <li>
-                    <a href="administrator_login_page.php">Administrateur</a>
+                    <?php
+                    if (isset($_SESSION['logged'])) {
+                        echo "<li><a href=\"administrator_action_page.php\">Administrateur</a></li>";
+                    }
+                    else{
+                        echo "<li><a href=\"administrator_login_page.php\">Administrateur</a></li>";
+                    }
+                    ?>
+
                 </li>
                 <?php
                 if (isset($_SESSION['logged'])) {
