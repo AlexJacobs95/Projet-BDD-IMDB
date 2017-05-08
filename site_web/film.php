@@ -234,7 +234,7 @@ if (isset($_SESSION['logged'])) {
 <script>
 
     var plot = "<?php echo addslashes($plot);?>";
-    var logged = "<?php echo $logged;?>";
+    var logged = <?php echo $logged;?>;
     console.log(logged);
     if (logged === 1) {
         addAdminElementsFilmEpisode(plot);

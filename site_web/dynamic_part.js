@@ -155,6 +155,7 @@ function addAdminElements(section) {
 
 
 function addAdminElementsFilmEpisode(plot) {
+    console.log("hi")
     addAdminElements(document.getElementById("actor-title"));
     addAdminElements(document.getElementById("director-title"));
     addAdminElements(document.getElementById("writer-title"));
