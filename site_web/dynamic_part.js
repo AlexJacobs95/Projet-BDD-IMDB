@@ -120,32 +120,35 @@ function addAdminElements(section) {
     button.addEventListener("click", function () {
 
         if (section.id === "actor-title") {
-            console.log("here");
             document.getElementById('formContainerActor').style.display = "block";
         } else if (section.id === "director-title") {
-            console.log("here");
             document.getElementById('formContainerDirector').style.display = "block";
         } else if (section.id === "writer-title") {
-            console.log("here");
             document.getElementById('formContainerWriter').style.display = "block";
-        } else {
-            console.log("here");
+        } else if (section.id === "details-title") {
             document.getElementById('formContainerDetails').style.display = "block";
+        } else { //resume
+            document.getElementById('formContainerResume').style.display = "block";
         }
 
     });
+
 
 }
 
 
 function addAdminElementsFilmEpisode() {
+    console.log("lol");
     addAdminElements(document.getElementById("actor-title"));
     addAdminElements(document.getElementById("director-title"));
     addAdminElements(document.getElementById("writer-title"));
     addAdminElements(document.getElementById("detail-title"));
-
-
+    addAdminElements(document.getElementById("resume-title"));
+    const resumeEditor = document.getElementsByClassName('resume');
+    //resumeEditor.value += plot;
 }
+
+
 
 
 //form pop_up
