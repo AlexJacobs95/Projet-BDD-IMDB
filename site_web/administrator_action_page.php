@@ -297,6 +297,9 @@ Page de recherche avancé de site web.
                         <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name of the serie" required>
                     </div>
                     <div class="form-group text-center">
+                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year of the serie name" required>
+                    </div>
+                    <div class="form-group text-center">
                         <input type="text_field" class="form-control" name="episode_name" placeholder="Enter the episode name" required>
                     </div>
                     <div class="form-group text-center">
