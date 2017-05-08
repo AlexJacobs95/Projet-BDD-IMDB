@@ -137,7 +137,7 @@ function addAdminElements(section) {
 }
 
 
-function addAdminElementsFilmEpisode() {
+function addAdminElementsFilmEpisode(plot) {
     console.log("lol");
     addAdminElements(document.getElementById("actor-title"));
     addAdminElements(document.getElementById("director-title"));
@@ -145,7 +145,7 @@ function addAdminElementsFilmEpisode() {
     addAdminElements(document.getElementById("detail-title"));
     addAdminElements(document.getElementById("resume-title"));
     const resumeEditor = document.getElementsByClassName('resume');
-    //resumeEditor.value += plot;
+    resumeEditor.value += plot;
 }
 
 

@@ -204,22 +204,24 @@ $havePlot = mysqli_num_rows($plot_res);
     add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
-<script>
-    var value = '@Request.RequestContext.HttpContext.Session["logged"]';
-    if (value != null) {
 
+
+<?php
+$logged = 0;
+if (isset($_SESSION['logged'])) {
+    $logged = 1;
+}
+?>
+
+<script>
+
+    var plot = "<?php echo $plot;?>";
+    var logged = "<?php echo $logged;?>";
+    console.log(logged);
+    if (logged === 1) {
+        addAdminElementsFilmEpisode(plot);
     }
 </script>
 
-<?php
-if (isset($_SESSION['logged'])) {
-
-    echo "<script>";
-    //echo "var plot =" . $plot.";";
-    echo "addAdminElementsFilmEpisode()";
-    echo "</script>";
-}
-
-?>
 
 </html>
