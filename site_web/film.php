@@ -8,7 +8,6 @@ include "tools.php";
 
 session_start();
 $id = urldecode($_GET['id']);
-echo $id;
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
