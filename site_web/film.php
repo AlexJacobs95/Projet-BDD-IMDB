@@ -157,8 +157,10 @@ $havePlot = mysqli_num_rows($plot_res);
         <div class="col-lg-12 text-center">
             <h2 class="section-heading">Bande-Annonce VO</h2>
         </div>
-        <iframe src="http://www.novelupdates.com/img/noimagefound.jpg" align="middle">
-        </iframe>
+        <div align = "center">
+            <iframe src="http://www.novelupdates.com/img/noimagefound.jpg" allowfullscreen>
+            </iframe>
+        </div>
     </div>
 </section>
 
