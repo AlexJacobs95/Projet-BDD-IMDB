@@ -126,18 +126,6 @@ function clearAllInputs(parent) {
     }
 }
 
-
-function createInput(parent, param, placeholder) {
-    console.log("creating input")
-    var input = document.createElement("input");
-    input.type = "text3";
-    input.name = param;
-    input.id = param;
-    input.placeholder = placeholder;
-    parent.insertBefore(input, parent.children[2]);
-    console.log("dine");
-}
-
 function addAdminElements(section) {
     /*create the "add" link*/
     const button = document.createElement('button');
@@ -168,14 +156,12 @@ function addAdminElements(section) {
 
 
 function addAdminElementsFilmEpisode(plot) {
-    console.log("lol");
     addAdminElements(document.getElementById("actor-title"));
     addAdminElements(document.getElementById("director-title"));
     addAdminElements(document.getElementById("writer-title"));
     addAdminElements(document.getElementById("detail-title"));
     addAdminElements(document.getElementById("resume-title"));
-    const resumeEditor = document.getElementsByClassName('resume');
-    resumeEditor.value += plot;
+    $('#resume').val($('#resume').val() + plot);
 }
 
 
