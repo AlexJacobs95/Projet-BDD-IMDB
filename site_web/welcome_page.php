@@ -39,7 +39,7 @@ Page d'acceuill de site web.
 
 </head>
 
-<body id="page-top" class="index">
+<body>
 
 <!-- Navigation -->
 <?php
@@ -80,7 +80,14 @@ include 'menubar.php';
 <section id="recherche_avancee">
 
     <?php
-    include'advanced_search.php'  ?>
+    include'advanced_search.php';  ?>
+</section>
+
+<section id ="predefined_query">
+    <?php
+    include "predefined_requete.php";
+    ?>
+    ?>
 </section>
 
 <!-- Stats Section -->
