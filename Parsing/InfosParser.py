@@ -61,7 +61,7 @@ def parse(infIle, infoName, begin_line):
                                     infoName: getSimpleInfo(line)
                                     }
 
-                    if isBetween2000and2016(dicEntry["OeuvreID"]):
+                    if isBetween2000and2017(dicEntry["OeuvreID"]):
                         resDic[ID] = dicEntry
             line_number += 1
 
