@@ -223,7 +223,7 @@ function startRequest(requestType) {
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
 
-        done: document.getElementById('#formContainerResume').style("display", "none")
+        done: document.getElementById('formContainerResume').style.display = "none"
         ,
         success: console.log(data)
         ,
