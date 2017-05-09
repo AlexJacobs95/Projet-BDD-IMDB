@@ -7,6 +7,7 @@ INFO-H-303 : Bases de données - Projet IMBD.
 include "tools.php";
 session_start();
 $id = urldecode($_GET['id']);
+$_SESSION['id'] = $id;
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -178,7 +179,6 @@ $havePlot = mysqli_num_rows($plot_res);
 
 <?php include "commonMovieEpisode.php" ?>
 
-
 </body>
 <!-- jQuery -->
 
@@ -243,6 +243,5 @@ if (isset($_SESSION['logged'])) {
         addAdminElementsFilmEpisode(plot);
     }
 </script>
-
 
 </html>

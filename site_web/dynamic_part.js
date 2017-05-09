@@ -147,7 +147,7 @@ function addAdminElements(section) {
             document.getElementById('formContainerDirector').style.display = "block";
         } else if (section.id === "writer-title") {
             document.getElementById('formContainerWriter').style.display = "block";
-        } else if (section.id === "details-title") {
+        } else if (section.id === "detail-title") {
             document.getElementById('formContainerDetails').style.display = "block";
         } else { //resume
             document.getElementById('formContainerResume').style.display = "block";
@@ -185,7 +185,7 @@ function check_empty() {
 //for details form
 function check_valid() {
     if (document.getElementById('genre').value == "" && document.getElementById('language').value == "") {
-        alert("Completer tous les champs S.V.P");
+        alert("Completer au moins un champ  S.V.P");
     } else {
         document.getElementById('form').submit();
         alert("Opération réussie");
@@ -197,3 +197,39 @@ function div_hide(id) {
     console.log(id)
     document.getElementById(id).style.display = "none";
 }
+
+
+function update_resume() {
+    //$('#plot').update($('#resume').val());
+
+}
+
+
+function startRequest(requestType) {
+    var loader = $("#load_spinner")
+    if ($('#load_spinner').is(":visible")) {
+        // Don't do anything if there's already content or if we're already loading
+        return;
+    }
+
+    var text = $('#resume').val();
+    //var text = "blbl";
+
+    loader.show();
+    console.log("adminRequests.php?type=" + requestType);
+    $.ajax({
+        url: "adminRequests.php?type=" + requestType, //This is the current doc
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({content: text}),
+
+        done: document.getElementById('#formContainerResume').style("display", "none")
+        ,
+        success: console.log(data)
+        ,
+        always: loader.hide()
+
+
+    });
+}
+
