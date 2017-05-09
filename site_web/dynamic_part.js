@@ -101,7 +101,7 @@ function add_navbar(args) {
     ul.setAttribute("id", "nav_bar");
 
     for (var arg in args) {
-        ul.innerHTML += "<li><a class=\"page-scroll\" href=#" + args[arg][1]  +" " + "data-toggle=\"pill\">" + args[arg][0] + "</a></li>"
+        ul.innerHTML += "<li><a class=\"page-scroll\" href=#" + args[arg][1] + " " + "data-toggle=\"pill\">" + args[arg][0] + "</a></li>"
     }
 
     div2.appendChild(ul);
@@ -131,7 +131,7 @@ function addAdminElements(section) {
     button.className += "addButton";
     button.id += section.id;
     const add = document.createElement('img');
-    if (section.id == "resume-title"){
+    if (section.id == "resume-title") {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA50lEQVRYR82XQQ7DIAwEycvbvLyVoxBBMbDYa9RccgFmbEDZHGnP874x+f1Qjw18gb5uzplSqiSiBUp4rrWSiBTQ4I1ElMAIXklECCDwR4ItsAIXiZMpsAyXG8ESMMGlBQwBM5wh4IJ7BdxwjwAFbhWgwS0CVPiqAB2+IhACRwXC4IhAKHwmEA5nCjRRC416s28B0gUzvNcBgZbBEYpWaMW/47QOfCQoABKuyrNIT+BKKwMJCry3BdIBNUIXQs0PBnsLyvVo1WqSoy3YIjG7htbOwvP+UqA8hHAlwEC1WPQMAOtPh6gCX5L0PiE3hQmGAAAAAElFTkSuQmCC";
     } else {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADMklEQVRYR8XXSaiWZRQH8N8No6I0a5PrBlKkdBNEVEjYQFlERmYtmmiAWigRGi0SF1HRALXJBigqW1UOURgNWjYuzAYjaHIbZRqVqYjE//K88vL1vfc+771iZ/MtvvOc83/P+D8j6mUqFuACzMHJmFae/4GfsRXv4Q38VWN6pELpNCzHYhyD/fgWPyCOI8cjerMwBbuxGg8VvU43YwGIs5VYgiOwHi/gHfzZYTFRugg3lGgF7GNYgT3D3nQBOBWv4Qy8ibvxXUW02iqzi/MA+hJX4adBG8MAzMUGHIc78XxPx4Pqt+KJkq6A+aqtMAggX/4RjsRl+GSSzpvn55bCTBrOaUeiDSA5/wynYP4hdN6AOA9vl1Sejb35ow3gYdyDmw5B2LsCdzuewoO4tw0gLZTWCsKEvlZSJ5Gqni+66aLzS8v+2ETgOdyIVG6fal+HA7iyFnHprHTFs7gtANK7v5Sv72MoPjcWx/N6AIjqW0hNnBQAmXCZWunT13samiiAa/EKFgXAMyX8J/TM5WQiEF+/xXcAfI6jyoLpGYAJpyB+Ums7AyBINmFhX++TqIG4ysY8KwD24SXc3AEgrZYaaVZvWy1jO5I1PCi7Sn3902H3RVxTCyAApw8xNBaA33E9xgXwKz74P1OQIjwaZx7mGjhYhE+X+X/iGESjC9tE50B8JfKjbdgMhavxas8oTBRAM/xGizBVnlH8Lq44TABCeMILZjTLKNPwlrIotvUAsaYso4zxWknnfIFVuKMBECaUdRxKfUmtpcKSo97VasNMvV++fmaofJuQhCQsy4os+6EHjmrVu/AkHsB9edUGkFb8FKfjQmyuNlunmJWd3H9TIvAfShYzuXY+LnPhcnxYZ3tcrThfi7+L8+3Ni2G0PAMp1CzXTo6SFMtkJGF/FDtwMb5uG+s6TBKJzIRUbNpz6eDDCkR5+zjy9VvKqD/45WNFoPkvNXF/uYpy7yV/Oc3yu7MDQCZcvjL8MkdINu0j5cQbzfmg1BynuRPSHdfh2NL335ejswEShpNWDrvOHRmW/HI5TnM1d0oNgOZxJualA+d5s6Kz+3P3he2Gdod0puDGlX8BJ+erZNd+SnYAAAAASUVORK5CYII=";
@@ -170,8 +170,6 @@ function addAdminElementsFilmEpisode(plot) {
 }
 
 
-
-
 //form pop_up
 function check_empty() {
     if (document.getElementById('name').value == "" || document.getElementById('firstName').value == "" || document.getElementById('role').value == "") {
@@ -207,9 +205,7 @@ function update_resume() {
 
 function edit_plot() {
     var loader = $("#load_spinner")
-
     var text = $('#resume').val();
-    //var text = "blbl";
 
     loader.show();
     $.ajax({
@@ -220,22 +216,138 @@ function edit_plot() {
         error: function (xhr, status) {
             alert(status);
         },
-        success: function(){
+        success: function () {
             $('#formContainerResume').css("display", "none");
             $("#text_plot").html(text);
             loader.hide();
         },
-        fail: function(){
+        fail: function () {
             alert("Une erreur est survenue")
 
         },
-        always: function(){
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
+
+function add_role(name, fn, num, role, OID) {
+    $.ajax({
+        url: "adminRequests.php?type=add_role",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn, role: role, num: num, OID: OID}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function () {
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    })
+}
+
+function add_in_tb_actor(name, fn, num) {
+    $.ajax({
+        url: "adminRequests.php?type=add_in_tb_actor",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn, num: num}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function () {
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    })
+}
+
+function add_person(name, fn) {
+    $.ajax({
+        url: "adminRequests.php?type=add_person",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            console.log("add_peson_OK")
+            console.log(data);
+            numero = data;
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    })
+
+    return numero;
+
+}
+
+function add_actors() {
+    var loader = $("#load_spinner")
+    loader.show();
+
+    var name = $('#actor_name').val();
+    var fn = $('#actor_fn').val();
+    console.log(name, fn);
+
+    $.ajax({
+        url: "adminRequests.php?type=edit_actors",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            console.log(data);
+            if (data == "not found") {
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                    var numero = add_person(name, fn);
+                    add_actors(name, fn, numero);
+                    add_role(name, fn, numero, role);
+                } else {
+
+                    //if (d
+
+                }
+
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
             $('#load_spinner').hide()
 
         }
 
+    })
 
-
-    });
 }
-

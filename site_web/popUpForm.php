@@ -6,14 +6,16 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Starts Here -->
     <div class="popupAdd">
         <!-- Contact Us Form -->
-        <form class="form_popup" action="#" id="formActor" method="post" name="form">
+        <form class="form_popup" action="" id="formActor" method="post" name="form">
             <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerActor')">
             <h2 class="h2popup">Ajouter un acteur </h2>
             <hr class="hrpopup">
-            <input id="actor_name" name="name" placeholder="Name" type="text3">
-            <input id="actor_fn" name="fn" placeholder="Prénom" type="text3">
-            <input id="actor_role" name="role" placeholder="Role" type="text3">
-            <a href="javascript:%20check_empty()" class="submit_form" id="submitActor">Send</a>
+            <input id="actor_name" name="name" placeholder="Name"  type="text3" required>
+            <input id="actor_fn" name="fn" placeholder="Prénom"  type="text3" required>
+            <input id="actor_role" name="role" placeholder="Role"  type="text3" required>
+            <button type='button' class="submit_form" onclick="add_actors()" id="submitResume">Send
+            </button>
+            <img src="squares.gif" id="load_spinner" style="display: none">
         </form>
     </div>
     <!-- Popup Div Ends Here -->
