@@ -205,7 +205,7 @@ function update_resume() {
 }
 
 
-function startRequest(requestType) {
+function edit_plot() {
     var loader = $("#load_spinner")
     if ($('#load_spinner').is(":visible")) {
         // Don't do anything if there's already content or if we're already loading
@@ -216,17 +216,13 @@ function startRequest(requestType) {
     //var text = "blbl";
 
     loader.show();
-    console.log("adminRequests.php?type=" + requestType);
     $.ajax({
-        url: "adminRequests.php?type=" + requestType, //This is the current doc
+        url: "adminRequests.php?type=" + 'edit_plot', //This is the current doc
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
-
-        done: document.getElementById('formContainerResume').style.display = "none"
-        ,
-        success: console.log(data)
-        ,
+        success: document.getElementById('formContainerResume').style.display = "none",
+        fail: alert("Echec de la requete"),
         always: loader.hide()
 
 
