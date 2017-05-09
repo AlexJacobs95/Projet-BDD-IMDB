@@ -208,13 +208,12 @@ function update_resume() {
 function edit_plot() {
     var loader = $("#load_spinner")
 
-
     var text = $('#resume').val();
     //var text = "blbl";
 
     loader.show();
     $.ajax({
-        url: "adminRequests.php?type=" + requestType, //This is the current doc
+        url: "adminRequests.php?type=edit_plot", //This is the current doc
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
@@ -224,6 +223,7 @@ function edit_plot() {
         success: function(){
             $('#formContainerResume').css("display", "none");
             $("#text_plot").html(text);
+            loader.hide();
         },
         fail: function(){
             alert("Une erreur est survenue")
