@@ -207,10 +207,7 @@ function update_resume() {
 
 function startRequest(requestType) {
     var loader = $("#load_spinner")
-    if ($('#load_spinner').is(":visible")) {
-        // Don't do anything if there's already content or if we're already loading
-        return;
-    }
+
 
     var text = $('#resume').val();
     //var text = "blbl";
@@ -222,14 +219,25 @@ function startRequest(requestType) {
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function(){
+            $('#formContainerResume').css("display", "none");
+            $("#text_plot").html(text);
+        },
+        fail: function(){
+            alert("Une erreur est survenue")
 
-        done: document.getElementById('formContainerResume').style.display = "none"
-        ,
-        success: console.log(data)
-        ,
-        always: loader.hide()
+        },
+        always: function(){
+            $('#load_spinner').hide()
+
+        }
+
 
 
     });
 }
 
+document.getElementById('formContainerResume').style.display = "none";

@@ -45,7 +45,7 @@ if (isset($_GET['run_function_log_out'])) {
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a href="welcome_page.php#predefined_query"> Requêtes Prédéfinies</a>
+                    <a href="predefined_requete.php"> Requêtes Prédéfinies</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="welcome_page.php#recherche_avancee">Recherche avancée</a>

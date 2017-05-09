@@ -15,7 +15,7 @@ function build_search($content)
         $search .= '+' . $word . '* ';
     }
 
-    return $search;
+    return substr($search, 0, strlen($search) - 1);
 }
 
 function allOneLetter($content)
@@ -64,7 +64,6 @@ if (!$database) {
     } else {
         $search = build_search($search_content);
 
-
         $requete_oeuvre = "SELECT *
                            FROM Oeuvre
                            WHERE MATCH (Titre)
@@ -77,6 +76,8 @@ if (!$database) {
                              FROM Personne
                              WHERE MATCH (Prenom, Nom)
                              AGAINST ('$search' IN BOOLEAN MODE)";
+
+
 
 
     }
@@ -190,6 +191,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
         </div>
     </div>
 
+
 </header>
 
 
@@ -261,6 +263,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
             document.getElementById("table_container_Oeuvres").appendChild(table);
             $('#oeuvres_table').DataTable({
+                "aaSorting": [],
                 data: oeuvres_array,
                 columns: [
                     {title: "Titre"},
@@ -277,10 +280,11 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
             document.getElementById("table_container_Personnes").appendChild(table);
             $('#personnes_table').DataTable({
+                "aaSorting": [],
                 data: personnes_array,
                 columns: [
                     {title: "Prenom/Nom"},
-                    {title: "Numero"}
+                    {title: "Numero"},
                 ]
             });
         }
