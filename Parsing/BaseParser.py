@@ -83,14 +83,14 @@ def getIndexOfDateEnd(long_id):
         i += 1
 
 
-def isBetween2000and2016(oeuvreID):
+def isBetween2000and2017(oeuvreID):
     date = ""
     i = 0
     date_found = False
     for char in oeuvreID:
         if char == '(' and oeuvreID[i + 1:i + 5].isdigit() and oeuvreID[i + 5] == ')':
             date = oeuvreID[i + 1:i + 5]
-            return 2000 <= int(date) <= 2016
+            return 2000 <= int(date) <= 2017
 
         i += 1
 

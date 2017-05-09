@@ -50,7 +50,7 @@ def parse():
                         note = {"ID": get_id(line),
                                 "note": get_note(line)
                                 }
-                        if isBetween2000and2016(note["ID"]):
+                        if isBetween2000and2017(note["ID"]):
                             ratings[ID] = note
             line_counter +=1
 
