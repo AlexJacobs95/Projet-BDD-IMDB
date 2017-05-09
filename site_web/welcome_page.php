@@ -83,12 +83,6 @@ include 'menubar.php';
     include'advanced_search.php';  ?>
 </section>
 
-<section id ="predefined_query">
-    <?php
-    include "predefined_requete.php";
-    ?>
-    ?>
-</section>
 
 <!-- Stats Section -->
 <section id="stats" class="bg-light-gray">

@@ -207,23 +207,33 @@ function update_resume() {
 
 function edit_plot() {
     var loader = $("#load_spinner")
-    if ($('#load_spinner').is(":visible")) {
-        // Don't do anything if there's already content or if we're already loading
-        return;
-    }
+
 
     var text = $('#resume').val();
     //var text = "blbl";
 
     loader.show();
     $.ajax({
-        url: "adminRequests.php?type=" + 'edit_plot', //This is the current doc
+        url: "adminRequests.php?type=" + requestType, //This is the current doc
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
-        success: document.getElementById('formContainerResume').style.display = "none",
-        fail: alert("Echec de la requete"),
-        always: loader.hide()
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function(){
+            $('#formContainerResume').css("display", "none");
+            $("#text_plot").html(text);
+        },
+        fail: function(){
+            alert("Une erreur est survenue")
+
+        },
+        always: function(){
+            $('#load_spinner').hide()
+
+        }
+
 
 
     });
