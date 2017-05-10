@@ -214,6 +214,7 @@ function edit_plot() {
         dataType: 'json', // add json datatype to get json
         data: ({content: text}),
         error: function (xhr, status) {
+            console.log(xhr, status);
             alert(status);
         },
         success: function () {
@@ -232,16 +233,21 @@ function edit_plot() {
     });
 }
 
-function add_role(name, fn, num, role, OID) {
+function add_role(name, fn, num) {
+    var role = $('#actor_role').val();
     $.ajax({
         url: "adminRequests.php?type=add_role",
         type: "POST",
         dataType: 'json', // add json datatype to get json
-        data: ({name: name, fn: fn, role: role, num: num, OID: OID}),
+        data: ({name: name, fn: fn, role: role, num: num}),
         error: function (xhr, status) {
             alert(status);
         },
-        success: function () {
+        success: function (data) {
+            //alert (data);
+            alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
+            $('#formContainerActor').css("display", "none");
+            $('#actors_table').append('<tr><td><a href="personne.php?id=' + encodeURIComponent(fn + ';' + name + ';' + num) + '">' + fn + ' ' + name + '</a></td><td>' + role + '</td></tr>');
 
         },
         fail: function () {
@@ -252,10 +258,11 @@ function add_role(name, fn, num, role, OID) {
             $('#load_spinner').hide()
 
         }
-    })
+    });
 }
 
 function add_in_tb_actor(name, fn, num) {
+    console.log("add_in_tb_actor: ", name, fn, num)
     $.ajax({
         url: "adminRequests.php?type=add_in_tb_actor",
         type: "POST",
@@ -264,7 +271,8 @@ function add_in_tb_actor(name, fn, num) {
         error: function (xhr, status) {
             alert(status);
         },
-        success: function () {
+        success: function (data) {
+            console.log(data)
 
         },
         fail: function () {
@@ -275,22 +283,23 @@ function add_in_tb_actor(name, fn, num) {
             $('#load_spinner').hide()
 
         }
-    })
+    });
 }
 
-function add_person(name, fn) {
+function add_person(name, fn, genre, callback) {
     $.ajax({
         url: "adminRequests.php?type=add_person",
         type: "POST",
         dataType: 'json', // add json datatype to get json
-        data: ({name: name, fn: fn}),
+        data: ({name: name, fn: fn, genre: genre}),
         error: function (xhr, status) {
             alert(status);
+
         },
-        success: function (data) {
+        success: function (numero) {
             console.log("add_peson_OK")
-            console.log(data);
-            numero = data;
+            console.log(numero);
+            callback(name, fn, numero);
 
         },
         fail: function () {
@@ -301,18 +310,23 @@ function add_person(name, fn) {
             $('#load_spinner').hide()
 
         }
-    })
+    });
+}
 
-    return numero;
+function add_actor_role(name, fn, numero) {
+    add_in_tb_actor(name, fn, numero);
+    add_role(name, fn, numero);
 
 }
 
-function add_actors() {
+function edit_actors() {
     var loader = $("#load_spinner")
     loader.show();
 
     var name = $('#actor_name').val();
     var fn = $('#actor_fn').val();
+    var genre = $('#actor_genre').find(":selected").text();
+
     console.log(name, fn);
 
     $.ajax({
@@ -327,12 +341,10 @@ function add_actors() {
             console.log(data);
             if (data == "not found") {
                 if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
-                    var numero = add_person(name, fn);
-                    add_actors(name, fn, numero);
-                    add_role(name, fn, numero, role);
+                    add_person(name, fn, genre, add_actor_role);
+                    //add_role(name, fn, numero, role);
                 } else {
-
-                    //if (d
+                    //TODO
 
                 }
 
@@ -348,6 +360,6 @@ function add_actors() {
 
         }
 
-    })
+    });
 
 }

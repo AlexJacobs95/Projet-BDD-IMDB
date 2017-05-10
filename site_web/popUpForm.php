@@ -13,7 +13,12 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <input id="actor_name" name="name" placeholder="Name"  type="text3" required>
             <input id="actor_fn" name="fn" placeholder="Prénom"  type="text3" required>
             <input id="actor_role" name="role" placeholder="Role"  type="text3" required>
-            <button type='button' class="submit_form" onclick="add_actors()" id="submitResume">Send
+
+            <select class="form-control" id="actor_genre" style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;";>
+                <option>Homme</option>
+                <option>Femme</option>
+            </select>
+            <button type='button' class="submit_form" onclick="edit_actors()" id="submitResume">Send
             </button>
             <img src="squares.gif" id="load_spinner" style="display: none">
         </form>

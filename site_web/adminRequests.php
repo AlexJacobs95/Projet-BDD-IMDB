@@ -4,6 +4,15 @@ session_start();
 
 include "roman.php";
 
+
+function execute_add_query($query, $db) {
+    if ($db->query($query) === TRUE) {
+        return ("Record added " . $db->error);
+    } else {
+        return ("Error updating record: " . $db->error);
+    }
+}
+
 function get_all_nums_for_name($nom, $prenom, $db)
 {
     $query = "SELECT Numero
@@ -14,11 +23,20 @@ function get_all_nums_for_name($nom, $prenom, $db)
 
 function get_numero($num_array)
 {
+    $cleaned_nums = array();
     foreach ($num_array as $num) {
-        $num = toNumber($num);
+        if ($num != "NA"){
+            $num = toNumber($num);
+            array_push($cleaned_nums, $num);
+        }
 
     }
-    return toRoman(max($num) + 1);
+
+    if (sizeof($cleaned_nums) > 0){
+        return toRoman(max($cleaned_nums) + 1);
+    } else {
+        return "NA";
+    }
 
 }
 
@@ -35,53 +53,62 @@ function query_res_to_array($query_res)
 
 function check_for_person($nom, $prenom, $db)
 {
-    $check_if_person_exists_query = "SELECT *
-                                     FROM Personne
-                                     WHERE Nom = '$nom' AND Prenom = '$prenom'";
-    return $db->query($check_if_person_exists_query);
+    $query = "SELECT *
+              FROM Personne
+              WHERE Nom = '$nom' AND Prenom = '$prenom'";
+
+    return $db->query($query);
 }
 
-function add_person($nom, $prenom, $numero, $db)
+function add_person($nom, $prenom, $numero, $genre, $db)
 {
-    $add_person_query = "INSERT INTO Personne(Nom, Prenom, Numero)
-                         VALUE ('$nom', '$prenom', '$numero')";
+    $fullname = $prenom . ' ' . $nom;
+    if ($genre == "Homme"){
+        $genre = "m";
+    } else {
+        $genre = "f";
+    }
+    $query = "INSERT INTO Personne(Nom, Prenom, Numero, Genre, fullname)
+              VALUE ('$nom', '$prenom', '$numero', '$genre','$fullname')";
 
-    return $db->query($add_person_query);
+    return execute_add_query($query, $db);
+
 }
 
 function add_actor($nom, $prenom, $numero, $db)
 {
-    $add_actor_query = "INSERT INTO Acteur(Nom, Prenom, Numero)
-                         VALUE ('$nom', '$prenom', '$numero')";
+    $query = "INSERT INTO Acteur(Nom, Prenom, Numero)
+              VALUE ('$nom', '$prenom', '$numero')";
 
-    return $db->query($add_actor_query);
+    return execute_add_query($query, $db);
 
 }
 
 function add_writer($nom, $prenom, $numero, $db)
 {
-    $add_writer_query = "INSERT INTO Auteur(Nom, Prenom, Numero)
-                         VALUE ('$nom', '$prenom', '$numero')";
+    $query = "INSERT INTO Auteur(Nom, Prenom, Numero)
+              VALUE ('$nom', '$prenom', '$numero')";
 
-    return $db->query($add_writer_query);
+    return execute_add_query($query, $db);
 
 }
 
 function add_director($nom, $prenom, $numero, $db)
 {
-    $add_director_query = "INSERT INTO Directeur(Nom, Prenom, Numero)
-                         VALUE ('$nom', '$prenom', '$numero')";
+    $query = "INSERT INTO Directeur(Nom, Prenom, Numero)
+              VALUE ('$nom', '$prenom', '$numero')";
 
-    return $db->query($add_director_query);
+    return execute_add_query($query, $db);
+
 
 }
 
-function add_role($nom, $prenom, $numero, $role, $db)
+function add_role($nom, $prenom, $numero, $role,$OID, $db)
 {
-    $add_role_query = "INSERT INTO Role(Nom, Prenom, Numero, Role)
-                         VALUE ('$nom', '$prenom', '$numero', '$role')";
+    $query = "INSERT INTO Role(OID, Nom, Prenom, Numero, Role)
+              VALUE ('$OID', '$nom', '$prenom', '$numero','$role')";
 
-    return $db->query($add_role_query);
+    return execute_add_query($query, $db);
 
 }
 
@@ -109,47 +136,48 @@ if (!$database) {
             echo json_encode("Error updating record: " . $database->error);
         }
     } elseif ($_GET['type'] === 'edit_actors') {
-        //$nom = mysqli_real_escape_string($database, $_POST['name']);
-        //$prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
 
 
-        //$res_check_query = check_for_person($nom, $prenom, $database);
+        $res_check_query = check_for_person($nom, $prenom, $database);
 
-        //if (mysqli_num_rows($res_check_query) !== 0){
-        //echo json_encode("bonjour")
-        //echo json_encode($res_check_query->fetch_all());
-        //} else {
-        //echo json_encode("not found");
-        //}
-        // echo json_encode("ok");
+        if (mysqli_num_rows($res_check_query) !== 0){
+            echo json_encode($res_check_query->fetch_all());
+        } else {
+        echo json_encode("not found");
+        }
 
 
     } elseif ($_GET['type'] === 'add_person') {
 
         $nom = mysqli_real_escape_string($database, $_POST['name']);
         $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-
+        $genre = mysqli_real_escape_string($database, $_POST['genre']);
         $all_nums = get_all_nums_for_name($nom, $prenom, $database)->fetch_all();
         $numero = get_numero($all_nums);
 
-        add_person($nom, $prenom, $numero, $database);
-
+        add_person($nom, $prenom, $numero, $genre, $database);
         echo json_encode($numero);
+
+
 
     } elseif ($_GET['type'] === 'add_in_tb_actor') {
 
         $nom = mysqli_real_escape_string($database, $_POST['name']);
         $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-
-        add_actor($nom, $prenom, $numero, $database);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        echo json_encode(add_actor($nom, $prenom, $numero, $database));
 
     } elseif ($_GET['type'] === 'add_role') {
 
         $nom = mysqli_real_escape_string($database, $_POST['name']);
         $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
         $role = mysqli_real_escape_string($database, $_POST['role']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
-        add_role($nom, $prenom, $numero, $role, $database);
+        echo json_encode(add_role($nom, $prenom, $numero, $role, $OID,$database));
 
     }
 
