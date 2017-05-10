@@ -13,6 +13,45 @@ function execute_add_query($query, $db) {
     }
 }
 
+function remove_role($nom, $prenom, $numero, $oid, $db)
+{
+    $query = "Delete
+              FROM Role
+              WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero' AND OID = '$oid'";
+
+    if ($db->query($query) === TRUE) {
+        return ("success " . $db->error);
+    } else {
+        return ("Error:" . $db->error);
+    }
+}
+
+function remove_isDiretedBy($nom, $prenom, $numero, $oid, $db)
+{
+    $query = "Delete
+              FROM DirigePar
+              WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero' AND OID = '$oid'";
+
+    if ($db->query($query) === TRUE) {
+        return ("Success " . $db->error);
+    } else {
+        return ("Error: " . $db->error);
+    }
+}
+
+function remove_isWrittenBy($nom, $prenom, $numero, $oid, $db)
+{
+    $query = "Delete
+              FROM DirigePar
+              WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero' AND OID = '$oid'";
+
+    if ($db->query($query) === TRUE) {
+        return ("Success" . $db->error);
+    } else {
+        return ("Error: " . $db->error);
+    }
+}
+
 function get_all_nums_for_name($nom, $prenom, $db)
 {
     $query = "SELECT Numero
@@ -142,10 +181,10 @@ if (!$database) {
 
         $res_check_query = check_for_person($nom, $prenom, $database);
 
-        if (mysqli_num_rows($res_check_query) !== 0){
+        if (mysqli_num_rows($res_check_query) !== 0) {
             echo json_encode($res_check_query->fetch_all());
         } else {
-        echo json_encode("not found");
+            echo json_encode("not found");
         }
 
 
@@ -159,7 +198,6 @@ if (!$database) {
 
         add_person($nom, $prenom, $numero, $genre, $database);
         echo json_encode($numero);
-
 
 
     } elseif ($_GET['type'] === 'add_in_tb_actor') {
@@ -177,7 +215,7 @@ if (!$database) {
         $role = mysqli_real_escape_string($database, $_POST['role']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
-        echo json_encode(add_role($nom, $prenom, $numero, $role, $OID,$database));
+        echo json_encode(add_role($nom, $prenom, $numero, $role, $OID, $database));
 
     } elseif ($_GET['type'] === 'add_plot') {
 
@@ -195,8 +233,36 @@ if (!$database) {
         } else {
             //echo json_encode("Error updating record: " . $database->error);
         }
-    }
+    } elseif ($_GET['type'] === 'remove_actor_from_work') {
 
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+
+        echo json_encode(remove_role($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'remove_director_from_work') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+
+        echo json_encode(remove_isDirectedby($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'remove_writer_from_work') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+
+        echo json_encode(remove_isWrittenBy($nom, $prenom, $numero, $OID, $database));
+    }
 }
 
 

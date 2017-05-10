@@ -318,4 +318,11 @@ input[type=text3] {
     display: none;
 }
 
+.td#hidden {
+    display: none;
+}
 
+.deleteButton {
+    background: transparent;
+    border: none;
+}

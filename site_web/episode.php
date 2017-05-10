@@ -202,6 +202,7 @@ if (isset($_SESSION['logged'])) {
     var logged = <?php echo $logged;?>;
     if (logged === 1) {
         addAdminElementsFilmEpisode(plot);
+        modifyRows();
     }
 </script>
 

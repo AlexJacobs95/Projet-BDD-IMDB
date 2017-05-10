@@ -171,7 +171,7 @@ include 'menubar.php';
             if ($date === 0) {
                 $date = '?';
             }
-            echo "<tr>";
+            echo "<tr class = 'row_t'>";
             echo "<td >";
 
             if (isFilm($id)) {
@@ -181,10 +181,11 @@ include 'menubar.php';
             } else {
                 echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . ' (' . $date . ')' . '</a>';
             }
-
-
             echo "</td>";
-            echo "<td >" . $role . "</td></tr>";
+            echo "<td >" . $role . "</td>";
+            echo "</td>";
+            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "</tr>";
             //echo '<a href="film_episode.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
         echo "</table>";
@@ -207,7 +208,7 @@ include 'menubar.php';
         while ($written_row = mysqli_fetch_array($written)) {
             $id = $written_row['OID'];
             $title = titleFromID($id, $database);
-            echo "<tr>";
+            echo "<tr class = 'row_t'>";
             echo "<td >";
 
             if (isFilm($id)) {
@@ -217,7 +218,9 @@ include 'menubar.php';
             } else {
                 echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             }
-            echo "</td></tr>";
+            echo "</td>";
+            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "</tr>";
         }
         echo "</table>";
         ?>
@@ -238,7 +241,7 @@ include 'menubar.php';
         while ($directed_row = mysqli_fetch_array($directed)) {
             $id = $directed_row['OID'];
             $title = titleFromID($id, $database);
-            echo "<tr>";
+            echo "<tr class = 'row_t'>";
             echo "<td >";
 
             if (isFilm($id)) {
@@ -248,7 +251,9 @@ include 'menubar.php';
             } else {
                 echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             }
-            echo "</td></tr>";
+            echo "</td>";
+            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "</tr>";
         }
         echo "</table>";
         ?>

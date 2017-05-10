@@ -24,11 +24,13 @@
                     $num = $actors_row['Numero'];
                     $role = $actors_row['Role'];
                     $nom = sprintf('%s %s', $fn, $ln);
-                    echo "<tr>";
+                    echo "<tr class = 'row_t'>";
                     echo "<td >";
                     echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
                     echo "</td>";
-                    echo "<td >" . $role . "</td></tr>";
+                    echo "<td >" . $role . "</td>";
+                    echo "<td class ='hidden'>$fn;$ln;$num</td>";
+                    echo "</tr>";
                     //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
                 }
                 echo "</table>";
@@ -48,17 +50,18 @@
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' border=1 frame=void rules=rows>";
+        echo "<table id = \"directors_table\" class='directorsAndWriters' border=1 frame=void rules=rows>";
 
         while ($directors_row = mysqli_fetch_array($directors)) {
             $fn = $directors_row['Prenom'];
             $ln = $directors_row['Nom'];
             $num = $directors_row['Numero'];
             $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
-            echo "<tr>";
+            echo "<tr class = 'row_t'>";
             echo "<td >";
             echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
             echo "</td>";
+            echo "<td class ='hidden'>$fn;$ln;$num</td>";
             echo "</tr>";
             //echo '<a href="film.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
@@ -76,17 +79,18 @@
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' >";
+        echo "<table id = \"writers_table\" class='directorsAndWriters' >";
 
         while ($writers_row = mysqli_fetch_array($writers)) {
             $fn = $writers_row['Prenom'];
             $ln = $writers_row['Nom'];
             $num = $writers_row['Numero'];
             $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
-            echo "<tr>";
+            echo "<tr class = 'row_t'>";
             echo "<td >";
             echo '<a href="personne.php?id=' . urlencode($fn . ';' . $ln . ';' . $num) . '">' . $nom . '</a>';
             echo "</td>";
+            echo "<td class ='hidden'>$fn;$ln;$num</td>";
             echo "</tr>";
         }
         echo "</table>";

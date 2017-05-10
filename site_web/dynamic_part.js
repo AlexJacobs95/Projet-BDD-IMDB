@@ -134,7 +134,7 @@ function addAdminElements(section) {
     if (section.id == "resume-title") {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA50lEQVRYR82XQQ7DIAwEycvbvLyVoxBBMbDYa9RccgFmbEDZHGnP874x+f1Qjw18gb5uzplSqiSiBUp4rrWSiBTQ4I1ElMAIXklECCDwR4ItsAIXiZMpsAyXG8ESMMGlBQwBM5wh4IJ7BdxwjwAFbhWgwS0CVPiqAB2+IhACRwXC4IhAKHwmEA5nCjRRC416s28B0gUzvNcBgZbBEYpWaMW/47QOfCQoABKuyrNIT+BKKwMJCry3BdIBNUIXQs0PBnsLyvVo1WqSoy3YIjG7htbOwvP+UqA8hHAlwEC1WPQMAOtPh6gCX5L0PiE3hQmGAAAAAElFTkSuQmCC";
     } else {
-        add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADMklEQVRYR8XXSaiWZRQH8N8No6I0a5PrBlKkdBNEVEjYQFlERmYtmmiAWigRGi0SF1HRALXJBigqW1UOURgNWjYuzAYjaHIbZRqVqYjE//K88vL1vfc+771iZ/MtvvOc83/P+D8j6mUqFuACzMHJmFae/4GfsRXv4Q38VWN6pELpNCzHYhyD/fgWPyCOI8cjerMwBbuxGg8VvU43YwGIs5VYgiOwHi/gHfzZYTFRugg3lGgF7GNYgT3D3nQBOBWv4Qy8ibvxXUW02iqzi/MA+hJX4adBG8MAzMUGHIc78XxPx4Pqt+KJkq6A+aqtMAggX/4RjsRl+GSSzpvn55bCTBrOaUeiDSA5/wynYP4hdN6AOA9vl1Sejb35ow3gYdyDmw5B2LsCdzuewoO4tw0gLZTWCsKEvlZSJ5Gqni+66aLzS8v+2ETgOdyIVG6fal+HA7iyFnHprHTFs7gtANK7v5Sv72MoPjcWx/N6AIjqW0hNnBQAmXCZWunT13samiiAa/EKFgXAMyX8J/TM5WQiEF+/xXcAfI6jyoLpGYAJpyB+Ums7AyBINmFhX++TqIG4ysY8KwD24SXc3AEgrZYaaVZvWy1jO5I1PCi7Sn3902H3RVxTCyAApw8xNBaA33E9xgXwKz74P1OQIjwaZx7mGjhYhE+X+X/iGESjC9tE50B8JfKjbdgMhavxas8oTBRAM/xGizBVnlH8Lq44TABCeMILZjTLKNPwlrIotvUAsaYso4zxWknnfIFVuKMBECaUdRxKfUmtpcKSo97VasNMvV++fmaofJuQhCQsy4os+6EHjmrVu/AkHsB9edUGkFb8FKfjQmyuNlunmJWd3H9TIvAfShYzuXY+LnPhcnxYZ3tcrThfi7+L8+3Ni2G0PAMp1CzXTo6SFMtkJGF/FDtwMb5uG+s6TBKJzIRUbNpz6eDDCkR5+zjy9VvKqD/45WNFoPkvNXF/uYpy7yV/Oc3yu7MDQCZcvjL8MkdINu0j5cQbzfmg1BynuRPSHdfh2NL335ejswEShpNWDrvOHRmW/HI5TnM1d0oNgOZxJualA+d5s6Kz+3P3he2Gdod0puDGlX8BJ+erZNd+SnYAAAAASUVORK5CYII=";
+        add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADvUlEQVRYhbWWX0xaZxTAzxtrneCSsixtlplO6/6kky1Z19UF05JZtUO7roBQtYCKVVEKKbXMgvingjrTLf2LwfmwJbVdU13YVgQu6J5MfJhDkS6ZyN4aWq4vQyc0OXtoNGtzddyvepLf083vO+c733fvPQDpB1dwOFchOS9y6hyy6U6XJt5LaZO9lDbZ4dI81jlk05LzIud7R3LlAMBlse7mkbk7M0/SKhq2eRtXvvq1BdOhx9OwfNIoGuLyObkvknvnZw2HBuz+pif9k81Igp1qTJXUf9wPADvY7XoXZ59hWB7qm9TiVqD/Vhbk8jk5aSXf9QbvA8uP6kd9k024lVhGVTF+dpbgf3duHlM96p1oxO3APKqMbdaJDP2wLGSfaMDtRDckCTLeieKGgwP2iTPIhrHQIN6bu8nKsU+cwWLNgb7nW5/X7at7YgvUIxv+WvoDF+l5Vo4tUI/d3trUM0dxwlg43BPQIFueFhBm7fUENHj83CfOp9lfAZ7VrVq5FKhDtqwVQOK231cmACAT9h/eq7jkr0MS1gsg9N8WZsvguKHA2e2vRRLW7gCpLz57yAH118qmu/w1SEJ06QFG6Hkit8tfg5qr4ikwjSriXZQaSVgvgNBvvSuPgcVdneykVMjED7PXMEqHMbr0gJF/Usu4kkps+DxKh/FO8Arj2p2UCi3u6lUwu6uSHZQSmbgdvIIL8RBGaGZWUglcTv694fOFeAhv/f4149odlBLN7qpVMN6TPrZSp5GE6FIYI3SIyLVSp/HcXWkMaq+WTlt91UhClA5jJB4icq2+alR/UzIFYv1BZ7uvCklYpMO4EJ8jctt9VXjs7EcOeKvwdbnFV4kkrBVA6ucV7JECAHBNropli7cS2bJeAIF7wSVLAMDLAABwzHBgyOw9hWxZpOdxIT7H2jN7T2GJ7sPB9b8hl8/JNd2vSF30KpANEXoe/4zPsnIuehVo+kWW5LzKefOZmeBIjaC/zSNHNnw/M4Df/dbPymnzyFGo3G9jGsl21t48OtvmqcDtpObG0RkAeIlxKOTwOTm6O2WxLz0y3A5aRsoe8ni8vRsNpQAAkJWdIWi5LY6ZxqW4lTTfEj/M2pORv2ny/3ZCfePToGlcgluB+rpohseDzXfOEDsK1e/2GX8+kbowfhJJMP70eVKofMe24Zmn241i3ftO/Vh5otX9BaaDfqw8UdQsGOTwnnvVXjAy9xXslhVp8x2Vl4VTTSOlMYOrfNXgKl9tGimNVV4WThVp8x05Ba9JYe0Ll0b8CxNQdU/XcVuxAAAAAElFTkSuQmCC";
 
     }
     button.appendChild(add);
@@ -167,6 +167,65 @@ function addAdminElementsFilmEpisode(plot) {
     addAdminElements(document.getElementById("detail-title"));
     addAdminElements(document.getElementById("resume-title"));
     $('#resume').val($('#resume').val() + plot);
+}
+
+function modifyRows() {
+    $('.row_t').attr('class', "clickable-row");
+
+    $(".clickable-row").append(
+        $('<td></td>')
+            .append(
+                $('<button class = "deleteButton"></button>')
+                    .append(
+                        $('<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC6klEQVRYhbWWO08bQRCAtwwkISWNC5QccQGY42aGCoRcgs1hGhD8ISQQPwDOiJ6OBikVIsDtRrawRZQag4+HHCiNDUTaFLEtP/Z86wuMNN3tft/Nzj4Y04wDwxhwAVY5QNolygjEB070XMt7lyjDAdIu4sqBYQzozhsYJ7FYlBPtCsTKj8lJqZMC8VEg7hyZ5nBocBagnyNuCsQ/umCFyIsA2NiLRPp6gh+Pj38VAL/CghUi54eWZWjBvwNYnOj3a8HryYlKp6ZpBv75W8CbJXwr8W1w8L1f2TMzMz3DsvG473Ioe4IjbqoGeI4jq54nc7atDc+nUvLp9lZ6juMnsd4CP4nFoqpu9xxH1kNXog6vh0pCIL60LAUn2lWVvXp9LZsjSCK/sCCrTXAppaxcXMjM1FRnPwCkGWOMZQE++R0yOdvWlvCDn83O+jVkeT8a/chcgNVuJdWRyNu2rN7ctMILBV94Q8KylhkHSAeuqwJQl1AJVi4v5dncXGC/CMQt5hJltDrbR0IFz2nAawKCCcQH7e2lkGiBX11pw2t9UGKc6Fl3gF+zSSllpViUuURCe56awNPrCiSToQTuteGplBIeVoITlfSbUAGvFIuyWiyGlhCIQm8bth2vjYZLJGQumQwt8W8bIq50hS8udsLbtlpYCW5ZS+zAMAYE4mNYeENifl5WPU9bghOV90ZGPjDGGBOIO+0fZOPxTnih0PWE85NQvSc40XbjNjwyzWGB+NL+UfN1HAT3k1Bdx5zo+XR09EvLm0AAbKgm9Byn662mlLBtWfU83weJS7TW8SLKAvS7RD9VA1T3eVBmpqfVnQ+Q3x0aeqd8Fx5alsGJSr3CdFMg3h2PjX1WwutxaprmW0gIxLvjiYnxrvDmSgjE81eDA+QD/7w99iKRPoG4rtodusmJnl2iNd81160GB0hzonIP4DIn2u7Yav8T+9HoR25ZywJxSyAKTlTiRE+1LAlEIRC3uGUtNU44jfgLUwkn+JzAd8QAAAAASUVORK5CYII=">')
+                    )
+            )
+    );
+
+
+    $(".deleteButton").click(function () {
+        const table = $(this).parent().parent().parent().parent().attr('id');
+        const id = $(this).parent().prev().text();
+        const id_element = id.split(';');
+        const row = $(this).parent().parent();
+        console.log(table);
+        if (table === "actors_table") {
+            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'actor', row);
+
+        } else if (table === "directors_table") {
+            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'director', row);
+
+        } else if (table === "writers_table") {
+            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'writer', row);
+        }
+
+    });
+}
+
+function remove_person_from_work(_name, _fn, _num, type, row) {
+
+    console.log(_name, _fn, _num, type);
+    console.log("adminRequests.php?type=remove_" + type + "_from_work");
+
+    $.ajax({
+        url: "adminRequests.php?type=remove_" + type + "_from_work", //This is the current doc
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: _name, fn: _fn, num: _num}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            alert(data);
+            row.remove();
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        }
+    });
+
+
 }
 
 
