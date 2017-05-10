@@ -26,7 +26,7 @@ function remove_role($nom, $prenom, $numero, $oid, $db)
     }
 }
 
-function remove_isDiretedBy($nom, $prenom, $numero, $oid, $db)
+function remove_isDirectedBy($nom, $prenom, $numero, $oid, $db)
 {
     $query = "Delete
               FROM DirigePar
