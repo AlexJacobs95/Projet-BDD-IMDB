@@ -506,6 +506,10 @@ function edit_directors() {
 
 function edit_writers() {
 
+    if (!checkForm('#formWirter'), 2){
+        return;
+    }
+
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
     var genre = $('#writer_genre').find(":selected").text();
@@ -581,7 +585,7 @@ function createPersonList(data, person_type) {
             );
         } else {
             $("#persons_list").append(
-                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero})
+                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "personType":person_type})
             );
         }
 
@@ -591,13 +595,15 @@ function createPersonList(data, person_type) {
     );
 
     $('.list_person_elem').click(function () {
-        if ($(this).data("person_type") === "actor") {
+        console.log($(this).data("personType"));
+        if ($(this).data("personType") === "actor") {
             add_actor_role($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
-        } else if ($(this).data("person_type") === "director") {
+        } else if ($(this).data("personType") === "director") {
+            console.log("s")
             add_director_directedBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
-        } else if ($(this).data("person_type") === "writer") {
+        } else if ($(this).data("personType") === "writer") {
             add_writer_writtenBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
 
@@ -621,29 +627,21 @@ function cancel_persons_list() {
 
 }
 
-
-
-
-/*
-function createPersonList(destination, data) {
-    console.log(data);
-    console.log(destination);
-
-    $('<div class="dialog" title="Choisisez une personne dans la liste" </div>').dialog().append(
-        $('<ul class="list-group" id="persons_list"></ul>')
-    );
-    for (var person in data) {
-        if (data[person][2] == "NA"){
-            $("#persons_list").append(
-                $('<button type="button" class="list-group-item">' +data[person][0] + " " + data[person][1] + '</button>')
-            );
-        } else {
-            $("#persons_list").append(
-                $('<button type="button" class="list-group-item">' +data[person][0] + " " + data[person][1] + " " + data[person][2]+ '</button>')
-            );
+function checkForm(formID, num_required) {
+    var counter = 0;
+    $(formID).filter(':input').each(function(){
+        if (!$.trim($(this).val())){
+            counter++;
         }
-
+    });
+    if (counter < num_required) {
+        alert("Remplissez tous les champs !");
+        return false;
     }
+    return true;
 
 }
-*/
+
+
+
+
