@@ -85,7 +85,8 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <h2 class="h2popup">Ajouter des details </h2>
             <hr class="hrpopup">
             <textarea class="textarea-resume" id="resume" name="resume"></textarea>
-            <button type='button' class="submit_form" onclick="edit_plot()" id="submitResume">Send
+            <button type='button' class="submit_form" onclick="edit_plot(<?php echo $havePlot; ?>)" id="submitResume">
+                Send
             </button>
             <img src="squares.gif" id="load_spinner" style="display: none">
         </form>

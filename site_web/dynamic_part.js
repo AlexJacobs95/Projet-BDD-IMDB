@@ -203,34 +203,61 @@ function update_resume() {
 }
 
 
-function edit_plot() {
+function edit_plot(havePlot) {
     var loader = $("#load_spinner")
     var text = $('#resume').val();
-
+    console.log(havePlot);
     loader.show();
-    $.ajax({
-        url: "adminRequests.php?type=edit_plot", //This is the current doc
-        type: "POST",
-        dataType: 'json', // add json datatype to get json
-        data: ({content: text}),
-        error: function (xhr, status) {
-            console.log(xhr, status);
-            alert(status);
-        },
-        success: function () {
-            $('#formContainerResume').css("display", "none");
-            $("#text_plot").html(text);
-            loader.hide();
-        },
-        fail: function () {
-            alert("Une erreur est survenue")
 
-        },
-        always: function () {
-            $('#load_spinner').hide()
+    if (havePlot !== 0) {
+        $.ajax({
+            url: "adminRequests.php?type=edit_plot", //This is the current doc
+            type: "POST",
+            dataType: 'json', // add json datatype to get json
+            data: ({content: text}),
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function () {
+                $('#formContainerResume').css("display", "none");
+                $("#text_plot").html(text);
+                loader.hide();
+            },
+            fail: function () {
+                alert("Une erreur est survenue")
 
-        }
-    });
+            },
+            always: function () {
+                $('#load_spinner').hide()
+
+            }
+        });
+    } else {
+        $.ajax({
+            url: "adminRequests.php?type=add_plot", //This is the current doc
+            type: "POST",
+            dataType: 'json', // add json datatype to get json
+            data: ({content: text}),
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function (data) {
+                console.log(data)
+                $('#formContainerResume').css("display", "none");
+                $("#text_plot").html(text);
+                loader.hide();
+            },
+            fail: function () {
+                alert("Une erreur est survenue")
+
+            },
+            always: function () {
+                $('#load_spinner').hide()
+
+            }
+        });
+
+    }
 }
 
 function add_role(name, fn, num) {
