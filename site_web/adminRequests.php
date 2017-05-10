@@ -151,6 +151,22 @@ if (!$database) {
 
         add_role($nom, $prenom, $numero, $role, $database);
 
+    } elseif ($_GET['type'] === 'add_plot') {
+
+
+        $content = mysqli_real_escape_string($database, $_POST['content']);
+        $id = $_SESSION['id'];
+        echo json_encode($id);
+
+        $query = "INSERT INTO Plots(ID, Plot)
+                  VALUE ('$id', '$content')";
+
+
+        if ($database->query($query) === TRUE) {
+            //echo json_encode("Record added " . $database->error);
+        } else {
+            //echo json_encode("Error updating record: " . $database->error);
+        }
     }
 
 }
