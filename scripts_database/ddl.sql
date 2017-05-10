@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS Personne (
   Nom      varchar(128) NOT NULL,
   Numero   VARCHAR(10),
   Genre    CHAR(2)      NOT NULL,
-  fullname VARCHAR(256) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero))
   CHARACTER SET latin1 COLLATE latin1_bin
   ENGINE = InnoDB;
