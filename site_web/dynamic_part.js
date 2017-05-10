@@ -184,21 +184,22 @@ function modifyRows() {
 
 
     $(".deleteButton").click(function () {
-        const table = $(this).parent().parent().parent().parent().attr('id');
-        const id = $(this).parent().prev().text();
-        const id_element = id.split(';');
-        const row = $(this).parent().parent();
-        console.log(table);
-        if (table === "actors_table") {
-            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'actor', row);
+        if (confirm("Etes vous sûr de vouloir supprimer cette personne ?")) {
+            const table = $(this).parent().parent().parent().parent().attr('id');
+            const id = $(this).parent().prev().text();
+            const id_element = id.split(';');
+            const row = $(this).parent().parent();
+            console.log(table);
+            if (table === "actors_table") {
+                remove_person_from_work(id_element[1], id_element[0], id_element[2], 'actor', row);
 
-        } else if (table === "directors_table") {
-            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'director', row);
+            } else if (table === "directors_table") {
+                remove_person_from_work(id_element[1], id_element[0], id_element[2], 'director', row);
 
-        } else if (table === "writers_table") {
-            remove_person_from_work(id_element[1], id_element[0], id_element[2], 'writer', row);
+            } else if (table === "writers_table") {
+                remove_person_from_work(id_element[1], id_element[0], id_element[2], 'writer', row);
+            }
         }
-
     });
 }
 
