@@ -216,7 +216,6 @@ function remove_person_from_work(_name, _fn, _num, type, row) {
             alert(status);
         },
         success: function (data) {
-            alert(data);
             row.remove();
         },
         fail: function () {
@@ -263,10 +262,8 @@ function update_resume() {
 
 
 function edit_plot(havePlot) {
-    var loader = $("#load_spinner")
     var text = $('#resume').val();
     console.log(havePlot);
-    loader.show();
 
     if (havePlot !== 0) {
         $.ajax({
@@ -280,7 +277,6 @@ function edit_plot(havePlot) {
             success: function () {
                 $('#formContainerResume').css("display", "none");
                 $("#text_plot").html(text);
-                loader.hide();
             },
             fail: function () {
                 alert("Une erreur est survenue")
@@ -304,7 +300,6 @@ function edit_plot(havePlot) {
                 console.log(data)
                 $('#formContainerResume').css("display", "none");
                 $("#text_plot").html(text);
-                loader.hide();
             },
             fail: function () {
                 alert("Une erreur est survenue")
@@ -330,10 +325,10 @@ function add_role(name, fn, num) {
             alert(status);
         },
         success: function (data) {
-            //alert (data);
+            console.log(data);
             alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
             $('#formContainerActor').css("display", "none");
-            $('#actors_table').append('<tr><td><a href="personne.php?id=' + encodeURIComponent(fn + ';' + name + ';' + num) + '">' + fn + ' ' + name + '</a></td><td>' + role + '</td></tr>');
+            location.reload();
 
         },
         fail: function () {
@@ -347,10 +342,10 @@ function add_role(name, fn, num) {
     });
 }
 
-function add_in_tb_actor(name, fn, num) {
-    console.log("add_in_tb_actor: ", name, fn, num)
+function add_in_tb(name, fn, num, tbName) {
+    console.log("add_in_tb: ", name, fn, num)
     $.ajax({
-        url: "adminRequests.php?type=add_in_tb_actor",
+        url: "adminRequests.php?type=add_in_tb_" + tbName,
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn, num: num}),
@@ -358,7 +353,17 @@ function add_in_tb_actor(name, fn, num) {
             alert(status);
         },
         success: function (data) {
-            console.log(data)
+            if (tbName == "directedBy"){
+                alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
+                $('#formContainerDirector').css("display", "none");
+                location.reload();
+
+            } else if (tbName == "writtenBy") {
+                alert(fn + " " + name + " a bien été ajouté dans les auteurs.");
+                $('#formContainerWriter').css("display", "none");
+                location.reload();
+
+            }
 
         },
         fail: function () {
@@ -371,6 +376,7 @@ function add_in_tb_actor(name, fn, num) {
         }
     });
 }
+
 
 function add_person(name, fn, genre, callback) {
     $.ajax({
@@ -399,15 +405,24 @@ function add_person(name, fn, genre, callback) {
     });
 }
 
-function add_actor_role(name, fn, numero) {
-    add_in_tb_actor(name, fn, numero);
-    add_role(name, fn, numero);
+function add_actor_role(name, fn, number) {
+    add_in_tb(name, fn, number, "actor");
+    add_role(name, fn, number);
+}
+
+function add_director_directedBy(name, fn, number) {
+    add_in_tb(name, fn, number, "director");
+    add_in_tb(name, fn, number, "directedBy");
+
+}
+
+function add_writer_writtenBy(name, fn, number) {
+    add_in_tb(name, fn, number, "writer");
+    add_in_tb(name, fn, number, "writtenBy");
 
 }
 
 function edit_actors() {
-    var loader = $("#load_spinner")
-    loader.show();
 
     var name = $('#actor_name').val();
     var fn = $('#actor_fn').val();
@@ -416,7 +431,7 @@ function edit_actors() {
     console.log(name, fn);
 
     $.ajax({
-        url: "adminRequests.php?type=edit_actors",
+        url: "adminRequests.php?type=check_person",
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn}),
@@ -424,16 +439,16 @@ function edit_actors() {
             alert(status);
         },
         success: function (data, textStatus, xhr) {
-            console.log(data);
             if (data == "not found") {
                 if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
                     add_person(name, fn, genre, add_actor_role);
-                    //add_role(name, fn, numero, role);
                 } else {
                     //TODO
 
                 }
 
+            } else {
+                createPersonList(data, "actor");
             }
 
         },
@@ -449,3 +464,186 @@ function edit_actors() {
     });
 
 }
+
+function edit_directors() {
+
+    var name = $('#director_name').val();
+    var fn = $('#director_fn').val();
+    var genre = $('#director_genre').find(":selected").text();
+    console.log(name, fn);
+
+    $.ajax({
+        url: "adminRequests.php?type=check_person",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                    add_person(name, fn, genre, add_director_directedBy);
+                }
+
+            } else {
+                createPersonList(data, "director");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
+
+}
+
+function edit_writers() {
+
+    var name = $('#writer_name').val();
+    var fn = $('#writer_fn').val();
+    var genre = $('#writer_genre').find(":selected").text();
+
+    console.log(name, fn);
+
+    $.ajax({
+        url: "adminRequests.php?type=check_person",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({name: name, fn: fn}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                    add_person(name, fn, genre, add_writer_writtenBy);
+                }
+
+            } else {
+                createPersonList(data, "writer");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
+
+}
+
+function createPersonList(data, person_type) {
+    console.log(data);
+
+    $("body").append(
+        $('<div class="listContainer" id="persons_list_container" </div>').append(
+            $('<div class="popupAdd form_popup" id="popupAddList"</div>').append(
+                $('<h2 class="h2popup">Sélectionnez une personne dans la liste</h2>')
+            )
+        )
+    );
+
+    $('#popupAddList').append(
+        $('<hr class="hrpopup"></hr>')
+
+    );
+
+    $('#popupAddList').append(
+        $('<ul class="list-group" id="persons_list"></ul>')
+
+    );
+
+    $('#popupAddList').append(
+        $('<button class="submit_form" id="cancel_button" onclick="cancel_persons_list()">Annuler</button>')
+
+    );
+
+    for (var person in data) {
+        const nom = data[person][1];
+        const prenom = data[person][0];
+        const numero = data[person][2];
+
+        if (data[person][2] == "NA"){
+            $("#persons_list").append(
+                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "personType":person_type})
+            );
+        } else {
+            $("#persons_list").append(
+                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero})
+            );
+        }
+
+    }
+    $("#persons_list").append(
+        $('<button type="button" class="list-group-item" id="new_person_button">Ajouter une nouvelle personne</button>')
+    );
+
+    $('.list_person_elem').click(function () {
+        if ($(this).data("person_type") === "actor") {
+            add_actor_role($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
+
+        } else if ($(this).data("person_type") === "director") {
+            add_director_directedBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
+
+        } else if ($(this).data("person_type") === "writer") {
+            add_writer_writtenBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
+
+
+        }
+        cancel_persons_list();
+
+    })
+
+    $('#new_person_button').click(function () {
+        var name = $('#actor_name').val();
+        var fn = $('#actor_fn').val();
+        var genre = $('#actor_genre').find(":selected").text();
+        add_person(name, fn, genre, add_actor_role);
+        cancel_persons_list();
+    })
+
+}
+
+function cancel_persons_list() {
+    $('#persons_list_container').remove();
+
+}
+
+
+
+
+/*
+function createPersonList(destination, data) {
+    console.log(data);
+    console.log(destination);
+
+    $('<div class="dialog" title="Choisisez une personne dans la liste" </div>').dialog().append(
+        $('<ul class="list-group" id="persons_list"></ul>')
+    );
+    for (var person in data) {
+        if (data[person][2] == "NA"){
+            $("#persons_list").append(
+                $('<button type="button" class="list-group-item">' +data[person][0] + " " + data[person][1] + '</button>')
+            );
+        } else {
+            $("#persons_list").append(
+                $('<button type="button" class="list-group-item">' +data[person][0] + " " + data[person][1] + " " + data[person][2]+ '</button>')
+            );
+        }
+
+    }
+
+}
+*/

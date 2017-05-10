@@ -142,6 +142,20 @@ function add_director($nom, $prenom, $numero, $db)
 
 }
 
+function add_directedBy($nom, $prenom, $numero,$OID, $db) {
+    $query = "INSERT INTO DirigePar(OID, Nom, Prenom, Numero)
+              VALUE ('$OID', '$nom', '$prenom', '$numero')";
+
+    return execute_add_query($query, $db);
+}
+
+function add_writtenBy($nom, $prenom, $numero, $OID, $db) {
+    $query = "INSERT INTO EcritPar(OID, Nom, Prenom, Numero)
+              VALUE ('$OID', '$nom', '$prenom', '$numero')";
+
+    return execute_add_query($query, $db);
+}
+
 function add_role($nom, $prenom, $numero, $role,$OID, $db)
 {
     $query = "INSERT INTO Role(OID, Nom, Prenom, Numero, Role)
@@ -174,7 +188,7 @@ if (!$database) {
         } else {
             echo json_encode("Error updating record: " . $database->error);
         }
-    } elseif ($_GET['type'] === 'edit_actors') {
+    } elseif ($_GET['type'] === 'check_person') {
         $nom = mysqli_real_escape_string($database, $_POST['name']);
         $prenom = mysqli_real_escape_string($database, $_POST['fn']);
 
@@ -262,6 +276,39 @@ if (!$database) {
 
 
         echo json_encode(remove_isWrittenBy($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'add_in_tb_director') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        echo json_encode(add_director($nom, $prenom, $numero, $database));
+
+    } elseif ($_GET['type'] === 'add_in_tb_directedBy') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+        echo json_encode(add_directedBy($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'add_in_tb_writer') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        echo json_encode(add_writer($nom, $prenom, $numero, $database));
+
+    } elseif ($_GET['type'] === 'add_in_tb_writtenBy') {
+
+        $nom = mysqli_real_escape_string($database, $_POST['name']);
+        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $OID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+        echo json_encode(add_writtenBy($nom, $prenom, $numero, $OID, $database));
+
     }
 }
 
