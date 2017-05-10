@@ -155,18 +155,6 @@
         header("Location: ./administrator_action_page.php#op_on_serie");
     }
 
-    function addEpisode($data){
-        global $database;
-        $res_episode = checkInDb($data, $data["type"]);
-        if($res_episode){
-            $_SESSION["error_add_episode"] = array("Episode Already in Db");
-        }
-        else{
-
-        }
-        header("Location : ./administrator_action_page.php#op_on_episode");
-    }
-
     function checkSameData($dataPerson){
         global $database;
         $result = "NA";
@@ -305,11 +293,6 @@
             $id = $data["ID"];
             $requete = "select s.SerieID from Serie s, Oeuvre o where s.SerieID = \"$id\" and s.SerieID = o.ID";
         }
-        else if($type == "episode"){
-            $title = $data['episodetitle'];
-            $serie = $data['serietitle'];
-            $requete = "select e.EpisodeID from Serie s, Episode e, Oeuvre o where s.SerieID = e.SID and e.TitreS = \"$serie\" and o.ID = e.EpisodeID and o.Titre = \"$title\"";
-        }
 		else if($type == "director"){
 		    $prenom = $data['firstName'];
             $nom = $data['secondName'];
@@ -409,24 +392,6 @@
             "type" => "serie"
         );
 		deleteSerie($data);
-	}
-	else if(isset($_POST['episode_add'])){
-        $name = $_POST['serie_name'];
-        $id = "\"$name\""." (".$_POST["begin_year"].")";
-	    $data = array(
-	        "serieID" => $id,
-            "episodeID" =>"", // ne vois pas comment le recréer
-            "episodeNumber" => "NA",
-            "seasonNumber" => "NA",
-            "type" => "episode"
-        );
-	    if($_POST["episode_number"] != ""){
-	        $data['episodeNumber'] = $_POST['episode_number'];
-        }
-        if($_POST["season_number"]!=""){
-	        $data['seasonNumber'] = $_POST['season_number'];
-        }
-		addEpisode($data);
 	}
 	else if(isset($_POST['director_add'])){
         $dataPerson = array(

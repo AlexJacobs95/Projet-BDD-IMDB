@@ -93,11 +93,6 @@ Page de recherche avancé de site web.
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_episode">Opérations sur Episode</a>
-                    </div>    
-
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
                         <a class="btn btn-xl" href="#op_on_dir">Opérations sur Directeur</a>
                     </div>
                               
@@ -275,44 +270,6 @@ Page de recherche avancé de site web.
 
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name="serie_delete">Suppression</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section id="op_on_episode">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Episode</h2>
-                    <h4>Ajout</h4>
-                </div>
-                <div class="form-errors">
-                    <?php displayMessage("query_succes_add_episode"); ?>
-                </div>
-                <div class="form-errors">
-                    <?php  displayMessage("error_add_episode") ?>
-                </div>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name of the serie" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year of the serie name" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="episode_name" placeholder="Enter the episode name" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="season_number" placeholder="Enter the season number">
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="episode_number" placeholder="Enter the episode number">
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="rating_note_episode" placeholder="Enter a rating note (optional)">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="episode_add">Ajout</button>
                     </div>
                 </form>
             </div>
