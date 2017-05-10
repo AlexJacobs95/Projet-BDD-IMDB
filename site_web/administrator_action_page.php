@@ -93,11 +93,6 @@ Page de recherche avancé de site web.
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_episode">Opérations sur Episode</a>
-                    </div>    
-
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
                         <a class="btn btn-xl" href="#op_on_dir">Opérations sur Directeur</a>
                     </div>
                               
