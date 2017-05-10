@@ -42,7 +42,7 @@ function remove_isDirectedBy($nom, $prenom, $numero, $oid, $db)
 function remove_isWrittenBy($nom, $prenom, $numero, $oid, $db)
 {
     $query = "Delete
-              FROM DirigePar
+              FROM EcritPar
               WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero' AND OID = '$oid'";
 
     if ($db->query($query) === TRUE) {
