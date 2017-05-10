@@ -146,10 +146,12 @@ $havePlot = mysqli_num_rows($plot_res);
                 <div class="col-lg-4" style="display: block; margin: auto">
                     <img class="poster"
                          src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
+                    <div class="intro-lead-in"><h2>link to watch trailers</h2></div>
                 </div>
                 <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
                 <div class=infos><?php extractGenres($genres) ?></div>
                 <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+                <div class="intro-lead-in"><h2>link to watch trailers</h2></div>
             </div>
         </div>
 
