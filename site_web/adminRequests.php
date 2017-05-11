@@ -184,6 +184,16 @@ function remove_work($id, $db)
 
 }
 
+function remove_person($prenom, $nom, $numero, $db)
+{
+    $query = "Delete
+              FROM Oeuvre
+              WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero'";
+
+    return execute_add_query($query, $db);
+
+}
+
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo json_encode("Error: Unable to connect to MySQL." . PHP_EOL);
@@ -333,7 +343,21 @@ if (!$database) {
 
         $ID = mysqli_real_escape_string($database, $_SESSION['id']);
 
+
         echo json_encode(remove_work($ID, $database));
+
+    } elseif ($_GET['type'] === 'remove_person') {
+
+
+        $ID = mysqli_real_escape_string($database, $_SESSION['id']);
+        $prenom_nom_numero = explode(";", $ID);
+
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(remove_person($prenom, $nom, $numero, $database));
+
 
     } elseif ($_GET['type'] === 'check_oeuvre') {
 

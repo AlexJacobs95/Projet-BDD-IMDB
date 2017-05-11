@@ -190,7 +190,7 @@ tr {
     border-width: 1px 0;
 }
 
-.deleteWork {
+.deleteFromDB {
     background-color: #c43131;
     color: white;
     border: none;

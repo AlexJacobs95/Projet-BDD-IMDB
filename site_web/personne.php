@@ -322,7 +322,7 @@ include "popUpForm.php";
 
 <script>
     var number_roles = "<?php echo $nb_roles;?>";
-    add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
+    //add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
 </script>
 
 
@@ -340,6 +340,7 @@ if (isset($_SESSION['logged'])) {
     if (logged == 1) {
         addAdminElementsPerson();
         modifyRows();
+        addheaderOptions("person")
     }
 </script>
 
