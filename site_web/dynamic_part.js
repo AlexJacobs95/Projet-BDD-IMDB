@@ -292,7 +292,7 @@ function remove_work() {
         },
         success: function (data) {
             console.log(data);
-            //location.href = "welcome_page.php"
+            location.href = "welcome_page.php"
         },
         fail: function () {
             alert("Une erreur est survenue")
@@ -983,6 +983,164 @@ function edit_directors_from_person() {
     });
 
 }
+
+
+function addMovie() { //fct appelée lors du clique sur le bouton
+
+    const title = $('#movie_name').val();
+    const date = $('#movie_date').val();
+    var note = $('#movie_note').val();
+
+    console.log(title, date);
+
+
+    if (note.replace(/ /g, '' === "")) {
+        note = -1;
+    }
+    console.log("apres return");
+    check_nb_works(title, date, "movie");
+
+}
+
+function insert_movie(title, id, date) { //fct qui fait l insertion dans la db
+    var note = $('#movie_note').val();
+
+    $.ajax({
+        url: "adminRequests.php?type=add_movie",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({id: id, title: title, date: date, note: note}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            window.location.href = "film.php?id=" + encodeURIComponent(id);
+
+        },
+        fail: function () {
+
+
+        },
+        always: function () {
+
+        }
+
+    });
+
+
+}
+
+function insert_serie(title, id, date) {
+    var note = $('#serie_note').val();
+    var end_date = $('#serie_end_year').val();
+
+    $.ajax({
+        url: "adminRequests.php?type=add_serie",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({id: id, title: title, start_date: date, end_date: end_date, note: note}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            window.location.href = "serie.php?id=" + encodeURIComponent(id);
+
+        },
+        fail: function () {
+
+
+        },
+        always: function () {
+
+        }
+
+    });
+}
+
+
+function build_movie_id(title, date, num) {
+
+    var id;
+
+    if (num === ('I')) { // il y avait pas d'oeuvre du meme nom
+
+        console.log("id : ", title + " (" + date + ")");
+        id = title + " (" + date + ")"
+    } else {
+
+        console.log("id : ", title + " (" + date + "/" + num + ")");
+        id = title + " (" + date + "/" + num + ")"
+    }
+    insert_movie(title, id, date);
+
+
+}
+
+function build_serie_id(title, date, num) {
+    var id;
+
+    if (num === ('I')) { // il y avait pas d'oeuvre du meme nom
+
+        console.log("id : ", title + " (" + date + ")");
+        id = "\"" + title + "\"" + " (" + date + ")"
+    } else {
+
+        console.log("id : ", title + " (" + date + "/" + num + ")");
+        id = "\"" + title + "\"" + " (" + date + "/" + num + ")"
+    }
+    insert_serie(title, id, date);
+}
+
+
+function check_nb_works(title, date, work_type) {
+    console.log("checking nb works", title, date)
+    $.ajax({
+        url: "adminRequests.php?type=check_nb_works",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({title: title, date: date}),
+        error: function (xhr, status) {
+            console.log();
+            alert(status);
+        },
+        success: function (data) {
+            console.log(data);
+            if (work_type === "movie") {
+                build_movie_id(title, date, data);
+            } else if (work_type === "serie") {
+                build_serie_id(title, date, data);
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+
+        }
+
+    });
+
+}
+
+function addSerie() { //fct appelée lors du clique sur le bouton
+
+    const title = $('#serie_name').val();
+    const start_date = $('#serie_start_year').val()
+    var note = $('#serie_note').val();
+
+    console.log(title, start_date);
+
+    if (note.replace(/ /g, '' === "")) {
+        note = -1;
+    }
+
+    console.log("apres return");
+    check_nb_works(title, start_date, "serie");
+
+}
+
 
 
 

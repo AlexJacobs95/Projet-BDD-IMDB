@@ -194,6 +194,48 @@ function remove_person($prenom, $nom, $numero, $db)
 
 }
 
+function number_movies($title, $date, $db)
+{
+    $query = "SELECT COUNT(*) as num
+              FROM Oeuvre
+              WHERE Titre = '$title' AND AnneeSortie = '$date' ";
+
+    return $db->query($query);
+
+}
+
+function add_oeuvre($id, $title, $date, $note, $db)
+{
+    $query = "INSERT
+              INTO Oeuvre(ID, Titre, AnneeSortie, Note)
+              VALUE ('$id', '$title', '$date', '$note')";
+
+    return execute_add_query($query, $db);
+
+}
+
+
+function add_movie($id, $db)
+{
+    $query = "INSERT
+              INTO Film(FilmID)
+              VALUE ('$id')";
+
+    return execute_add_query($query, $db);
+
+}
+
+function add_serie($id, $end_date, $db)
+{
+    $query = "INSERT
+              INTO Serie(SerieID, AnneeFin) 
+              VALUE ('$id', '$end_date')";
+
+    return execute_add_query($query, $db);
+
+}
+
+
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo json_encode("Error: Unable to connect to MySQL." . PHP_EOL);
@@ -441,9 +483,8 @@ if (!$database) {
 
         add_director($nom, $prenom, $numero, $database);
         echo json_encode(add_directedBy($nom, $prenom, $numero, $id, $database));
-    }
 
-    elseif ($_GET['type'] === "add_details"){
+    } elseif ($_GET['type'] === "add_details") {
         $id = $_SESSION['id'];
         $type = mysqli_real_escape_string($database, $_POST["type_field"]);
         $data = mysqli_real_escape_string($database, $_POST["data_field"]);
@@ -464,7 +505,41 @@ if (!$database) {
         } else {
             echo json_encode("Error updating details: " . $database->error);
         }
+    } elseif ($_GET['type'] === 'check_nb_works') {
+
+        $title = mysqli_real_escape_string($database, $_POST['title']);
+        $date = mysqli_real_escape_string($database, $_POST['date']);
+
+
+        $res = mysqli_fetch_array(number_movies($title, $date, $database));
+        $num = $res['num'];
+        echo json_encode(toRoman($num + 1));
+
+    } elseif ($_GET['type'] === 'add_movie') {
+
+        $id = mysqli_real_escape_string($database, $_POST['id']);
+        $title = mysqli_real_escape_string($database, $_POST['title']);
+        $date = mysqli_real_escape_string($database, $_POST['date']);
+        $note = mysqli_real_escape_string($database, $_POST['note']);
+
+
+        add_oeuvre($id, $title, $date, $note, $database);
+        echo json_encode(add_movie($id, $database));
+
+    } elseif ($_GET['type'] === 'add_serie') {
+
+        $id = mysqli_real_escape_string($database, $_POST['id']);
+        $title = mysqli_real_escape_string($database, $_POST['title']);
+        $start_date = mysqli_real_escape_string($database, $_POST['start_date']);
+        $end_date = mysqli_real_escape_string($database, $_POST['end_date']);
+        $note = mysqli_real_escape_string($database, $_POST['note']);
+
+
+        add_oeuvre($id, $title, $start_date, $note, $database);
+        echo json_encode(add_serie($id, $end_date, $database));
+
     }
+
 }
 
 

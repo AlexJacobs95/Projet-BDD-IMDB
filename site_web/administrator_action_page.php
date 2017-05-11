@@ -3,7 +3,9 @@ Jacobs Alexandre, Engelman David, Engelman Benjamin.
 INFO-H-303 : Bases de données - Projet IMBD.
 Page de recherche avancé de site web.
 -->
- <?php session_start();
+
+
+<?php session_start();
  function displayMessage($key){
      if(isset($_SESSION[$key])) {
          foreach ($_SESSION[$key] as $succes) {
@@ -14,7 +16,10 @@ Page de recherche avancé de site web.
  }
  ?>
 
- <!DOCTYPE html>
+<!DOCTYPE html>
+
+<script src="dynamic_part.js"></script>
+
 <html>
 	<head>
 
@@ -169,45 +174,26 @@ Page de recherche avancé de site web.
                  <div class="form-errors">
                      <?php  displayMessage("error_add_film") ?>
                  </div>
-                <form action="/action_administrator.php" method="post">
+                 <form action="#" method="post" id="add_movie">
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="film_name" placeholder="Enter the name" required>
+                        <input id="movie_name" type="text_field" class="form-control" name="film_name"
+                               placeholder="Titre" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="year_film" placeholder="Enter the year" required>
+                        <input id="movie_date" type="text_field" class="form-control" name="year_film"
+                               placeholder="Année" required>
                     </div>
+                     <!--
+                     <div class="form-group text-center">
+                         <input id = "movie_gender" type="text_field" class="form-control" name="genre_film" placeholder="Enter the genre(optional)">
+                     </div>
+                     -->
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="genre_film" placeholder="Enter the genre(optional)">
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="rating_note_film" placeholder="Enter a rating note (optional)">
+                        <input id="movie_note" type="text_field" class="form-control" name="rating_note_film"
+                               placeholder="Note(optionel)">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="film_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h4>Suppression</h4>
-                </div>
-
-                <div class="form-errors">
-                    <?php displayMessage("query_succes_delete_film"); ?>
-                </div>
-                <div class="form-errors">
-                    <?php  displayMessage("error_delete_film") ?>
-                </div>
-
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="film_name" placeholder="Enter the name" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="year_film" placeholder="Enter the year" required>
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name="film_delete">Suppression</button>
+                        <button type="button" class="btn btn-xl" name="film_add" onclick="addMovie()">Ajout</button>
                     </div>
                 </form>
             </div>
@@ -227,58 +213,36 @@ Page de recherche avancé de site web.
                 </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name" required>
+                        <input id="serie_name" type="text_field" class="form-control" name="serie_name"
+                               placeholder="Titre" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year" required>
+                        <input id="serie_start_year" type="text_field" class="form-control" name="begin_year"
+                               placeholder="Année de sortie" required>
                     </div>
-                    <div class="form-group text-center">
+                    <!--<div class="form-group text-center">
                         <input type="text_field" class="form-control" name="genre_serie" placeholder="Enter the genre (optional)">
+                    </div>-->
+                    <div class="form-group text-center">
+                        <input id="serie_end_year" type="text_field" class="form-control" name="end_year"
+                               placeholder="Année de fin (optionnel)">
                     </div>
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="end_year" placeholder="Enter the end year (optional)">
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="rating_note_serie" placeholder="Enter a rating note(optional)">
+                        <input id="serie_note" type="text_field" class="form-control" name="rating_note_serie"
+                               placeholder="Note (optionnel)">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="serie_add">Ajout</button>
+                        <button type="button" class="btn btn-xl" name="serie_add" onclick="addSerie()">Ajout</button>
                     </div>
                 </form>
             </div>
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h4>Suppression</h4>
-                </div>
 
-                <div class="form-errors">
-                    <?php displayMessage("query_succes_delete_serie"); ?>
-                </div>
-                <div class="form-errors">
-                    <?php  displayMessage("error_delete_serie") ?>
-                </div>
-
-                <form action="/action_administrator.php" method="post">
-
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="serie_name" placeholder="Enter the name" required>
-                    </div>
-
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="begin_year" placeholder="Enter the begin year" required>
-                    </div>
-
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name="serie_delete">Suppression</button>
-                    </div>
-                </form>
-            </div>
         </section>
 
-        <section id="op_on_dir">
+        <section id="op_on_pers">
             <div class="container text-center"> 
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Directeur</h2>
+                    <h2 class="section-heading">Opérations sur personnes</h2>
                     <h4>Ajout</h4>
                 </div>
                 <div class="form-errors">
@@ -299,64 +263,6 @@ Page de recherche avancé de site web.
                     </div>
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-xl" name ="director_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section id="op_on_writer">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Auteur</h2>
-                    <h4>Ajout</h4>
-                </div>
-                <div class="form-errors">
-                    <?php displayMessage("query_succes_add_writer"); ?>
-                </div>
-                <div class="form-errors">
-                    <?php  displayMessage("error_add_writer") ?>
-                </div>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                         <input type="text_field" class="form-control" name="writer_firstname" placeholder="Enter the FirstName" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="writer_secondname" placeholder="Enter the SecondName" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="writer_add">Ajout</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section id="op_on_actor">
-            <div class="container text-center"> 
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Opérations sur Acteur/Actrice</h2>
-                    <h4>Ajout</h4>
-                </div>
-                <div class="form-errors">
-                    <?php displayMessage("query_succes_add_actor"); ?>
-                </div>
-                <div class="form-errors">
-                    <?php  displayMessage("error_add_actor") ?>
-                </div>
-                <form action="/action_administrator.php" method="post">
-                    <div class="form-group text-center">
-                         <input type="text_field" class="form-control" name="actor_firstname" placeholder="Enter the FirstName" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="actor_secondname" placeholder="Enter the SecondName" required>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="actor_add">Ajout</button>
                     </div>
                 </form>
             </div>
