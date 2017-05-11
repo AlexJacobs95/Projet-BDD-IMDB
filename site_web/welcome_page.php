@@ -85,60 +85,6 @@ include 'menubar.php';
 
 
 <!-- Stats Section -->
-<section id="stats" class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Sur ce site, sont référencés</h2>
-            </div>
-        </div>
-        <div class="row">
-            <?php
-            $database = new mysqli("localhost","root","imdb","IMDB");
-            $number_film = 0;
-            $number_serie = 0;
-            $number_actor =0;
-            if (!$database)
-            {
-                echo "Error: Unable to connect to MySQL." . PHP_EOL;
-                echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-                echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-                exit;
-            }
-            else{
-                $result_film = $database->query("SELECT * FROM Film");
-                $number_film =  $result_film->num_rows;
-                $result_serie = $database->query("SELECT * FROM Serie");
-                $number_serie = $result_serie->num_rows;
-                $result_actor = $database->query("SELECT * From Acteur");
-                $number_actor = $result_actor->num_rows;
-                $result_film->close();
-                $result_serie->close();
-                $result_actor->close();
-            }
-            $database->close();
-            ?>
-            <div class="col-sm-4">
-                <div class="stat-member">
-                    <h3><?php echo "$number_film"; ?></h3>
-                    <h4>Films</h4>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="stat-member">
-                    <h3><?php echo "$number_serie"; ?></h3>
-                    <h4>Séries</h4>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="stat-member">
-                    <h3><?php echo "$number_actor"; ?></h3>
-                    <h4>Acteurs</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 </body>
 

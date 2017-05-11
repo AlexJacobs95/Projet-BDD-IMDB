@@ -117,6 +117,8 @@ function printCategories($roles, $directed, $written)
             integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
             crossorigin="anonymous"></script>
     <![endif]-->
+    <script src="dynamic_part.js"></script>
+
 
 </head>
 
@@ -153,6 +155,11 @@ include 'menubar.php';
 
 
 </header>
+
+<script>
+    add_navbar([["Acteur", "Roles"],
+        ["Auteur", "Written"], ["Directeur", "Directed"]])
+</script>
 
 <section id="Roles" class="bg-light-gray">
     <div class="container">
@@ -286,6 +293,16 @@ include "popUpForm.php";
 <script type="text/javascript">
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
+        $(window).scroll(function () {
+
+            if ($(window).scrollTop() > 892 - 171) {
+                $('#nav_bar').addClass('navbar-top');
+            }
+
+            if ($(window).scrollTop() < 892 -170) {
+                $('#nav_bar').removeClass('navbar-top');
+            }
+        });
     });
 
 </script>
@@ -302,9 +319,6 @@ include "popUpForm.php";
     });
 
 </script>
-
-<script src="dynamic_part.js"></script>
-
 
 <script>
     var number_roles = "<?php echo $nb_roles;?>";

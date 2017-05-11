@@ -368,6 +368,7 @@ if (!$database) {
         $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
         $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
 
+        add_actor($nom, $prenom, $numero, $database);
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $id, $database));
 
     } elseif ($_GET['type'] === 'add_directed_by_person') {
@@ -381,6 +382,7 @@ if (!$database) {
         $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
         $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
 
+        add_director($nom, $prenom, $numero, $database);
         echo json_encode(add_directedBy($nom, $prenom, $numero, $id, $database));
     }
 
