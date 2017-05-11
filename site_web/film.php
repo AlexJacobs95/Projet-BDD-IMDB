@@ -127,7 +127,7 @@ include 'menubar.php';
 <?php
 $movie_infos = mysqli_fetch_array($movie);
 $plot_info = mysqli_fetch_array($plot_res);
-$tire = $movie_infos['Titre'];
+$titre = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
@@ -146,9 +146,10 @@ $havePlot = mysqli_num_rows($plot_res);
                 <div class="col-lg-4" style="display: block; margin: auto">
                     <img class="poster"
                          src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
-                    <div class="intro-lead-in"><h2>link to watch trailers</h2></div>
+                    <div id="link_trailer"><h2 id="text-watch-trailer">watch trailers</h2></div>
                 </div>
-                <div class="intro-heading"><?php echo sprintf($titre_format, $tire, $date); ?></div>
+                <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
+                <div class="intro-heading" id="date"><?php echo $date; ?></div>
                 <div class=infos><?php extractGenres($genres) ?></div>
                 <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             </div>
@@ -200,7 +201,7 @@ $havePlot = mysqli_num_rows($plot_res);
 
 <script>
 
-    var titre = "<?php echo $tire;?>";
+    var titre = "<?php echo $titre;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
