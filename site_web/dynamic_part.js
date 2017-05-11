@@ -619,7 +619,7 @@ function edit_directors_from_oeuvre() {
 
 }
 
-function edit_writers_from_person() {
+function edit_writers_from_oeuvre() {
 
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
