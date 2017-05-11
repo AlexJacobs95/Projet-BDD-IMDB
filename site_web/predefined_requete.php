@@ -20,7 +20,8 @@ Page avec menu déroulant pour requetes prédéfinies.
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="test_css/agency.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="predefined_query.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,6 +30,9 @@ Page avec menu déroulant pour requetes prédéfinies.
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
+
+    <script src="dynamic_part.js"></script>
+
 
 
 </head>
@@ -46,11 +50,11 @@ include 'menubar.php';
     <div class="col-lg-12 text-center">
         <h2 style="color: white" class="section-heading">Requêtes Prédéfinies</h2>
     </div>
-        <form action="./requetes_action.php" name="form_query" method = "post">
+        <form name="form_query" method = "post">
             <select class="form-control" name ="requete" id="requete">
                 <?php
                 for ($i=1; $i < 7; $i++) {
-                    echo "<option>Requete ".$i."</option>";
+                    echo "<option id=".$i.">Requete ".$i."</option>";
                 }
                 ?>
             </select>
@@ -75,38 +79,92 @@ include 'menubar.php';
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
         $('form[name=form_query]').submit(function(e) {
             e.preventDefault();
-            var query_num = $('#form_query').find(":selected").text();
-            execute_query(query_num);
+            var query = $('#requete').find(":selected").text();
+            var num  = $('#requete').find(":selected").attr('id');
+            console.log(num, query);
+            execute_query(query, num);
         });
     });
 
 
-    function execute_query(num) {
+    function execute_query(query, num) {
+        createSection("Résultats de la requête " + num);
+        var spinnerID = "loading_spinner"+num;
+        var tableID = "table_container_Résultats de la requête " + num;
+        console.log(tableID);
+        div = document.getElementById(tableID);
+        image = document.createElement("image");
+        image.setAttribute("id", spinnerID);
+        image.setAttribute("src", "sqares.gif");
+        div.appendChild(image);
+
+        console.log("requetes_action.php?requete="+query);
         $.ajax({
-            url: "requetes_action.php?requete="+num,
+            url: "requetes_action.php?requete="+query,
             type: "POST",
             error: function (xhr, status) {
                 alert(status);
             },
-            success: function (data, textStatus, xhr) {
-                alert("done");
-
+            success: function (data) {
+                console.log(query + "termninée");
+                data = (JSON.parse(data));
+                output_query(num, data);
             },
             fail: function () {
                 alert("Une erreur est survenue")
 
             },
             always: function () {
-                $('#load_spinner').hide()
+                $('#loading_spinner'+num).hide()
 
             }
 
         });
 
     }
+
+    function output_query(num, res) {
+        table = document.createElement("table");
+        table.setAttribute("id", "table_"+num);
+        table.setAttribute("class", "display");
+        if (num === "1"){
+            create_table_query_1(res)
+        } else if (num === "4") {
+            create_table_query_4(res)
+        }
+    }
+
+
+    function create_table_query_1(data) {
+        document.getElementById("table_container_Résultats de la requête 1").appendChild(table);
+        $('#table_1').DataTable({
+            "aaSorting": [],
+            data: data,
+            columns: [
+                {title: "Nom"},
+                {title: "Prenom"},
+                {title: "Numero"}
+            ]
+        });
+    }
+
+    function create_table_query_4(data) {
+        document.getElementById("table_container_Résultats de la requête 4").appendChild(table);
+        $('#table_4').DataTable({
+            "aaSorting": [],
+            data: data,
+            columns: [
+                {title: "ID de l'épisode"},
+
+            ]
+        });
+    }
+
+
 </script>

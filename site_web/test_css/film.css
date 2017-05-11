@@ -353,9 +353,7 @@ input[type=text3] {
     transform: translate(-50%, 35px);
 }
 
-#loading_spinner {
-    display: none;
-}
+
 
 .td#hidden {
     display: none;

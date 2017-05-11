@@ -207,16 +207,7 @@ $havePlot = mysqli_num_rows($plot_res);
         $("#intro").fadeIn(2000);
         getImagesMovie(titre, date);
         getTrailersMovie(titre, date)
-        $(window).scroll(function () {
 
-            if ($(window).scrollTop() > 892 - 61) {
-                $('#nav_bar').addClass('navbar-top');
-            }
-
-            if ($(window).scrollTop() < 892 -60) {
-                $('#nav_bar').removeClass('navbar-top');
-            }
-        });
     });
 
 </script>
