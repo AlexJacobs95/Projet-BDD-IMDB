@@ -25,6 +25,15 @@ header .intro-text .intro-heading {
     margin-bottom: 10px;
 }
 
+header .intro-text .intro-heading-with-no-margin {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 75px;
+    margin-bottom: 0px;
+}
+
 header .intro-text .infos {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
@@ -159,7 +168,7 @@ a:active {
     width: auto;
     display: block;
     margin: 0 auto;
-    padding-bottom: 100px;
+    padding-bottom: 5px;
 }
 
 
@@ -171,6 +180,17 @@ td {
 tr {
     border: solid;
     border-width: 1px 0;
+}
+
+.deleteWork {
+    background-color: #c43131;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 200px;
+    font-size: 24px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 
 
@@ -336,4 +356,12 @@ input[type=text3] {
 .deleteButton {
     background: transparent;
     border: none;
+}
+
+div#link_trailer {
+    padding-bottom: 100px;
+}
+
+h2#text-watch-trailer {
+    font-size: 22px;
 }

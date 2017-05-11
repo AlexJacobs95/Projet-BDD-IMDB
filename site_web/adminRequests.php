@@ -165,6 +165,16 @@ function add_role($nom, $prenom, $numero, $role,$OID, $db)
 
 }
 
+function remove_work($id, $db)
+{
+    $query = "Delete
+              FROM Oeuvre
+              WHERE ID = '$id'";
+
+    return execute_add_query($query, $db);
+
+}
+
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo json_encode("Error: Unable to connect to MySQL." . PHP_EOL);
@@ -309,6 +319,12 @@ if (!$database) {
 
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $OID, $database));
 
+    } elseif ($_GET['type'] === 'remove_work') {
+
+
+        $ID = mysqli_real_escape_string($database, $_SESSION['id']);
+
+        echo json_encode(remove_work($ID, $database));
     }
 }
 
