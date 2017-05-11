@@ -151,7 +151,7 @@ function addAdminElements(section) {
             document.getElementById('formContainerDetails').style.display = "block";
         } else if (section.id === "roles-title") {
             document.getElementById('formContainerActorPerson').style.display = "block";
-        } else if (section.id === "director-peron-title") {
+        } else if (section.id === "director-person-title") {
             document.getElementById('formContainerDirectorPerson').style.display = "block";
         } else if (section.id === "writer-person-title") {
             document.getElementById('formContainerWriterPerson').style.display = "block";
