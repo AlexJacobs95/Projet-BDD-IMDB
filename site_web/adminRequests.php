@@ -372,6 +372,29 @@ if (!$database) {
 
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $id, $database));
     }
+
+    elseif ($_GET['type'] === "add_details"){
+        $id = $_SESSION['id'];
+        $type = mysqli_real_escape_string($database, $_POST["type_field"]);
+        $data = mysqli_real_escape_string($database, $_POST["data_field"]);
+        if ($type === "genre"){
+            $query ="INSERT INTO Genre(ID, Genre)
+                  VALUE ('$id', '$data')";
+        }
+        elseif ($type === "language"){
+            $query ="INSERT INTO Langue(ID, Langue)
+                  VALUE ('$id', '$data')";
+        }
+        elseif ($type === "country"){
+            $query ="INSERT INTO Pays(ID, Pays)
+                  VALUE ('$id', '$data')";
+        }
+        if ($database->query($query) === TRUE) {
+            echo json_encode("Details added " . $database->error);
+        } else {
+            echo json_encode("Error updating details: " . $database->error);
+        }
+    }
 }
 
 
