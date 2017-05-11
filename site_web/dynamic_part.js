@@ -690,6 +690,9 @@ function add_details(field_data, field_type){
         success: function (res) {
             console.log("add_details")
             console.log(res);
+            $('#formContainerDetails').css("display", "none");
+            alert(res);
+            location.reload();
         },
         fail: function () {
             alert("Une erreur est survenue")
