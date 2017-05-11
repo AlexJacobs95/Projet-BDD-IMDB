@@ -41,12 +41,12 @@ include 'menubar.php';
 ?>
 
 
-<section id ="bla">
+<section id ="query_section">
 <div class="container text-center">
     <div class="col-lg-12 text-center">
         <h2 style="color: white" class="section-heading">Requêtes Prédéfinies</h2>
     </div>
-        <form action="./requetes_action.php" method = "post">
+        <form action="./requetes_action.php" name="form_query" method = "post">
             <select class="form-control" name ="requete" id="requete">
                 <?php
                 for ($i=1; $i < 7; $i++) {
@@ -75,3 +75,38 @@ include 'menubar.php';
 
 <!-- Theme JavaScript -->
 <script src="test_js/agency.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('form[name=form_query]').submit(function(e) {
+            e.preventDefault();
+            var query_num = $('#form_query').find(":selected").text();
+            execute_query(query_num);
+        });
+    });
+
+
+    function execute_query(num) {
+        $.ajax({
+            url: "requetes_action.php?requete="+num,
+            type: "POST",
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function (data, textStatus, xhr) {
+                alert("done");
+
+            },
+            fail: function () {
+                alert("Une erreur est survenue")
+
+            },
+            always: function () {
+                $('#load_spinner').hide()
+
+            }
+
+        });
+
+    }
+</script>
