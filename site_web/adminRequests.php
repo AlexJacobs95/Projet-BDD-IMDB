@@ -168,7 +168,7 @@ function add_role($nom, $prenom, $numero, $role,$OID, $db)
 function check_for_oeuvre($titre, $db) {
     $query = "SELECT *
               FROM Oeuvre
-              WHERE Match(Titre) AGAINST ('\"$titre\"')";
+              WHERE Titre = '$titre'";
 
     return $db->query($query);
 
@@ -334,17 +334,15 @@ if (!$database) {
         $ID = mysqli_real_escape_string($database, $_SESSION['id']);
 
         echo json_encode(remove_work($ID, $database));
+
     } elseif ($_GET['type'] === 'check_oeuvre') {
 
         $titreOeuvre = mysqli_real_escape_string($database, $_POST['titreOeuvre']);
 
         $res = check_for_oeuvre($titreOeuvre, $database);
 
-        if (mysqli_num_rows($res) !== 0) {
-            echo json_encode($res_check_query->fetch_all());
-        } else {
-            echo json_encode("not found");
-        }
+        echo json_encode($res->fetch_all());
+
     } elseif ($_GET['type'] === 'add_role_by_oeuvre_id') {
 
         $id = mysqli_real_escape_string($database, $_POST['id']);
@@ -371,7 +369,21 @@ if (!$database) {
         $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
 
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $id, $database));
+
+    } elseif ($_GET['type'] === 'add_directed_by_person') {
+
+        $id = mysqli_real_escape_string($database, $_POST['id']);
+
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(add_directedBy($nom, $prenom, $numero, $id, $database));
     }
+
 }
 
 

@@ -318,9 +318,9 @@ function update_resume() {
 
 }
 
-function add_written_by(id, titre) {
+function add_written_or_directed_by(id, titre, option) {
     $.ajax({
-        url: "adminRequests.php?type=add_written_by_person",
+        url: "adminRequests.php?type=add_"+option+"_by_person",
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({id:id}),
@@ -789,10 +789,11 @@ function add_details(field_data, field_type){
 }
 function createList(data, type) {
     console.log(data);
+    var titre;
     if (type === "actor" || type === "director" || type === "writer") {
-        const titre = "Sélectionnez une personne dans la liste";
+        titre = "Sélectionnez une personne dans la liste";
     } else {
-        const titre = "Sélectionnez une oeuvre dans la liste";
+        titre = "Sélectionnez une oeuvre dans la liste";
     }
     $("body").append(
         $('<div class="listContainer" id="persons_list_container" </div>').append(
@@ -839,7 +840,7 @@ function createList(data, type) {
             const id = data[i][0];
 
             $("#list").append(
-                $('<button type="button" class="list-group-item list_elem">' + titre + '(' + date + ')</button>').data({"titre": titre, "date": date, "id": id, "itemType":type})
+                $('<button type="button" class="list-group-item list_elem">' + id + '</button>').data({"titre": titre, "date": date, "id": id, "itemType":type})
             );
 
 
@@ -868,8 +869,11 @@ function createList(data, type) {
         } else if ($(this).data("itemType") === "role") {
             add_role_by_oeuvre_id($(this).data("id"), $(this).data("titre"));
 
-        } else if ($(this).data("itemType") === "writtenBy") {
-            add_written_by($(this).data("id"), $(this).data("titre"));
+        } else if ($(this).data("itemType") === "writtenBy"){
+            add_written_or_directed_by($(this).data("id"), $(this).data("titre"), "written");
+
+        } else if ($(this).data("itemType") === "directedBy"){
+            add_written_or_directed_by($(this).data("id"), $(this).data("titre"), "directed");
 
         }
         cancel_persons_list();
@@ -954,7 +958,38 @@ function edit_writers_from_person() {
             if (data == "not found") {
                 alert("Aucune Oeuvre n'a été trouvée pour le titre " + titreOeuvre + "\nVeuillez ajouter l'oeuvre depuis la page administrateur puis rééssayer.")
             } else {
+                console.log(data);
                 createList(data, "writtenBy");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+
+        }
+
+    });
+
+}
+
+function edit_directors_from_person() {
+    const titreOeuvre = $('#oeuvre_name_director').val();
+    $.ajax({
+        url: "adminRequests.php?type=check_oeuvre",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({titreOeuvre: titreOeuvre}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                alert("Aucune Oeuvre n'a été trouvée pour le titre " + titreOeuvre + "\nVeuillez ajouter l'oeuvre depuis la page administrateur puis rééssayer.")
+            } else {
+                createList(data, "directedBy");
             }
 
         },
