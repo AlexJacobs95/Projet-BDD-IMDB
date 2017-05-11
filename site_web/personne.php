@@ -305,6 +305,13 @@ include "popUpForm.php";
 
 <script src="dynamic_part.js"></script>
 
+
+<script>
+    var number_roles = "<?php echo $nb_roles;?>";
+    add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
+</script>
+
+
 <?php
 $logged = 0;
 if (isset($_SESSION['logged'])) {

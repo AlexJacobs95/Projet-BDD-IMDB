@@ -153,7 +153,7 @@ function addAdminElements(section) {
             document.getElementById('formContainerActorPerson').style.display = "block";
         } else if (section.id === "director-peron-title") {
             document.getElementById('formContainerDirectorPerson').style.display = "block";
-        } else if (section.id === "writer-peron-title") {
+        } else if (section.id === "writer-person-title") {
             document.getElementById('formContainerWriterPerson').style.display = "block";
         } else { //resume
             document.getElementById('formContainerResume').style.display = "block";
