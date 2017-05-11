@@ -1,8 +1,9 @@
-function add_showMore_link(hideContent, link) {
+function add_showMore_link_action(hideContent, link) {
     link.on("click", function () {
 
         const $this = $(this);
         const $content = $this.parent().prev("div.content");
+        console.log($content)
         let linkText = $this.text().toUpperCase();
 
         if (linkText === "SHOW MORE") {
@@ -18,13 +19,14 @@ function add_showMore_link(hideContent, link) {
 
 }
 
-function add_resizable_table(number_roles) {
+function add_resizable_table(table_id, _parent, section_id, number_elements) {
 
+    console.log(_parent);
+    if (number_elements > 10) {
 
-    if (number_roles > 10) {
-
-        const parent = document.getElementById("actors");
-        const toWrap = document.getElementById("actors_table");
+        const parent = document.getElementById(_parent);
+        console.log(parent);
+        const toWrap = document.getElementById(table_id);
         const wrapper = document.createElement('div');
         wrapper.className += "content hideContent-actors";
         parent.replaceChild(wrapper, toWrap);
@@ -33,7 +35,7 @@ function add_resizable_table(number_roles) {
         const link = document.createElement('a');
         const linkText = document.createTextNode("Show more");
         link.appendChild(linkText);
-        link.href = "#Acteurs";
+        link.href = section_id;
         link_div.appendChild(link);
         link_div.className += "show-more";
         parent.appendChild(link_div);
@@ -67,19 +69,23 @@ function add_plots(havePlot) {
 
 }
 
+function add_dynamic_part_person(number_roles, number_written, number_directed) {
+    add_resizable_table("roles_table", "roles-container", "#Roles", number_roles);
+    add_resizable_table("written_table", "written-container", "#Written", number_written);
+    add_resizable_table("directed_table", "directed-container", "#Directed", number_directed);
+    add_showMore_link_action("hideContent-actors", $(".show-more a"));
+}
 
 function add_dynamic_part_series(havePlot, hideContent) {
     add_plots(havePlot);
-    add_showMore_link(hideContent, $(".show-more-plot a"))
-
 }
 
 function add_dynamic_part_filmAndEp(havePlot, number_roles, hideContent_plot, hideContent_actors) {
 
     add_plots(havePlot);
-    add_showMore_link(hideContent_plot, $(".show-more-plot a"));
-    add_resizable_table(number_roles);
-    add_showMore_link(hideContent_actors, $(".show-more a"))
+    add_showMore_link_action(hideContent_plot, $(".show-more-plot a"));
+    add_resizable_table("actors_table", "actors", "#Acteurs", number_roles);
+    add_showMore_link_action(hideContent_actors, $(".show-more a"))
 
 }
 
@@ -189,7 +195,6 @@ function addheaderOptions(type) {
 
 
 function addAdminElementsFilmEpisode(plot) {
-    console.log("hi")
     addAdminElements(document.getElementById("actor-title"));
     addAdminElements(document.getElementById("director-title"));
     addAdminElements(document.getElementById("writer-title"));
@@ -204,6 +209,13 @@ function addAdminElementsPerson() {
     addAdminElements(document.getElementById("roles-title"));
     addAdminElements(document.getElementById("director-person-title"));
     addAdminElements(document.getElementById("writer-person-title"));
+
+}
+
+function addAdminElementsSerie(plot) {
+    addAdminElements(document.getElementById("resume-title"));
+    $('#resume').val($('#resume').val() + plot);
+    addheaderOptions("work");
 
 }
 
@@ -225,27 +237,50 @@ function modifyRows() {
         if (confirm("Etes vous sûr de vouloir supprimer cette personne ?")) {
             const table = $(this).parent().parent().parent().parent().attr('id');
             const id = $(this).parent().prev().text();
-            const id_element = id.split(';');
             const row = $(this).parent().parent();
             console.log(table);
             if (table === "actors_table") {
+                const id_element = id.split(';');
                 remove_person_from_work(id_element[1], id_element[0], id_element[2], 'actor', row);
-
             } else if (table === "directors_table") {
+                const id_element = id.split(';');
                 remove_person_from_work(id_element[1], id_element[0], id_element[2], 'director', row);
-
             } else if (table === "writers_table") {
+                const id_element = id.split(';');
                 remove_person_from_work(id_element[1], id_element[0], id_element[2], 'writer', row);
             } else if (table === "roles_table") {
-                remove_role_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
+                remove_elem_from_person(id, 'role', row);
             } else if (table === "written_table") {
-                remove_written_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
+                remove_elem_from_person(id, "written", row);
             } else if (table === "directed_table") {
-                remove_directed_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
+                remove_elem_from_person(id, "directed", row);
             }
         }
     });
 }
+
+function remove_elem_from_person(_id, type, row) {
+    console.log(_id, type);
+
+    $.ajax({
+        url: "adminRequests.php?type=remove_" + type + "_from_person", //This is the current doc
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({id: _id}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            row.remove();
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        }
+    });
+
+}
+
 
 
 function remove_work() {
@@ -256,7 +291,8 @@ function remove_work() {
             alert(status);
         },
         success: function (data) {
-            location.href = "welcome_page.php"
+            console.log(data);
+            //location.href = "welcome_page.php"
         },
         fail: function () {
             alert("Une erreur est survenue")
@@ -267,6 +303,8 @@ function remove_work() {
 }
 
 function remove_person() {
+
+    console.log("In remove_person")
 
     $.ajax({
         url: "adminRequests.php?type=remove_person",
