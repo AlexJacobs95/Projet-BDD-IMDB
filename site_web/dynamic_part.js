@@ -430,7 +430,7 @@ function add_person(name, fn, genre, callback) {
 
         },
         success: function (numero) {
-            console.log("add_peson_OK")
+            console.log("add_person_OK")
             console.log(numero);
             callback(name, fn, numero);
 
@@ -547,7 +547,7 @@ function edit_directors() {
 
 function edit_writers() {
 
-    if (!checkForm('#formWirter'), 2){
+    if (!checkForm('#formWriter'), 2){
         return;
     }
 
@@ -587,6 +587,37 @@ function edit_writers() {
 
     });
 
+}
+
+function edit_details() {
+    var genre = $('#genre').val();
+    var language = $('#language').val();
+    var country = $('#country').val();
+
+    console.log(genre, language, country);
+
+    if(!(genre.length === 0)){
+        edit_genre(genre);
+    }
+    if(!(language.length === 0)){
+        edit_language(language);
+    }
+    if(!(country.length === 0)){
+        edit_country(country);
+    }
+}
+
+
+function edit_genre(genre) {
+    console.log(genre);
+}
+
+function edit_language(language) {
+    console.log(language);
+}
+
+function edit_country(country) {
+    console.log(country);
 }
 
 function createPersonList(data, person_type) {
