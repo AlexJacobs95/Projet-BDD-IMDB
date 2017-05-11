@@ -570,16 +570,113 @@ function edit_details() {
 
 function edit_genre(genre) {
     console.log(genre);
+    $.ajax({
+        url: "adminRequests.php?type=check_genre",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data === "not found") {
+                add_details(genre, "genre");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
 }
 
 function edit_language(language) {
     console.log(language);
+    $.ajax({
+        url: "adminRequests.php?type=check_language",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                add_details(language, "language");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
 }
 
 function edit_country(country) {
     console.log(country);
+    $.ajax({
+        url: "adminRequests.php?type=check_country",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                add_details(country, "country");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
 }
 
+
+function add_details(field_data, field_type){
+    $.ajax({
+        url: "adminRequests.php?type=add_details",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({type_field: field_type, data_field: field_data}),
+        error: function (xhr, status) {
+            alert(status);
+
+        },
+        success: function (field_data) {
+            console.log("add_details")
+            console.log(field_data);
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
 function createPersonList(data, person_type) {
     console.log(data);
 
