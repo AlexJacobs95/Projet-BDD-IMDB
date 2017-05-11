@@ -76,6 +76,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <hr class="hrpopup">
             <input id="genre" name="genre" placeholder="Genre" type="text3">
             <input id="language" name="language" placeholder="Langue" type="text3">
+            <input id="country" name="country" placeholder="Pays" type="text3">
             <button type="button" class="submit_form" id="submitDetails">Send</button>
         </form>
     </div>
