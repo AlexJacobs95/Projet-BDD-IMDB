@@ -984,6 +984,33 @@ function edit_directors_from_person() {
 
 }
 
+function createSection(titre) {
+    console.log("hey", "table_container_" + titre);
+    var $element = $('#'+titre);
+    if(!$element.length){
+
+        var oeuvre_section = document.createElement("SECTION");
+        oeuvre_section.setAttribute('id', titre);
+        oeuvre_section.setAttribute('class', "blue");
+
+        div_container = document.createElement('div');
+        div_row = document.createElement('div');
+        div_text = document.createElement('div');
+        div_text.setAttribute("class", "col-lg-12 text-center table_container");
+        div_text.setAttribute("id", "table_container_" + titre);
+
+        h2 = document.createElement('h2');
+        h2.setAttribute("class", "titre-section");
+        h2.innerHTML = titre;
+
+        div_text.appendChild(h2);
+        div_row.appendChild(div_text);
+        div_container.appendChild(div_row);
+        oeuvre_section.appendChild(div_container);
+        document.body.appendChild(oeuvre_section);
+    }
+}
+
 
 function addMovie() { //fct appelée lors du clique sur le bouton
 

@@ -1,0 +1,22 @@
+.titre-section {
+    color:black;
+}
+
+th{
+    text-align: center;
+    color: black;
+}
+
+tr {
+    color:black;
+}
+
+td {
+    color:black;
+    text-align: center;
+
+}
+
+.table_container{
+    background-color: white;
+}

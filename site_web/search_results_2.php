@@ -215,38 +215,10 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 
 </html>
 
+<script src="dynamic_part.js"></script>
+
+
 <script type="text/javascript">
-
-    var MAX_RESULT_NUMBER = 10;
-    var current_result_p_counter = 0;
-    var current_result_o_counter = 0;
-    var prec_pers_added = false;
-    var prec_oeuvre_added = false;
-    var last_num_o;
-
-
-    function createSection(titre) {
-        var oeuvre_section = document.createElement("SECTION");
-        oeuvre_section.setAttribute('id', titre);
-        oeuvre_section.setAttribute('class', "blue");
-
-        div_container = document.createElement('div');
-        div_row = document.createElement('div');
-        div_text = document.createElement('div');
-        div_text.setAttribute("class", "col-lg-12 text-center");
-        div_text.setAttribute("id", "table_container_" + titre);
-
-        h2 = document.createElement('h2');
-        h2.setAttribute("class", "titre-section");
-        h2.innerHTML = titre;
-
-        div_text.appendChild(h2);
-        div_row.appendChild(div_text);
-        div_container.appendChild(div_row);
-        oeuvre_section.appendChild(div_container);
-        document.body.appendChild(oeuvre_section);
-
-    }
 
 
     $(document).ready(function () {
@@ -277,7 +249,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             table = document.createElement("table");
             table.setAttribute("id", "personnes_table");
             table.setAttribute("class", "display");
-
+            console.log(personnes_array)
             document.getElementById("table_container_Personnes").appendChild(table);
             $('#personnes_table').DataTable({
                 "aaSorting": [],

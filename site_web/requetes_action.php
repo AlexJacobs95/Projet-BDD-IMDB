@@ -7,16 +7,25 @@ if ($database->connect_errno) {
 
         if ($_GET['requete'] == "Requete 1") {
             $requete = "SELECT Nom, Prenom, Numero
-                      FROM (
-	                  SELECT AnneeSortie, Nom, Prenom, Numero
-	                  FROM Oeuvre o INNER JOIN Role r
-	                  ON ID = OID
-	                  WHERE AnneeSortie BETWEEN 2003 AND 2007) t
-                    GROUP BY Nom, Prenom, Numero
-                    HAVING count(DISTINCT AnneeSortie) = 5";
+                        FROM Acteur a
+                        WHERE (SELECT count(distinct AnneeSortie)
+                               FROM (
+                                    SELECT AnneeSortie, Nom, Prenom, Numero
+                                    FROM Oeuvre o INNER JOIN Role r
+                                    ON ID = OID
+                                    WHERE AnneeSortie BETWEEN 2003 AND 2007) t
+                               WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5";
 
             $res = $database->query($requete);
-            echo json_encode($res->fetch_all());
+            $rows = array();
+            while($row = mysqli_fetch_array($res)) {
+                $fn = utf8_encode($row["Prenom"]);
+                $n = utf8_encode($row["Nom"]);
+                $num = utf8_encode($row["Numero"]);
+                array_push($rows, [$fn, $n, $num]);
+            }
+
+            echo json_encode($rows);
         }
         if ($_GET['requete'] == "Requete 2") {
             $requete = "SELECT DISTINCT Nom, Prenom, Numero
@@ -29,7 +38,15 @@ if ($database->connect_errno) {
                       HAVING count(*) >=2 )t";
 
             $res = $database->query($requete);
-            echo json_encode($res->fetch_all());
+            $rows = array();
+            while($row = mysqli_fetch_array($res)) {
+                $fn = utf8_encode($row["Prenom"]);
+                $n = utf8_encode($row["Nom"]);
+                $num = utf8_encode($row["Numero"]);
+                array_push($rows, [$fn, $n, $num]);
+            }
+
+            echo json_encode($rows);
         }
         if ($_GET['requete'] == "Requete 3") {
             $requete = "SELECT DISTINCT Nom, Prenom, Numero
@@ -52,7 +69,15 @@ if ($database->connect_errno) {
                     JOIN Role R3 ON T5.OID = R3.OID";
 
             $res = $database->query($requete);
-            echo json_encode($res->fetch_all());
+            $rows = array();
+            while($row = mysqli_fetch_array($res)) {
+                $fn = utf8_encode($row["Prenom"]);
+                $n = utf8_encode($row["Nom"]);
+                $num = utf8_encode($row["Numero"]);
+                array_push($rows, [$fn, $n, $num]);
+            }
+
+            echo json_encode($rows);
         }
         if ($_GET['requete'] == "Requete 4") {
             $requete = "SELECT DISTINCT EpisodeID
@@ -60,12 +85,28 @@ if ($database->connect_errno) {
                     WHERE NOT EXISTS(
                         SELECT Genre, EpisodeID
                         FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
-                        WHERE genre = 'm' AND OID = e.EpisodeID)";
+                        WHERE genre = 'm' AND OID = e.EpisodeID) LIMIT 100";
+
 
             $res = $database->query($requete);
-            echo json_encode($res->fetch_all());
+
+            $rows = array();
+            while($row = mysqli_fetch_array($res)) {
+                $id = utf8_encode($row["EpisodeID"]);
+                array_push($rows, [$id]);
+            }
+
+            echo json_encode($rows);
         }
 
 }
+/*
+"SELECT DISTINCT EpisodeID
+                    FROM Episode e
+                    WHERE NOT EXISTS(
+                        SELECT Genre, EpisodeID
+                        FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
+                        WHERE genre = 'm' AND OID = e.EpisodeID)";
 
+*/
 ?>
