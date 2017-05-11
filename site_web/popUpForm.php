@@ -60,7 +60,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
                 <option>Homme</option>
                 <option>Femme</option>
             </select>
-            <button type='button' class="submit_form" onclick="edit_writers_from_person()" id="submitWriter">Send</button>
+            <button type='button' class="submit_form" onclick="edit_writers_from_oeuvre()" id="submitWriter">Send</button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->
