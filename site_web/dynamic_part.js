@@ -156,6 +156,22 @@ function addAdminElements(section) {
     });
 
 
+
+function addheaderOptions() {
+
+    $("#intro").append(
+        $('<button class = "deleteWork">Supprimer</button>')
+            .append(
+                $('<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC6klEQVRYhbWWO08bQRCAtwwkISWNC5QccQGY42aGCoRcgs1hGhD8ISQQPwDOiJ6OBikVIsDtRrawRZQag4+HHCiNDUTaFLEtP/Z86wuMNN3tft/Nzj4Y04wDwxhwAVY5QNolygjEB070XMt7lyjDAdIu4sqBYQzozhsYJ7FYlBPtCsTKj8lJqZMC8VEg7hyZ5nBocBagnyNuCsQ/umCFyIsA2NiLRPp6gh+Pj38VAL/CghUi54eWZWjBvwNYnOj3a8HryYlKp6ZpBv75W8CbJXwr8W1w8L1f2TMzMz3DsvG473Ioe4IjbqoGeI4jq54nc7atDc+nUvLp9lZ6juMnsd4CP4nFoqpu9xxH1kNXog6vh0pCIL60LAUn2lWVvXp9LZsjSCK/sCCrTXAppaxcXMjM1FRnPwCkGWOMZQE++R0yOdvWlvCDn83O+jVkeT8a/chcgNVuJdWRyNu2rN7ctMILBV94Q8KylhkHSAeuqwJQl1AJVi4v5dncXGC/CMQt5hJltDrbR0IFz2nAawKCCcQH7e2lkGiBX11pw2t9UGKc6Fl3gF+zSSllpViUuURCe56awNPrCiSToQTuteGplBIeVoITlfSbUAGvFIuyWiyGlhCIQm8bth2vjYZLJGQumQwt8W8bIq50hS8udsLbtlpYCW5ZS+zAMAYE4mNYeENifl5WPU9bghOV90ZGPjDGGBOIO+0fZOPxTnih0PWE85NQvSc40XbjNjwyzWGB+NL+UfN1HAT3k1Bdx5zo+XR09EvLm0AAbKgm9Byn662mlLBtWfU83weJS7TW8SLKAvS7RD9VA1T3eVBmpqfVnQ+Q3x0aeqd8Fx5alsGJSr3CdFMg3h2PjX1WwutxaprmW0gIxLvjiYnxrvDmSgjE81eDA+QD/7w99iKRPoG4rtodusmJnl2iNd81160GB0hzonIP4DIn2u7Yav8T+9HoR25ZywJxSyAKTlTiRE+1LAlEIRC3uGUtNU44jfgLUwkn+JzAd8QAAAAASUVORK5CYII=">')
+            )
+    );
+
+
+    $(".deleteWork").click(function () {
+        if (confirm("Etes vous sûr de vouloir supprimer cette Oeuvre ?")) {
+            remove_work();
+        }
+    });
 }
 
 
@@ -167,6 +183,8 @@ function addAdminElementsFilmEpisode(plot) {
     addAdminElements(document.getElementById("detail-title"));
     addAdminElements(document.getElementById("resume-title"));
     $('#resume').val($('#resume').val() + plot);
+    addheaderOptions();
+
 }
 
 function modifyRows() {
@@ -201,6 +219,26 @@ function modifyRows() {
             }
         }
     });
+}
+
+
+function remove_work() {
+
+    $.ajax({
+        url: "adminRequests.php?type=remove_work",
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            location.href = "welcome_page.php"
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        }
+    });
+
+
 }
 
 function remove_person_from_work(_name, _fn, _num, type, row) {
@@ -446,7 +484,7 @@ function add_person(name, fn, genre, callback) {
 
         },
         success: function (numero) {
-            console.log("add_peson_OK")
+            console.log("add_person_OK")
             console.log(numero);
             callback(name, fn, numero);
 
@@ -602,6 +640,134 @@ function edit_writers_from_person() {
 
 }
 
+function edit_details() {
+    var genre = $('#genre').val();
+    var language = $('#language').val();
+    var country = $('#country').val();
+
+    console.log(genre, language, country);
+
+    if(!(genre.length === 0)){
+        edit_genre(genre);
+    }
+    if(!(language.length === 0)){
+        edit_language(language);
+    }
+    if(!(country.length === 0)){
+        edit_country(country);
+    }
+}
+
+
+function edit_genre(genre) {
+    console.log(genre);
+    $.ajax({
+        url: "adminRequests.php?type=check_genre",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data === "not found") {
+                add_details(genre, "genre");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
+}
+
+function edit_language(language) {
+    console.log(language);
+    $.ajax({
+        url: "adminRequests.php?type=check_language",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                add_details(language, "language");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
+}
+
+function edit_country(country) {
+    console.log(country);
+    $.ajax({
+        url: "adminRequests.php?type=check_country",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: genre,
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                add_details(country, "country");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+
+    });
+}
+
+
+function add_details(field_data, field_type){
+    $.ajax({
+        url: "adminRequests.php?type=add_details",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({type_field: field_type, data_field: field_data}),
+        error: function (xhr, status) {
+            alert(status);
+
+        },
+        success: function (field_data) {
+            console.log("add_details")
+            console.log(field_data);
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
 function createList(data, type) {
     console.log(data);
     if (type === "actor" || type === "director" || type === "writer") {

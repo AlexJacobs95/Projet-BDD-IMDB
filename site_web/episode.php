@@ -143,7 +143,8 @@ $havePlot = mysqli_num_rows($plot_res);
 <header>
     <div class="container">
         <div class="intro-text" id = "intro">
-            <div class="intro-heading"><?php echo sprintf($titre_format, $titre, $date); ?></div>
+            <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
+            <div class="intro-heading" id="date"><?php echo $date; ?></div>
             <div class="infos"><?php extractEpInfos($ep_infos); ?></div>
 
             <div class=infos><?php extractGenres($genres) ?></div>
