@@ -155,7 +155,7 @@ function addAdminElements(section) {
 
     });
 
-
+}
 
 function addheaderOptions() {
 
@@ -392,10 +392,11 @@ function add_role_by_actor_name(name, fn, num, role) {
             alert(status);
         },
         success: function (data) {
-            console.log(data);
-            alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
-            $('#formContainerActor').css("display", "none");
-            location.reload();
+            alert(data)
+            //console.log(data);
+            //alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
+            //$('#formContainerActor').css("display", "none");
+            //location.reload();
 
         },
         fail: function () {
