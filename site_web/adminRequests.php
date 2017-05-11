@@ -165,6 +165,15 @@ function add_role($nom, $prenom, $numero, $role,$OID, $db)
 
 }
 
+function check_for_oeuvre($titre, $db) {
+    $query = "SELECT *
+              FROM Oeuvre
+              WHERE Match(Titre) AGAINST ('\"$titre\"')";
+
+    return $db->query($query);
+
+}
+
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
     echo json_encode("Error: Unable to connect to MySQL." . PHP_EOL);
@@ -221,7 +230,7 @@ if (!$database) {
         $numero = mysqli_real_escape_string($database, $_POST['num']);
         echo json_encode(add_actor($nom, $prenom, $numero, $database));
 
-    } elseif ($_GET['type'] === 'add_role') {
+    } elseif ($_GET['type'] === 'add_role_by_actor_name') {
 
         $nom = mysqli_real_escape_string($database, $_POST['name']);
         $prenom = mysqli_real_escape_string($database, $_POST['fn']);
@@ -309,6 +318,43 @@ if (!$database) {
 
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $OID, $database));
 
+    } elseif ($_GET['type'] === 'check_oeuvre') {
+
+        $titreOeuvre = mysqli_real_escape_string($database, $_POST['titreOeuvre']);
+
+        $res = check_for_oeuvre($titreOeuvre, $database);
+
+        if (mysqli_num_rows($res) !== 0) {
+            echo json_encode($res_check_query->fetch_all());
+        } else {
+            echo json_encode("not found");
+        }
+    } elseif ($_GET['type'] === 'add_role_by_oeuvre_id') {
+
+        $id = mysqli_real_escape_string($database, $_POST['id']);
+        $role = mysqli_real_escape_string($database, $_POST['role']);
+
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(add_role($nom, $prenom, $numero, $role, $id, $database));
+
+    } elseif ($_GET['type'] === 'add_written_by_person') {
+
+        $id = mysqli_real_escape_string($database, $_POST['id']);
+
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(add_writtenBy($nom, $prenom, $numero, $id, $database));
     }
 }
 

@@ -9,6 +9,7 @@ include "type.php";
 include "tools.php";
 session_start();
 $id = urldecode($_GET['id']);
+$_SESSION['id'] = $id;
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 $id = mysqli_real_escape_string($database, $id);

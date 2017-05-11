@@ -261,6 +261,35 @@ function update_resume() {
 
 }
 
+function add_written_by(id, titre) {
+    $.ajax({
+        url: "adminRequests.php?type=add_written_by_person",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({id:id}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            console.log(data);
+            alert(titre + " a bien été ajouté dans la liste.");
+            $('#formContainerWriterPerson').css("display", "none");
+            location.reload();
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+
+
+}
+
 
 function edit_plot(havePlot) {
     var text = $('#resume').val();
@@ -315,10 +344,9 @@ function edit_plot(havePlot) {
     }
 }
 
-function add_role(name, fn, num) {
-    var role = $('#actor_role').val();
+function add_role_by_actor_name(name, fn, num, role) {
     $.ajax({
-        url: "adminRequests.php?type=add_role",
+        url: "adminRequests.php?type=add_role_by_actor_name",
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn, role: role, num: num}),
@@ -343,8 +371,8 @@ function add_role(name, fn, num) {
     });
 }
 
-function add_in_tb(name, fn, num, tbName) {
-    console.log("add_in_tb: ", name, fn, num)
+function add_person_in_tb(name, fn, num, tbName) {
+    console.log("add_person_in_tb: ", name, fn, num)
     $.ajax({
         url: "adminRequests.php?type=add_in_tb_" + tbName,
         type: "POST",
@@ -365,6 +393,34 @@ function add_in_tb(name, fn, num, tbName) {
                 location.reload();
 
             }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
+
+function add_role_by_oeuvre_id(id, name) {
+    var role = $('#oeuvre_role').val();
+    $.ajax({
+        url: "adminRequests.php?type=add_role_by_oeuvre_id",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({id:id, role: role}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            console.log(data);
+            alert(name + " a bien été ajouté dans les rôles.");
+            $('#formContainerActorPerson').css("display", "none");
+            location.reload();
 
         },
         fail: function () {
@@ -407,23 +463,24 @@ function add_person(name, fn, genre, callback) {
 }
 
 function add_actor_role(name, fn, number) {
-    add_in_tb(name, fn, number, "actor");
-    add_role(name, fn, number);
+    add_person_in_tb(name, fn, number, "actor");
+    var role = $('#actor_role').val();
+    add_role_by_actor_name(name, fn, number, role);
 }
 
 function add_director_directedBy(name, fn, number) {
-    add_in_tb(name, fn, number, "director");
-    add_in_tb(name, fn, number, "directedBy");
+    add_person_in_tb(name, fn, number, "director");
+    add_person_in_tb(name, fn, number, "directedBy");
 
 }
 
 function add_writer_writtenBy(name, fn, number) {
-    add_in_tb(name, fn, number, "writer");
-    add_in_tb(name, fn, number, "writtenBy");
+    add_person_in_tb(name, fn, number, "writer");
+    add_person_in_tb(name, fn, number, "writtenBy");
 
 }
 
-function edit_actors() {
+function edit_actors_from_oeuvre() {
 
     var name = $('#actor_name').val();
     var fn = $('#actor_fn').val();
@@ -449,7 +506,7 @@ function edit_actors() {
                 }
 
             } else {
-                createPersonList(data, "actor");
+                createList(data, "actor");
             }
 
         },
@@ -466,7 +523,7 @@ function edit_actors() {
 
 }
 
-function edit_directors() {
+function edit_directors_from_oeuvre() {
 
     var name = $('#director_name').val();
     var fn = $('#director_fn').val();
@@ -488,7 +545,7 @@ function edit_directors() {
                 }
 
             } else {
-                createPersonList(data, "director");
+                createList(data, "director");
             }
 
         },
@@ -505,11 +562,7 @@ function edit_directors() {
 
 }
 
-function edit_writers() {
-
-    if (!checkForm('#formWirter'), 2){
-        return;
-    }
+function edit_writers_from_person() {
 
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
@@ -532,7 +585,7 @@ function edit_writers() {
                 }
 
             } else {
-                createPersonList(data, "writer");
+                createList(data, "writer");
             }
 
         },
@@ -549,13 +602,17 @@ function edit_writers() {
 
 }
 
-function createPersonList(data, person_type) {
+function createList(data, type) {
     console.log(data);
-
+    if (type === "actor" || type === "director" || type === "writer") {
+        const titre = "Sélectionnez une personne dans la liste";
+    } else {
+        const titre = "Sélectionnez une oeuvre dans la liste";
+    }
     $("body").append(
         $('<div class="listContainer" id="persons_list_container" </div>').append(
             $('<div class="popupAdd form_popup" id="popupAddList"</div>').append(
-                $('<h2 class="h2popup">Sélectionnez une personne dans la liste</h2>')
+                $('<h2 class="h2popup">'+titre+'</h2>')
             )
         )
     );
@@ -566,7 +623,7 @@ function createPersonList(data, person_type) {
     );
 
     $('#popupAddList').append(
-        $('<ul class="list-group" id="persons_list"></ul>')
+        $('<ul class="list-group" id="list"></ul>')
 
     );
 
@@ -575,38 +632,59 @@ function createPersonList(data, person_type) {
 
     );
 
-    for (var person in data) {
-        const nom = data[person][1];
-        const prenom = data[person][0];
-        const numero = data[person][2];
+    for (var i in data) {
 
-        if (data[person][2] == "NA"){
-            $("#persons_list").append(
-                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "personType":person_type})
-            );
+        if (type === "actor" || type === "director" || type === "writer") {
+            const nom = data[i][1];
+            const prenom = data[i][0];
+            const numero = data[i][2];
+
+            if (data[i][2] == "NA"){
+                $("#list").append(
+                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "itemType":type})
+                );
+            } else {
+                $("#list").append(
+                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "itemType":type})
+                );
+            }
         } else {
-            $("#persons_list").append(
-                $('<button type="button" class="list-group-item list_person_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "personType":person_type})
+            const titre = data[i][1];
+            const date = data[i][2];
+            const id = data[i][0];
+
+            $("#list").append(
+                $('<button type="button" class="list-group-item list_elem">' + titre + '(' + date + ')</button>').data({"titre": titre, "date": date, "id": id, "itemType":type})
             );
+
+
         }
 
     }
-    $("#persons_list").append(
-        $('<button type="button" class="list-group-item" id="new_person_button">Ajouter une nouvelle personne</button>')
-    );
+    if (type === "actor" || type === "director" || type === "writer") {
 
-    $('.list_person_elem').click(function () {
-        console.log($(this).data("personType"));
-        if ($(this).data("personType") === "actor") {
+        $("#list").append(
+            $('<button type="button" class="list-group-item" id="new_person_button">Ajouter une nouvelle personne</button>')
+        );
+    }
+
+    $('.list_elem').click(function () {
+        console.log($(this).data("itemType"));
+        if ($(this).data("itemType") === "actor") {
             add_actor_role($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
-        } else if ($(this).data("personType") === "director") {
+        } else if ($(this).data("itemType") === "director") {
             console.log("s")
             add_director_directedBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
-        } else if ($(this).data("personType") === "writer") {
+        } else if ($(this).data("itemType") === "writer") {
             add_writer_writtenBy($(this).data("nom"), $(this).data("prenom"), $(this).data("numero"));
 
+        } else if ($(this).data("itemType") === "role") {
+            add_role_by_oeuvre_id($(this).data("id"), $(this).data("titre"));
+
+        } else if ($(this).data("itemType") === "writtenBy") {
+            add_written_by($(this).data("id"), $(this).data("titre"));
 
         }
         cancel_persons_list();
@@ -640,6 +718,70 @@ function checkForm(formID, num_required) {
         return false;
     }
     return true;
+
+}
+
+//Partie Person
+
+function edit_actors_from_person() {
+
+    const titreOeuvre = $('#oeuvre_name_actor').val();
+    $.ajax({
+        url: "adminRequests.php?type=check_oeuvre",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({titreOeuvre: titreOeuvre}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                alert("Aucune Oeuvre n'a été trouvée pour le titre " + titreOeuvre + "\nVeuillez ajouter l'oeuvre depuis la page administrateur puis rééssayer.")
+                } else {
+                createList(data, "role");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+
+        }
+
+    });
+
+}
+
+function edit_writers_from_person() {
+
+    const titreOeuvre = $('#oeuvre_name_writer').val();
+    $.ajax({
+        url: "adminRequests.php?type=check_oeuvre",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({titreOeuvre: titreOeuvre}),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data, textStatus, xhr) {
+            if (data == "not found") {
+                alert("Aucune Oeuvre n'a été trouvée pour le titre " + titreOeuvre + "\nVeuillez ajouter l'oeuvre depuis la page administrateur puis rééssayer.")
+            } else {
+                createList(data, "writtenBy");
+            }
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+
+        }
+
+    });
 
 }
 
