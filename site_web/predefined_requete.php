@@ -97,11 +97,15 @@ include 'menubar.php';
         createSection("Résultats de la requête " + num);
         var spinnerID = "loading_spinner"+num;
         var tableID = "table_container_Résultats de la requête " + num;
-        console.log(tableID);
+
         div = document.getElementById(tableID);
         image = document.createElement("image");
         image.setAttribute("id", spinnerID);
-        image.setAttribute("src", "sqares.gif");
+        image.setAttribute("src", "site_web/squares.gif");
+        image.setAttribute("width", "100");
+        image.setAttribute("height", "100");
+
+
         div.appendChild(image);
 
         console.log("requetes_action.php?requete="+query);
