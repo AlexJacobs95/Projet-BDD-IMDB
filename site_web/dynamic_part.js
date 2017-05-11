@@ -149,6 +149,12 @@ function addAdminElements(section) {
             document.getElementById('formContainerWriter').style.display = "block";
         } else if (section.id === "detail-title") {
             document.getElementById('formContainerDetails').style.display = "block";
+        } else if (section.id === "roles-title") {
+            document.getElementById('formContainerActorPerson').style.display = "block";
+        } else if (section.id === "director-peron-title") {
+            document.getElementById('formContainerDirectorPerson').style.display = "block";
+        } else if (section.id === "writer-peron-title") {
+            document.getElementById('formContainerWriterPerson').style.display = "block";
         } else { //resume
             document.getElementById('formContainerResume').style.display = "block";
         }
@@ -187,6 +193,13 @@ function addAdminElementsFilmEpisode(plot) {
 
 }
 
+function addAdminElementsPerson() {
+    addAdminElements(document.getElementById("roles-title"));
+    addAdminElements(document.getElementById("director-person-title"));
+    addAdminElements(document.getElementById("writer-person-title"));
+
+}
+
 function modifyRows() {
     $('.row_t').attr('class', "clickable-row");
 
@@ -216,6 +229,12 @@ function modifyRows() {
 
             } else if (table === "writers_table") {
                 remove_person_from_work(id_element[1], id_element[0], id_element[2], 'writer', row);
+            } else if (table === "roles_table") {
+                remove_role_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
+            } else if (table === "written_table") {
+                remove_written_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
+            } else if (table === "directed_table") {
+                remove_directed_from_person(id_element[1], id_element[0], id_element[2], 'writer', row);
             }
         }
     });

@@ -134,7 +134,8 @@ include 'menubar.php';
         <div class="intro-text" id="intro">
 
             <div class="col-lg-4" style="display: block; margin: auto">
-                <img src="https://www.velvetjobs.com/assets/noavatar-profile.jpg">
+                <img class="profil_pic"
+                     src="https://www.velvetjobs.com/assets/noavatar-profile.jpg">
             </div>
 
             <div class="intro-heading">
@@ -157,12 +158,12 @@ include 'menubar.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Roles</h2>
+                <h2 class="section-heading" id="roles-title">Roles</h2>
             </div>
         </div>
 
         <?php
-        echo "<table>";
+        echo "<table id = \"roles_table\">";
 
         while ($roles_row = mysqli_fetch_array($roles)) {
             $id = $roles_row['OID'];
@@ -199,12 +200,12 @@ include 'menubar.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Auteur</h2>
+                <h2 class="section-heading" id="writer-person-title">Auteur</h2>
             </div>
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' > ";
+        echo "<table class='directorsAndWriters' id = \"written_table\" > ";
 
         while ($written_row = mysqli_fetch_array($written)) {
             $id = $written_row['OID'];
@@ -232,12 +233,12 @@ include 'menubar.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Directeur</h2>
+                <h2 class="section-heading" id="director-person-title">Directeur</h2>
             </div>
         </div>
 
         <?php
-        echo "<table class='directorsAndWriters' >";
+        echo "<table class='directorsAndWriters' id = \"directed_table\" >";
 
         while ($directed_row = mysqli_fetch_array($directed)) {
             $id = $directed_row['OID'];
@@ -260,6 +261,10 @@ include 'menubar.php';
         ?>
     </div>
 </section>
+
+<?php
+include "popUpForm.php";
+?>
 
 
 </body>
@@ -296,6 +301,25 @@ include 'menubar.php';
         getPersonPic(firstname, lastname)
     });
 
+</script>
+
+<script src="dynamic_part.js"></script>
+
+<?php
+$logged = 0;
+if (isset($_SESSION['logged'])) {
+    $logged = 1;
+}
+?>
+
+<script>
+
+    var logged = <?php echo $logged;?>;
+    console.log(logged);
+    if (logged == 1) {
+        addAdminElementsPerson();
+        modifyRows();
+    }
 </script>
 
 </html>

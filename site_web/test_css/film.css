@@ -171,6 +171,14 @@ a:active {
     padding-bottom: 5px;
 }
 
+.poster {
+    height: 300px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+
 
 td {
     width: 250px;

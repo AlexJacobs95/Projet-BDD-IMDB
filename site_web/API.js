@@ -68,9 +68,9 @@ function getPersonPic(firstname, lastname) {
         const data_ok = data['results'];
         if (data_ok[0]["profile_path"] != null) {
             const profilePic = "https://image.tmdb.org/t/p/w500" + data_ok[0]["profile_path"];
-            $('img').attr('src', profilePic);
-            $("img").css("height", 600);
-            $("img").css("width", 'auto');
+            $('.profil_pic').attr('src', profilePic);
+            $(".profil_pic").css("height", 300);
+            $(".profil_pic").css("width", 'auto');
         }
 
     }, function (error) {
