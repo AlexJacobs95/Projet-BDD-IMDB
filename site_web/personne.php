@@ -19,6 +19,7 @@ $lastname = $keywords[1];
 $firstname_escape = mysqli_real_escape_string($database, $keywords[0]);
 $lastname_escape = mysqli_real_escape_string($database, $keywords[1]);
 $numero = $keywords[2];
+
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
@@ -127,6 +128,11 @@ function printCategories($roles, $directed, $written)
 <!-- Navigation -->
 <?php
 include 'menubar.php';
+
+
+$nb_roles = mysqli_num_rows($roles);
+$nb_written = mysqli_num_rows($written);
+$nb_directed = mysqli_num_rows($directed);
 ?>
 
 <!-- Header -->
@@ -162,7 +168,7 @@ include 'menubar.php';
 </script>
 
 <section id="Roles" class="bg-light-gray">
-    <div class="container">
+    <div class="container" id="roles-container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading" id="roles-title">Roles</h2>
@@ -193,7 +199,7 @@ include 'menubar.php';
             echo "</td>";
             echo "<td >" . $role . "</td>";
             echo "</td>";
-            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "<td class ='hidden'>$id</td>";
             echo "</tr>";
             //echo '<a href="film_episode.php?id='.urlencode($actors_row['Prenom']).'">'.$actors_row['ID'].'</a>';
         }
@@ -204,7 +210,7 @@ include 'menubar.php';
 
 
 <section id="Written">
-    <div class="container">
+    <div class="container" id="written-container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading" id="writer-person-title">Auteur</h2>
@@ -228,7 +234,7 @@ include 'menubar.php';
                 echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             }
             echo "</td>";
-            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "<td class ='hidden'>$id</td>";
             echo "</tr>";
         }
         echo "</table>";
@@ -237,7 +243,7 @@ include 'menubar.php';
 </section>
 
 <section id="Directed" class="bg-light-gray">
-    <div class="container">
+    <div class="container" id="directed-container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading" id="director-person-title">Directeur</h2>
@@ -261,7 +267,7 @@ include 'menubar.php';
                 echo '<a href="episode.php?id=' . urlencode($id) . '">' . $title . '</a>';
             }
             echo "</td>";
-            echo "<td class ='hidden'>$fn;$ln;$num</td>";
+            echo "<td class ='hidden'>$id</td>";
             echo "</tr>";
         }
         echo "</table>";
@@ -322,7 +328,9 @@ include "popUpForm.php";
 
 <script>
     var number_roles = "<?php echo $nb_roles;?>";
-    //add_dynamic_part_filmAndEp(havePlot, number_roles, 'hideContent-plot', 'hideContent-actors')
+    var number_written = "<?php echo $nb_written;?>";
+    var number_directed = "<?php echo $nb_directed;?>";
+    add_dynamic_part_person(number_roles, number_written, number_directed);
 </script>
 
 

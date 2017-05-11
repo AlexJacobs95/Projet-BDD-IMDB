@@ -187,7 +187,7 @@ function remove_work($id, $db)
 function remove_person($prenom, $nom, $numero, $db)
 {
     $query = "Delete
-              FROM Oeuvre
+              FROM Personne
               WHERE Prenom = '$prenom' AND Nom = '$nom' AND Numero = '$numero'";
 
     return execute_add_query($query, $db);
@@ -303,6 +303,39 @@ if (!$database) {
         $numero = mysqli_real_escape_string($database, $_POST['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
+
+        echo json_encode(remove_isWrittenBy($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'remove_role_from_person') {
+
+        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(remove_role($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'remove_directed_from_person') {
+
+        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
+
+        echo json_encode(remove_isDirectedBy($nom, $prenom, $numero, $OID, $database));
+
+    } elseif ($_GET['type'] === 'remove_written_from_person') {
+
+        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $prenom_nom_numero = $_SESSION['id'];
+        $prenom_nom_numero = explode(";", $prenom_nom_numero);
+        $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
+        $nom = mysqli_real_escape_string($database, $prenom_nom_numero[1]);
+        $numero = mysqli_real_escape_string($database, $prenom_nom_numero[2]);
 
         echo json_encode(remove_isWrittenBy($nom, $prenom, $numero, $OID, $database));
 

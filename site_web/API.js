@@ -47,9 +47,9 @@ function getImagesTvShow(title, date) {
         const backDropPath = "https://image.tmdb.org/t/p/w1000" + data_ok[0]["backdrop_path"];
 
         if (data_ok[0]["poster_path"] != null) {
-            $('img').attr('src', posterPath);
-            $("img").css("height", 600);
-            $("img").css("width", 'auto');
+            $('.poster').attr('src', posterPath);
+            $('.poster').css("height", 600);
+            $('.poster').css("width", 'auto');
 
 
         } if (data_ok[0]["backdrop_path"] != null) {

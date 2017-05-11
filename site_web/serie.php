@@ -138,12 +138,12 @@ $plot_info = mysqli_fetch_array($plot_res);
 $serie_infos = mysqli_fetch_array($serie);
 $num = $_numSaisons['Saison'];
 $date_fin = $serie_infos['AnneeFin'];
-$tire = $movie_infos['Titre'];
+$titre = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $saison_format = '%d saison(s)';
-$titre_format1 = '%s (%d-%d)';
-$titre_format2 = '%s (%d-)';
+$date_format1 = '%d-%d';
+$date_format2 = '%d-';
 
 $note_fomat = '%g/10';
 $plot = $plot_info['Plot'];
@@ -176,16 +176,18 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     <div class="container">
         <div class="intro-text" id = "intro" style="display: none">
 
-            <div class="col-lg-4" style="display: block; margin: auto" >
-                <img src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
+            <div class="col-lg-4" style="display: block; margin: auto">
+                <img class="poster"
+                     src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
+                <div id="link_trailer"><h2 id="text-watch-trailer">watch trailer</h2></div>
             </div>
-
+            <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
             <div class="intro-heading"><?php
                 if ($date_fin != 0) {
-                    echo sprintf($titre_format1, $tire, $date, $date_fin);
+                    echo sprintf($date_format1, $date, $date_fin);
                 } else {
 
-                    echo sprintf($titre_format2, $tire, $date);
+                    echo sprintf($date_format2, $date);
                 }
                 ;
                 ?>
@@ -206,7 +208,7 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id=resume_block>
-                <h2 class="section-heading">Résumé</h2>
+                <h2 class="section-heading" id="resume-title">Résumé</h2>
                 <div class="content hideContent-plot" id="plot"><span> <?php echo $plot ?> </span></div>
 
             </div>
@@ -344,14 +346,12 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
 
 <script>
 
-    var titre = "<?php echo $tire;?>";
+    var titre = "<?php echo $titre;?>";
     var date = "<?php echo $date;?>";
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
         getImagesTvShow(titre, date);
         $(window).scroll(function () {
-
-            console.log($(window).scrollTop());
 
             if ($(window).scrollTop() > 892 - 61) {
                 $('#nav_bar').addClass('navbar-top');
@@ -367,6 +367,24 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
     var havePlot = "<?php echo $havePlot;?>";
     add_dynamic_part_series(havePlot, 'hideContent-plot');
 
+</script>
+
+<?php
+$logged = 0;
+if (isset($_SESSION['logged'])) {
+    $logged = 1;
+}
+?>
+
+<script>
+
+    var plot = "<?php echo addslashes($plot);?>";
+    var logged = <?php echo $logged;?>;
+    console.log(logged);
+    if (logged == 1) {
+        addAdminElementsSerie(plot);
+
+    }
 </script>
 
 

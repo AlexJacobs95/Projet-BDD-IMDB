@@ -141,12 +141,11 @@ $havePlot = mysqli_num_rows($plot_res);
         <div class="container">
 
             <div class="intro-text" id="intro">
-                <div id = "image"></div>
 
                 <div class="col-lg-4" style="display: block; margin: auto">
                     <img class="poster"
                          src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
-                    <div id="link_trailer"><h2 id="text-watch-trailer">watch trailers</h2></div>
+                    <div id="link_trailer"><h2 id="text-watch-trailer">watch trailer</h2></div>
                 </div>
                 <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
                 <div class="intro-heading" id="date"><?php echo $date; ?></div>
