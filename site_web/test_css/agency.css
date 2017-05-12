@@ -495,3 +495,7 @@ body {
 .search {
     background-color: #2D3E50;
 }
+
+input .form-control:invalid{
+  border: solid 2px red;
+}

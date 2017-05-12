@@ -687,6 +687,7 @@ function edit_directors_from_oeuvre() {
     var fn = $('#director_fn').val();
     var genre = $('#director_genre').find(":selected").text();
     console.log(name, fn);
+    var invalid = false;
 
     if ($.trim(name) === "") {
         $('#director_name').removeClass("valid").addClass("invalid");
@@ -741,6 +742,7 @@ function edit_writers_from_oeuvre() {
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
     var genre = $('#writer_genre').find(":selected").text();
+    var invalid = false;
 
     if ($.trim(name) === "") {
         $('#writer_name').removeClass("valid").addClass("invalid");
@@ -799,6 +801,7 @@ function edit_details() {
     var country = $('#country').val();
 
     console.log(genre, language, country);
+    var invalid = false;
 
     if(!(genre.length === 0)){
         add_details(genre, "genre");
@@ -966,6 +969,7 @@ function checkForm(formID, num_required) {
 function edit_actors_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_actor').val();
+    var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_actor').removeClass("valid").addClass("invalid");
@@ -1014,6 +1018,7 @@ function edit_actors_from_person() {
 function edit_writers_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_writer').val();
+    var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_writer').removeClass("valid").addClass("invalid");
@@ -1056,6 +1061,7 @@ function edit_writers_from_person() {
 
 function edit_directors_from_person() {
     const titreOeuvre = $('#oeuvre_name_director').val();
+    var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_director').removeClass("valid").addClass("invalid");
@@ -1127,14 +1133,48 @@ function addMovie() { //fct appelée lors du clique sur le bouton
 
     const title = $('#movie_name').val();
     const date = $('#movie_date').val();
-    var note = $('#movie_note').val();
+    const note = $('#movie_note').val();
+
+    var invalid = false;
+
+    if ($.trim(title) === "") {
+        $('#movie_name').css("border-color", "red")
+        invalid = true
+    }   else {
+        $('#movie_name').css("border-color", "#fed136")
+    }
+
+    if ($.trim(date) === ""  || (isNaN(date))){
+        $('#movie_date').css("border-color", "red")
+        invalid = true
+    }   else {
+        $('#movie_date').css("border-color", "#fed136")
+    }
+
+    if($.trim(note) !== "") {
+        if(isNaN(note)){
+            $('#movie_note').css("border-color", "red")
+            invalid = true
+        } else {
+            if (note < 0 || note > 10){
+                $('#movie_date').css("border-color", "red")
+                invalid=true;
+            } else {
+                $('#movie_date').css("border-color", "#fed136")
+            }
+
+        }
+    } else {
+        $('#movie_date').css("border-color", "#fed136")
+
+    }
+
+
+    if (invalid) return;
+
 
     console.log(title, date);
 
-
-    if (note.replace(/ /g, '' === "")) {
-        note = -1;
-    }
     console.log("apres return");
     check_nb_works(title, date, "movie");
 
@@ -1142,8 +1182,13 @@ function addMovie() { //fct appelée lors du clique sur le bouton
 
 function insert_movie(title, id, date) { //fct qui fait l insertion dans la db
     var note = $('#movie_note').val();
+    if ($.trim(note) === "") {
+        note = -1
+    }
 
-    $.ajax({
+
+
+        $.ajax({
         url: "adminRequests.php?type=add_movie",
         type: "POST",
         dataType: 'json', // add json datatype to get json
@@ -1171,6 +1216,12 @@ function insert_movie(title, id, date) { //fct qui fait l insertion dans la db
 function insert_serie(title, id, date) {
     var note = $('#serie_note').val();
     var end_date = $('#serie_end_year').val();
+    if ($.trim(note) === "") {
+        note = -1
+    }
+    if ($.trim(end_date) === "") {
+        end_date = 0
+    }
 
     $.ajax({
         url: "adminRequests.php?type=add_serie",
@@ -1266,13 +1317,70 @@ function addSerie() { //fct appelée lors du clique sur le bouton
 
     const title = $('#serie_name').val();
     const start_date = $('#serie_start_year').val()
-    var note = $('#serie_note').val();
+    const end_date = $('#serie_end_year').val()
+    const note = $('#serie_note').val();
+
+    var invalid = false;
+    if ($.trim(title) === "") {
+        $('#serie_name').css("border-color", "red")
+        invalid = true
+    }   else {
+        $('#serie_name').css("border-color", "#fed136")
+    }
+
+    if ($.trim(start_date) === ""  || isNaN(start_date)){
+        $('#serie_start_year').css("border-color", "red")
+        invalid = true
+    }   else {
+        $('#serie_start_year').css("border-color", "#fed136")
+    }
+
+    if($.trim(end_date) !== "") {
+        if (!isNaN(end_date)){
+            if(end_date<start_date){
+                $('#serie_end_year').css("border-color", "red")
+                //TODO: show endYear < startDate
+                invalid = true
+            } else {
+                $('#serie_end_year').css("border-color", "#fed136")
+
+
+            }
+        } else {
+            $('#serie_end_year').css("border-color", "red")
+            invalid=true;
+            //TODO: show endYear != int
+
+        }
+
+    } else {
+        $('#serie_end_year').css("border-color", "#fed136")
+
+    }
+
+    if($.trim(note) !== "") {
+        if(isNaN(note)){
+            $('#serie_note').css("border-color", "red")
+            invalid = true
+        } else {
+            if (note < 0 || note > 10){
+                $('#serie_note').css("border-color", "red")
+                invalid=true;
+            } else {
+                $('#serie_note').css("border-color", "#fed136")
+            }
+
+        }
+    } else {
+        $('#serie_note').css("border-color", "#fed136")
+
+    }
+
+
+    if (invalid) return;
 
     console.log(title, start_date);
 
-    if (note.replace(/ /g, '' === "")) {
-        note = -1;
-    }
 
     console.log("apres return");
     check_nb_works(title, start_date, "serie");

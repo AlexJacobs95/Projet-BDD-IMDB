@@ -76,6 +76,7 @@ Page de recherche avancé de site web.
                         -webkit-transition: width 0.4s ease-in-out;
                         transition: width 0.4s ease-in-out;
                     }
+
                 </style>
                     <div class="intro-heading">Panneau Administrateur</div> 
                     
@@ -98,18 +99,9 @@ Page de recherche avancé de site web.
 
                     <div class="clearfix"></div>
                     <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_dir">Opérations sur Directeur</a>
+                        <a class="btn btn-xl" href="#op_on_pers">Opérations sur Personne</a>
                     </div>
-                              
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_writer">Opérations sur Auteur</a>
-                    </div>  
 
-                    <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
-                        <a class="btn btn-xl" href="#op_on_actor">Opérations sur Acteur</a>
-                    </div>
                 </div>
             </div>
         </header>
@@ -177,11 +169,11 @@ Page de recherche avancé de site web.
                  <form action="#" method="post" id="add_movie">
                     <div class="form-group text-center">
                         <input id="movie_name" type="text_field" class="form-control" name="film_name"
-                               placeholder="Titre" required>
+                               placeholder="Titre">
                     </div>
                     <div class="form-group text-center">
                         <input id="movie_date" type="text_field" class="form-control" name="year_film"
-                               placeholder="Année" required>
+                               placeholder="Année">
                     </div>
                      <!--
                      <div class="form-group text-center">
@@ -214,11 +206,12 @@ Page de recherche avancé de site web.
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
                         <input id="serie_name" type="text_field" class="form-control" name="serie_name"
-                               placeholder="Titre" required>
+                               placeholder="Titre" >
                     </div>
                     <div class="form-group text-center">
                         <input id="serie_start_year" type="text_field" class="form-control" name="begin_year"
-                               placeholder="Année de sortie" required>
+                               placeholder="Année de sortie"
+                        >
                     </div>
                     <!--<div class="form-group text-center">
                         <input type="text_field" class="form-control" name="genre_serie" placeholder="Enter the genre (optional)">
