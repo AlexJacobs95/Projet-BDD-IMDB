@@ -93,33 +93,6 @@ if (!$database) {
                     <label for="title">Année</label>
                     <input type="text3" class="form-control" placeholder="Ex : 2010" name="year">
                 </div>
-                <div class="form-group text-left">
-                    <label for="title">Catégorie</label>
-                    <span class="custom-dropdown custom-dropdown--white">
-                            <select class="custom-dropdown__select custom-dropdown__select--white">
-                                <option>Toutes</option>
-                                <option>Film</option>
-                                <option>Série</option>
-                                <option>Episode</option>
-                            </select>
-                        </span>
-                </div>
-
-                <div class="form-group text-left">
-                    <label for="title">Genres</label>
-                    <select class="form-control test" multiple="multiple" id="genre_select" name="genres[]">
-                    </select>
-                </div>
-                <div class="form-group text-left">
-                    <label for="title">Langues</label>
-                    <select class="form-control test" multiple="multiple" id="langage_select" name="langages[]">
-                    </select>
-                </div>
-                <div class="form-group text-left">
-                    <label for="title">Pays</label>
-                    <select class="form-control test" multiple="multiple" id="country_select" name="countries[]">
-                    </select>
-                </div>
 
                 <label for="title">Acteur</label>
                 <div class="row">
@@ -154,6 +127,32 @@ if (!$database) {
                         <label for="title">Nom</label>
                         <input type="text2" class="form-control name" placeholder="Ex : Nolan" name="autor_n">
                     </div>
+                </div>
+
+                <div class="form-group text-left">
+                    <label for="title">Categorie</label>
+                    <select class="form-control test" id="category_select" name="category">
+                        <option>Toutes</option>
+                        <option>Film</option>
+                        <option>Série</option>
+                        <option>Episode</option>
+                    </select>
+                </div>
+
+                <div class="form-group text-left">
+                    <label for="title">Genres</label>
+                    <select class="form-control test" multiple="multiple" id="genre_select" name="genres[]">
+                    </select>
+                </div>
+                <div class="form-group text-left">
+                    <label for="title">Langues</label>
+                    <select class="form-control test" multiple="multiple" id="langage_select" name="langages[]">
+                    </select>
+                </div>
+                <div class="form-group text-left">
+                    <label for="title">Pays</label>
+                    <select class="form-control test" multiple="multiple" id="country_select" name="countries[]">
+                    </select>
                 </div>
 
                 <div class="clearfix"></div>
@@ -219,7 +218,7 @@ if (!$database) {
         });
         $("#country_select").select2();
 
-
+        $("#category_select").select2();
 
     });
 </script>
