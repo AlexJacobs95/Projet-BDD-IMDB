@@ -99,16 +99,23 @@ Les requêtes demandées étaient les suivantes:
     note est supérieure à la moyenne des notes des séries.
 \end{list}
 \subsubsection{SQL}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \begin{lstlisting}[
            language=SQL,
+           backgroundcolor=\color{backcolour},
            showspaces=false,
            basicstyle=\ttfamily,
-           numbers=left,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
            numberstyle=\tiny,
            commentstyle=\color{blue},
            caption = Requête 1,
            captionpos = b, 
-           tabsize = 4
+           tabsize = 4,
+           keywordstyle=\color{magenta},
+           breakatwhitespace=false,         
+           breaklines=true,
         ]
 /*R1*/
 SELECT Nom, Prenom, Numero
@@ -120,6 +127,7 @@ WHERE (SELECT count(distinct AnneeSortie)
 			ON ID = OID
 			WHERE AnneeSortie BETWEEN 2003 AND 2007) t
 	   WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5;
+       
 /*R1 bis*/:
 SELECT Nom, Prenom, Numero
 FROM (
@@ -132,14 +140,20 @@ having count(distinct AnneeSortie) = 5;
 \end{lstlisting}
 \begin{lstlisting}[
            language=SQL,
+           backgroundcolor=\color{backcolour},
            showspaces=false,
            basicstyle=\ttfamily,
-           numbers=left,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
            numberstyle=\tiny,
            commentstyle=\color{blue},
            caption = Requête 2,
            captionpos = b,
-           tabsize = 4
+           tabsize = 4,
+           keywordstyle=\color{magenta},
+           breakatwhitespace=false,         
+           breaklines=true,
         ]
 /*R2*/
 SELECT distinct Nom, Prenom, Numero
@@ -155,14 +169,20 @@ FROM(
 \newpage
 \begin{lstlisting}[
            language=SQL,
+           backgroundcolor=\color{backcolour},
            showspaces=false,
            basicstyle=\ttfamily,
-           numbers=left,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
            numberstyle=\tiny,
            commentstyle=\color{blue},
            caption = Requête 3,
            captionpos = b,
-           tabsize = 4
+           tabsize = 4,
+           keywordstyle=\color{magenta},
+           breakatwhitespace=false,         
+           breaklines=true,
         ]
 /*R3*/
 SELECT distinct Nom, Prenom, Numero
@@ -187,14 +207,20 @@ JOIN Role R3 ON T5.OID = R3.OID;
 
 \begin{lstlisting}[
            language=SQL,
+           backgroundcolor=\color{backcolour},
            showspaces=false,
            basicstyle=\ttfamily,
-           numbers=left,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
            numberstyle=\tiny,
            commentstyle=\color{blue},
            caption = Requête 4,
            captionpos = b,
-           tabsize = 4
+           tabsize = 4,
+           breakatwhitespace=false,         
+    	   breaklines=true,
+           keywordstyle=\color{magenta},
         ]
 /*R4*/
 Select distinct e.EpisodeID, e.SID 
@@ -202,16 +228,14 @@ Select distinct e.EpisodeID, e.SID
     Where Not Exists( 
         Select a.OID 
         From Role a, Personne p 
-        	Where p.Numero = a.Numero and a.Nom = p.Nom and a.Prenom = p.Prenom 
-                and p.Genre = 'm' and a.OID = e.EpisodeID);
+        	Where p.Numero = a.Numero and a.Nom = p.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
 
 /*R4 bis*/
 SELECT distinct EpisodeID
 FROM Episode e
 WHERE NOT EXISTS(
 	SELECT Genre, EpisodeID
-	FROM Role INNER Join Personne on  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom 
-    			AND Personne.Numero  = Role.Numero
+	FROM Role INNER Join Personne on  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
 	WHERE genre = 'm' AND OID = e.EpisodeID
     );
     
