@@ -67,14 +67,91 @@ Dans le cadre du cours de "Base de donnée", nous avons du réaliser un projet m
 \subsection{But du projet}
 Ici le but fût à partir de fichiers disponible sur internet de récréer un base de donnée sur le concept de "IMDB: Internet Movie Database". Le projet fut divisé en deux grandes parties, la première partie (section \ref{première partie}) étant la création d'un diagramme entité-association et un diagramme relationnel. La seconde partie (section \ref{deuxieme partie}) fut la plus pratique qui était l'implémentation de la base de donnée et la création du site web. \\
 
-En plus de devoir faire une base de donnée, nous avons dû faire les scripts qui permettaient la création de la base de donnée et l'extraction des données qui y sont stockés. Aussi à fin de pouvoir utiliser notre base de donnée, nous avons crée un site web permettant de rechercher sur des critère simple ou avancés des oeuvres(film, série ou épisodes), des personnes(acteur, directeur, auteur).
+En plus de devoir faire une base de donnée, nous avons dû faire les scripts qui permettaient la création de la base de donnée et l'extraction des données qui y sont stockés. Aussi à fin de pouvoir utiliser notre base de donnée, nous avons crée un site web permettant de rechercher sur des critère simple ou avancés des œuvres(film, série ou épisodes), des personnes(acteur, directeur, auteur).
 
 \newpage
 \section{Première Partie}\label{première partie}
 
 \subsection{Modèle entité-association}
 
+\includegraphics[width = 17cm]{Diag_E-A}
+
+\subsubsection{Contraintes et hypothèses}
+
+\noindent\underline{Contraintes}
+\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. Un numéro d’épisode ne peut pas être négaif.
+La date de sortie d’un épisode doit être postérieure ou égale à la date de sortie de la série auquel il appartient.
+\\
+\\
+\noindent\underline{Hypothèses}
+\\ \\ Une personne (Auteur, Producteur, Directeur, Acteur) peut n’avoir participé à aucune œuvre.
+Une oeuve peut avoir été tournée dans plusieurs pays, avoir plusieurs langues et avoir différents genres.
+Une saison possède au moins un épisode.
+L’année de sortie d’une œuvre peut être inconnue.
+Si un pays se trouve dans la base de donnée c’est qu’au moins une Œuvre y a été tournée.
+Si un genre se trouve dans la base de donnée c’est qu’il existe au moins une Œuvre de ce genre.
+Si une langue se trouve dans la base de donnée, c’est qu’elle est parlée dans au moins une œuvre.
+Un acteur peut jouer plusieurs rôles dans une même œuvre.
+Un rôle peut être jouer plusieurs acteurs (exemple: enfant et adulte).
+Plusieurs personnes peuvent avoir le même nom et le même prénom, dans ce cas nous leur attribuons également un numéro pour les différencier.
+Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en même temps.
+
 \subsection{Modèle relationnel}
+
+Personne(Nom, Prénom, Numéro, Genre)
+Auteur(Nom, Prénom, Numéro)
+Auteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+AuteurOeuvre(Nom, Prénom, Numéro, Référence)
+AuteurOeuvre.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
+	AuteurOeuvre.Référence référence Œuvre.Référence
+Producteur(Nom, Prénom, Numéro, Genre)
+Producteur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+ProducteurOeuvre(Nom, Prénom, Numéro, Référence)
+ProducteurOeuvre.(Nom, Prénom, Numéro) référence Producteur.(Nom, Prénom, Numéro, Genre)
+	ProducteurOeuvre.Référence référence Œuvre.Référence
+Directeur(Nom, Prénom, Numéro , Genre)
+Directeur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+DirecteurOeuvre(Nom, Prénom, Numéro, Référence)
+	DirecteurOeuvre.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
+	DirecteurOeuvre.Référence référence Œuvre.Référence
+Acteur(Nom, Prénom, Numéro, Genre)
+Acteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+
+ActeurRole(Nom, Prénom, Numéro, Rôle)
+	ActeurRole.(Nom, Prénom, Numéro) référence Acteur.(Nom, Prénom, Numéro)
+	ActeurRole.(Role) référence Rôle.Rôle
+Rôle(Rôle, Nom, Prénom, Référence, RéférenceO)
+	Rôle.RéférenceO référence Œuvre.Référene
+Œuvre(Référence, Titre, Note, AnnéeSortie)
+Pays(Nom)
+PaysOeuvre(Nom, Référence)
+	Nom référence Pays.Nom
+	Référence référence Œuvre.Référence
+Genre(Nom)
+GenreOeuvre(Nom, Référence)
+	Nom référence Genre.Nom
+	Référence référence Œuvre.Référence
+Langue(Nom)
+LangueOeuvre(Nom, Référence)
+	Nom référence Langue.Nom
+	Référence référence Œuvre.Référence
+Film(Référence)
+	Film.Référence référence Œuvre. Référence
+Série(Référence, AnnéeFin)
+	Série.Référence référence Œuvre.Référence
+Episode(Référence,TitreE, NuméroE, Date de sortie, RéférenceS)
+Episode.Référence référence Œuvre.référence
+Epidode.RéférenceS référence Saison.Référence
+
+Saison(Référence, NuméroS, NombreEpisodes, RéférenceS)
+Saison.Référence référence Série.référence
+Saison.RéférenceS référence Série.Référence
+Administrateur(Adresse mail, mot de passe)
+Contraintes modèle relationnel:
+Episode.Date de sortie >= Serie.Date de sortie
+RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série)
+RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison) 
+Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’à une Œuvre)
 
 \newpage
 \section{Deuxième Partie}\label{deuxieme partie}
