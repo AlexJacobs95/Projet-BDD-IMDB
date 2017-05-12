@@ -26,7 +26,7 @@ def output_episodes(dico):
     of = open("../SQL_data_files/episodes_ok.txt", 'w')
     for key in dico:
         of.write(
-        dico[key]["realID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["numero"] + "|" +
+        dico[key]["realID"] + "|" + dico[key]["numero"] + "|" +
         dico[key]["saison"] + "|" + dico[key]["SID"]+ "\n")
 
     of.close()

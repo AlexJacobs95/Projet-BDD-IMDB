@@ -604,6 +604,30 @@ function edit_actors_from_oeuvre() {
     var name = $('#actor_name').val();
     var fn = $('#actor_fn').val();
     var genre = $('#actor_genre').find(":selected").text();
+    var invalid = false;
+
+    if ($.trim(name) === "") {
+        $('#actor_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#actor_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim($('#actor_role').val()) === "") {
+        $('#actor_role').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_role').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
 
     console.log(name, fn);
 
@@ -649,6 +673,22 @@ function edit_directors_from_oeuvre() {
     var genre = $('#director_genre').find(":selected").text();
     console.log(name, fn);
 
+    if ($.trim(name) === "") {
+        $('#director_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#director_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#director_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#director_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_person",
         type: "POST",
@@ -686,6 +726,23 @@ function edit_writers_from_oeuvre() {
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
     var genre = $('#writer_genre').find(":selected").text();
+
+    if ($.trim(name) === "") {
+        $('#writer_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#writer_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#writer_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#writer_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
 
     console.log(name, fn);
 
@@ -894,6 +951,23 @@ function checkForm(formID, num_required) {
 function edit_actors_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_actor').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_actor').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_actor').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim($('#oeuvre_role')) === "") {
+        $('#oeuvre_role').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_role').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",
@@ -925,6 +999,17 @@ function edit_actors_from_person() {
 function edit_writers_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_writer').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_writer').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_writer').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",
@@ -956,6 +1041,16 @@ function edit_writers_from_person() {
 
 function edit_directors_from_person() {
     const titreOeuvre = $('#oeuvre_name_director').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_director').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_director').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",
