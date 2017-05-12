@@ -235,6 +235,25 @@ function add_serie($id, $end_date, $db)
 
 }
 
+function edit_title($id, $title, $db)
+{
+    $query = "UPDATE Oeuvre
+              SET Titre = '$title'
+              WHERE ID = '$id'";
+
+    return execute_add_query($query, $db);
+
+}
+
+function edit_date($id, $date, $db)
+{
+    $query = "UPDATE Oeuvre
+              SET AnneeSortie = '$date'
+              WHERE ID = '$id'";
+
+    return execute_add_query($query, $db);
+
+}
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
@@ -538,8 +557,20 @@ if (!$database) {
         add_oeuvre($id, $title, $start_date, $note, $database);
         echo json_encode(add_serie($id, $end_date, $database));
 
-    }
+    } elseif ($_GET['type'] === 'edit_title') {
 
+        $id = mysqli_real_escape_string($database, $_SESSION['id']);
+        $title = mysqli_real_escape_string($database, $_POST['info']);
+
+        echo json_encode(edit_title($id, $title, $database));
+
+    } elseif ($_GET['type'] === 'edit_date') {
+
+        $id = mysqli_real_escape_string($database, $_SESSION['id']);
+        $date = mysqli_real_escape_string($database, $_POST['info']);
+
+        echo json_encode(edit_date($id, $date, $database));
+    }
 }
 
 

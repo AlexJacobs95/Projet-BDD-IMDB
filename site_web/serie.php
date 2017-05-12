@@ -5,7 +5,6 @@ INFO-H-303 : Bases de données - Projet IMBD.
 
 <?php
 include "tools.php";
-
 session_start();
 $id = urldecode($_GET['id']);
 $_SESSION['id'] = $id;
@@ -322,8 +321,9 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
     </div>
 </section>
 
-
-
+<?php
+include "popUpForm.php";
+?>
 
 
 </body>
