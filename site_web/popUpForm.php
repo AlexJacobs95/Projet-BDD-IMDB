@@ -213,3 +213,25 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     </div>
     <!-- Popup Div Ends Here -->
 </div>
+
+
+<div class="formContainer" id="formContainerAddEpisode" style="display: none">
+    <!-- Popup Div Starts Here -->
+    <div class="popupAdd" id="add_episode_form_popup">
+        <!-- Contact Us Form -->
+        <form class="form_popup" action="#" id="formAddEpisode" method="post" name="form">
+            <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerAddEpisode')">
+            <h2 class="h2popup">Ajouter un episode </h2>
+            <hr class="hrpopup">
+            <input id="episode_name" type="text3" name="episode_name" placeholder="Titre">
+            <input id="episode_saison" type="text3" name="episode_saison" placeholder="Saison">
+            <input id="episode_num" type="text3" name="episode_num" placeholder="Numéro de l'épisode">
+            <input id="episode_date" type="text3" name="episode_date" placeholder="Date">
+            <input id="episode_note" type="text3" name="episode_note" placeholder="Note">
+            <button type='button' class="submit_form" onclick="addEpisode(<?php echo '\'' . $dateAndTitre . '\'' ?>)"
+                    id="submit_add_episode">Send
+            </button>
+        </form>
+    </div>
+    <!-- Popup Div Ends Here -->
+</div>

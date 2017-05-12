@@ -176,11 +176,11 @@ function check_for_oeuvre($titre, $db) {
 
 function remove_work($id, $db)
 {
-    $query = "Delete
-              FROM Oeuvre
-              WHERE ID = '$id'";
+    $query = "Delete FROM Oeuvre WHERE ID = '$id'";
 
-    return execute_add_query($query, $db);
+    execute_add_query($query, $db);
+    return $query;
+
 
 }
 
@@ -257,6 +257,24 @@ function edit_end_date($id, $date, $db)
               WHERE SerieID = '$id'";
 
     return execute_add_query($query, $db);
+}
+
+function number_episodes($sid, $saison, $numero, $db)
+{
+    $query = "SELECT COUNT(*) as num
+              FROM Episode
+              WHERE SID = '$sid' AND Saison = '$saison' AND NumeroE = '$numero'";
+
+    return $db->query($query);
+}
+
+function add_episode($episode_id, $numero, $saison, $sid, $db)
+{
+    $query = "INSERT INTO Episode(EpisodeID, NumeroE, Saison, SID) 
+              VALUE ('$episode_id', $numero, $saison, '$sid')";
+
+    return execute_add_query($query, $db);
+
 }
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
@@ -439,15 +457,14 @@ if (!$database) {
     } elseif ($_GET['type'] === 'remove_work') {
 
 
-        $ID = mysqli_real_escape_string($database, $_SESSION['id']);
+        $ID = $_SESSION['id'];
 
-
-        echo json_encode(remove_work($ID, $database));
+        echo remove_work($ID, $database);
 
     } elseif ($_GET['type'] === 'remove_person') {
 
 
-        $ID = mysqli_real_escape_string($database, $_SESSION['id']);
+        $ID = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $ID);
 
         $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
@@ -612,6 +629,35 @@ if (!$database) {
             edit_end_date($id, $end_date, $database);
         }
         echo json_encode("done");
+
+    } elseif ($_GET['type'] === 'check_if_episode_exist') {
+
+        $sid = mysqli_real_escape_string($database, $_SESSION['sid']);
+        $saison = mysqli_real_escape_string($database, $_POST['saison']);
+        $numero = mysqli_real_escape_string($database, $_POST['numero']);
+
+        $res = mysqli_fetch_array(number_episodes($sid, $saison, $numero, $database));
+        $num = $res['num'];
+        if ($num !== 0) {
+            echo json_encode($num);
+        } else {
+            echo json_encode("not exist");
+        }
+
+    } elseif ($_GET['type'] === 'insert_episode') {
+
+        $sid = mysqli_real_escape_string($database, $_POST['sid']);
+        $saison = mysqli_real_escape_string($database, $_POST['saison']);
+        $numero = mysqli_real_escape_string($database, $_POST['numero']);
+        $title = mysqli_real_escape_string($database, $_POST['title']);
+        $date = mysqli_real_escape_string($database, $_POST['date']);
+        $note = mysqli_real_escape_string($database, $_POST['note']);
+        $episode_id = mysqli_real_escape_string($database, $_POST['episode_id']);
+
+        add_oeuvre($episode_id, $title, $date, $note, $database);
+        echo json_encode(add_episode($episode_id, $numero, $saison, $sid, $database));
+
+
     }
 }
 
