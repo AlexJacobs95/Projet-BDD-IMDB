@@ -17,7 +17,6 @@ if (!$database) {
 } else {
 
     $id = mysqli_real_escape_string($database, $id);
-
     //fecth the Serie
     $querry = "SELECT Titre, AnneeSortie, Note
                 FROM Oeuvre
@@ -139,6 +138,7 @@ $num = $_numSaisons['Saison'];
 $date_fin = $serie_infos['AnneeFin'];
 $titre = $movie_infos['Titre'];
 $date = $movie_infos['AnneeSortie'];
+$dateAndTitre = $date . "|" . $titre;
 $note = $movie_infos['Note'];
 $saison_format = '%d saison(s)';
 $date_format1 = '%d-%d';
@@ -187,7 +187,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                 } else {
 
                     echo sprintf($date_format2, $date);
-                };
+                }
                 ?>
             </div>
             <div class=infos><?php extractGenres($genres) ?></div>
