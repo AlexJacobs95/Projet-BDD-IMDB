@@ -137,14 +137,23 @@ function addAdminElements(section) {
     button.className += "addButton";
     button.id += section.id;
     const add = document.createElement('img');
+    const button_del = document.createElement('button');
+    button_del.className += "addButton";
+    button_del.id += section.id;
+    const del = document.createElement('img');
     if (section.id == "resume-title") {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACzUlEQVRYhcWWz0sbQRTH51httRdLLx5KG5tK6s5YPRR6bmt/nBX9EzwIQhV6yy24sjsj0sJKoqUohGVmtBbxx11UcimWHloo/YGgpFpLNGldI6+HNNE0WXfVCT54p32zn+/7MT8Q8mmB8XBtkzC7MGdRTdAEkWwLS+pgSR1N0k1N0ATmLKpx2hkYD9f6/a+nBe2BIOF0TJPm7+bJIfDjWLIMljTWOKE3nBrcYlnVWFIDS5r1Cy4RItg+4cZgvdlbdSL4rbhxk3Dzw2nBJUI4XQ3ZkYAvuBbX72DBfqiC551ImgzZOvHMvBLwYhEulbj6+tlFlWU/rh1lZwJLaqiCtM2NwpP5sWMqYepF8KA9EDzLtB/1R3OjsLb7C9YzKXi68Mp1dxS1gnA6phKet/VMCh7Pj7q0gkURQgi12Nblkxwybt46NQzdi5PgHGQLAr7ubMP92ahLFWi6LtZfg5qE2aUi8y+pn9Cz9AZ6lqbBOcjCt51teOACPxRhdCDMWVRV2Z2DLPQsTUP34hQ8nI15rsXctJAmaEJVzwEAPqe2oHVq2Nd6zNkyIpJtqYJ/392GtjnvzPNOJE0iLKlzHvCcALZ3YgGq4AUBmqSb5wEvtMDvEKqGF4bQzzasBDwnwLSQxmmnV+DC2ifl8H8C2lFgPFyLJcu4Bd17+xL+ZPfVwwVNX7HDl/JXccwt8HliFgAAMlkH5tc+KoHnBpCNFG7Dxgm9AQu2Xy6wb2UG+lZm4O70CyXg5skhwJI6t+P6jaI3AeHGoCqAtwAWKXkRtVhWNZHsfaXhRJrvroXDF8q+C0N2JEAkTVYMLthG00Tkeln4oQidVEIEEWwjFDfwsfCjlcCcrqosu2fm/1u92VtFpKm77Q6/044li7j23H81WBQLmvYNFjRNJBsp2WpnsbpYfw0WRgfmpoU5WyaSJolkezmnSczZcu6b2V444XzYX91CT5vRTRG8AAAAAElFTkSuQmCC";
     } else {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADvUlEQVRYhbWWX0xaZxTAzxtrneCSsixtlplO6/6kky1Z19UF05JZtUO7roBQtYCKVVEKKbXMgvingjrTLf2LwfmwJbVdU13YVgQu6J5MfJhDkS6ZyN4aWq4vQyc0OXtoNGtzddyvepLf083vO+c733fvPQDpB1dwOFchOS9y6hyy6U6XJt5LaZO9lDbZ4dI81jlk05LzIud7R3LlAMBlse7mkbk7M0/SKhq2eRtXvvq1BdOhx9OwfNIoGuLyObkvknvnZw2HBuz+pif9k81Igp1qTJXUf9wPADvY7XoXZ59hWB7qm9TiVqD/Vhbk8jk5aSXf9QbvA8uP6kd9k024lVhGVTF+dpbgf3duHlM96p1oxO3APKqMbdaJDP2wLGSfaMDtRDckCTLeieKGgwP2iTPIhrHQIN6bu8nKsU+cwWLNgb7nW5/X7at7YgvUIxv+WvoDF+l5Vo4tUI/d3trUM0dxwlg43BPQIFueFhBm7fUENHj83CfOp9lfAZ7VrVq5FKhDtqwVQOK231cmACAT9h/eq7jkr0MS1gsg9N8WZsvguKHA2e2vRRLW7gCpLz57yAH118qmu/w1SEJ06QFG6Hkit8tfg5qr4ikwjSriXZQaSVgvgNBvvSuPgcVdneykVMjED7PXMEqHMbr0gJF/Usu4kkps+DxKh/FO8Arj2p2UCi3u6lUwu6uSHZQSmbgdvIIL8RBGaGZWUglcTv694fOFeAhv/f4149odlBLN7qpVMN6TPrZSp5GE6FIYI3SIyLVSp/HcXWkMaq+WTlt91UhClA5jJB4icq2+alR/UzIFYv1BZ7uvCklYpMO4EJ8jctt9VXjs7EcOeKvwdbnFV4kkrBVA6ucV7JECAHBNropli7cS2bJeAIF7wSVLAMDLAABwzHBgyOw9hWxZpOdxIT7H2jN7T2GJ7sPB9b8hl8/JNd2vSF30KpANEXoe/4zPsnIuehVo+kWW5LzKefOZmeBIjaC/zSNHNnw/M4Df/dbPymnzyFGo3G9jGsl21t48OtvmqcDtpObG0RkAeIlxKOTwOTm6O2WxLz0y3A5aRsoe8ni8vRsNpQAAkJWdIWi5LY6ZxqW4lTTfEj/M2pORv2ny/3ZCfePToGlcgluB+rpohseDzXfOEDsK1e/2GX8+kbowfhJJMP70eVKofMe24Zmn241i3ftO/Vh5otX9BaaDfqw8UdQsGOTwnnvVXjAy9xXslhVp8x2Vl4VTTSOlMYOrfNXgKl9tGimNVV4WThVp8x05Ba9JYe0Ll0b8CxNQdU/XcVuxAAAAAElFTkSuQmCC";
 
     }
+    if (section.id == "detail-title"){
+        del.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC6klEQVRYhbWWO08bQRCAtwwkISWNC5QccQGY42aGCoRcgs1hGhD8ISQQPwDOiJ6OBikVIsDtRrawRZQag4+HHCiNDUTaFLEtP/Z86wuMNN3tft/Nzj4Y04wDwxhwAVY5QNolygjEB070XMt7lyjDAdIu4sqBYQzozhsYJ7FYlBPtCsTKj8lJqZMC8VEg7hyZ5nBocBagnyNuCsQ/umCFyIsA2NiLRPp6gh+Pj38VAL/CghUi54eWZWjBvwNYnOj3a8HryYlKp6ZpBv75W8CbJXwr8W1w8L1f2TMzMz3DsvG473Ioe4IjbqoGeI4jq54nc7atDc+nUvLp9lZ6juMnsd4CP4nFoqpu9xxH1kNXog6vh0pCIL60LAUn2lWVvXp9LZsjSCK/sCCrTXAppaxcXMjM1FRnPwCkGWOMZQE++R0yOdvWlvCDn83O+jVkeT8a/chcgNVuJdWRyNu2rN7ctMILBV94Q8KylhkHSAeuqwJQl1AJVi4v5dncXGC/CMQt5hJltDrbR0IFz2nAawKCCcQH7e2lkGiBX11pw2t9UGKc6Fl3gF+zSSllpViUuURCe56awNPrCiSToQTuteGplBIeVoITlfSbUAGvFIuyWiyGlhCIQm8bth2vjYZLJGQumQwt8W8bIq50hS8udsLbtlpYCW5ZS+zAMAYE4mNYeENifl5WPU9bghOV90ZGPjDGGBOIO+0fZOPxTnih0PWE85NQvSc40XbjNjwyzWGB+NL+UfN1HAT3k1Bdx5zo+XR09EvLm0AAbKgm9Byn662mlLBtWfU83weJS7TW8SLKAvS7RD9VA1T3eVBmpqfVnQ+Q3x0aeqd8Fx5alsGJSr3CdFMg3h2PjX1WwutxaprmW0gIxLvjiYnxrvDmSgjE81eDA+QD/7w99iKRPoG4rtodusmJnl2iNd81160GB0hzonIP4DIn2u7Yav8T+9HoR25ZywJxSyAKTlTiRE+1LAlEIRC3uGUtNU44jfgLUwkn+JzAd8QAAAAASUVORK5CYII="
+    }
     button.appendChild(add);
+    button_del.appendChild(del);
     section.insertBefore(button, section.children[1]);
+    section.insertBefore(button_del, section.children[1]);
     button.addEventListener("click", function () {
 
         if (section.id === "actor-title") {
@@ -163,6 +172,12 @@ function addAdminElements(section) {
             document.getElementById('formContainerWriterPerson').style.display = "block";
         } else { //resume
             document.getElementById('formContainerResume').style.display = "block";
+        }
+
+    });
+    button_del.addEventListener("click", function () {
+        if(section.id = "detail-title"){
+            document.getElementById('formContainerDetailsDelete').style.display = "block";
         }
 
     });
@@ -670,6 +685,30 @@ function edit_actors_from_oeuvre() {
     var name = $('#actor_name').val();
     var fn = $('#actor_fn').val();
     var genre = $('#actor_genre').find(":selected").text();
+    var invalid = false;
+
+    if ($.trim(name) === "") {
+        $('#actor_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#actor_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim($('#actor_role').val()) === "") {
+        $('#actor_role').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#actor_role').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
 
     console.log(name, fn);
 
@@ -715,6 +754,22 @@ function edit_directors_from_oeuvre() {
     var genre = $('#director_genre').find(":selected").text();
     console.log(name, fn);
 
+    if ($.trim(name) === "") {
+        $('#director_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#director_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#director_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#director_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_person",
         type: "POST",
@@ -752,6 +807,23 @@ function edit_writers_from_oeuvre() {
     var name = $('#writer_name').val();
     var fn = $('#writer_fn').val();
     var genre = $('#writer_genre').find(":selected").text();
+
+    if ($.trim(name) === "") {
+        $('#writer_name').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#writer_name').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim(fn) === "") {
+        $('#writer_fn').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#writer_fn').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
 
     console.log(name, fn);
 
@@ -819,6 +891,53 @@ function add_details(field_data, field_type){
             console.log("add_details")
             console.log(res);
             $('#formContainerDetails').css("display", "none");
+            alert(res);
+            location.reload();
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
+
+function remove_details(){
+    var genre = $('#genre').val();
+    var language = $('#language').val();
+    var country = $('#country').val();
+
+    console.log(genre, language, country);
+
+    if(!(genre.length === 0)){
+        rm_details(genre, "genre");
+    }
+    if(!(language.length === 0)){
+        rm_details(language, "language");
+    }
+    if(!(country.length === 0)){
+        rm_details(country, "country");
+    }
+
+}
+
+function rm_details(field_data, field_type){
+    $.ajax({
+        url: "adminRequests.php?type=remove_details",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({type_field: field_type, data_field: field_data}),
+        error: function (xhr, status) {
+            alert(status);
+
+        },
+        success: function (res) {
+            console.log("remove_details")
+            console.log(res);
+            $('#formContainerDetailsDelete').css("display", "none");
             alert(res);
             location.reload();
         },
@@ -960,6 +1079,23 @@ function checkForm(formID, num_required) {
 function edit_actors_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_actor').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_actor').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_actor').removeClass("invalid").addClass("valid");
+    }
+
+    if ($.trim($('#oeuvre_role')) === "") {
+        $('#oeuvre_role').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_role').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",
@@ -991,6 +1127,17 @@ function edit_actors_from_person() {
 function edit_writers_from_person() {
 
     const titreOeuvre = $('#oeuvre_name_writer').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_writer').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_writer').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",
@@ -1022,6 +1169,16 @@ function edit_writers_from_person() {
 
 function edit_directors_from_person() {
     const titreOeuvre = $('#oeuvre_name_director').val();
+
+    if ($.trim(titreOeuvre) === "") {
+        $('#oeuvre_name_director').removeClass("valid").addClass("invalid");
+        invalid = true
+    }   else {
+        $('#oeuvre_name_director').removeClass("invalid").addClass("valid");
+    }
+
+    if (invalid) return;
+
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
         type: "POST",

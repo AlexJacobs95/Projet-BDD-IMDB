@@ -317,6 +317,10 @@ input[type=text3] {
     font-family: raleway
 }
 
+input[type=text3]:invalid{
+    border: 2px solid red;
+}
+
 .textarea-resume {
 
     background-repeat: no-repeat;
@@ -376,3 +380,4 @@ h2#text-watch-trailer {
     background: none;
     border: none;
 }
+

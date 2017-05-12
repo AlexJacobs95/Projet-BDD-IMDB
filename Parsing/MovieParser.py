@@ -26,7 +26,7 @@ def output_episodes(dico):
     of = open("../SQL_data_files/episodes_ok.txt", 'w')
     for key in dico:
         of.write(
-        dico[key]["realID"] + "|" + dico[key]["titreS"] + "|" + dico[key]["numero"] + "|" +
+        dico[key]["realID"] + "|" + dico[key]["numero"] + "|" +
         dico[key]["saison"] + "|" + dico[key]["SID"]+ "\n")
 
     of.close()
@@ -257,7 +257,7 @@ def main():
                                          "dateFin": data[2]
                                          }
 
-                        if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2016:
+                        if current_serie["dateSortie"].isdigit() and 2000 <= int(current_serie["dateSortie"]) <= 2017:
                             series[ID] = current_serie
                             date_ok = True
 
@@ -273,7 +273,7 @@ def main():
                                         "titre": data[0],
                                         "dateSortie": data[1],
                                         }
-                        if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2016:
+                        if current_film["dateSortie"].isdigit() and 2000 <= int(current_film["dateSortie"]) <= 2017:
                             films[ID] = current_film
                         extracting_episodes = False
 

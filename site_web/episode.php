@@ -67,11 +67,21 @@ if (!$database) {
     $genres = $database->query($query);
 
     //fetch ep infos
-    $query = "SELECT TitreS, NumeroE, Saison, SID
+    $query = "SELECT NumeroE, Saison, SID
               FROM Episode
               WHERE EpisodeID = '$id'";
 
     $ep_infos = $database->query($query);
+
+    //fetch serie title
+    $query="SELECT Titre
+            FROM Oeuvre
+            WHERE ID = (
+              SELECT SID
+              FROM Episode
+              WHERE EpisodeID = '$id')";
+
+    $serie_title = $database->query($query);
 
     //fetch plot
     $querry = "SELECT Plot
@@ -145,7 +155,7 @@ $havePlot = mysqli_num_rows($plot_res);
         <div class="intro-text" id = "intro">
             <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
             <div class="intro-heading" id="date"><?php echo $date; ?></div>
-            <div class="infos"><?php extractEpInfos($ep_infos); ?></div>
+            <div class="infos"><?php extractEpInfos($ep_infos, $serie_title); ?></div>
 
             <div class=infos><?php extractGenres($genres) ?></div>
             <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
