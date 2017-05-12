@@ -376,3 +376,8 @@ h2#text-watch-trailer {
     font-size: 22px;
 }
 
+.editButton {
+    background: none;
+    border: none;
+}
+

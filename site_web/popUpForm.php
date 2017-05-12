@@ -83,6 +83,23 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Ends Here -->
 </div>
 
+<div class="formContainer" id="formContainerDetailsDelete" style="display: none" onsubmit="remove_details()">
+<!-- Popup Div Starts Here -->
+<div class="popupAdd" id="details_form_popup">
+    <!-- Contact Us Form -->
+    <form class="form_popup" action="#" id="formDetails" method="post" name="form">
+        <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerDetailsDelete')">
+        <h2 class="h2popup">Supprimer des details </h2>
+        <hr class="hrpopup">
+        <input id="genre" name="genre" placeholder="Genre" type="text3">
+        <input id="language" name="language" placeholder="Langue" type="text3">
+        <input id="country" name="country" placeholder="Pays" type="text3">
+        <button type="submit" class="submit_form" id="submitDetails">Send</button>
+    </form>
+</div>
+<!-- Popup Div Ends Here -->
+</div>
+
 
 <div class="formContainer" id="formContainerResume" style="display: none" >
     <!-- Popup Div Starts Here -->
@@ -142,6 +159,37 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <hr class="hrpopup">
             <input id="oeuvre_name_director" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3" >
             <button type='button' class="submit_form" id="submitWriterPerson" onclick="edit_directors_from_person()">Send</button>
+        </form>
+    </div>
+    <!-- Popup Div Ends Here -->
+</div>
+
+
+<div class="formContainer" id="formContainerEditTitle" style="display: none">
+    <!-- Popup Div Starts Here -->
+    <div class="popupAdd" id="title_form_popup">
+        <!-- Contact Us Form -->
+        <form class="form_popup" action="#" id="formTitle" method="post" name="form">
+            <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerEditTitle')">
+            <h2 class="h2popup">Modifier le titre </h2>
+            <hr class="hrpopup">
+            <input id="title_f" name="title" placeholder="Titre" type="text3">
+            <button type='button' class="submit_form" onclick="edit_header('title')" id="submitTitle">Send</button>
+        </form>
+    </div>
+    <!-- Popup Div Ends Here -->
+</div>
+
+<div class="formContainer" id="formContainerEditDate" style="display: none">
+    <!-- Popup Div Starts Here -->
+    <div class="popupAdd" id="date_form_popup">
+        <!-- Contact Us Form -->
+        <form class="form_popup" action="#" id="formTitle" method="post" name="form">
+            <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerEditDate')">
+            <h2 class="h2popup">Modifier la Date </h2>
+            <hr class="hrpopup">
+            <input id="date_f" name="date" placeholder="Date" type="date">
+            <button type='button' class="submit_form" onclick="edit_header('date')" id="submitDate">Send</button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->

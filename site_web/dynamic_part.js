@@ -193,6 +193,20 @@ function addheaderOptions(type) {
             )
     );
 
+    $("#titre").css("display", "block")
+        .append($('<button id = "edit_title" class = "editButton"></button>')
+            .append(
+                $('<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACzUlEQVRYhcWWz0sbQRTH51httRdLLx5KG5tK6s5YPRR6bmt/nBX9EzwIQhV6yy24sjsj0sJKoqUohGVmtBbxx11UcimWHloo/YGgpFpLNGldI6+HNNE0WXfVCT54p32zn+/7MT8Q8mmB8XBtkzC7MGdRTdAEkWwLS+pgSR1N0k1N0ATmLKpx2hkYD9f6/a+nBe2BIOF0TJPm7+bJIfDjWLIMljTWOKE3nBrcYlnVWFIDS5r1Cy4RItg+4cZgvdlbdSL4rbhxk3Dzw2nBJUI4XQ3ZkYAvuBbX72DBfqiC551ImgzZOvHMvBLwYhEulbj6+tlFlWU/rh1lZwJLaqiCtM2NwpP5sWMqYepF8KA9EDzLtB/1R3OjsLb7C9YzKXi68Mp1dxS1gnA6phKet/VMCh7Pj7q0gkURQgi12Nblkxwybt46NQzdi5PgHGQLAr7ubMP92ahLFWi6LtZfg5qE2aUi8y+pn9Cz9AZ6lqbBOcjCt51teOACPxRhdCDMWVRV2Z2DLPQsTUP34hQ8nI15rsXctJAmaEJVzwEAPqe2oHVq2Nd6zNkyIpJtqYJ/392GtjnvzPNOJE0iLKlzHvCcALZ3YgGq4AUBmqSb5wEvtMDvEKqGF4bQzzasBDwnwLSQxmmnV+DC2ifl8H8C2lFgPFyLJcu4Bd17+xL+ZPfVwwVNX7HDl/JXccwt8HliFgAAMlkH5tc+KoHnBpCNFG7Dxgm9AQu2Xy6wb2UG+lZm4O70CyXg5skhwJI6t+P6jaI3AeHGoCqAtwAWKXkRtVhWNZHsfaXhRJrvroXDF8q+C0N2JEAkTVYMLthG00Tkeln4oQidVEIEEWwjFDfwsfCjlcCcrqosu2fm/1u92VtFpKm77Q6/044li7j23H81WBQLmvYNFjRNJBsp2WpnsbpYfw0WRgfmpoU5WyaSJolkezmnSczZcu6b2V444XzYX91CT5vRTRG8AAAAAElFTkSuQmCC">')
+            )
+        );
+
+
+    $("#date").css("display", "block")
+        .append($('<button id = "edit_date" class = "editButton"></button>')
+            .append(
+                $('<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACzUlEQVRYhcWWz0sbQRTH51httRdLLx5KG5tK6s5YPRR6bmt/nBX9EzwIQhV6yy24sjsj0sJKoqUohGVmtBbxx11UcimWHloo/YGgpFpLNGldI6+HNNE0WXfVCT54p32zn+/7MT8Q8mmB8XBtkzC7MGdRTdAEkWwLS+pgSR1N0k1N0ATmLKpx2hkYD9f6/a+nBe2BIOF0TJPm7+bJIfDjWLIMljTWOKE3nBrcYlnVWFIDS5r1Cy4RItg+4cZgvdlbdSL4rbhxk3Dzw2nBJUI4XQ3ZkYAvuBbX72DBfqiC551ImgzZOvHMvBLwYhEulbj6+tlFlWU/rh1lZwJLaqiCtM2NwpP5sWMqYepF8KA9EDzLtB/1R3OjsLb7C9YzKXi68Mp1dxS1gnA6phKet/VMCh7Pj7q0gkURQgi12Nblkxwybt46NQzdi5PgHGQLAr7ubMP92ahLFWi6LtZfg5qE2aUi8y+pn9Cz9AZ6lqbBOcjCt51teOACPxRhdCDMWVRV2Z2DLPQsTUP34hQ8nI15rsXctJAmaEJVzwEAPqe2oHVq2Nd6zNkyIpJtqYJ/392GtjnvzPNOJE0iLKlzHvCcALZ3YgGq4AUBmqSb5wEvtMDvEKqGF4bQzzasBDwnwLSQxmmnV+DC2ifl8H8C2lFgPFyLJcu4Bd17+xL+ZPfVwwVNX7HDl/JXccwt8HliFgAAMlkH5tc+KoHnBpCNFG7Dxgm9AQu2Xy6wb2UG+lZm4O70CyXg5skhwJI6t+P6jaI3AeHGoCqAtwAWKXkRtVhWNZHsfaXhRJrvroXDF8q+C0N2JEAkTVYMLthG00Tkeln4oQidVEIEEWwjFDfwsfCjlcCcrqosu2fm/1u92VtFpKm77Q6/044li7j23H81WBQLmvYNFjRNJBsp2WpnsbpYfw0WRgfmpoU5WyaSJolkezmnSczZcu6b2V444XzYX91CT5vRTRG8AAAAAElFTkSuQmCC">')
+            )
+        );
 
     $(".deleteFromDB").click(function () {
 
@@ -205,6 +219,15 @@ function addheaderOptions(type) {
                 remove_person();
             }
         }
+    });
+
+
+    $("#edit_date").click(function () {
+        document.getElementById('formContainerEditDate').style.display = "block";
+    });
+
+    $("#edit_title").click(function () {
+        document.getElementById('formContainerEditTitle').style.display = "block";
     });
 }
 
@@ -337,13 +360,56 @@ function remove_person() {
 
 }
 
+
+function edit_header(type) {
+
+    if (type == "title") {
+        var form = $("#formContainerEditTitle");
+        var info = $('#title_f').val();
+        var to_modify = $("#titre");
+
+
+    } else if (type == "date") {
+        var form = $("#formContainerEditDate");
+        var info = $('#date_f').val();
+        var to_modify = $("#date");
+    }
+
+    var old_content = to_modify.children().first();
+    console.log(old_content);
+
+    if (confirm("Etes vous sûr de vouloir modifier ce champs ? ")) {
+
+        $.ajax({
+            url: "adminRequests.php?type=edit_" + type,
+            type: "POST",
+            dataType: 'json', // add json datatype to get json
+            data: ({info: info}),
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function (data) {
+                console.log(data);
+                form.css("display", "none");
+                location.reload();
+
+            },
+            fail: function () {
+                alert("Une erreur est survenue")
+
+            }
+        });
+    }
+}
+
+
 function remove_person_from_work(_name, _fn, _num, type, row) {
 
     console.log(_name, _fn, _num, type);
     console.log("adminRequests.php?type=remove_" + type + "_from_work");
 
     $.ajax({
-        url: "adminRequests.php?type=remove_" + type + "_from_work", //This is the current doc
+        url: "adminRequests.php?type=remove_" + type + "_from_work",
         type: "POST",
         dataType: 'json', // add json datatype to get json
         data: ({name: _name, fn: _fn, num: _num}),
@@ -431,7 +497,7 @@ function edit_plot(havePlot) {
 
     if (havePlot !== 0) {
         $.ajax({
-            url: "adminRequests.php?type=edit_plot", //This is the current doc
+            url: "adminRequests.php?type=edit_plot",
             type: "POST",
             dataType: 'json', // add json datatype to get json
             data: ({content: text}),
@@ -453,7 +519,7 @@ function edit_plot(havePlot) {
         });
     } else {
         $.ajax({
-            url: "adminRequests.php?type=add_plot", //This is the current doc
+            url: "adminRequests.php?type=add_plot",
             type: "POST",
             dataType: 'json', // add json datatype to get json
             data: ({content: text}),
@@ -828,6 +894,53 @@ function add_details(field_data, field_type){
             console.log("add_details")
             console.log(res);
             $('#formContainerDetails').css("display", "none");
+            alert(res);
+            location.reload();
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
+
+function remove_details(){
+    var genre = $('#genre').val();
+    var language = $('#language').val();
+    var country = $('#country').val();
+
+    console.log(genre, language, country);
+
+    if(!(genre.length === 0)){
+        rm_details(genre, "genre");
+    }
+    if(!(language.length === 0)){
+        rm_details(language, "language");
+    }
+    if(!(country.length === 0)){
+        rm_details(country, "country");
+    }
+
+}
+
+function rm_details(field_data, field_type){
+    $.ajax({
+        url: "adminRequests.php?type=remove_details",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({type_field: field_type, data_field: field_data}),
+        error: function (xhr, status) {
+            alert(status);
+
+        },
+        success: function (res) {
+            console.log("remove_details")
+            console.log(res);
+            $('#formContainerDetailsDelete').css("display", "none");
             alert(res);
             location.reload();
         },

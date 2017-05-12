@@ -235,6 +235,25 @@ function add_serie($id, $end_date, $db)
 
 }
 
+function edit_title($id, $title, $db)
+{
+    $query = "UPDATE Oeuvre
+              SET Titre = '$title'
+              WHERE ID = '$id'";
+
+    return execute_add_query($query, $db);
+
+}
+
+function edit_date($id, $date, $db)
+{
+    $query = "UPDATE Oeuvre
+              SET AnneeSortie = '$date'
+              WHERE ID = '$id'";
+
+    return execute_add_query($query, $db);
+
+}
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
 if (!$database) {
@@ -539,7 +558,43 @@ if (!$database) {
         echo json_encode(add_serie($id, $end_date, $database));
 
     }
+    elseif ($_GET['type'] === "remove_details") {
+        $id = $_SESSION['id'];
+        $type = mysqli_real_escape_string($database, $_POST["type_field"]);
+        $data = mysqli_real_escape_string($database, $_POST["data_field"]);
+        if ($type === "genre") {
+            $query = "Delete
+              FROM Genre
+              WHERE ID = '$id' and Genre = '$data'";
+        } elseif ($type === "language") {
+            $query = "Delete
+              FROM Langue
+              WHERE ID = '$id' and Langue = '$data'";
+        } elseif ($type === "country") {
+            $query = "Delete
+              FROM Pays
+              WHERE ID = '$id' and Pays = '$data'";
+        }
+        if ($database->query($query) === TRUE) {
+            echo json_encode("Details removed " . $database->error);
+        } else {
+            echo json_encode("Error updating details: " . $database->error);
+        }
+    }
+    } elseif ($_GET['type'] === 'edit_title') {
 
+        $id = mysqli_real_escape_string($database, $_SESSION['id']);
+        $title = mysqli_real_escape_string($database, $_POST['info']);
+
+        echo json_encode(edit_title($id, $title, $database));
+
+    } elseif ($_GET['type'] === 'edit_date') {
+
+        $id = mysqli_real_escape_string($database, $_SESSION['id']);
+        $date = mysqli_real_escape_string($database, $_POST['info']);
+
+        echo json_encode(edit_date($id, $date, $database));
+    }
 }
 
 
