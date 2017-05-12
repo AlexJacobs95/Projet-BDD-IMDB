@@ -350,7 +350,7 @@ function remove_work() {
         },
         success: function (data) {
             console.log(data);
-            //location.href = "welcome_page.php"
+            location.href = "welcome_page.php"
         },
         fail: function () {
             alert("Une erreur est survenue")
