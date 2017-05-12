@@ -838,6 +838,53 @@ function add_details(field_data, field_type){
         }
     });
 }
+
+function remove_details(){
+    var genre = $('#genre').val();
+    var language = $('#language').val();
+    var country = $('#country').val();
+
+    console.log(genre, language, country);
+
+    if(!(genre.length === 0)){
+        rm_details(genre, "genre");
+    }
+    if(!(language.length === 0)){
+        rm_details(language, "language");
+    }
+    if(!(country.length === 0)){
+        rm_details(country, "country");
+    }
+
+}
+
+function rm_details(field_data, field_type){
+    $.ajax({
+        url: "adminRequests.php?type=remove_details",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({type_field: field_type, data_field: field_data}),
+        error: function (xhr, status) {
+            alert(status);
+
+        },
+        success: function (res) {
+            console.log("remove_details")
+            console.log(res);
+            $('#formContainerDetailsDelete').css("display", "none");
+            alert(res);
+            location.reload();
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+            $('#load_spinner').hide()
+
+        }
+    });
+}
 function createList(data, type) {
     console.log(data);
     var titre;
