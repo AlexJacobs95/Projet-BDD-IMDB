@@ -10,12 +10,32 @@ if (!$database) {
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 } else {
+
+    //get genres
     $query = "SELECT DISTINCT Genre FROM Genre";
 
     $all_genres_dirty = $database->query($query);
-    $res = array();
+    $res_genres = array();
     while ($row = mysqli_fetch_assoc($all_genres_dirty)) {
-        array_push($res, $row['Genre']);
+        array_push($res_genres, $row['Genre']);
+    }
+
+    //get languages
+    $query = "SELECT DISTINCT Langue FROM Langue";
+
+    $all_langages_dirty = $database->query($query);
+    $res_langages = array();
+    while ($row = mysqli_fetch_assoc($all_langages_dirty)) {
+        array_push($res_langages, utf8_encode($row['Langue']));
+    }
+
+    //get countries
+    $query = "SELECT DISTINCT Pays FROM Pays";
+
+    $all_countries_dirty = $database->query($query);
+    $res_countries = array();
+    while ($row = mysqli_fetch_assoc($all_countries_dirty)) {
+        array_push($res_countries, $row['Pays']);
     }
 }
 
@@ -84,9 +104,20 @@ if (!$database) {
                             </select>
                         </span>
                 </div>
+
                 <div class="form-group text-left">
                     <label for="title">Genres</label>
                     <select class="form-control test" multiple="multiple" id="genre_select" name="genres[]">
+                    </select>
+                </div>
+                <div class="form-group text-left">
+                    <label for="title">Langues</label>
+                    <select class="form-control test" multiple="multiple" id="langage_select" name="langages[]">
+                    </select>
+                </div>
+                <div class="form-group text-left">
+                    <label for="title">Pays</label>
+                    <select class="form-control test" multiple="multiple" id="country_select" name="countries[]">
                     </select>
                 </div>
 
@@ -155,14 +186,40 @@ if (!$database) {
 
 <script type="text/javascript">
     $(document).ready(function() {
-        var array = (<?php echo json_encode($res); ?>);
-        array.forEach(function (entry) {
+        var array_genres = (<?php echo json_encode($res_genres); ?>);
+        console.log("genres", array_genres);
+
+        array_genres.forEach(function (entry) {
             $('#genre_select').append(
                 $('<option>'+entry+'</option>')
             );
 
-        })
+        });
+        $("#genre_select").select2();
 
-        $(".test").select2();
+        var array_langages = (<?php echo json_encode($res_langages); ?>);
+        console.log("langages", array_langages);
+
+        array_langages.forEach(function (entry1) {
+            $('#langage_select').append(
+                $('<option>'+entry1+'</option>')
+            );
+
+        });
+        $("#langage_select").select2();
+
+
+        var array_countries = (<?php echo json_encode($res_countries); ?>);
+        console.log("countries", array_countries);
+        array_countries.forEach(function (entry2) {
+            $('#country_select').append(
+                $('<option>'+entry2+'</option>')
+            );
+
+        });
+        $("#country_select").select2();
+
+
+
     });
 </script>
