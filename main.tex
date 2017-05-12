@@ -98,6 +98,61 @@ Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en m�
 
 \subsection{Modèle relationnel}
 
+Personne(Nom, Prénom, Numéro, Genre)
+Auteur(Nom, Prénom, Numéro)
+Auteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+AuteurOeuvre(Nom, Prénom, Numéro, Référence)
+AuteurOeuvre.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
+	AuteurOeuvre.Référence référence Œuvre.Référence
+Producteur(Nom, Prénom, Numéro, Genre)
+Producteur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+ProducteurOeuvre(Nom, Prénom, Numéro, Référence)
+ProducteurOeuvre.(Nom, Prénom, Numéro) référence Producteur.(Nom, Prénom, Numéro, Genre)
+	ProducteurOeuvre.Référence référence Œuvre.Référence
+Directeur(Nom, Prénom, Numéro , Genre)
+Directeur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+DirecteurOeuvre(Nom, Prénom, Numéro, Référence)
+	DirecteurOeuvre.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
+	DirecteurOeuvre.Référence référence Œuvre.Référence
+Acteur(Nom, Prénom, Numéro, Genre)
+Acteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+
+ActeurRole(Nom, Prénom, Numéro, Rôle)
+	ActeurRole.(Nom, Prénom, Numéro) référence Acteur.(Nom, Prénom, Numéro)
+	ActeurRole.(Role) référence Rôle.Rôle
+Rôle(Rôle, Nom, Prénom, Référence, RéférenceO)
+	Rôle.RéférenceO référence Œuvre.Référene
+Œuvre(Référence, Titre, Note, AnnéeSortie)
+Pays(Nom)
+PaysOeuvre(Nom, Référence)
+	Nom référence Pays.Nom
+	Référence référence Œuvre.Référence
+Genre(Nom)
+GenreOeuvre(Nom, Référence)
+	Nom référence Genre.Nom
+	Référence référence Œuvre.Référence
+Langue(Nom)
+LangueOeuvre(Nom, Référence)
+	Nom référence Langue.Nom
+	Référence référence Œuvre.Référence
+Film(Référence)
+	Film.Référence référence Œuvre. Référence
+Série(Référence, AnnéeFin)
+	Série.Référence référence Œuvre.Référence
+Episode(Référence,TitreE, NuméroE, Date de sortie, RéférenceS)
+Episode.Référence référence Œuvre.référence
+Epidode.RéférenceS référence Saison.Référence
+
+Saison(Référence, NuméroS, NombreEpisodes, RéférenceS)
+Saison.Référence référence Série.référence
+Saison.RéférenceS référence Série.Référence
+Administrateur(Adresse mail, mot de passe)
+Contraintes modèle relationnel:
+Episode.Date de sortie >= Serie.Date de sortie
+RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série)
+RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison) 
+Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’à une Œuvre)
+
 \newpage
 \section{Deuxième Partie}\label{deuxieme partie}
 
