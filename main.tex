@@ -1,0 +1,62 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[export]{adjustbox}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{transparent}
+\usepackage[export]{adjustbox}
+\usepackage{hyperref} \hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black,}
+\usepackage[nonumberlist]{glossaries}
+\usepackage{glossaries}
+\usepackage{imakeidx}
+
+% 1 : Logo ulb en fond
+\newcommand\BackgroundPic{%
+    \put(0,-47){%
+        \parbox[b][\paperheight]{\paperwidth}{%
+            \vfill
+            \centering
+            {\transparent{0.09}\includegraphics[width=1.17 \textwidth]{logo_ulb.jpg}}%
+            \vfill
+        }
+    }
+}
+\begin{document}
+\AddToShipoutPicture*{\BackgroundPic}
+
+\begin{titlepage}
+\begin{center}
+\vspace*{-1.5cm}
+\includegraphics[width=8cm]{ULB.jpg}
+\vspace{6cm}
+
+\par{\huge \textbf{Rapport Projet}}\bigbreak
+\bigbreak
+\par{\huge \textbf{\textit{{IMDB: Internet Movie Database}}}}
+\vspace{2cm}
+\par{\large [Cours: INFO-H-303]}
+\vspace{2cm}
+
+\par \hrulefill \par
+\vspace{1cm}
+\bsc{Jacobs} Alexandre 
+\bsc{\&}
+\bsc{Engelman} David
+\bsc{\&}
+\bsc{Engelman} Benjamin
+{\emph \\BA2 Informatique}
+\vspace{0.7cm}
+\par \hrulefill \par
+
+\vspace{2cm}
+\par Mai 2017
+
+\end{center}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+\end{document}
