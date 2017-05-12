@@ -736,24 +736,24 @@ function edit_actors_from_oeuvre() {
     var invalid = false;
 
     if ($.trim(name) === "") {
-        $('#actor_name').removeClass("valid").addClass("invalid");
+        $('#actor_name').css("border-color", "red")
         invalid = true
     }   else {
-        $('#actor_name').removeClass("invalid").addClass("valid");
+        $('#actor_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
-        $('#actor_fn').removeClass("valid").addClass("invalid");
+        $('#actor_fn').css("border-color", "red")
         invalid = true
     }   else {
-        $('#actor_fn').removeClass("invalid").addClass("valid");
+        $('#actor_fn').css("border-color", "#fed136")
     }
 
     if ($.trim($('#actor_role').val()) === "") {
-        $('#actor_role').removeClass("valid").addClass("invalid");
+        $('#actor_role').css("border-color", "red")
         invalid = true
     }   else {
-        $('#actor_role').removeClass("invalid").addClass("valid");
+        $('#actor_role').css("border-color", "#fed136")
     }
 
     if (invalid) return;
@@ -804,17 +804,17 @@ function edit_directors_from_oeuvre() {
     var invalid = false;
 
     if ($.trim(name) === "") {
-        $('#director_name').removeClass("valid").addClass("invalid");
+        $('#director_name').css("border-color", "red")
         invalid = true
     }   else {
-        $('#director_name').removeClass("invalid").addClass("valid");
+        $('#director_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
-        $('#director_fn').removeClass("valid").addClass("invalid");
+        $('#director_fn').css("border-color", "red")
         invalid = true
     }   else {
-        $('#director_fn').removeClass("invalid").addClass("valid");
+        $('#director_fn').css("border-color", "#fed136")
     }
 
     if (invalid) return;
@@ -859,17 +859,17 @@ function edit_writers_from_oeuvre() {
     var invalid = false;
 
     if ($.trim(name) === "") {
-        $('#writer_name').removeClass("valid").addClass("invalid");
+        $('#writer_name').css("border-color", "red")
         invalid = true
     }   else {
-        $('#writer_name').removeClass("invalid").addClass("valid");
+        $('#writer_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
-        $('#writer_fn').removeClass("valid").addClass("invalid");
+        $('#writer_fn').css("border-color", "red")
         invalid = true
     }   else {
-        $('#writer_fn').removeClass("invalid").addClass("valid");
+        $('#writer_fn').css("border-color", "#fed136")
     }
 
     if (invalid) return;
@@ -915,7 +915,6 @@ function edit_details() {
     var country = $('#country').val();
 
     console.log(genre, language, country);
-    var invalid = false;
 
     if(!(genre.length === 0)){
         add_details(genre, "genre");
@@ -1133,17 +1132,17 @@ function edit_actors_from_person() {
     var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
-        $('#oeuvre_name_actor').removeClass("valid").addClass("invalid");
+        $('#oeuvre_name_actor').css("border-color", "red")
         invalid = true
     }   else {
-        $('#oeuvre_name_actor').removeClass("invalid").addClass("valid");
+        $('#oeuvre_name_actor').css("border-color", "#fed136")
     }
 
     if ($.trim($('#oeuvre_role')) === "") {
-        $('#oeuvre_role').removeClass("valid").addClass("invalid");
+        $('#oeuvre_role').css("border-color", "red")
         invalid = true
     }   else {
-        $('#oeuvre_role').removeClass("invalid").addClass("valid");
+        $('#oeuvre_role').css("border-color", "#fed136")
     }
 
     if (invalid) return;
@@ -1182,10 +1181,10 @@ function edit_writers_from_person() {
     var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
-        $('#oeuvre_name_writer').removeClass("valid").addClass("invalid");
+        $('#oeuvre_name_writer').css("border-color", "red")
         invalid = true
     }   else {
-        $('#oeuvre_name_writer').removeClass("invalid").addClass("valid");
+        $('#oeuvre_name_writer').css("border-color", "#fed136")
     }
 
     if (invalid) return;
@@ -1225,10 +1224,10 @@ function edit_directors_from_person() {
     var invalid = false;
 
     if ($.trim(titreOeuvre) === "") {
-        $('#oeuvre_name_director').removeClass("valid").addClass("invalid");
+        $('#oeuvre_name_director').css("border-color", "red")
         invalid = true
     }   else {
-        $('#oeuvre_name_director').removeClass("invalid").addClass("valid");
+        $('#oeuvre_name_director').css("border-color", "#fed136")
     }
 
     if (invalid) return;

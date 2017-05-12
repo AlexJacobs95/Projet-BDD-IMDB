@@ -308,10 +308,10 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
                     a.setAttribute("class", "episode");
 
                     ul.appendChild(a); // append the created li element above to the ul element
-
+                }
                 div.innerHTML = '';
                 div.appendChild(ul); // finally the ul element to the div with an id of placeholder
-                }
+
             }
         </script>
 
