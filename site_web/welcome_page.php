@@ -77,11 +77,6 @@ include 'menubar.php';
 
 </header>
 
-<section id="recherche_avancee">
-
-    <?php
-    include'advanced_search.php';  ?>
-</section>
 
 
 <!-- Stats Section -->

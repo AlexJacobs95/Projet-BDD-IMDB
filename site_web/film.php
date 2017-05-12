@@ -136,7 +136,7 @@ $plot = $plot_info['Plot'];
 $nb_roles = mysqli_num_rows($roles);
 $havePlot = mysqli_num_rows($plot_res);
 ?>
-<header style>
+<header>
     <div class="top">
         <div class="container">
 

@@ -85,7 +85,7 @@ if ($database->connect_errno) {
                     WHERE NOT EXISTS(
                         SELECT Genre, EpisodeID
                         FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
-                        WHERE genre = 'm' AND OID = e.EpisodeID) LIMIT 100";
+                        WHERE genre = 'm' AND OID = e.EpisodeID)";
 
 
             $res = $database->query($requete);

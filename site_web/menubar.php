@@ -48,7 +48,7 @@ if (isset($_GET['run_function_log_out'])) {
                     <a href="predefined_requete.php"> Requêtes Prédéfinies</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="welcome_page.php#recherche_avancee">Recherche avancée</a>
+                    <a class="page-scroll" href="advanced_search.php">Recherche avancée</a>
                 </li>
                 <?php
                 if (isset($_SESSION['logged'])) {

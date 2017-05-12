@@ -5,7 +5,7 @@
 
 select{
     margin: 0;
-    color: #fec503;
+    color: black;
 }
 
 
@@ -14,33 +14,10 @@ h2{
 }
 
 
-header {
-    background-color: #2D3E50;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    text-align: center;
-    color: white;
-
+header .intro-text {
     padding-top: 120px;
-    padding-bottom: 50px;
-
+    padding-bottom: 10px;
 }
-
-header .intro-heading {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 100;
-    font-size: 30px;
-    line-height: 25px;
-    margin-bottom: 30px;
-}
-
-
 
 .titre-section {
     margin-top: 40px;

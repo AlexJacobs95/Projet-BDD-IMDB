@@ -9,7 +9,7 @@ def output_oeuvres(dico):
 def output_films(dico):
     of = open("../SQL_data_files/films_ok.txt", 'w')
     for key in dico:
-        of.write(dico[key]["realID"]+ "\n")
+        of.write(dico[key]["realID"] + "\n")
 
     of.close()
 
@@ -17,7 +17,7 @@ def output_films(dico):
 def output_series(dico):
     of = open("../SQL_data_files/series_ok.txt", 'w')
     for key in dico:
-        of.write(dico[key]["realID"] + "|" + dico[key]["dateFin"]+ "\n")
+        of.write(dico[key]["realID"] + "|" + dico[key]["dateFin"] + "\n")
 
     of.close()
 
@@ -26,8 +26,8 @@ def output_episodes(dico):
     of = open("../SQL_data_files/episodes_ok.txt", 'w')
     for key in dico:
         of.write(
-        dico[key]["realID"] + "|" + dico[key]["numero"] + "|" +
-        dico[key]["saison"] + "|" + dico[key]["SID"]+ "\n")
+            dico[key]["realID"] + "|" + dico[key]["numero"] + "|" +
+            dico[key]["saison"] + "|" + dico[key]["SID"] + "\n")
 
     of.close()
 
@@ -52,11 +52,10 @@ def get_name_date_film(line):
     name = ""
     i = 0
     for char in id:
-        if char == '(' and id[i + 5] in ('/',')'):
+        if char == '(' and id[i + 5] in ('/', ')'):
             break
-        name+=char
-        i+=1
-
+        name += char
+        i += 1
 
     return name.strip(), date
 
@@ -113,7 +112,7 @@ def extract_episode_infos(line):
         if infos.find("(#") != -1 and infos[infos.index("(#") + 2].isdigit():
             saison = infos[infos.index('(#') + 2: infos.index('.', infos.index('(#'), index_end_infos)]
             numero = infos[infos.index('.', infos.index('(#'), index_end_infos) + 1: infos.index(')', infos.index('(#'),
-                                                                                                index_end_infos)]
+                                                                                                 index_end_infos)]
             if infos.index('(#') != 0:
                 title = infos[0:infos.index('(#') - 1]
         else:
@@ -168,6 +167,7 @@ def getRealID(line):
 
     return long_id.strip()
 
+
 def getShortID(line):
     short_id = line.split('\t')[0]
     if '{' in short_id:
@@ -178,6 +178,7 @@ def getShortID(line):
         short_id = short_id[0:short_id.rindex(')') + 1]
     return short_id
 
+
 def getIndexOfDateEnd(long_id):
     index = 999
     i = 0
@@ -186,8 +187,8 @@ def getIndexOfDateEnd(long_id):
             begin_index = i
             end_index = i + 5
             if (long_id[begin_index + 1:end_index].isdigit() or long_id[begin_index + 1:end_index] == '????') and (
-                long_id[
-                    end_index] in ("/", ")")):
+                        long_id[
+                            end_index] in ("/", ")")):
                 # Si on a une une date
                 if long_id[end_index] == '/':
                     return long_id.index(')', end_index, len(long_id))
@@ -285,6 +286,7 @@ def main():
     output_films(films)
     output_series(series)
     output_episodes(episodes)
+
 
 if __name__ == '__main__':
     main()

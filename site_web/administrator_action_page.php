@@ -78,28 +78,29 @@ Page de recherche avancé de site web.
                     }
 
                 </style>
-                    <div class="intro-heading">Panneau Administrateur</div> 
-                    
+                    <div class="intro-heading">Panneau Administrateur</div>
                     <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
+                    <div>
+                    <div class="col-lg-12 text-center" style="display: inline">
                        <a class="btn btn-xl" href="#op_compte_admin"> Comptes administrateur</a>
                     </div>
 
 
                     <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" style="display: inline">
                     	<a class="btn btn-xl" href="#op_on_film">Opérations sur Film</a>
                     </div>
                                   
 
                     <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" style="display: inline">
                         <a class="btn btn-xl" href="#op_on_serie">Opérations sur Série</a>
                     </div>
 
                     <div class="clearfix"></div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" style="display: inline">
                         <a class="btn btn-xl" href="#op_on_pers">Opérations sur Personne</a>
+                    </div>
                     </div>
 
                 </div>

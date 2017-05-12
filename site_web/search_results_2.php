@@ -7,6 +7,8 @@ Page d'acceuill de site web.
 <?php
 session_start();
 
+include "menubar.php";
+
 function build_search($content)
 {
     $search = "";
@@ -115,6 +117,7 @@ if (!$database) {
 
     <!-- Theme CSS -->
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="test_css/agency.css" rel="stylesheet">
     <link href="test_css/search_results.css" rel="stylesheet">
 
 
@@ -134,10 +137,6 @@ if (!$database) {
 <body id="page-top" class="index">
 
 <!-- Navigation -->
-
-<?php
-include 'menubar.php';
-?>
 
 <?php
 
@@ -178,16 +177,18 @@ while ($row = mysqli_fetch_array($result_personnes)) {
 ?>
 
 <!-- Header -->
-<header>
-    <div class="intro-text">
-        <div class="intro-heading">
-        <?php
-        echo $nb_res_oeuvre;
-        echo ' Oeuvres | ';
-        echo $nb_res_personnes;
-        echo ' Personnes ';
+<header style="background-color: #126a9d;">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-heading">
+            <?php
+            echo $nb_res_oeuvre;
+            echo ' Oeuvres | ';
+            echo $nb_res_personnes;
+            echo ' Personnes ';
 
-        ?>
+            ?>
+            </div>
         </div>
     </div>
 

@@ -40,6 +40,8 @@ Page avec menu déroulant pour requetes prédéfinies.
 <body id="page-top" class="index" style="background-color: #2D3E50">
 
 <!-- Navigation -->
+
+
 <?php
 include 'menubar.php';
 ?>
@@ -95,18 +97,14 @@ include 'menubar.php';
 
     function execute_query(query, num) {
         createSection("Résultats de la requête " + num);
-        var spinnerID = "loading_spinner"+num;
         var tableID = "table_container_Résultats de la requête " + num;
 
-        div = document.getElementById(tableID);
-        image = document.createElement("image");
-        image.setAttribute("id", spinnerID);
-        image.setAttribute("src", "site_web/squares.gif");
-        image.setAttribute("width", "100");
-        image.setAttribute("height", "100");
+        var div = document.getElementById(tableID);
+        var running = document.createElement("h3");
+        running.setAttribute("id", "running_text"+num);
+        running.innerHTML = "Requête en cours d'exécution..."
 
-
-        div.appendChild(image);
+        div.appendChild(running);
 
         console.log("requetes_action.php?requete="+query);
         $.ajax({
@@ -119,13 +117,15 @@ include 'menubar.php';
                 console.log(query + "termninée");
                 data = (JSON.parse(data));
                 output_query(num, data);
+
+
             },
             fail: function () {
                 alert("Une erreur est survenue")
 
             },
             always: function () {
-                $('#loading_spinner'+num).hide()
+                console.log("hi")
 
             }
 
@@ -138,16 +138,24 @@ include 'menubar.php';
         table.setAttribute("id", "table_"+num);
         table.setAttribute("class", "display");
         if (num === "1"){
-            create_table_query_1(res)
+            create_table_query_1_2_3(res, "1")
+        } else if (num === "2"){
+            create_table_query_1_2_3(res, "2")
+
+        } else if (num === "3"){
+            create_table_query_1_2_3(res, "3")
+
         } else if (num === "4") {
             create_table_query_4(res)
         }
+        $('#running_text'+num).css("display", "none");
+
     }
 
 
-    function create_table_query_1(data) {
-        document.getElementById("table_container_Résultats de la requête 1").appendChild(table);
-        $('#table_1').DataTable({
+    function create_table_query_1_2_3(data, num) {
+        document.getElementById("table_container_Résultats de la requête " + num).appendChild(table);
+        $('#table_'+num).DataTable({
             "aaSorting": [],
             data: data,
             columns: [

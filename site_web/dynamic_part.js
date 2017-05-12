@@ -373,14 +373,34 @@ function edit_header_movie_episode(type) {
         var info = $('#title_f').val();
         var to_modify = $("#titre");
 
+        var invalid = false;
+        if ($.trim(info) === "") {
+            $('#titre').css("border-color", "red")
+            invalid = true
+        }   else {
+            $('#titre').css("border-color", "#fed136")
+        }
+
+        if (invalid) return;
+
 
     } else if (type == "date") {
         var form = $("#formContainerEditDate");
         var info = $('#date_f').val();
         var to_modify = $("#date");
+
+        var invalid = false;
+        if ($.trim(info) === "" || !isNaN(invalid)) {
+            $('#date').css("border-color", "red")
+            invalid = true
+        }   else {
+            $('#date').css("border-color", "#fed136")
+        }
+
+        if (invalid) return;
     }
 
-    if (confirm("Etes vous sûr de vouloir modifier ce champs ? ")) {
+    if (confirm("Etes vous sûr de vouloir modifier ce champ ? ")) {
 
         $.ajax({
             url: "adminRequests.php?type=edit_" + type,
@@ -408,11 +428,22 @@ function edit_header_movie_episode(type) {
 function edit_header_serie() {
 
 
+
     var form = $("#formContainerEditDateSerie");
     var start_date = $('#start_date').val();
     var end_date = $("#end_date").val();
 
-    if (confirm("Etes vous sûr de vouloir modifier ce champs ? ")) {
+    var invalid = false;
+    if ($.trim(info) === "") {
+        $('#titre').css("border-color", "red")
+        invalid = true
+    }   else {
+        $('#titre').css("border-color", "#fed136")
+    }
+
+    if (invalid) return;
+
+    if (confirm("Etes vous sûr de vouloir modifier ce champ ? ")) {
 
         $.ajax({
             url: "adminRequests.php?type=edit_date_serie",
