@@ -193,6 +193,19 @@ function addheaderOptions(type) {
             )
     );
 
+    if (type === "serie") {
+        $("#intro").append(
+            $('<button id = "add_episode" class = "addEpisode">Episode  </button>')
+                .append(
+                    $('<img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADvUlEQVRYhbWWX0xaZxTAzxtrneCSsixtlplO6/6kky1Z19UF05JZtUO7roBQtYCKVVEKKbXMgvingjrTLf2LwfmwJbVdU13YVgQu6J5MfJhDkS6ZyN4aWq4vQyc0OXtoNGtzddyvepLf083vO+c733fvPQDpB1dwOFchOS9y6hyy6U6XJt5LaZO9lDbZ4dI81jlk05LzIud7R3LlAMBlse7mkbk7M0/SKhq2eRtXvvq1BdOhx9OwfNIoGuLyObkvknvnZw2HBuz+pif9k81Igp1qTJXUf9wPADvY7XoXZ59hWB7qm9TiVqD/Vhbk8jk5aSXf9QbvA8uP6kd9k024lVhGVTF+dpbgf3duHlM96p1oxO3APKqMbdaJDP2wLGSfaMDtRDckCTLeieKGgwP2iTPIhrHQIN6bu8nKsU+cwWLNgb7nW5/X7at7YgvUIxv+WvoDF+l5Vo4tUI/d3trUM0dxwlg43BPQIFueFhBm7fUENHj83CfOp9lfAZ7VrVq5FKhDtqwVQOK231cmACAT9h/eq7jkr0MS1gsg9N8WZsvguKHA2e2vRRLW7gCpLz57yAH118qmu/w1SEJ06QFG6Hkit8tfg5qr4ikwjSriXZQaSVgvgNBvvSuPgcVdneykVMjED7PXMEqHMbr0gJF/Usu4kkps+DxKh/FO8Arj2p2UCi3u6lUwu6uSHZQSmbgdvIIL8RBGaGZWUglcTv694fOFeAhv/f4149odlBLN7qpVMN6TPrZSp5GE6FIYI3SIyLVSp/HcXWkMaq+WTlt91UhClA5jJB4icq2+alR/UzIFYv1BZ7uvCklYpMO4EJ8jctt9VXjs7EcOeKvwdbnFV4kkrBVA6ucV7JECAHBNropli7cS2bJeAIF7wSVLAMDLAABwzHBgyOw9hWxZpOdxIT7H2jN7T2GJ7sPB9b8hl8/JNd2vSF30KpANEXoe/4zPsnIuehVo+kWW5LzKefOZmeBIjaC/zSNHNnw/M4Df/dbPymnzyFGo3G9jGsl21t48OtvmqcDtpObG0RkAeIlxKOTwOTm6O2WxLz0y3A5aRsoe8ni8vRsNpQAAkJWdIWi5LY6ZxqW4lTTfEj/M2pORv2ny/3ZCfePToGlcgluB+rpohseDzXfOEDsK1e/2GX8+kbowfhJJMP70eVKofMe24Zmn241i3ftO/Vh5otX9BaaDfqw8UdQsGOTwnnvVXjAy9xXslhVp8x2Vl4VTTSOlMYOrfNXgKl9tGimNVV4WThVp8x05Ba9JYe0Ll0b8CxNQdU/XcVuxAAAAAElFTkSuQmCC">')
+                )
+        );
+
+        $("#add_episode").click(function () {
+            document.getElementById('formContainerAddEpisode').style.display = "block";
+        })
+    }
+
     $("#titre").css("display", "block")
         .append($('<button id = "edit_title" class = "editButton"></button>')
             .append(
@@ -255,12 +268,14 @@ function addAdminElementsPerson() {
 
 }
 
+
 function addAdminElementsSerie(plot) {
     addAdminElements(document.getElementById("resume-title"));
     $('#resume').val($('#resume').val() + plot);
     addheaderOptions("serie");
 
 }
+
 
 function modifyRows() {
     $('.row_t').attr('class', "clickable-row");
@@ -1563,7 +1578,105 @@ function addSerie() { //fct appelée lors du clique sur le bouton
 
 }
 
+function addEpisode(dateAndTitle) { //fct appelée lors du clique sur le bouton
 
+
+    var serieTitleDate = dateAndTitle.split("|");
+
+    const saison = $('#episode_saison').val();
+    const numero = $('#episode_num').val();
+    const sid = "\"" + serieTitleDate[1] + "\" " + "(" + serieTitleDate[0] + ")";
+
+    console.log("add episode for ", sid);
+
+    check_if_episode_exist(saison, numero, sid);
+
+
+}
+
+
+function build_episode_id(sid) {
+
+    console.log("building episode id");
+
+    const title = $('#episode_name').val();
+    const saison = $('#episode_saison').val();
+    const numero = $('#episode_num').val();
+    const note = $('#episode_note').val();
+    const date = $('#episode_date').val();
+    const episode_id = sid + " {" + title + " (#" + saison + "." + numero + ")}"
+
+    insert_episode(title, saison, numero, episode_id, date, note, sid);
+}
+
+function check_if_episode_exist(saison, numero, sid) {
+    console.log("checking if episode exist");
+    $.ajax({
+        url: "adminRequests.php?type=check_if_episode_exist",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({saison: saison, numero: numero, sid: sid}),
+        error: function (xhr, status) {
+            console.log();
+            alert(status);
+        },
+        success: function (data) {
+            console.log(data);
+            if (data === "exist") {
+                return;
+            }
+            build_episode_id(sid)
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        },
+        always: function () {
+
+        }
+
+    });
+}
+
+function insert_episode(title, saison, numero, episode_id, date, note, sid) {
+
+    console.log("title", title);
+    console.log("saison", saison);
+    console.log("numero", numero);
+    console.log("episode_id", episode_id);
+    console.log("date", date);
+    console.log("note", note);
+    console.log("sid", sid);
+
+    console.log("inserting episode");
+    $.ajax({
+        url: "adminRequests.php?type=insert_episode",
+        type: "POST",
+        dataType: 'json', // add json datatype to get json
+        data: ({
+            saison: saison,
+            numero: numero,
+            sid: sid,
+            title: title,
+            episode_id: episode_id,
+            date: date,
+            note: note
+        }),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function (data) {
+            console.log(data);
+            window.location.href = "episode.php?id=" + encodeURIComponent(episode_id);
+
+        },
+        fail: function () {
+            alert("Une erreur est survenue")
+
+        }
+    });
+}
 
 
 

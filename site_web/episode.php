@@ -140,7 +140,7 @@ include 'menubar.php';
 <?php
 $movie_infos = mysqli_fetch_array($movie);
 $plot_info = mysqli_fetch_array($plot_res);
-$titre = $movie_infos['Titre'];
+$titre = utf8_encode($movie_infos['Titre']);
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';

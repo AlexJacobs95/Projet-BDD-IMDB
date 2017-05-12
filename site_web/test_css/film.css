@@ -201,6 +201,18 @@ tr {
 
 }
 
+.addEpisode {
+    background-color: #83BD62;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 200px;
+    font-size: 24px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+
 
 
 .content {
