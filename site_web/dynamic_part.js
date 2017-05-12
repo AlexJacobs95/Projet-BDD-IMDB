@@ -210,11 +210,11 @@ function addheaderOptions(type) {
 
     $(".deleteFromDB").click(function () {
 
-        if (type == "work") {
+        if (type === "work" || type === "serie") {
             if (confirm("Etes vous sûr de vouloir supprimer cette Oeuvre ?")) {
                 remove_work();
             }
-        } else if (type == "person") {
+        } else if (type === "person") {
             if (confirm("Etes vous sûr de vouloir supprimer cette Personne ?")) {
                 remove_person();
             }
@@ -223,7 +223,12 @@ function addheaderOptions(type) {
 
 
     $("#edit_date").click(function () {
-        document.getElementById('formContainerEditDate').style.display = "block";
+        if (type === "serie") {
+            document.getElementById('formContainerEditDateSerie').style.display = "block";
+        } else {
+            document.getElementById('formContainerEditDate').style.display = "block";
+        }
+
     });
 
     $("#edit_title").click(function () {
@@ -253,7 +258,7 @@ function addAdminElementsPerson() {
 function addAdminElementsSerie(plot) {
     addAdminElements(document.getElementById("resume-title"));
     $('#resume').val($('#resume').val() + plot);
-    addheaderOptions("work");
+    addheaderOptions("serie");
 
 }
 
@@ -361,7 +366,7 @@ function remove_person() {
 }
 
 
-function edit_header(type) {
+function edit_header_movie_episode(type) {
 
     if (type == "title") {
         var form = $("#formContainerEditTitle");
@@ -374,9 +379,6 @@ function edit_header(type) {
         var info = $('#date_f').val();
         var to_modify = $("#date");
     }
-
-    var old_content = to_modify.children().first();
-    console.log(old_content);
 
     if (confirm("Etes vous sûr de vouloir modifier ce champs ? ")) {
 
@@ -401,6 +403,37 @@ function edit_header(type) {
         });
     }
 }
+
+
+function edit_header_serie() {
+
+
+    var form = $("#formContainerEditDateSerie");
+    var start_date = $('#start_date').val();
+    var end_date = $("#end_date").val();
+
+    if (confirm("Etes vous sûr de vouloir modifier ce champs ? ")) {
+
+        $.ajax({
+            url: "adminRequests.php?type=edit_date_serie",
+            type: "POST",
+            dataType: 'json', // add json datatype to get json
+            data: ({start_date: start_date, end_date: end_date}),
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function (data) {
+                form.css("display", "none");
+                location.reload();
+            },
+            fail: function () {
+                alert("Une erreur est survenue")
+
+            }
+        });
+    }
+}
+
 
 
 function remove_person_from_work(_name, _fn, _num, type, row) {

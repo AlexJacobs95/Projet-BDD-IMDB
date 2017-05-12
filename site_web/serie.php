@@ -181,14 +181,13 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                 <div id="link_trailer"><h2 id="text-watch-trailer">watch trailer</h2></div>
             </div>
             <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
-            <div class="intro-heading"><?php
+            <div class="intro-heading" id="date"><?php
                 if ($date_fin != 0) {
                     echo sprintf($date_format1, $date, $date_fin);
                 } else {
 
                     echo sprintf($date_format2, $date);
-                }
-                ;
+                };
                 ?>
             </div>
             <div class=infos><?php extractGenres($genres) ?></div>

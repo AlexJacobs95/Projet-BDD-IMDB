@@ -211,7 +211,6 @@ function add_oeuvre($id, $title, $date, $note, $db)
               VALUE ('$id', '$title', '$date', '$note')";
 
     return execute_add_query($query, $db);
-
 }
 
 
@@ -222,7 +221,6 @@ function add_movie($id, $db)
               VALUE ('$id')";
 
     return execute_add_query($query, $db);
-
 }
 
 function add_serie($id, $end_date, $db)
@@ -232,7 +230,6 @@ function add_serie($id, $end_date, $db)
               VALUE ('$id', '$end_date')";
 
     return execute_add_query($query, $db);
-
 }
 
 function edit_title($id, $title, $db)
@@ -242,7 +239,6 @@ function edit_title($id, $title, $db)
               WHERE ID = '$id'";
 
     return execute_add_query($query, $db);
-
 }
 
 function edit_date($id, $date, $db)
@@ -252,7 +248,15 @@ function edit_date($id, $date, $db)
               WHERE ID = '$id'";
 
     return execute_add_query($query, $db);
+}
 
+function edit_end_date($id, $date, $db)
+{
+    $query = "UPDATE Serie
+              SET AnneeFin = '$date'
+              WHERE SerieID = '$id'";
+
+    return execute_add_query($query, $db);
 }
 
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
@@ -580,7 +584,7 @@ if (!$database) {
         } else {
             echo json_encode("Error updating details: " . $database->error);
         }
-    }
+
     } elseif ($_GET['type'] === 'edit_title') {
 
         $id = mysqli_real_escape_string($database, $_SESSION['id']);
@@ -594,6 +598,20 @@ if (!$database) {
         $date = mysqli_real_escape_string($database, $_POST['info']);
 
         echo json_encode(edit_date($id, $date, $database));
+
+    } elseif ($_GET['type'] === 'edit_date_serie') {
+
+        $id = mysqli_real_escape_string($database, $_SESSION['id']);
+        $start_date = mysqli_real_escape_string($database, $_POST['start_date']);
+        $end_date = mysqli_real_escape_string($database, $_POST['end_date']);
+
+        if (strip_tags($start_date) !== "") {
+            edit_date($id, $start_date, $database);
+        }
+        if (strip_tags($end_date) !== "") {
+            edit_end_date($id, $end_date, $database);
+        }
+        echo json_encode("done");
     }
 }
 
