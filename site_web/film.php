@@ -164,7 +164,7 @@ $havePlot = mysqli_num_rows($plot_res);
 </script>
 
 
-<section id="Trailer" class="bg-light-gray">
+<section id="Proporition" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id=trailer-block>
@@ -177,6 +177,7 @@ $havePlot = mysqli_num_rows($plot_res);
         </div>
     </div>
 </section>
+
 
 <?php include "commonMovieEpisode.php" ?>
 

@@ -200,7 +200,15 @@ CREATE TABLE IF NOT EXISTS Plots (
   ENGINE = InnoDB;
 
 
+DELIMITER |
+CREATE TRIGGER after_episode_delete
+AFTER DELETE ON Episode
+FOR EACH ROW
+  BEGIN
+    DELETE FROM Oeuvre
+    WHERE Oeuvre.ID = old.EpisodeID;
+  END
 
-
+    delimiter;
 
 

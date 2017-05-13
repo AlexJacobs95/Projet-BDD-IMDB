@@ -50,6 +50,9 @@ if (isset($_GET['run_function_log_out'])) {
                 <li>
                     <a class="page-scroll" href="advanced_search.php">Recherche avancée</a>
                 </li>
+                <li>
+                    <a href="statistics_page.php"> Stats</a>
+                </li>
                 <?php
                 if (isset($_SESSION['logged'])) {
                     echo "<li><a href=\"administrator_action_page.php\">Administrateur</a></li>";

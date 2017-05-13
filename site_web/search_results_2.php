@@ -11,12 +11,15 @@ include "menubar.php";
 
 function build_search($content)
 {
+    //$content = preg_replace('/[+\-><\(\)~*\"@]+/', '', $content);
     $search = "";
     $terms = explode(" ", $content);
+    $i = 0;
     foreach ($terms as $word) {
+        echo $i;
         $search .= '+' . $word . '* ';
+        $i++;
     }
-
     return substr($search, 0, strlen($search) - 1);
 }
 
