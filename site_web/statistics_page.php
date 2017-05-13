@@ -69,7 +69,7 @@ include 'menubar.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Evolution du nombre de films et series en fonction du temps </h2>
+                <h2 class="section-heading">Evolution du nombre de films et series tournés chaque année </h2>
             </div>
         </div>
 
