@@ -6,11 +6,11 @@ mkdir ../SQL_data_files
 echo "Parsing..."
 
 echo "Parsing actors..."
-python ActorParser.py -f
+python ActorParser.py -m
 echo "Parsing actors done."
 
 echo "Parsing actresses..."
-python ActorParser.py -m
+python ActorParser.py -f
 echo "Parsing actresses done."
 
 echo "Parsing movies..."
