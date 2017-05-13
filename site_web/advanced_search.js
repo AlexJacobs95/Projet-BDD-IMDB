@@ -174,8 +174,8 @@ function addListOfElemToQuery(list, name, query) {
 }
 
 function launch_advanced_search(query) {
-    //var redirect = 'advanced_search_result.php';
-    //$.redirectPost(redirect, {query: query});
+    var redirect = 'advanced_search_result.php';
+    $.redirectPost(redirect, {query: query});
 
 }
 
