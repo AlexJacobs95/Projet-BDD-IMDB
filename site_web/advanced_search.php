@@ -1,4 +1,3 @@
-
 <?php
 include 'menubar.php';
 session_start();
@@ -53,7 +52,8 @@ if (!$database) {
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
@@ -63,10 +63,15 @@ if (!$database) {
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY" crossorigin="anonymous"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+            integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY"
+            crossorigin="anonymous"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+            integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
+            crossorigin="anonymous"></script>
     <![endif]-->
 
+    <script src="advanced_search.js"></script>
 
 </head>
 
@@ -75,95 +80,95 @@ if (!$database) {
 
     <div class="container">
         <div class="intro-text">
-             <div class="intro-heading" style="color: white">Recherche avancée</div>
+            <div class="intro-heading" style="color: white">Recherche avancée</div>
         </div>
     </div>
 </header>
 
-    <section style="background-color: white">
-        <div class="container text-center">
+<section style="background-color: white" >
+    <div class="container text-center" >
 
-            <form action="search.php" name="search" id="searchForm" novalidate>
+        <form name="search" id="searchForm" novalidate>
 
-                <div class="form-group text-left">
-                    <label for="title">Titre</label>
-                    <input type="text3" class="form-control" placeholder="Ex : Inception" name="title">
-                </div>
-                <div class="form-group text-left">
-                    <label for="title">Année</label>
-                    <input type="text3" class="form-control" placeholder="Ex : 2010" name="year">
-                </div>
+            <div class="form-group text-left" id="form_section">
+                <label for="title">Titre</label>
+                <input type="text3" class="form-control" placeholder="Ex : Inception" id="title">
+            </div>
+            <div class="form-group text-left">
+                <label for="title">Année</label>
+                <input type="text3" class="form-control" placeholder="Ex : 2010" id="year">
+            </div>
 
-                <label for="title">Acteur</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Prénom</label>
-                        <input type="text2" class="form-control fn" placeholder="Ex : Bruce" name="actor_fn">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="title">Nom</label>
-                        <input type="text2" class="form-control name" placeholder="Ex : Willis" name="actor_n">
-                    </div>
+            <label for="title">Acteur</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Prénom</label>
+                    <input type="text2" class="form-control fn" placeholder="Ex : Bruce" id="actor_fn">
                 </div>
+                <div class="col-md-6">
+                    <label for="title">Nom</label>
+                    <input type="text2" class="form-control name" placeholder="Ex : Willis" id="actor_n">
+                </div>
+            </div>
 
-                <label for="title">Directeur</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Prénom</label>
-                        <input type="text2" class="form-control fn" placeholder="Ex : Steven" name="director_fn">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="title">Nom</label>
-                        <input type="text2" class="form-control name" placeholder="Ex : Spielberg" name="director_n">
-                    </div>
+            <label for="title">Directeur</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Prénom</label>
+                    <input type="text2" class="form-control fn" placeholder="Ex : Steven" id="director_fn">
                 </div>
-                <label for="title">Auteur</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Prénom</label>
-                        <input type="text2" class="form-control fn" placeholder="Ex : Chritopher" name="autor_fn">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="title">Nom</label>
-                        <input type="text2" class="form-control name" placeholder="Ex : Nolan" name="autor_n">
-                    </div>
+                <div class="col-md-6">
+                    <label for="title">Nom</label>
+                    <input type="text2" class="form-control name" placeholder="Ex : Spielberg" id="director_n">
                 </div>
+            </div>
+            <label for="title">Auteur</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Prénom</label>
+                    <input type="text2" class="form-control fn" placeholder="Ex : Chritopher" id="writer_fn">
+                </div>
+                <div class="col-md-6">
+                    <label for="title">Nom</label>
+                    <input type="text2" class="form-control name" placeholder="Ex : Nolan" id="writer_n">
+                </div>
+            </div>
 
-                <div class="form-group text-left">
-                    <label for="title">Categorie</label>
-                    <select class="form-control test" id="category_select" name="category">
-                        <option>Toutes</option>
-                        <option>Film</option>
-                        <option>Série</option>
-                        <option>Episode</option>
-                    </select>
-                </div>
+            <div class="form-group text-left">
+                <label for="title">Categorie</label>
+                <select class="form-control test" id="category_select" name="category">
+                    <option>Toutes</option>
+                    <option>Film</option>
+                    <option>Serie</option>
+                    <option>Episode</option>
+                </select>
+            </div>
 
-                <div class="form-group text-left">
-                    <label for="title">Genres</label>
-                    <select class="form-control test" multiple="multiple" id="genre_select" name="genres[]">
-                    </select>
-                </div>
-                <div class="form-group text-left">
-                    <label for="title">Langues</label>
-                    <select class="form-control test" multiple="multiple" id="langage_select" name="langages[]">
-                    </select>
-                </div>
-                <div class="form-group text-left">
-                    <label for="title">Pays</label>
-                    <select class="form-control test" multiple="multiple" id="country_select" name="countries[]">
-                    </select>
-                </div>
+            <div class="form-group text-left">
+                <label for="title">Genres</label>
+                <select class="form-control test" multiple="multiple" id="genre_select" name="genres[]">
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="title">Langues</label>
+                <select class="form-control test" multiple="multiple" id="langage_select" name="langages[]">
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="title">Pays</label>
+                <select class="form-control test" multiple="multiple" id="country_select" name="countries[]">
+                </select>
+            </div>
 
-                <div class="clearfix"></div>
-                <div class="col-lg-12 text-center">
-                    <div id="success"></div>
-                    <button type="submit" class="btn btn-xl">Rechercher</button>
-                </div>
-            </form>
+            <div class="clearfix"></div>
+            <div class="col-lg-12 text-center">
+                <div id="success"></div>
+                <button type="button" class="btn btn-xl" onclick="build_advanced_query()">Rechercher</button>
+            </div>
+        </form>
 
-        </div>
-    </section>
+    </div>
+</section>
 
 </body>
 
@@ -184,13 +189,13 @@ if (!$database) {
 <script src="select2.full.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var array_genres = (<?php echo json_encode($res_genres); ?>);
         console.log("genres", array_genres);
 
         array_genres.forEach(function (entry) {
             $('#genre_select').append(
-                $('<option>'+entry+'</option>')
+                $('<option>' + entry + '</option>')
             );
 
         });
@@ -201,7 +206,7 @@ if (!$database) {
 
         array_langages.forEach(function (entry1) {
             $('#langage_select').append(
-                $('<option>'+entry1+'</option>')
+                $('<option>' + entry1 + '</option>')
             );
 
         });
@@ -212,7 +217,7 @@ if (!$database) {
         console.log("countries", array_countries);
         array_countries.forEach(function (entry2) {
             $('#country_select').append(
-                $('<option>'+entry2+'</option>')
+                $('<option>' + entry2 + '</option>')
             );
 
         });
@@ -220,5 +225,26 @@ if (!$database) {
 
         $("#category_select").select2();
 
+        $.extend(
+            {
+                redirectPost: function(location, args)
+                {
+                    var form = $('<form></form>');
+                    form.attr("method", "post");
+                    form.attr("action", location);
+
+                    $.each( args, function( key, value ) {
+                        var field = $('<input></input>');
+
+                        field.attr("type", "hidden");
+                        field.attr("name", key);
+                        field.attr("value", value);
+
+                        form.append(field);
+                    });
+                    $(form).appendTo('body').submit();
+                }
+            });
     });
+
 </script>
