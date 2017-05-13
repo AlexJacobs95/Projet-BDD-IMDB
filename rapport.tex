@@ -12,6 +12,7 @@
 \usepackage{xcolor,listings}
 \usepackage{textcomp}
 \lstset{upquote=true}
+\usepackage{amsmath} 
 
 
 
@@ -363,8 +364,136 @@ WHERE NOT EXISTS(
     );
     
 \end{lstlisting}
+\newpage
+\begin{lstlisting}[
+           language=SQL,
+           backgroundcolor=\color{backcolour},
+           showspaces=false,
+           basicstyle=\ttfamily,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
+           numberstyle=\tiny,
+           commentstyle=\color{blue},
+           caption = Requête 5,
+           captionpos = b,
+           tabsize = 4,
+           breakatwhitespace=false,         
+    	   breaklines=true,
+           keywordstyle=\color{magenta},
+        ]
+/*R5*/
+Select Prenom, Nom, Numero, count(*)nb
+FROM(
+	select SID, Prenom, Nom, Numero
+	from Episode
+	inner join Role on OID = EpisodeID
+	group by  SID, Prenom, Nom, Numero)t
+group by  Prenom, Nom, Numero
+order by nb desc
+LIMIT 1
+   
+\end{lstlisting}
+
 \subsubsection{Algèbre relationnel}
+\begin{list}{*}{}
+\item Requête 1
+\\ \\
+$
+RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 AND AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
+$\\$
+RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $
+\\$
+ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom and ro.Nom = a. Nom and ro.Numero = a.Numero} Acteur a $
+\\
+$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre)$
+\\
+\\
+\item Requête 2
+\\ \\ 
+$ FilmOeuvre \leftarrow Oeuvre \bowtie_{ID = FilmID} Film$ \\ 
+$FilmAuteur \leftarrow FilmOeuvre \bowtie_{OID = ID} EcritPar$ \\
+$Auteur2Film \leftarrow \sigma_{count(*)>=2}(\pi_{AnneSortie, Nom, Prenom, Numero} (FilmAuteur) )$\\
+$R2 \leftarrow \pi_{Nom, Prenom, Numero} (Auteur2Film)$
+\\
+\\
+
+\item Requête 3
+\\ \\ 
+$ T \leftarrow \sigma_{Nom = "Willis" and Prenom = "Bruce" and Numero = "NA"}(Role)$ \\ 
+$T \leftarrow Role r \bowtie_{r.OID = t.OID} T  t$ \\
+$T2 \leftarrow \pi_{Prenom, Nom, Numero, OID}(T)$\\
+$T2 \leftarrow Role r \bowtie_{r.Nom = t.Nom and r.Prenom = t.Prenom and r.Numero = t.Numero and r.OID = t.OID} T2 t$\\
+$T3 \leftarrow \pi_{OID} (T2)$\\
+$T3 \leftarrow Role r \bowtie_{r.OID = t.OID} T3 t$ \\
+$R3 \leftarrow \pi_{Nom, Prenom, Numero} (T3)$
+\\
+\\
+\item Requête 4
+\\ \\
+$PersonneRole \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero} Role r$\\
+$PersonneRoleM \leftarrow \sigma_{Genre = "m"}(PersonneRole p \bowtie_{p.OID = EpisodeID} Episode)$\\
+$EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
+$Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
+$R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
+\\
+\\
+\item Requête 5
+\\ \\
+$RoleEpisode \leftarrow Role \bowtie_{OID = EpisodeID}Episode$
+$ActeurEpisode \leftarrow \pi_{SID, Prenom, Nom, Numero}(RoleEpisode)$\\
+$ActeurEpisode \leftarrow \pi_{Prenom, Nom, Numero}(ActeurEpisode)$\\
+$R5 \leftarrow \tau_{nb desc}(\sigma_{count(*)}(ActeurEpisode)$
+\end{list}
+\newpage
 \subsubsection{Calcul relationnel tuple}
 
+\begin{list}{*}{}
+\item Requête 1
+\noindent
+\[\begin{aligned}
+      \{ a.Nom, a.Prenom, a.Numero | Acteur(a) \wedge \exists r1, r2, r3, r4, r5, o1, o2, o3, o4, o5 ( \\
+       Oeuvre(o1) \wedge Oeuvre(o2) \wedge Oeuvre(o3) \wedge Oeuvre(o4) \wedge \\
+       Oeuvre(o5) \wedge Role(r1) \wedge Role(r2) \wedge Role(r3) \wedge \\
+       Role(r4) \wedge Role(r4)\wedge \\
+       r1.Nom = a.Nom \wedge r1.Numero = a.Numero \wedge \\
+       r1.Prenom = a.Prenom \wedge \\
+       r2.Nom = a.Nom \wedge r2.Numero = a.Numero \wedge \\
+       r2.Prenom = a.Prenom \wedge \\
+       r3.Nom = a.Nom \wedge r3.Numero = a.Numero \wedge \\
+       r3.Prenom = a.Prenom \wedge \\
+       r4.Nom = a.Nom \wedge r4.Numero = a.Numero \wedge \\
+       r5.Prenom = a.Prenom \wedge \\
+       r5.Nom = a.Nom \wedge r5.Numero = a.Numero \wedge \\
+       o1.ID = r1.ID \wedge o1.AnneeSortie = 2003 \wedge \\
+       o2.ID = r2.ID \wedge o2.AnneeSortie = 2004 \wedge \\
+       o3.ID = r3.ID \wedge o3.AnneeSortie = 2005 \wedge \\
+       o4.ID = r4.ID \wedge o4.AnneeSortie = 2006 \wedge \\
+       o5.ID = r5.ID \wedge o5.AnneeSortie = 2007) \}
+\end{aligned}\]
+\item Requête 2 :
+\noindent
+\[\begin{aligned}
+\{ a1.Nom, a1.Prenom, a1.Numero | EcritPar(a1) \wedge \exists o1, o2, a2, f1, f2 ( \\
+      Oeuvre(o1) \wedge Oeuvre(o2) \wedge EcritPar(a2) \wedge \\
+       Film(f1) \wedge Film(f2) \wedge \\
+       o1.ID \neq o2.ID \wedge \\
+       o1.ID = f1.ID \wedge o1.ID = a1.ID \wedge \\
+       o2.ID = f2.ID \wedge o2.ID = a2.ID \wedge \\
+       a1.Nom = a2.Nom \wedge \\
+       a1.Prenom = a2.Prenom \wedge \\
+       a1.Numero = a2.Numero \wedge \\
+       o1.AnneeSortie = o2.AnneeSortie) \}
+\end{aligned}\]
+\item Requête 3 je sais pas :/ elle est compliqué
+
+\item Requête 4
+\noindent
+\[\begin{aligned}
+\{e.EpisodeID, e.SID | Episode(e) \wedge \forall a, p (Personne(p) \wedge Role(a) \\
+ 	   a.Nom  = p.Nom \wedge a.Prenom = p.Prenom \wedge p.Numero = a.Numero \\
+       p.Genre = "f" \wedge a.OID = e.EpisodeID \}
+\end{aligned}\]
+\end{list}
 \section{Conclusion}
 \end{document}
