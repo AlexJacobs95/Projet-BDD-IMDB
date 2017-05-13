@@ -12,6 +12,7 @@
 \usepackage{xcolor,listings}
 \usepackage{textcomp}
 \lstset{upquote=true}
+\usepackage{amsmath} 
 
 % 1 : Logo ulb en fond
 \newcommand\BackgroundPic{%
@@ -403,7 +404,55 @@ $EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
 $Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
 $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
 \end{list}
+\newpage
 \subsubsection{Calcul relationnel tuple}
 
+\begin{list}{*}{}
+\item Requête 1
+\noindent
+\[\begin{aligned}
+      \{ a.Nom, a.Prenom, a.Numero | Acteur(a) \wedge \exists r1, r2, r3, r4, r5, o1, o2, o3, o4, o5 ( \\
+       Oeuvre(o1) \wedge Oeuvre(o2) \wedge Oeuvre(o3) \wedge Oeuvre(o4) \wedge \\
+       Oeuvre(o5) \wedge Role(r1) \wedge Role(r2) \wedge Role(r3) \wedge \\
+       Role(r4) \wedge Role(r4)\wedge \\
+       r1.Nom = a.Nom \wedge r1.Numero = a.Numero \wedge \\
+       r1.Prenom = a.Prenom \wedge \\
+       r2.Nom = a.Nom \wedge r2.Numero = a.Numero \wedge \\
+       r2.Prenom = a.Prenom \wedge \\
+       r3.Nom = a.Nom \wedge r3.Numero = a.Numero \wedge \\
+       r3.Prenom = a.Prenom \wedge \\
+       r4.Nom = a.Nom \wedge r4.Numero = a.Numero \wedge \\
+       r5.Prenom = a.Prenom \wedge \\
+       r5.Nom = a.Nom \wedge r5.Numero = a.Numero \wedge \\
+       o1.ID = r1.ID \wedge o1.AnneeSortie = 2003 \wedge \\
+       o2.ID = r2.ID \wedge o2.AnneeSortie = 2004 \wedge \\
+       o3.ID = r3.ID \wedge o3.AnneeSortie = 2005 \wedge \\
+       o4.ID = r4.ID \wedge o4.AnneeSortie = 2006 \wedge \\
+       o5.ID = r5.ID \wedge o5.AnneeSortie = 2007) \}
+\end{aligned}\]
+\item Requête 2 :
+\noindent
+\[\begin{aligned}
+\{ a1.Nom, a1.Prenom, a1.Numero | EcritPar(a1) \wedge \exists o1, o2, a2, f1, f2 ( \\
+      Oeuvre(o1) \wedge Oeuvre(o2) \wedge EcritPar(a2) \wedge \\
+       Film(f1) \wedge Film(f2) \wedge \\
+       o1.ID \neq o2.ID \wedge \\
+       o1.ID = f1.ID \wedge o1.ID = a1.ID \wedge \\
+       o2.ID = f2.ID \wedge o2.ID = a2.ID \wedge \\
+       a1.Nom = a2.Nom \wedge \\
+       a1.Prenom = a2.Prenom \wedge \\
+       a1.Numero = a2.Numero \wedge \\
+       o1.AnneeSortie = o2.AnneeSortie) \}
+\end{aligned}\]
+\item Requête 3 je sais pas :/ elle est compliqué
+
+\item Requête 4
+\noindent
+\[\begin{aligned}
+\{e.EpisodeID, e.SID | Episode(e) \wedge \forall a, p (Personne(p) \wedge Role(a) \\
+ 	   a.Nom  = p.Nom \wedge a.Prenom = p.Prenom \wedge p.Numero = a.Numero \\
+       p.Genre = "f" \wedge a.OID = e.EpisodeID \}
+\end{aligned}\]
+\end{list}
 \section{Conclusion}
 \end{document}
