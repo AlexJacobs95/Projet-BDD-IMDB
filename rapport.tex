@@ -364,6 +364,37 @@ WHERE NOT EXISTS(
     );
     
 \end{lstlisting}
+\newpage
+\begin{lstlisting}[
+           language=SQL,
+           backgroundcolor=\color{backcolour},
+           showspaces=false,
+           basicstyle=\ttfamily,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
+           numberstyle=\tiny,
+           commentstyle=\color{blue},
+           caption = Requête 5,
+           captionpos = b,
+           tabsize = 4,
+           breakatwhitespace=false,         
+    	   breaklines=true,
+           keywordstyle=\color{magenta},
+        ]
+/*R5*/
+Select Prenom, Nom, Numero, count(*)nb
+FROM(
+	select SID, Prenom, Nom, Numero
+	from Episode
+	inner join Role on OID = EpisodeID
+	group by  SID, Prenom, Nom, Numero)t
+group by  Prenom, Nom, Numero
+order by nb desc
+LIMIT 1
+   
+\end{lstlisting}
+
 \subsubsection{Algèbre relationnel}
 \begin{list}{*}{}
 \item Requête 1
@@ -405,6 +436,14 @@ $PersonneRoleM \leftarrow \sigma_{Genre = "m"}(PersonneRole p \bowtie_{p.OID = E
 $EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
 $Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
 $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
+\\
+\\
+\item Requête 5
+\\ \\
+$RoleEpisode \leftarrow Role \bowtie_{OID = EpisodeID}Episode$
+$ActeurEpisode \leftarrow \pi_{SID, Prenom, Nom, Numero}(RoleEpisode)$\\
+$ActeurEpisode \leftarrow \pi_{Prenom, Nom, Numero}(ActeurEpisode)$\\
+$R5 \leftarrow \tau_{nb desc}(\sigma_{count(*)}(ActeurEpisode)$
 \end{list}
 \newpage
 \subsubsection{Calcul relationnel tuple}
