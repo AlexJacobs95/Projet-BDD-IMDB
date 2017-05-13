@@ -364,6 +364,47 @@ WHERE NOT EXISTS(
     
 \end{lstlisting}
 \subsubsection{Algèbre relationnel}
+\begin{list}{*}{}
+\item Requête 1
+\\ \\
+$
+RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 AND AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
+$\\$
+RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $
+\\$
+ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom and ro.Nom = a. Nom and ro.Numero = a.Numero} Acteur a $
+\\
+$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre)$
+\\
+\\
+\item Requête 2
+\\ \\ 
+$ FilmOeuvre \leftarrow Oeuvre \bowtie_{ID = FilmID} Film$ \\ 
+$FilmAuteur \leftarrow FilmOeuvre \bowtie_{OID = ID} EcritPar$ \\
+$Auteur2Film \leftarrow \sigma_{count(*)>=2}(\pi_{AnneSortie, Nom, Prenom, Numero} (FilmAuteur) )$\\
+$R2 \leftarrow \pi_{Nom, Prenom, Numero} (Auteur2Film)$
+\\
+\\
+
+\item Requête 3
+\\ \\ 
+$ T \leftarrow \sigma_{Nom = "Willis" and Prenom = "Bruce" and Numero = "NA"}(Role)$ \\ 
+$T \leftarrow Role r \bowtie_{r.OID = t.OID} T  t$ \\
+$T2 \leftarrow \pi_{Prenom, Nom, Numero, OID}(T)$\\
+$T2 \leftarrow Role r \bowtie_{r.Nom = t.Nom and r.Prenom = t.Prenom and r.Numero = t.Numero and r.OID = t.OID} T2 t$\\
+$T3 \leftarrow \pi_{OID} (T2)$\\
+$T3 \leftarrow Role r \bowtie_{r.OID = t.OID} T3 t$ \\
+$R3 \leftarrow \pi_{Nom, Prenom, Numero} (T3)$
+\\
+\\
+\item Requête 4
+\\ \\
+$PersonneRole \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero} Role r$\\
+$PersonneRoleM \leftarrow \sigma_{Genre = "m"}(PersonneRole p \bowtie_{p.OID = EpisodeID} Episode)$\\
+$EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
+$Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
+$R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
+\end{list}
 \subsubsection{Calcul relationnel tuple}
 
 \section{Conclusion}
