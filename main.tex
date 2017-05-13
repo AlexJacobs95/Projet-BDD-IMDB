@@ -200,6 +200,8 @@ Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’
 
 \subsection{Méthode d'extraction des données}
 
+Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers télécharger, nous avons réaliser un autre script de bash qui lui fait appel à du code python permettant de formaté les fichiers selon un standard que nous nous sommes fixé pour permettre l'insertion des données dans la base de donnée plus simple. Nous avons donc réaliser différents parsers avec un "BaseParser" contenant des méthodes de base pour tout les autres parsers.
+
 \subsection{Requêtes demandées}
 Les requêtes demandées étaient les suivantes:
 \begin{list}{-}{}
@@ -257,6 +259,7 @@ FROM (
 group by Nom, Prenom, Numero
 having count(distinct AnneeSortie) = 5;
 \end{lstlisting}
+\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -285,7 +288,6 @@ FROM(
 	having count(*) >=2 )t;
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
