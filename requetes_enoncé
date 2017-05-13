@@ -87,6 +87,16 @@ WHERE NOT EXISTS(
 	WHERE genre = 'm' AND OID = e.EpisodeID
     )
 
-R5: :'(
+R5:
+select Prenom, Nom, Numero, count(*)nb
+FROM(
+	select SID, Prenom, Nom, Numero
+	from Episode
+	inner join Role on OID = EpisodeID
+	group by  SID, Prenom, Nom, Numero)t
+group by  Prenom, Nom, Numero
+order by nb desc
+LIMIT 1
+
 
 R6: :'(
