@@ -98,65 +98,111 @@ Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en m�
 
 \subsection{Modèle relationnel}
 
-Personne(Nom, Prénom, Numéro, Genre)
-Auteur(Nom, Prénom, Numéro)
-Auteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
-AuteurOeuvre(Nom, Prénom, Numéro, Référence)
-AuteurOeuvre.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
-	AuteurOeuvre.Référence référence Œuvre.Référence
-Producteur(Nom, Prénom, Numéro, Genre)
-Producteur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
-ProducteurOeuvre(Nom, Prénom, Numéro, Référence)
-ProducteurOeuvre.(Nom, Prénom, Numéro) référence Producteur.(Nom, Prénom, Numéro, Genre)
-	ProducteurOeuvre.Référence référence Œuvre.Référence
-Directeur(Nom, Prénom, Numéro , Genre)
-Directeur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
-DirecteurOeuvre(Nom, Prénom, Numéro, Référence)
-	DirecteurOeuvre.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
-	DirecteurOeuvre.Référence référence Œuvre.Référence
-Acteur(Nom, Prénom, Numéro, Genre)
-Acteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
-
-ActeurRole(Nom, Prénom, Numéro, Rôle)
-	ActeurRole.(Nom, Prénom, Numéro) référence Acteur.(Nom, Prénom, Numéro)
-	ActeurRole.(Role) référence Rôle.Rôle
-Rôle(Rôle, Nom, Prénom, Référence, RéférenceO)
-	Rôle.RéférenceO référence Œuvre.Référene
-Œuvre(Référence, Titre, Note, AnnéeSortie)
-Pays(Nom)
-PaysOeuvre(Nom, Référence)
-	Nom référence Pays.Nom
-	Référence référence Œuvre.Référence
-Genre(Nom)
-GenreOeuvre(Nom, Référence)
-	Nom référence Genre.Nom
-	Référence référence Œuvre.Référence
-Langue(Nom)
-LangueOeuvre(Nom, Référence)
+\textbf{Personne}(\underline{Nom, Prénom, Numéro}, Genre)
+\\
+\\
+\textbf{Auteur}(\underline{Nom, Prénom, Numéro})
+\\
+		Auteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+\\ \\
+\textbf{AuteurOeuvre}(\underline{Nom, Prénom, Numéro, Référence})
+\\
+		AuteurOeuvre.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
+\\
+		AuteurOeuvre.Référence référence Œuvre.Référence
+\\
+\\
+\textbf{Directeur}(\underline{Nom, Prénom, Numéro}, Genre)
+\\
+		Directeur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+\\ \\
+\textbf{DirecteurOeuvre}(\underline{Nom, Prénom, Numéro, Référence})
+\\
+		DirecteurOeuvre.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
+        \\
+		DirecteurOeuvre.Référence référence Œuvre.Référence
+\\
+\\
+\textbf{Acteur}(\underline{Nom, Prénom, Numéro}, Genre)
+\\
+		Acteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
+\\
+\\
+\textbf{ActeurRole}(\underline{Nom, Prénom, Numéro, Rôle})
+\\
+		ActeurRole.(Nom, Prénom, Numéro) référence Acteur.(Nom, Prénom, Numéro)
+    \\
+		ActeurRole.(Role) référence Rôle.Rôle
+\\
+\\
+\textbf{Rôle}(\underline{Rôle, Nom, Prénom, Référence}, RéférenceO)
+\\
+		Rôle.RéférenceO référence Œuvre.Référene
+\\
+\\
+\textbf{Œuvre}(\underline{Référence}, Titre, Note, AnnéeSortie)
+\\
+\\
+\textbf{Pays}(\underline{Nom})
+\\
+\\
+\textbf{PaysOeuvre}(\underline{Nom, Référence})
+\\
+		Nom référence Pays.Nom
+        \\
+		Référence référence Œuvre.Référence
+\\ 
+\\
+\textbf{Genre}(\underline{Nom})
+\\
+\\
+\textbf{GenreOeuvre}(\underline{Nom, Référence})
+\\
+		Nom référence Genre.Nom
+    \\
+		Référence référence Œuvre.Référence
+\\
+\\
+\textbf{Langue}(\underline{Nom})
+\\
+\\
+\textbf{LangueOeuvre}(\underline{Nom, Référence})
+\\
 	Nom référence Langue.Nom
+    \\
 	Référence référence Œuvre.Référence
-Film(Référence)
+\\
+\\
+\textbf{Film}(\underline{Référence})
+\\
 	Film.Référence référence Œuvre. Référence
-Série(Référence, AnnéeFin)
+\\
+\\
+\textbf{Série}(\underline{Référence}, AnnéeFin)
+\\
 	Série.Référence référence Œuvre.Référence
-Episode(Référence,TitreE, NuméroE, Date de sortie, RéférenceS)
-Episode.Référence référence Œuvre.référence
-Epidode.RéférenceS référence Saison.Référence
-
-Saison(Référence, NuméroS, NombreEpisodes, RéférenceS)
-Saison.Référence référence Série.référence
-Saison.RéférenceS référence Série.Référence
-Administrateur(Adresse mail, mot de passe)
-Contraintes modèle relationnel:
-Episode.Date de sortie >= Serie.Date de sortie
-RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série)
-RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison) 
+\\
+\\
+\textbf{Episode}(\underline{Référence},TitreE, NuméroE, Date de sortie, RéférenceS)
+\\
+		Episode.Référence référence Œuvre.référence
+        \\
+		Epidode.RéférenceS référence Saison.Référence
+\\
+\\
+\textbf{Administrateur}(\underline{Adresse mail}, mot de passe)
+\subsubsection{Contraintes modèle relationnel}
+\noindent Episode.Date de sortie >= Serie.Date de sortie \\
+RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série) \\
+RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison) \\
 Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’à une Œuvre)
 
 \newpage
 \section{Deuxième Partie}\label{deuxieme partie}
 
 \subsection{Méthode d'extraction des données}
+
+Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers télécharger, nous avons réaliser un autre script de bash qui lui fait appel à du code python permettant de formaté les fichiers selon un standard que nous nous sommes fixé pour permettre l'insertion des données dans la base de donnée plus simple. Nous avons donc réaliser différents parsers avec un "BaseParser" contenant des méthodes de base pour tout les autres parsers.
 
 \subsection{Requêtes demandées}
 Les requêtes demandées étaient les suivantes:
@@ -215,6 +261,7 @@ FROM (
 group by Nom, Prenom, Numero
 having count(distinct AnneeSortie) = 5;
 \end{lstlisting}
+\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -243,7 +290,6 @@ FROM(
 	having count(*) >=2 )t;
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -318,6 +364,47 @@ WHERE NOT EXISTS(
     
 \end{lstlisting}
 \subsubsection{Algèbre relationnel}
+\begin{list}{*}{}
+\item Requête 1
+\\ \\
+$
+RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 AND AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
+$\\$
+RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $
+\\$
+ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom and ro.Nom = a. Nom and ro.Numero = a.Numero} Acteur a $
+\\
+$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre)$
+\\
+\\
+\item Requête 2
+\\ \\ 
+$ FilmOeuvre \leftarrow Oeuvre \bowtie_{ID = FilmID} Film$ \\ 
+$FilmAuteur \leftarrow FilmOeuvre \bowtie_{OID = ID} EcritPar$ \\
+$Auteur2Film \leftarrow \sigma_{count(*)>=2}(\pi_{AnneSortie, Nom, Prenom, Numero} (FilmAuteur) )$\\
+$R2 \leftarrow \pi_{Nom, Prenom, Numero} (Auteur2Film)$
+\\
+\\
+
+\item Requête 3
+\\ \\ 
+$ T \leftarrow \sigma_{Nom = "Willis" and Prenom = "Bruce" and Numero = "NA"}(Role)$ \\ 
+$T \leftarrow Role r \bowtie_{r.OID = t.OID} T  t$ \\
+$T2 \leftarrow \pi_{Prenom, Nom, Numero, OID}(T)$\\
+$T2 \leftarrow Role r \bowtie_{r.Nom = t.Nom and r.Prenom = t.Prenom and r.Numero = t.Numero and r.OID = t.OID} T2 t$\\
+$T3 \leftarrow \pi_{OID} (T2)$\\
+$T3 \leftarrow Role r \bowtie_{r.OID = t.OID} T3 t$ \\
+$R3 \leftarrow \pi_{Nom, Prenom, Numero} (T3)$
+\\
+\\
+\item Requête 4
+\\ \\
+$PersonneRole \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero} Role r$\\
+$PersonneRoleM \leftarrow \sigma_{Genre = "m"}(PersonneRole p \bowtie_{p.OID = EpisodeID} Episode)$\\
+$EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
+$Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
+$R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
+\end{list}
 \subsubsection{Calcul relationnel tuple}
 
 \section{Conclusion}
