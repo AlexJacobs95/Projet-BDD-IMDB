@@ -113,9 +113,12 @@ FROM (
 			 FROM(
 			 SELECT note
 			 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
-			 WHERE note != -1) as t)) as Series_OK
+			 WHERE note != -1 and AnneeSortie !=0) as t)) as Series_OK
 		 INNER JOIN Episode ON Series_OK.ID = Episode.SID) as t
-		 GROUP BY ID)T1,
+		 GROUP BY ID)T1
+
+	inner join
+
 	 (
 		 SELECT SID, avg(num) as avg_actor_by_season
 		 FROM(
@@ -129,7 +132,12 @@ FROM (
 				INNER Join Role on EpisodeID = OID
 				Group by Nom, Prenom, Numero, SID, Saison)t2
 			GROUP BY SID, Saison)t3
-		Group By SID)T2,
+		Group By SID)T2
+
+	on T1.ID = T2.SID
+
+	inner join
+
 	(
 		SELECT t5.SID, AVG(num) as avg_ep_by_year
 		FROM(
@@ -141,8 +149,12 @@ FROM (
 		 WHERE AnneeSortie != 0
 		 GROUP BY t6.SID, AnneeSortie) as t5
 		Group by t5.SID)T3
+
+	on T1.ID = T3.SID
 )
-	WHERE T1.ID = T2.SID = T3.SID
+
+
+
 
 
 
