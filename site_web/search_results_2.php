@@ -9,19 +9,24 @@ session_start();
 
 include "menubar.php";
 
-function build_search($content)
+function content_cleaner($content)
 {
-    //$content = preg_replace('/[+\-><\(\)~*\"@]+/', '', $content);
-    $search = "";
+
     $terms = explode(" ", $content);
-    $i = 0;
-    foreach ($terms as $word) {
-        echo $i;
-        $search .= '+' . $word . '* ';
-        $i++;
+    $numTerms = count($terms);
+
+    for ($x = 0; $x < $numTerms; $x++) {
+        $term = ltrim($terms[$x], "+*<>-");
+        if ($term !== "") {
+            $terms[$x] = '+' . $term . '*';
+        } else {
+            $terms[$x] = '';
+        }
     }
-    return substr($search, 0, strlen($search) - 1);
+
+    return implode(' ', $terms);
 }
+
 
 function allOneLetter($content)
 {
@@ -67,7 +72,7 @@ if (!$database) {
 
 
     } else {
-        $search = build_search($search_content);
+        $search = content_cleaner($search_content);
 
         $requete_oeuvre = "SELECT *
                            FROM Oeuvre
