@@ -201,3 +201,39 @@ CREATE TABLE IF NOT EXISTS Plots (
 
 
 
+DELIMITER $$
+CREATE TRIGGER check_end_date_serie_update
+BEFORE UPDATE ON Serie
+FOR EACH ROW
+  BEGIN
+    DECLARE beginDate INT;
+    DECLARE msg VARCHAR(255);
+    SET beginDate = (SELECT AnneeSortie FROM Oeuvre WHERE ID=NEW.SerieID);
+    IF NEW.AnneeFin < beginDate || NEW.AnneeFin < 0
+    THEN
+      set msg = "La date de fin doit être inférieur à la date de sortie et positive";
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+    END IF;
+  END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER check_end_date_serie_insert
+BEFORE INSERT ON Serie
+FOR EACH ROW
+  BEGIN
+    DECLARE beginDate INT;
+    DECLARE msg VARCHAR(255);
+    SET beginDate = (SELECT AnneeSortie FROM Oeuvre WHERE ID=NEW.SerieID);
+    IF NEW.AnneeFin < beginDate || NEW.AnneeFin < 0
+    THEN
+      set msg = "La date de fin doit être inférieur à la date de sortie et positive";
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+    END IF;
+  END;
+$$
+DELIMITER ;
+
+
+
