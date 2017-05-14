@@ -443,21 +443,6 @@ function edit_header_movie_episode(type) {
 function edit_header_serie() {
 
 
-
-    var form = $("#formContainerEditDateSerie");
-    var start_date = $('#start_date').val();
-    var end_date = $("#end_date").val();
-
-    var invalid = false;
-    if ($.trim(info) === "") {
-        $('#titre').css("border-color", "red")
-        invalid = true
-    }   else {
-        $('#titre').css("border-color", "#fed136")
-    }
-
-    if (invalid) return;
-
     if (confirm("Etes vous sûr de vouloir modifier ce champ ? ")) {
 
         $.ajax({
@@ -633,10 +618,15 @@ function add_role_by_actor_name(name, fn, num, role) {
             alert(status);
         },
         success: function (data) {
-            console.log(data);
-            alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
-            $('#formContainerActor').css("display", "none");
-            location.reload();
+            if (date === "Succes") {
+                console.log(data);
+                alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
+                $('#formContainerActor').css("display", "none");
+                location.reload();
+            } else {
+                alert("Une Erreur s'est produite")
+            }
+
 
         },
         fail: function () {

@@ -7,9 +7,9 @@ include "roman.php";
 
 function execute_add_query($query, $db) {
     if ($db->query($query) === TRUE) {
-        return ("Record added " . $db->error);
+        return ("Succes");
     } else {
-        return ("Error updating record: " . $db->error);
+        return ("Error");
     }
 }
 
