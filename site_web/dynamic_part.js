@@ -225,7 +225,7 @@ function addheaderOptions(type) {
 
         if (type === "work" || type === "serie") {
             if (confirm("Etes vous sûr de vouloir supprimer cette Oeuvre ?")) {
-                remove_work();
+                remove_work(type);
             }
         } else if (type === "person") {
             if (confirm("Etes vous sûr de vouloir supprimer cette Personne ?")) {
@@ -340,11 +340,11 @@ function remove_elem_from_person(_id, type, row) {
 }
 
 
+function remove_work(type) {
 
-function remove_work() {
-
+    console.log("adminRequests.php?type=remove_" + type);
     $.ajax({
-        url: "adminRequests.php?type=remove_work",
+        url: "adminRequests.php?type=remove_" + type,
         error: function (xhr, status) {
             alert(status);
         },

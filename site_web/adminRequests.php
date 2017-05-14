@@ -184,6 +184,28 @@ function remove_work($id, $db)
 
 }
 
+function remove_serie($id, $db)
+{
+
+    //1 - get all episode and remove them from work
+    $query_all_episodes = "Delete from Oeuvre 
+                           WHERE ID IN (
+                                    SELECT EpisodeID
+                                    FROM Episode
+                                    WHERE SID = '$id'
+                           
+                           ) ";
+
+    $db->query($query_all_episodes);
+
+    $query = "Delete FROM Oeuvre WHERE ID = '$id'";
+
+    execute_add_query($query, $db);
+    return $query;
+
+
+}
+
 function remove_person($prenom, $nom, $numero, $db)
 {
     $query = "Delete
@@ -460,6 +482,13 @@ if (!$database) {
         $ID = $_SESSION['id'];
 
         echo remove_work($ID, $database);
+
+    } elseif ($_GET['type'] === 'remove_serie') {
+
+
+        $ID = $_SESSION['id'];
+
+        echo remove_serie($ID, $database);
 
     } elseif ($_GET['type'] === 'remove_person') {
 
