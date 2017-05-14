@@ -5,7 +5,7 @@ include 'menubar.php';
 <head>
 
     <meta charset="utf-8">
-    <title>Recherche avancée</title>
+    <title>Statistiques</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
