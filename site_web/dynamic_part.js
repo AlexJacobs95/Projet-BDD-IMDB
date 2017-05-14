@@ -1297,8 +1297,9 @@ function createSection(titre) {
         div_row = document.createElement('div');
         div_row.setAttribute('id', 'div_row');
         div_text = document.createElement('div');
-        div_text.setAttribute("class", "col-lg-12 text-center table_container");
+        div_text.setAttribute("class", "text-center table_container");
         div_text.setAttribute("id", "table_container_" + titre);
+
 
         h2 = document.createElement('h2');
         h2.setAttribute("class", "titre-section");

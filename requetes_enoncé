@@ -99,4 +99,51 @@ order by nb desc
 LIMIT 1
 
 
-R6: :'(
+R6:
+SELECT T3.SID, ep_num, avg_ep_by_year, avg_actor_by_season
+FROM (
+	(SELECT ID, count(*) as ep_num
+	FROM(
+		SELECT ID, EpisodeID
+		FROM(
+		 SELECT ID
+		 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+		 WHERE note >(
+			 SELECT AVG(note)
+			 FROM(
+			 SELECT note
+			 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+			 WHERE note != -1) as t)) as Series_OK
+		 INNER JOIN Episode ON Series_OK.ID = Episode.SID) as t
+		 GROUP BY ID)T1,
+	 (
+		 SELECT SID, avg(num) as avg_actor_by_season
+		 FROM(
+			SELECT SID, count(*) as num
+			FROM(
+				SELECT Nom, Prenom, Numero, SID, Saison
+					FROM(
+					SELECT SID, EpisodeID, Saison
+					FROM Episode inner join Serie on SerieID = SID
+					WHERE Saison != -1)t
+				INNER Join Role on EpisodeID = OID
+				Group by Nom, Prenom, Numero, SID, Saison)t2
+			GROUP BY SID, Saison)t3
+		Group By SID)T2,
+	(
+		SELECT t5.SID, AVG(num) as avg_ep_by_year
+		FROM(
+		 SELECT t6.SID, count(*) as num
+		 FROM(
+			 SELECT SID, ID, AnneeSortie
+			 FROM Oeuvre
+			 INNER Join Episode on EpisodeID = ID)t6
+		 WHERE AnneeSortie != 0
+		 GROUP BY t6.SID, AnneeSortie) as t5
+		Group by t5.SID)T3
+)
+	WHERE T1.ID = T2.SID = T3.SID
+
+
+
+
