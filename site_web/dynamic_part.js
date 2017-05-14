@@ -727,8 +727,11 @@ function add_person(name, fn, genre, callback) {
         success: function (numero) {
             console.log("add_person_OK")
             console.log(numero);
-            callback(name, fn, numero);
-
+            if (callback != null) {
+                callback(name, fn, numero);
+            } else {
+                alert("Personne ajoutée")
+            }
         },
         fail: function () {
             alert("Une erreur est survenue")
