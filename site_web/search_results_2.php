@@ -41,10 +41,9 @@ function allOneLetter($content)
     return true;
 }
 
-$search_content = $_POST["search"];
-
+$search_content = $_GET["search"];
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
-$search_content = mysqli_real_escape_string($database, $_POST["search"]);
+$search_content = mysqli_real_escape_string($database, $_GET["search"]);
 
 
 
