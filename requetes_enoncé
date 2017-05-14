@@ -43,7 +43,7 @@ R3 dans les oeuvres:
 SELECT distinct Nom, Prenom, Numero
 FROM(
 	SELECT R2.OID
-		FROM(
+    FROM(
 			SELECT R1.Prenom, R1.Nom, R1.Numero, R1.OID
 			FROM (
 				SELECT *

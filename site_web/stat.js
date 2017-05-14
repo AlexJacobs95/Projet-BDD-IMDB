@@ -247,6 +247,9 @@ function build_graph_movies_by_country(absx, ord) {
 //GRAPHIQUE NB ACTEUR HOMMES VS FEMMES
 function get_nb_man_and_womman() {
 
+    $('#loader_act').show();
+
+
     $.ajax({
         url: "statRequests.php?type=nb_man_and_women",
         dataType: 'json',
@@ -258,6 +261,7 @@ function get_nb_man_and_womman() {
             data.forEach(function (entry) {
                 res.push(entry[1])
             });
+            $('#loader_act').css("display", "none");
             build_graph_cmp_sex(res);
         },
         fail: function () {
@@ -270,6 +274,7 @@ function get_nb_man_and_womman() {
 //GRAPHIQUE DONUT COMPARAISON FILM SERIE EPISODE
 
 function get_nb_movies_series_episodes() {
+    $('#loader_oeuvres').show();
 
     $.ajax({
         url: "statRequests.php?type=nb_movies_series_episodes",
@@ -282,6 +287,7 @@ function get_nb_movies_series_episodes() {
             for (i = 0; i < (data[0].length); i++) {
                 res.push(data[0][i])
             }
+            $('#loader_oeuvres').css("display", "none");
             build_graph_nb_movies_series_epsiodes(res);
         },
         fail: function () {
@@ -294,6 +300,7 @@ function get_nb_movies_series_episodes() {
 //GRAPHIQUE BATONETS NB FILM EN FONCTION DU PAYS
 
 function get_nb_movies_by_country() {
+    $('#loader_movies_by_country').show();
 
     $.ajax({
         url: "statRequests.php?type=nb_movies_by_country",
@@ -308,6 +315,7 @@ function get_nb_movies_by_country() {
                 absx.push(entry[0])
                 ord.push(entry[1])
             });
+            $('#loader_movies_by_country').css("display", "none");
             build_graph_movies_by_country(absx.slice(0, 30), ord);
         },
         fail: function () {
@@ -320,6 +328,7 @@ function get_nb_movies_by_country() {
 //GRAPHIQUE NOTE MOYENNE EN FONCTION DU TEMPS
 
 function get_notes_evolution() {
+    $('#loader_note_evol').show();
 
     $.ajax({
         url: "statRequests.php?type=notes_evolution",
@@ -334,6 +343,7 @@ function get_notes_evolution() {
                 absx.push(entry[0])
                 ord.push(entry[1])
             });
+            $('#loader_note_evol').css("display", "none");
             build_graph_notes_evolution(absx, ord);
         },
         fail: function () {
@@ -346,6 +356,7 @@ function get_notes_evolution() {
 //GRAPHIQUE FILM SERIE EN FCT DU TEMPS
 
 function get_nb_movies_between_2000_2016() {
+    $('#loader_evol').show();
 
     $.ajax({
         url: "statRequests.php?type=nb_movies",
@@ -386,7 +397,7 @@ function fetch_movies_nb(data) {
     data.forEach(function (entry) {
         res_movie.push(entry[1])
     });
-    console.log(res_movie)
+    console.log(res_movie);
 
     $.ajax({
         url: "statRequests.php?type=nb_series",
@@ -419,6 +430,9 @@ function fetch_series_nb(data) {
             alert(status);
         },
         success: function (data) {
+            console.log("hey");
+            $('#loader_evol').css("display", "none");
+
             build_graph_evolution(res_movie, res_series);
         },
         fail: function () {

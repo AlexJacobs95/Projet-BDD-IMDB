@@ -49,14 +49,18 @@ include 'menubar.php';
 <section id=compare>
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 text-center">
+            <div class="col-md-6 text-center">
                 <h2 class="section-heading">Film - Serie - Episode</h2>
                 <canvas id="compare_nb_work" width="100" height="100"></canvas>
+                <image id = "loader_oeuvres" src="ripple.svg" style="display: none"></image>
             </div>
-            <div class="col-lg-6 text-center">
-                <h2 class="section-heading">Acteur - Actrice</h2>
+
+            <div class="col-md-6 text-center" id="col_actices_acteurs">
+                <h2 id="titre_acteur_actrices" class="section-heading">Acteur - Actrice</h2>
                 <canvas id="compare_sex" width="100" height="100"></canvas>
+                <image id="loader_act" src="ripple.svg" style="display: none"></image>
             </div>
+            <div class="clearfix"></div>
 
         </div>
 
@@ -65,17 +69,19 @@ include 'menubar.php';
 
 </section>
 
-<section id=nbMoviesSeriesEvolution>
+
+<section id=workByCountries>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Evolution du nombre de films et series tournés chaque année </h2>
+                <h2 class="section-heading">Nombre d'oeuvre par pays (Top 30)</h2>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <canvas id="evolution" width="100" height="50"></canvas>
+                <canvas id="movies-by-country" width="100" height="50"></canvas>
+                <image id="loader_movies_by_country" src="ripple.svg" style="display: none"></image>
             </div>
 
         </div>
@@ -94,6 +100,7 @@ include 'menubar.php';
 
         <div class="row">
             <div class="col-lg-12 text-center">
+                <image id="loader_note_evol" src="ripple.svg" style="display: none"></image>
                 <canvas id="note_evolution" width="100" height="50"></canvas>
             </div>
 
@@ -104,17 +111,18 @@ include 'menubar.php';
 </section>
 
 
-<section id=workByCountries>
+<section id=nbMoviesSeriesEvolution>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Nombre d'oeuvre par pays (Top 30)</h2>
+                <h2 class="section-heading">Evolution du nombre de films et series tournés chaque année </h2>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <canvas id="movies-by-country" width="100" height="50"></canvas>
+                <image  id="loader_evol" src="ripple.svg" style="display: none"></image>
+                <canvas id="evolution" width="100" height="50"></canvas>
             </div>
 
         </div>
