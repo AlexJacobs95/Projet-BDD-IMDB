@@ -980,9 +980,9 @@ function add_details(field_data, field_type){
 }
 
 function remove_details(){
-    var genre = $('#genre').val();
-    var language = $('#language').val();
-    var country = $('#country').val();
+    var genre = $('#genre_rm_detail').val();
+    var language = $('#language_rm_detail').val();
+    var country = $('#country_rm_detail').val();
 
     console.log(genre, language, country);
 
@@ -999,6 +999,7 @@ function remove_details(){
 }
 
 function rm_details(field_data, field_type){
+    console.log("in rm details")
     $.ajax({
         url: "adminRequests.php?type=remove_details",
         type: "POST",

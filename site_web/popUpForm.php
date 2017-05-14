@@ -83,7 +83,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Ends Here -->
 </div>
 
-<div class="formContainer" id="formContainerDetailsDelete" style="display: none" onsubmit="remove_details()">
+<div class="formContainer" id="formContainerDetailsDelete" style="display: none">
 <!-- Popup Div Starts Here -->
 <div class="popupAdd" id="details_form_popup">
     <!-- Contact Us Form -->
@@ -91,10 +91,10 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
         <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerDetailsDelete')">
         <h2 class="h2popup">Supprimer des details </h2>
         <hr class="hrpopup">
-        <input id="genre" name="genre" placeholder="Genre" type="text3">
-        <input id="language" name="language" placeholder="Langue" type="text3">
-        <input id="country" name="country" placeholder="Pays" type="text3">
-        <button type="submit" class="submit_form" id="submitDetails">Send</button>
+        <input id="genre_rm_detail" name="genre" placeholder="Genre" type="text3">
+        <input id="language_rm_detail" name="language" placeholder="Langue" type="text3">
+        <input id="country_rm_detail" name="country" placeholder="Pays" type="text3">
+        <button type="button" class="submit_form" id="submitDetails" onclick="remove_details()">Send</button>
     </form>
 </div>
 <!-- Popup Div Ends Here -->
