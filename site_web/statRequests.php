@@ -74,12 +74,11 @@ function count_movies_by_country($db)
 
 function notes_evolution($db)
 {
-    $query = "SELECT AnneeSortie, Avg(note)
-              FROM(
-	                SELECT note, AnneeSortie
-	                FROM Oeuvre
-	                WHERE note != -1 and AnneeSortie >= 2000)t
-              Group by AnneeSortie";
+    $query = "select AnneeSortie, AVG(Note) 
+              from Oeuvre 
+              WHERE NOTE != -1 AND AnneeSortie >= 2000 
+              group by AnneeSortie 
+              Order by AnneeSortie ASC;";
 
     return $db->query($query);
 

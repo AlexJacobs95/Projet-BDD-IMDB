@@ -247,16 +247,25 @@ Page de recherche avancé de site web.
                 </div>
                 <form action="/action_administrator.php" method="post">
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="director_firstname" placeholder="Enter the FirstName" required>
+                        <input id="person_fn" type="text_field" class="form-control" name="person_fn"
+                               placeholder="Prenom" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="director_secondname" placeholder="Enter the SecondName" required>
+                        <input id="person_ln" type="text_field" class="form-control" name="person_ln" placeholder="Nom"
+                               required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="text_field" class="form-control" name="gender" placeholder= "Enter the gender (optional if person already exist)">
+                        <select id="person_gender" class="form-control" id="person_genre"
+                                style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;" ;>
+                            <option>Homme</option>
+                            <option>Femme</option>
+                        </select>
                     </div>
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn btn-xl" name ="director_add">Ajout</button>
+                        <button type="button" class="btn btn-xl" name="person_add"
+                                onclick="add_person($('#person_ln').val(),$('#person_fn').val(), $('#person_gender').val(), null )">
+                            Ajout
+                        </button>
                     </div>
                 </form>
             </div>
