@@ -164,18 +164,12 @@ a:active {
 }
 
 .poster {
-    height: 500px;
+    position: absolute;
+    left: 80%;
+    height: auto;
     width: auto;
     display: block;
-    margin: 0 auto;
-    padding-bottom: 5px;
-}
-
-.poster {
-    height: 300px;
-    width: auto;
-    display: block;
-    margin: 0 auto;
+    padding-top: 300px;
     padding-bottom: 5px;
 }
 

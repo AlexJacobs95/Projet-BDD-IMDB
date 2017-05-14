@@ -139,18 +139,19 @@ $havePlot = mysqli_num_rows($plot_res);
 <header>
     <div class="top">
         <div class="container">
-
-            <div class="intro-text" id="intro">
-
-                <div class="col-lg-4" style="display: block; margin: auto">
+            <div class="row">
+                <div class="col-lg-4" style="text-align: center">
                     <img class="poster"
                          src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
-                    <div id="link_trailer"><h2 id="text-watch-trailer">watch trailer</h2></div>
                 </div>
-                <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
-                <div class="intro-heading" id="date"><?php echo $date; ?></div>
-                <div class=infos><?php extractGenres($genres) ?></div>
-                <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+                <div class="col-lg-8">
+                    <div class="intro-text" id="intro">
+                        <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
+                        <div class="intro-heading" id="date"><?php echo $date; ?></div>
+                        <div class=infos><?php extractGenres($genres) ?></div>
+                        <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -206,7 +207,7 @@ $havePlot = mysqli_num_rows($plot_res);
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
         getImagesMovie(titre, date);
-        getTrailersMovie(titre, date)
+        getTrailersMovie(titre, date);
         $(window).scroll(function () {
 
             if ($(window).scrollTop() > 892 - 61) {

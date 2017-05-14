@@ -173,25 +173,27 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 <header>
 
     <div class="container">
-        <div class="intro-text" id = "intro" style="display: none">
-
-            <div class="col-lg-4" style="display: block; margin: auto">
+        <div class="row">
+            <div class="col-lg-4" style="text-align: center">
                 <img class="poster"
                      src="https://s-media-cache-ak0.pinimg.com/originals/f3/5a/d9/f35ad9427be01af5955e6a6ce803f5dc.jpg">
-                <div id="link_trailer"><h2 id="text-watch-trailer">watch trailer</h2></div>
             </div>
-            <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
-            <div class="intro-heading" id="date"><?php
-                if ($date_fin != 0) {
-                    echo sprintf($date_format1, $date, $date_fin);
-                } else {
+            <div class="col-lg-8">
+                <div class="intro-text" id="intro" style="display: none">
+                    <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
+                    <div class="intro-heading" id="date"><?php
+                        if ($date_fin != 0) {
+                            echo sprintf($date_format1, $date, $date_fin);
+                        } else {
 
-                    echo sprintf($date_format2, $date);
-                }
-                ?>
+                            echo sprintf($date_format2, $date);
+                        }
+                        ?>
+                    </div>
+                    <div class=infos><?php extractGenres($genres) ?></div>
+                    <div class=intro-lead-in><?php if ($note != '_' - 1) echo sprintf($note_fomat, $note); ?></div>
+                </div>
             </div>
-            <div class=infos><?php extractGenres($genres) ?></div>
-            <div class=intro-lead-in><?php if ($note != '_' - 1) echo sprintf($note_fomat, $note); ?></div>
         </div>
     </div>
 
@@ -213,7 +215,6 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
         </div>
     </div>
 </section>
-
 
 <section id="Details" class="bg-light-gray">
     <div class="container">
