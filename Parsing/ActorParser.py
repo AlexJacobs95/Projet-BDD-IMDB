@@ -156,6 +156,9 @@ def test():
 
 
 def parse(file):
+    of = open("../SQL_data_files/persons_ok.txt", 'a')
+    of_roles = open("../SQL_data_files/roles.txt", 'a')
+    of_actors = open("../SQL_data_files/acteurs_ok.txt", 'a')
     first_line_index = 239
     genre = 'm' if file == "../IMDB_files/actors.list" else 'f'
 
@@ -176,7 +179,12 @@ def parse(file):
 
                     actorID += 1
                     if actor_done and len(current_actor["oeuvres"]) > 0:
-                        actors[actorID - 1] = current_actor
+                        of.write(current_actor["prenom"] + "|" + current_actor["nom"] + "|" + current_actor["numero"] + "|" + current_actor["genre"] + "\n")
+                        of_actors.write(current_actor["prenom"] + "|" + current_actor["nom"] + "|" + current_actor["numero"] +"\n")
+                        for id_oeuvre, role in current_actor["oeuvres"]:
+                            of_roles.write(current_actor["prenom"] + "|" + current_actor["nom"] + "|" + current_actor[
+                            "numero"] + "|" + id_oeuvre + "|" + role + "\n")
+
 
                     actor_done = True
                     actor_data = get_nom_prenom(line)
@@ -212,7 +220,7 @@ def main():
         print ("Wrong arguments ! -f for actresses or -m for actors !!!")
         return
 
-    pretty_print(data, "ACTORS")
+    #pretty_print(data, "ACTORS")
 
 
 if __name__ == '__main__':
