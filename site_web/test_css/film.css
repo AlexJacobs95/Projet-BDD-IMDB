@@ -173,6 +173,13 @@ a:active {
     padding-bottom: 100px;
 }
 
+.profil_pic{
+    height: 500px;
+    width: auto;
+    display: block;
+    padding-bottom: 100px;
+    padding-left: 65%;
+}
 
 td {
     width: 250px;
