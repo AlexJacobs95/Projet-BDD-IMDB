@@ -618,7 +618,7 @@ function add_role_by_actor_name(name, fn, num, role) {
             alert(status);
         },
         success: function (data) {
-            if (date === "Succes") {
+            if (data === "Succes") {
                 console.log(data);
                 alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
                 $('#formContainerActor').css("display", "none");

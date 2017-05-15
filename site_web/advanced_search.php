@@ -99,39 +99,18 @@ if (!$database) {
                 <input type="text3" class="form-control" placeholder="Ex : 2010" id="year">
             </div>
 
-            <label for="title">Acteur</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Prénom</label>
-                    <input type="text2" class="form-control fn" placeholder="Ex : Bruce" id="actor_fn">
-                </div>
-                <div class="col-md-6">
-                    <label for="title">Nom</label>
-                    <input type="text2" class="form-control name" placeholder="Ex : Willis" id="actor_n">
-                </div>
+            <div class="form-group text-left">
+                <label for="title">Acteur</label>
+                <input type="text3" class="form-control" placeholder="Bruce Willis" id="actor_n">
             </div>
 
-            <label for="title">Directeur</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Prénom</label>
-                    <input type="text2" class="form-control fn" placeholder="Ex : Steven" id="director_fn">
-                </div>
-                <div class="col-md-6">
-                    <label for="title">Nom</label>
-                    <input type="text2" class="form-control name" placeholder="Ex : Spielberg" id="director_n">
-                </div>
+            <div class="form-group text-left">
+                <label for="title">Directeur</label>
+                <input type="text3" class="form-control" placeholder="Steven Spielberg" id="director_n">
             </div>
-            <label for="title">Auteur</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Prénom</label>
-                    <input type="text2" class="form-control fn" placeholder="Ex : Chritopher" id="writer_fn">
-                </div>
-                <div class="col-md-6">
-                    <label for="title">Nom</label>
-                    <input type="text2" class="form-control name" placeholder="Ex : Nolan" id="writer_n">
-                </div>
+            <div class="form-group text-left">
+                <label for="title">Auteur</label>
+                <input type="text3" class="form-control" placeholder="Christopher Nolan" id="writer_n">
             </div>
 
             <div class="form-group text-left">

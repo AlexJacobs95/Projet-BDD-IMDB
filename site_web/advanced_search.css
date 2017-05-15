@@ -169,3 +169,9 @@ label{
 .select2-selection__choice{
     height: 30px;
 }
+
+td {
+    text-align: center;
+    color:black;
+
+}
