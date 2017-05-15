@@ -150,6 +150,13 @@ $havePlot = mysqli_num_rows($plot_res);
                         <div class="intro-heading" id="date"><?php echo $date; ?></div>
                         <div class=infos><?php extractGenres($genres) ?></div>
                         <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
+                        <a href="https://twitter.com/share"
+                           class="twitter-share-button"
+                           data-show-count="false"
+                           data-text="Hey jetez un coups d'oeil à ce film"
+                           data-hashtags="imdb"
+                           data-related="twitterapi,twitter">Tweet</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </div>
             </div>
@@ -171,7 +178,8 @@ $havePlot = mysqli_num_rows($plot_res);
             <div class="col-lg-12 text-center" id=trailer-block>
                 <h2 class="section-heading" id="trailer-title">Trailer</h2>
                 <div align="center">
-                    <iframe src="http://www.dlclassifieds.com/admin/photos/no-video-available.jpg" allowfullscreen>
+                    <iframe id="trailer-video" src="http://www.dlclassifieds.com/admin/photos/no-video-available.jpg"
+                            allowfullscreen>
                     </iframe>
                 </div>
             </div>

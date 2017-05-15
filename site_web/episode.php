@@ -160,6 +160,13 @@ $havePlot = mysqli_num_rows($plot_res);
             <div class=infos><?php extractGenres($genres) ?></div>
             <div class=intro-lead-in><?php if ($note != -1) echo sprintf($note_fomat, $note); ?></div>
             <div class=infos><?php sprintf($ep_infos_format, $titreS, $epNum, $saisonNum); ?></div>
+            <a href="https://twitter.com/share"
+               class="twitter-share-button"
+               data-show-count="false"
+               data-text="Hey jetez un coups d'oeil à cette série"
+               data-hashtags="imdb"
+               data-related="twitterapi,twitter">Tweet</a>
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         </div>
     </div>

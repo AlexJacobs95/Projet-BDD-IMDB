@@ -25,10 +25,10 @@ function getTrailersMovie(title, date) {
             data = JSON.parse(datat); //parse the data
             const videoPath = "https://www.youtube.com/embed/"+ data["youtube"][0]["source"]+"?controls=1";
             if (data["youtube"][0]["source"] != null) {
-                $("iframe").attr("src", videoPath);
-                $("iframe").attr("height", '500');
-                $("iframe").attr("width", "800");
-                $("iframe").attr("align", "middle");
+                $("#trailer-video").attr("src", videoPath);
+                $("#trailer-video").attr("height", '500');
+                $("#trailer-video").attr("width", "800");
+                $("#trailer-video").attr("align", "middle");
             }
         }, function (error) {})
     }, function (error) {
