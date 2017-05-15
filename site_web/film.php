@@ -168,7 +168,7 @@ $havePlot = mysqli_num_rows($plot_res);
     add_navbar([["Trailer", "Trailer"],
                 ["Résumé", "Resume"], ["Acteur", "Acteurs"],
                 ["Directeur", "Directeurs"], ["Auteurs", "Auteurs"],
-                ["Détails", "Details"]])
+                ["Détails", "Details"], ["Commentaires", "Comments"]])
 </script>
 
 

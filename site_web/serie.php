@@ -208,7 +208,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 </header>
 
 <script>
-add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons"]]);
+add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons"], ["Commentaires", "Comments"]]);
 </script>
 
 <section id="Resume">

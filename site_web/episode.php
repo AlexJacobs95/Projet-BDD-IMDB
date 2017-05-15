@@ -126,6 +126,8 @@ if (!$database) {
             integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
             crossorigin="anonymous"></script>
     <![endif]-->
+    <script src="dynamic_part.js"></script>
+
 
 </head>
 
@@ -174,6 +176,12 @@ $havePlot = mysqli_num_rows($plot_res);
 
 </header>
 
+<script>
+    add_navbar([
+        ["Résumé", "Resume"], ["Acteur", "Acteurs"],
+        ["Directeur", "Directeurs"], ["Auteurs", "Auteurs"],
+        ["Détails", "Details"], ["Commentaires", "Comments"]])
+</script>
 <?php include "commonMovieEpisode.php"; ?>
 <?php include "commentSection.php" ?>
 
@@ -197,11 +205,21 @@ $havePlot = mysqli_num_rows($plot_res);
 <script type="text/javascript">
     $(document).ready(function () {
         $("#intro").fadeIn(2000);
+        $(window).scroll(function () {
+
+            if ($(window).scrollTop() > 892 - 61) {
+                $('#nav_bar').addClass('navbar-top');
+            }
+
+            if ($(window).scrollTop() < 892 -60) {
+                $('#nav_bar').removeClass('navbar-top');
+            }
+        });
+
     });
 
 </script>
 
-<script src="dynamic_part.js"></script>
 
 <script>
     var havePlot = "<?php echo $havePlot;?>";
