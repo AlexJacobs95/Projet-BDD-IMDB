@@ -175,6 +175,8 @@ $havePlot = mysqli_num_rows($plot_res);
 </header>
 
 <?php include "commonMovieEpisode.php"; ?>
+<?php include "commentSection.php" ?>
+
 
 </body>
 <!-- jQuery -->

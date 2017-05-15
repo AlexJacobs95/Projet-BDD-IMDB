@@ -350,6 +350,8 @@ include "popUpForm.php";
 <script src="themoviedb.js"></script>
 <script src="API.js"></script>
 
+<?php include "commentSection.php" ?>
+
 
 <script>
 

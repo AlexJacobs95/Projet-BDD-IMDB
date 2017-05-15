@@ -49,8 +49,8 @@ if (!$database) {
                 <div class="col-lg-12">
                 <div class="post-footer">
                     <div class="input-group">
-                        <input class="form-control" placeholder="Pseudo" type="text" id="new_comm_pseudo">
-                        <input class="form-control" placeholder="Ajouter un commentaire...." type="text" id="new_comm_text">
+                        <input class="form-control input_comments" placeholder="Pseudo" type="text_" id="new_comm_pseudo">
+                        <input class="form-control input_comments" placeholder="Ajouter un commentaire...." type="text_" id="new_comm_text">
                         <span class="input-group-addon">
                         <a href="javascript:send_comment()"><i class="fa fa-edit"></i></a>
                     </span>

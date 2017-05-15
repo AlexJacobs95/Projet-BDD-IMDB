@@ -104,7 +104,7 @@
     margin-left: 50px;
 }
 
-input[type="text"] {
+input[type="text_"] {
     border: 1px solid lightgrey;
     color: black;
 }
