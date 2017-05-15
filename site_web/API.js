@@ -7,10 +7,6 @@ function getImagesMovie(title, date) {
 
         if (data_ok[0]["poster_path"] != null) {
             $('.poster').attr('src', posterPath);
-            $('.poster').css("height", 600);
-            $('.poster').css("width", 'auto');
-
-
         }
         if (data_ok[0]["backdrop_path"] != null) {
             const path = 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%), url(' + backDropPath + ')';
@@ -48,8 +44,6 @@ function getImagesTvShow(title, date) {
 
         if (data_ok[0]["poster_path"] != null) {
             $('.poster').attr('src', posterPath);
-            $('.poster').css("height", 600);
-            $('.poster').css("width", 'auto');
 
 
         } if (data_ok[0]["backdrop_path"] != null) {
