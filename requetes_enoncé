@@ -34,7 +34,7 @@ SELECT distinct Nom, Prenom, Numero
 FROM(
 	SELECT AnneeSortie, Nom,Prenom, Numero
 	FROM Oeuvre o
-	INNER JOIN Film f ON o.ID = f.FilmID
+	INNER JOIN Film f ON o.ID = f.Film  ID
 	INNER JOIN EcritPar ON ID = OID
 	group by AnneeSortie, Nom, Prenom, Numero
 	having count(*) >=2 )t

@@ -61,7 +61,7 @@ if ($database->connect_errno) {
                                     FROM (
                                         SELECT *
                                         FROM Role
-                                        WHERE Nom = 'Willis' AND Prenom = 'Bruce' AND Numero = 'NA') AS T
+                                        WHERE Nom = 'Elliott' AND Prenom = 'Missy' AND Numero = 'NA') AS T
                                         JOIN Role R1 ON T.OID = R1.OID) AS T2
                                 INNER JOIN Film F ON F.FilmID = T2.OID) AS T3
                             JOIN Role R2 ON T3.Prenom = R2.Prenom AND T3.Nom = R2.Nom AND T3.Numero = R2.Numero) AS T4
@@ -70,7 +70,7 @@ if ($database->connect_errno) {
 
             $res = $database->query($requete);
             $rows = array();
-            while($row = mysqli_fetch_array($res)) {
+                while($row = mysqli_fetch_array($res)) {
                 $fn = utf8_encode($row["Prenom"]);
                 $n = utf8_encode($row["Nom"]);
                 $num = utf8_encode($row["Numero"]);

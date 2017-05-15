@@ -1,3 +1,8 @@
+header .intro-text {
+    padding-top: 120px;
+    padding-bottom: 10px;
+}
+
 .titre-section {
     color:black;
 }

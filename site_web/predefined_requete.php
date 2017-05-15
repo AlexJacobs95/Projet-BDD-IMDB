@@ -4,6 +4,10 @@ INFO-H-303 : Bases de données - Projet IMBD.
 Page avec menu déroulant pour requetes prédéfinies.
 -->
 
+<?php
+include 'menubar.php';
+?>
+
 <head>
 
     <meta charset="utf-8">
@@ -21,6 +25,7 @@ Page avec menu déroulant pour requetes prédéfinies.
 
     <!-- Theme CSS -->
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="test_css/agency.css" rel="stylesheet">
     <link href="predefined_query.css" rel="stylesheet">
 
 
@@ -37,35 +42,26 @@ Page avec menu déroulant pour requetes prédéfinies.
 
 </head>
 
-<body id="page-top" class="index" style="background-color: #2D3E50">
-
-<!-- Navigation -->
-
-
-<?php
-include 'menubar.php';
-?>
-
-
-<section id ="query_section">
-<div class="container text-center">
-    <div class="col-lg-12 text-center">
-        <h2 style="color: white" class="section-heading">Requêtes Prédéfinies</h2>
+<body id="page-top" class="index">
+<header style="background-color: #126a9d">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-heading" style="color: white">Requêtes prédéfinies</div>
+            <form name="form_query" method = "post">
+                <select class="form-control" name ="requete" id="requete">
+                    <?php
+                    for ($i=1; $i < 7; $i++) {
+                        echo "<option id=".$i.">Requete ".$i."</option>";
+                    }
+                    ?>
+                </select>
+                </br>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
     </div>
-        <form name="form_query" method = "post">
-            <select class="form-control" name ="requete" id="requete">
-                <?php
-                for ($i=1; $i < 7; $i++) {
-                    echo "<option id=".$i.">Requete ".$i."</option>";
-                }
-                ?>
-            </select>
-            </br>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
-    </div>
-</div>
-</section>
+</header>
+
 </body>
 
 
