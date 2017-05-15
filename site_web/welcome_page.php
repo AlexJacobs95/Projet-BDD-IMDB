@@ -39,7 +39,7 @@ Page d'acceuill de site web.
 
 </head>
 
-<body>
+<body style="background-color: #126a9d">
 
 <!-- Navigation -->
 <?php
@@ -55,7 +55,7 @@ include 'menubar.php';
 <header>
 
     <div class="container">
-        <div class="intro-text" id="intro" style="display: none">
+        <div class="intro-text" id="intro" style="display: none; background-color: ">
             <div class="intro-lead-in" id="bienvenue"  >Bienvenue sur IMDB!</div>
             <div class="intro-heading" id ="sous-titre">Recherchez un film, une série, un acteur et plus</div>
 
@@ -71,8 +71,6 @@ include 'menubar.php';
 
         </div>
     </div>
-
-
 
 
 </header>

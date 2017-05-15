@@ -76,7 +76,7 @@ if (!$database) {
 </head>
 
 <body id="page-top" class="index">
-<header style="background-color: #126a9d">
+<header style="background-color: #w">
 
     <div class="container">
         <div class="intro-text">
