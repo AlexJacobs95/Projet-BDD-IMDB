@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS Commentaires(
   OID          VARCHAR(512) NOT NULL,
   Texte        TEXT         NOT NULL,
   Auteur       VARCHAR(512) NOT NULL,
-  Etoiles      INT          NOT NULL,
+  Etoiles      FLOAT        NOT NULL,
   DateComplete DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (OID, Auteur, DateComplete),
   FOREIGN KEY (OID) REFERENCES Oeuvre (ID)
