@@ -165,14 +165,21 @@ a:active {
 
 .poster {
     position: absolute;
-    left: 80%;
-    height: auto;
+    left: 40%;
+    height: 750px;
     width: auto;
     display: block;
-    padding-top: 300px;
-    padding-bottom: 5px;
+    padding-top: 150px;
+    padding-bottom: 100px;
 }
 
+.profil_pic{
+    height: 500px;
+    width: auto;
+    display: block;
+    padding-bottom: 100px;
+    padding-left: 65%;
+}
 
 td {
     width: 250px;

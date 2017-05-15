@@ -143,7 +143,7 @@ $nb_directed = mysqli_num_rows($directed);
 
             <div class="col-lg-4" style="display: block; margin: auto">
                 <img class="profil_pic"
-                     src="https://www.velvetjobs.com/assets/noavatar-profile.jpg">
+                     src="https://www.velvetjobs.com/assets/noavatar-profile.jpg" style="height: 300px; width:auto">
             </div>
 
             <div class="intro-heading">

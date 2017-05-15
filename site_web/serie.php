@@ -192,6 +192,13 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
                     </div>
                     <div class=infos><?php extractGenres($genres) ?></div>
                     <div class=intro-lead-in><?php if ($note != '_' - 1) echo sprintf($note_fomat, $note); ?></div>
+                    <a href="https://twitter.com/share"
+                       class="twitter-share-button"
+                       data-show-count="false"
+                       data-text="Hey jetez un coups d'oeil à cette série"
+                       data-hashtags="imdb"
+                       data-related="twitterapi,twitter">Tweet</a>
+                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>

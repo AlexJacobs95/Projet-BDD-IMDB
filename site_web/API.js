@@ -7,10 +7,6 @@ function getImagesMovie(title, date) {
 
         if (data_ok[0]["poster_path"] != null) {
             $('.poster').attr('src', posterPath);
-            $('.poster').css("height", 600);
-            $('.poster').css("width", 'auto');
-
-
         }
         if (data_ok[0]["backdrop_path"] != null) {
             const path = 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%), url(' + backDropPath + ')';
@@ -29,10 +25,10 @@ function getTrailersMovie(title, date) {
             data = JSON.parse(datat); //parse the data
             const videoPath = "https://www.youtube.com/embed/"+ data["youtube"][0]["source"]+"?controls=1";
             if (data["youtube"][0]["source"] != null) {
-                $("iframe").attr("src", videoPath);
-                $("iframe").attr("height", '500');
-                $("iframe").attr("width", "800");
-                $("iframe").attr("align", "middle");
+                $("#trailer-video").attr("src", videoPath);
+                $("#trailer-video").attr("height", '500');
+                $("#trailer-video").attr("width", "800");
+                $("#trailer-video").attr("align", "middle");
             }
         }, function (error) {})
     }, function (error) {
@@ -48,8 +44,6 @@ function getImagesTvShow(title, date) {
 
         if (data_ok[0]["poster_path"] != null) {
             $('.poster').attr('src', posterPath);
-            $('.poster').css("height", 600);
-            $('.poster').css("width", 'auto');
 
 
         } if (data_ok[0]["backdrop_path"] != null) {
@@ -69,7 +63,7 @@ function getPersonPic(firstname, lastname) {
         if (data_ok[0]["profile_path"] != null) {
             const profilePic = "https://image.tmdb.org/t/p/w500" + data_ok[0]["profile_path"];
             $('.profil_pic').attr('src', profilePic);
-            $(".profil_pic").css("height", 300);
+            $(".profil_pic").css("height", 500);
             $(".profil_pic").css("width", 'auto');
         }
 
