@@ -80,7 +80,7 @@ En plus de devoir faire une base de donnée, nous avons dû faire les scripts qu
 \subsubsection{Contraintes et hypothèses}
 
 \noindent\underline{Contraintes}
-\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. Un numéro d’épisode ne peut pas être négaif.
+\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. Un numéro d’épisode ne peut pas être négaif. Une note doit être compris entre 0 et 10.
 La date de sortie d’un épisode doit être postérieure ou égale à la date de sortie de la série auquel il appartient.
 \\
 \\
@@ -449,36 +449,33 @@ FROM (
 \item Requête 1
 \\ \\
 $
-RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 \wedge AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
+RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 \wedge AnneeSortie < 2008  } ( Oeuvre \ o \bowtie_{ r.OID = o.ID  } Role \ r) 
 $\\$
 RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $\\
 $AnneeSortie \leftarrow \pi_{AnneeSortie}(RoleOeuvre)$\\
-$ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom \wedge ro.Nom = a. Nom \wedge ro.Numero = a.Numero} Acteur a $
+$R1 \leftarrow \pi_{Nom, Prenom, Numero}(RoleOeuvre / AnneeSortie)$
 \\
-$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre / AnneeSortie)$
-\\
-\\
-	* FROM	\item Requête 2
+\\	\item Requête 2
 \\ \\ 
 $ FilmOeuvre \leftarrow Oeuvre \bowtie_{ID = FilmID} Film$ \\ 
-$FilmAuteur \leftarrow FilmOeuvre*EcritPar$ \\
+$FilmAuteur \leftarrow FilmOeuvre \bowtie_{ID = OID} EcritPar$ \\
 $FilmAuteur' \leftarrow FilmAuteur$\\
-$Auteur2Film \leftarrow FilmAuteur \bowtie_{ID \neq OID \wedge \\
-	AnneeSortie = AnneeSortie \wedge Nom = Nom \wedge Prenom = Prenom \wedge Numero = Numero} FilmAuteur'$\\
+$Auteur2Film \leftarrow FilmAuteur \ f \bowtie_{f.ID \neq a.ID \wedge \\
+	f.AnneeSortie = a.AnneeSortie \wedge f.Nom = a.Nom \wedge f.Prenom = a.Prenom \wedge f.Numero = a.Numero} FilmAuteur' \ a$\\
 $R2 \leftarrow \pi_{Nom, Prenom, Numero} (Auteur2Film)$
 \\
-\item Requête 3
+\item Requête 3 (exemple avec Bruce Willis)
 \\ \\ 
 $ T \leftarrow \pi_{Nom, Prenom, Numero} (\sigma_{Nom = "Willis", Prenom = "Bruce"(Role)})$ \\
-$ T2 \leftarrow \pi_{R1.Prenom, R1.Nom, R1.Numero, R1.OID} (T \bowtie_{T.OID = R.OID} Role R1 )$ \\
-$ T3 \leftarrow  \pi_{R2.OID} (T2 \bowtie_{T2.Prenom = R2.Prenom and T2.Nom = R2.Nom and T2.Numero = R2.Numero} Role R2)$ \\
-$ Res \leftarrow \pi_{Nom, Prenom, Numero} (T3 \bowtie_{T3.OID = R3.OID} Role R3)$
+$ T2 \leftarrow \pi_{R1.Prenom, R1.Nom, R1.Numero, R1.OID} (T \bowtie_{T.OID = R.OID} Role \ R1 )$ \\
+$ T3 \leftarrow  \pi_{R2.OID} (T2 \bowtie_{T2.Prenom = R2.Prenom \wedge T2.Nom = R2.Nom \wedge T2.Numero = R2.Numero} Role R2)$ \\
+$ Res \leftarrow \pi_{Nom, Prenom, Numero} (T3 \bowtie_{T3.OID = R3.OID} Role \ R3)$
 \\
 \\
 \item Requête 4
 \\ \\
 $Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
-$PersonneRoleM \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero and p.Genre='m'} Role r$\\
+$PersonneRoleM \leftarrow Personne \ p \bowtie_{p.Nom = r.Nom \wedge p.Prenom = r.Prenom \wedge p.Numero = r.Numero \wedge p.Genre='m'} Role \ r$\\
 $PersonneRoleMEpisodes \leftarrow \pi_{EpisodeID} (PersonneRoleM \bowtie {OID=EpisodeID}) Episode$\\
 $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - PersonneRoleMEpisodes)$
 \\
@@ -525,7 +522,7 @@ $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - PersonneRoleMEpisodes)$
        a1.Numero = a2.Numero \wedge \\
        o1.AnneeSortie = o2.AnneeSortie) \}
 \end{aligned}\]
-\item Requête 3
+\item Requête 3 (exemple avec Bruce Willis)
 \noindent
 \[\begin{aligned}
 \{r1.Nom, r1.Prenom, r1.Numero | Role(r1) \wedge \exists f1 \exists r2 (\\
@@ -575,7 +572,6 @@ Lorsque un administrateur s'identifie celui profite de nombreuses options suppl�
 
 \vskip 10pt
 et dans le cadre d'une personne de :
-\vskip 3pt
 \begin{itemize}
 \item Modifier ses rôles.
 \item Modifier (ajouter et supprimer) les film dont elle est l’auteur.
@@ -611,7 +607,7 @@ Dans cette section sont disponibles les informations suivantes :
 \end{itemize}
 
 \subsection{Commentaires}
-Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoile. La note moyenne est affichée en haut de la page.
+Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoile.
 
 
 
