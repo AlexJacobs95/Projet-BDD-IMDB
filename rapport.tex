@@ -1,5 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[left=1.5cm,right=1.5cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[left=1cm,right=1cm,top=3cm,bottom=3cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[export]{adjustbox}
@@ -65,8 +65,8 @@
 
 \section{Introduction}
 Dans le cadre du cours de "Base de donnée", nous avons du réaliser un projet mettant en applications les différents concepts vus en cours et lors des séances de travaux pratiques.
-\subsection{But du projet}
-Ici le but fût à partir de fichiers disponible sur internet de récréer un base de donnée sur le concept de "IMDB: Internet Movie Database". Le projet fut divisé en deux grandes parties, la première partie (section \ref{première partie}) étant la création d'un diagramme entité-association et un diagramme relationnel. La seconde partie (section \ref{deuxieme partie}) fut la plus pratique qui était l'implémentation de la base de donnée et la création du site web. \\
+\subsection{Objectif du projet}
+L'objectif du projets fût à partir de fichiers disponible sur internet de récréer un base de donnée sur le concept de "IMDB: Internet Movie Database". Le projet fut divisé en deux grandes parties, la première partie (section \ref{première partie}) étant la création d'un diagramme entité-association et un diagramme relationnel. La seconde partie (section \ref{deuxieme partie}) fut la plus pratique qui était l'implémentation de la base de donnée et la création du site web. \\
 
 En plus de devoir faire une base de donnée, nous avons dû faire les scripts qui permettaient la création de la base de donnée et l'extraction des données qui y sont stockés. Aussi à fin de pouvoir utiliser notre base de donnée, nous avons crée un site web permettant de rechercher sur des critère simple ou avancés des œuvres(film, série ou épisodes), des personnes(acteur, directeur, auteur).
 
@@ -106,39 +106,32 @@ Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en m�
 \\
 		Auteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
 \\ \\
-\textbf{AuteurOeuvre}(\underline{Nom, Prénom, Numéro, Référence})
+\textbf{EcritPar}(\underline{Nom, Prénom, Numéro, Référence})
 \\
-		AuteurOeuvre.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
+		EcritPar.(Nom, Prénom, Numéro) référence Auteur.(Nom, Prénom, Numéro)
 \\
 		AuteurOeuvre.Référence référence Œuvre.Référence
 \\
 \\
-\textbf{Directeur}(\underline{Nom, Prénom, Numéro}, Genre)
+\textbf{Directeur}(\underline{Nom, Prénom, Numéro})
 \\
-		Directeur.(Nom, Prénom, Numéro, Genre) référence Personne.(Nom, Prénom, Numéro, Genre)
+		Directeur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
 \\ \\
-\textbf{DirecteurOeuvre}(\underline{Nom, Prénom, Numéro, Référence})
+\textbf{DirigePar}(\underline{Nom, Prénom, Numéro, Référence})
 \\
-		DirecteurOeuvre.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
+		DirigePar.(Nom, Prénom, Numéro) référence Directeur.(Nom, Prénom, Numéro)
         \\
-		DirecteurOeuvre.Référence référence Œuvre.Référence
+		DirigePar.Référence référence Œuvre.Référence
 \\
 \\
-\textbf{Acteur}(\underline{Nom, Prénom, Numéro}, Genre)
+\textbf{Acteur}(\underline{Nom, Prénom, Numéro})
 \\
 		Acteur.(Nom, Prénom, Numéro) référence Personne.(Nom, Prénom, Numéro)
 \\
 \\
-\textbf{ActeurRole}(\underline{Nom, Prénom, Numéro, Rôle})
+\textbf{Rôle}(\underline{Rôle, Nom, Prénom, OID})
 \\
-		ActeurRole.(Nom, Prénom, Numéro) référence Acteur.(Nom, Prénom, Numéro)
-    \\
-		ActeurRole.(Role) référence Rôle.Rôle
-\\
-\\
-\textbf{Rôle}(\underline{Rôle, Nom, Prénom, Référence}, RéférenceO)
-\\
-		Rôle.RéférenceO référence Œuvre.Référene
+		Rôle.OID référence Œuvre.Référene
 \\
 \\
 \textbf{Œuvre}(\underline{Référence}, Titre, Note, AnnéeSortie)
@@ -203,7 +196,12 @@ Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’
 
 \subsection{Méthode d'extraction des données}
 
-Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers télécharger, nous avons réaliser un autre script de bash qui lui fait appel à du code python permettant de formaté les fichiers selon un standard que nous nous sommes fixé pour permettre l'insertion des données dans la base de donnée plus simple. Nous avons donc réaliser différents parsers avec un "BaseParser" contenant des méthodes de base pour tout les autres parsers.
+Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers télécharger, nous avons réaliser un autre script de bash qui lui fait appel à du code python permettant de formater les fichiers selon un standard que nous nous sommes fixé grâce a différents parsers et ainsi permettre l'insertion des données dans la base de donnée.
+
+\subsection{Méthode d'insertion dans la base de donnée}
+
+Pour insérer toutes nos donnée le plus rapidement possible, nous avons choisis d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultants de notre parsing.
+
 
 \subsection{Requêtes demandées}
 Les requêtes demandées étaient les suivantes:
@@ -251,18 +249,7 @@ WHERE (SELECT count(distinct AnneeSortie)
 			ON ID = OID
 			WHERE AnneeSortie BETWEEN 2003 AND 2007) t
 	   WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5;
-       
-/*R1 bis*/:
-SELECT Nom, Prenom, Numero
-FROM (
-	SELECT AnneeSortie, Nom, Prenom, Numero
-	FROM Oeuvre o INNER JOIN Role r
-	ON ID = OID
-	WHERE AnneeSortie BETWEEN 2003 AND 2007) t
-group by Nom, Prenom, Numero
-having count(distinct AnneeSortie) = 5;
 \end{lstlisting}
-\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -290,7 +277,7 @@ FROM(
 	group by AnneeSortie, Nom, Prenom, Numero
 	having count(*) >=2 )t;
 \end{lstlisting}
-
+\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -352,19 +339,8 @@ Select distinct e.EpisodeID, e.SID
     Where Not Exists( 
         Select a.OID 
         From Role a, Personne p 
-        	Where p.Numero = a.Numero and a.Nom = p.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);
-
-/*R4 bis*/
-SELECT distinct EpisodeID
-FROM Episode e
-WHERE NOT EXISTS(
-	SELECT Genre, EpisodeID
-	FROM Role INNER Join Personne on  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
-	WHERE genre = 'm' AND OID = e.EpisodeID
-    );
-    
+        	Where p.Numero = a.Numero and a.Nom = p.Nom and a.Prenom = p.Prenom and p.Genre = 'm' and a.OID = e.EpisodeID);    
 \end{lstlisting}
-\newpage
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
@@ -394,58 +370,122 @@ order by nb desc
 LIMIT 1
    
 \end{lstlisting}
+\newpage
+\begin{lstlisting}[
+           language=SQL,
+           backgroundcolor=\color{backcolour},
+           showspaces=false,
+           basicstyle=\ttfamily,
+           keepspaces=true,                 
+           numbers=left,                    
+           numbersep=5pt,
+           numberstyle=\tiny,
+           commentstyle=\color{blue},
+           caption = Requête 6,
+           captionpos = b,
+           tabsize = 4,
+           breakatwhitespace=false,         
+    	   breaklines=true,
+           keywordstyle=\color{magenta},
+        ]
+/*R6*/
+SELECT T3.SID, ep_num, avg_ep_by_year, avg_actor_by_season
+FROM (
+	(SELECT ID, count(*) as ep_num
+	FROM(
+		SELECT ID, EpisodeID
+		FROM(
+		 SELECT ID
+		 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+		 WHERE note >(
+			 SELECT AVG(note)
+			 FROM(
+			 SELECT note
+			 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+			 WHERE note != -1 and AnneeSortie !=0) as t)) as Series_OK
+		 INNER JOIN Episode ON Series_OK.ID = Episode.SID) as t
+		 GROUP BY ID)T1
+
+	inner join
+
+	 (
+		 SELECT SID, avg(num) as avg_actor_by_season
+		 FROM(
+			SELECT SID, count(*) as num
+			FROM(
+				SELECT Nom, Prenom, Numero, SID, Saison
+					FROM(
+					SELECT SID, EpisodeID, Saison
+					FROM Episode inner join Serie on SerieID = SID
+					WHERE Saison != -1)t
+				INNER Join Role on EpisodeID = OID
+				Group by Nom, Prenom, Numero, SID, Saison)t2
+			GROUP BY SID, Saison)t3
+		Group By SID)T2
+
+	on T1.ID = T2.SID
+
+	inner join
+
+	(
+		SELECT t5.SID, AVG(num) as avg_ep_by_year
+		FROM(
+		 SELECT t6.SID, count(*) as num
+		 FROM(
+			 SELECT SID, ID, AnneeSortie
+			 FROM Oeuvre
+			 INNER Join Episode on EpisodeID = ID)t6
+		 WHERE AnneeSortie != 0
+		 GROUP BY t6.SID, AnneeSortie) as t5
+		Group by t5.SID)T3
+
+	on T1.ID = T3.SID
+)
+   
+\end{lstlisting}
 
 \subsubsection{Algèbre relationnel}
 \begin{list}{*}{}
 \item Requête 1
 \\ \\
 $
-RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 AND AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
+RoleOeuvre \leftarrow \sigma_{ AnneeSortie > 2002 \wedge AnneeSortie < 2008  } ( Oeuvre o \bowtie_{ r.OID = o.ID  } Role r) 
 $\\$
-RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $
-\\$
-ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom and ro.Nom = a. Nom and ro.Numero = a.Numero} Acteur a $
+RoleOeuvre \leftarrow \pi_{AnneeSortie, Nom, Prenom, Numero}(RoleOeuvre) $\\
+$AnneeSortie \leftarrow \pi_{AnneeSortie}(RoleOeuvre)$\\
+$ActeurOeuvre \leftarrow RoleOeuvre ro \bowtie_{ro.Prenom = a.Prenom \wedge ro.Nom = a. Nom \wedge ro.Numero = a.Numero} Acteur a $
 \\
-$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre)$
+$R1 \leftarrow \pi_{Nom, Prenom, Numero}(ActeurOeuvre / AnneeSortie)$
 \\
 \\
-\item Requête 2
+	* FROM	\item Requête 2
 \\ \\ 
 $ FilmOeuvre \leftarrow Oeuvre \bowtie_{ID = FilmID} Film$ \\ 
-$FilmAuteur \leftarrow FilmOeuvre \bowtie_{OID = ID} EcritPar$ \\
-$Auteur2Film \leftarrow \sigma_{count(*)>=2}(\pi_{AnneSortie, Nom, Prenom, Numero} (FilmAuteur) )$\\
+$FilmAuteur \leftarrow FilmOeuvre*EcritPar$ \\
+$FilmAuteur' \leftarrow FilmAuteur$\\
+$Auteur2Film \leftarrow FilmAuteur \bowtie_{ID \neq OID \wedge \\
+	AnneeSortie = AnneeSortie \wedge Nom = Nom \wedge Prenom = Prenom \wedge Numero = Numero} FilmAuteur'$\\
 $R2 \leftarrow \pi_{Nom, Prenom, Numero} (Auteur2Film)$
 \\
-\\
-
 \item Requête 3
 \\ \\ 
-$ T \leftarrow \sigma_{Nom = "Willis" and Prenom = "Bruce" and Numero = "NA"}(Role)$ \\ 
-$T \leftarrow Role r \bowtie_{r.OID = t.OID} T  t$ \\
-$T2 \leftarrow \pi_{Prenom, Nom, Numero, OID}(T)$\\
-$T2 \leftarrow Role r \bowtie_{r.Nom = t.Nom and r.Prenom = t.Prenom and r.Numero = t.Numero and r.OID = t.OID} T2 t$\\
-$T3 \leftarrow \pi_{OID} (T2)$\\
-$T3 \leftarrow Role r \bowtie_{r.OID = t.OID} T3 t$ \\
-$R3 \leftarrow \pi_{Nom, Prenom, Numero} (T3)$
+$ T \leftarrow \pi_{Nom, Prenom, Numero} (\sigma_{Nom = "Willis", Prenom = "Bruce"(Role)})$ \\
+$ T2 \leftarrow \pi_{R1.Prenom, R1.Nom, R1.Numero, R1.OID} (T \bowtie_{T.OID = R.OID} Role R1 )$ \\
+$ T3 \leftarrow  \pi_{R2.OID} (T2 \bowtie_{T2.Prenom = R2.Prenom and T2.Nom = R2.Nom and T2.Numero = R2.Numero} Role R2)$ \\
+$ Res \leftarrow \pi_{Nom, Prenom, Numero} (T3 \bowtie_{T3.OID = R3.OID} Role R3)$
 \\
 \\
 \item Requête 4
 \\ \\
-$PersonneRole \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero} Role r$\\
-$PersonneRoleM \leftarrow \sigma_{Genre = "m"}(PersonneRole p \bowtie_{p.OID = EpisodeID} Episode)$\\
-$EpiPersonneRoleM \leftarrow \pi_{EpisodeID} PersonneRoleM$\\
 $Episode \leftarrow \pi_{EpisodeID}(Episode)$\\
-$R4 \leftarrow \pi_{EpisodeID, SID}(Episode - EpiPersonneRoleM)$
+$PersonneRoleM \leftarrow Personne p \bowtie_{p.Nom = r.Nom and p.Prenom = r.Prenom and p.Numero = r.Numero and p.Genre='m'} Role r$\\
+$PersonneRoleMEpisodes \leftarrow \pi_{EpisodeID} (PersonneRoleM \bowtie {OID=EpisodeID}) Episode$\\
+$R4 \leftarrow \pi_{EpisodeID, SID}(Episode - PersonneRoleMEpisodes)$
 \\
 \\
-\item Requête 5
-\\ \\
-$RoleEpisode \leftarrow Role \bowtie_{OID = EpisodeID}Episode$
-$ActeurEpisode \leftarrow \pi_{SID, Prenom, Nom, Numero}(RoleEpisode)$\\
-$ActeurEpisode \leftarrow \pi_{Prenom, Nom, Numero}(ActeurEpisode)$\\
-$R5 \leftarrow \tau_{nb desc}(\sigma_{count(*)}(ActeurEpisode)$
 \end{list}
-\newpage
+
+
 \subsubsection{Calcul relationnel tuple}
 
 \begin{list}{*}{}
@@ -485,15 +525,97 @@ $R5 \leftarrow \tau_{nb desc}(\sigma_{count(*)}(ActeurEpisode)$
        a1.Numero = a2.Numero \wedge \\
        o1.AnneeSortie = o2.AnneeSortie) \}
 \end{aligned}\]
-\item Requête 3 je sais pas :/ elle est compliqué
+\item Requête 3
+\noindent
+\[\begin{aligned}
+\{r1.Nom, r1.Prenom, r1.Numero | Role(r1) \wedge \exists f1 \exists r2 (\\
+	Film(f1) \wedge Role(r2) \wedge \\
+    r1.OID = f1 \wedge \\
+    r2.Nom = 'Bruce' \wedge \\
+    r2.Prenom = 'Willis \wedge \\
+    r2.Numero = 'NA' \wedge \\
+    r2.OID = r1.OID) \}
+\end{aligned}\]
+
 
 \item Requête 4
 \noindent
 \[\begin{aligned}
 \{e.EpisodeID, e.SID | Episode(e) \wedge \forall a, p (Personne(p) \wedge Role(a) \\
- 	   a.Nom  = p.Nom \wedge a.Prenom = p.Prenom \wedge p.Numero = a.Numero \\
+ 	   a.Nom  = p.Nom \wedge a.Prenom = p.Prenom \wedge p.Numero = a.Numero \wedge \\
        p.Genre = "f" \wedge a.OID = e.EpisodeID \}
 \end{aligned}\]
 \end{list}
+
+\newpage
+\section{Site Web}
+
+Le site est divisé en 4 parties principales : 
+\vskip 3pt
+\begin{itemize}
+\item La page d’accueil, d'où un utilisateur peut lancer une recherche pour une Œuvre ou des personnes.
+\item L'espace administrateur, permettant d'ajouter des oeuvres et personnes à la base de donnée.
+\item La recherche avancée.
+\item La page de statistique, offrant quelques informations intéressantes sur les données stockés dans la base de donnée.
+\end{itemize}
+
+\subsection{L'administrateur}
+Lorsque un administrateur s'identifie celui profite de nombreuses options supplémentaires. Outre le fait de posséder le droit d'insertion et dans la base donnée, aussi bien pour une oeuvre qu'une personne, celui peut également complètement modifier les pages du site. En effet, l'interface des pages se modifie lorsque un administrateur est identifié lui permettant pour une oeuvre de :
+\vskip 3pt
+\begin{itemize}
+\item Modifier le titre.
+\item Modifier la date de sortie (et date de fin si l'oeuvre est une série).
+\item Modifier les détails (genres, langues, pays).
+\item Modifier (ou ajouter) un résumé.
+\item Ajouter et supprimer des rôles.
+\item Ajouter et supprimer des directeurs.
+\item Ajouter et supprimer des personnes.
+\item Supprimer l'oeuvre.
+\end{itemize}
+
+\vskip 10pt
+et dans le cadre d'une personne de :
+\vskip 3pt
+\begin{itemize}
+\item Modifier ses rôles.
+\item Modifier (ajouter et supprimer) les film dont elle est l’auteur.
+\item Modifier (ajouter et supprimer) les film dont elle est le directeur.
+\item Supprimer la personne.
+\end{itemize}
+
+\subsection{La recherche}
+
+L'utilisateur à la possibilité de rechercher des oeuvres (films, séries, épisodes) et des personnes au travers de notre moteur de recherche. Pour trouver un maximum de résultats le plus rapidement possible (et conserver leurs pertinence) nous avons choisit d'utiliser les requêtes \textit{MATCH (...) AGAINST (... IN BOOLEAN MODE)} utilisant des fulltext indexes. 
+\par 
+Le contenu de l'input entré par l'utilisateur est d'abord traité pour augmenté la pertinence des résultat en ajoutant des "+" devant chaque mots. de cette manière nous obligeons tous que tous le mots entré par l'utilisateur soient présent dans le résultat et évitons donc un nombre trop important de "match".
+\par
+Aussi, si jamais l'utilisateur entre des mots composés exclusivement d'une seule lettre, par exemple pour rechercher le film \textit{A (2002)} une simple requête \textit{WHERE = }
+sera exécutée pour éviter d'avoir un nombre aberrant de résultats.
+
+\subsection{API}
+Nous nous sommes servi de l'api du site www.themoviedb.org pour ajouter du contenu à notre site web. \\
+Pour les films ainsi que les séries nous avons récupéré le poster et une image de fond. Nous avons également pu récupéré les photos des personnes et les trailers des films. Par contre nous n'avons pas pu certifié la concordance du contenu récupéré avec l'oeuvre ou la personne car l'API utilise un système d'id différent du notre. Il se peut donc que du contenu non cohérent apparaisse dans le cas ou 2 oeuvres on le même titre et la même année de sortie ou lorsque 2 personnes ont le même nom.
+
+\newpage
+\subsection{Statistiques}
+La section statistiques permet à l'utilisateur d'obtenir des information intéressantes sur les données stockées dans la base de données. Ces informations sont illustré grâce à des graphiques. \\
+
+Dans cette section sont disponibles les informations suivantes : 
+\vskip 3pt
+\begin{itemize}
+\item Le proportion acteurs/actrices.
+\item La proportion de films/séries/épisodes.
+\item Le nombre d'oeuvre par pays (top 30).
+\item L'évolution des notes en fonction du temps.
+\item L'évolution du nombre de films et séries tournés chaque année.
+\end{itemize}
+
+\subsection{Commentaires}
+Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoile. La note moyenne est affichée en haut de la page.
+
+
+
+
+
 \section{Conclusion}
 \end{document}
