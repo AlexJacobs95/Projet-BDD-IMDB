@@ -260,6 +260,7 @@ while ($row = mysqli_fetch_array($result_personnes)) {
             console.log(personnes_array)
             document.getElementById("table_container_Personnes").appendChild(table);
             $('#personnes_table').DataTable({
+
                 "aaSorting": [],
                 data: personnes_array,
                 columns: [
