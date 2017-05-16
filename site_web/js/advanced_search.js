@@ -151,8 +151,8 @@ function build_advanced_query() {
 
 function addListOfElemToQuery(list, name, query) {
     if (list[0] !== null) {
-        list.forEach(function (entry) {
-            entry.forEach(function (entry) {
+        list.forEach((entry) => {
+            entry.forEach((entry) => {
                 var part = " exists ( SELECT "+ name +" From " +name+ " g WHERE o.ID = g.ID and " +name+ " = '" + entry + "')";
 
                 if (entry === list[0][0]){

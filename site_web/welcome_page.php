@@ -77,39 +77,7 @@ include 'menubar.php';
 
 
 
-<!-- Travel Section -->
 
-    <section id="travel" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                   <div class="stat-member">
-                       <h4>Films</h4>
-                   </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="stat-member">
-                        <h4>Séries</h4>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="stat-member">
-                        <h4>Acteurs</h4>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="stat-member">
-                        <h4>Auteurs</h4>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="stat-member">
-                        <h4>Directeurs</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </body>
 

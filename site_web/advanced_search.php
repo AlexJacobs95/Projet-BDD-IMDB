@@ -193,7 +193,7 @@ if (!$database) {
         var array_genres = (<?php echo json_encode($res_genres); ?>);
         console.log("genres", array_genres);
 
-        array_genres.forEach(function (entry) {
+        array_genres.forEach((entry) => {
             $('#genre_select').append(
                 $('<option>' + entry + '</option>')
             );
@@ -204,7 +204,7 @@ if (!$database) {
         var array_langages = (<?php echo json_encode($res_langages); ?>);
         console.log("langages", array_langages);
 
-        array_langages.forEach(function (entry1) {
+        array_langages.forEach((entry1) => {
             $('#langage_select').append(
                 $('<option>' + entry1 + '</option>')
             );
@@ -215,7 +215,7 @@ if (!$database) {
 
         var array_countries = (<?php echo json_encode($res_countries); ?>);
         console.log("countries", array_countries);
-        array_countries.forEach(function (entry2) {
+        array_countries.forEach((entry2) => {
             $('#country_select').append(
                 $('<option>' + entry2 + '</option>')
             );

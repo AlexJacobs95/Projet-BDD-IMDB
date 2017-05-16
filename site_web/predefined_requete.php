@@ -36,7 +36,7 @@ include 'menubar.php';
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-    <script src="dynamic_part.js"></script>
+    <script src="js/dynamic_part.js"></script>
 
 
 
@@ -152,6 +152,7 @@ include 'menubar.php';
     function create_table_query_1_2_3(data, num) {
         document.getElementById("table_container_Résultats de la requête " + num).appendChild(table);
         $('#table_'+num).DataTable({
+            "deferRender": true,
             "aaSorting": [],
             data: data,
             columns: [
