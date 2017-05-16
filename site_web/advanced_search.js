@@ -3,8 +3,11 @@ function build_advanced_query() {
     const category = $('#category_select').find(":selected").text();
     const title = $('#title').val();
     const year = $('#year').val();
+    const actor_fn = $('#actor_fn').val();
     const actor_n = $('#actor_n').val();
+    const director_fn = $('#director_fn').val();
     const director_n = $('#director_n').val();
+    const writer_fn = $('#writer_fn').val();
     const writer_n = $('#writer_n').val();
 
     var genres = [];
@@ -41,7 +44,7 @@ function build_advanced_query() {
     }
     if ($.trim(title) !== "") {
         whereAdded = true;
-        query += " WHERE MATCH(Titre) AGAINST( '" + title + "' IN BOOLEAN MODE)";
+        query += " WHERE Titre = '" + title + "'";
     }
     if ($.trim(year) !== "") {
         if (!whereAdded) {
@@ -53,40 +56,87 @@ function build_advanced_query() {
     }
 
     //actor
-
-    if ($.trim(actor_n) !== "") {
-        var part = " exists ( SELECT Nom From Role r WHERE o.ID = r.OID and MATCH (Prenom, Nom) AGAINST ('" + actor_n + "' IN BOOLEAN MODE))";
+    var actor_fn_added = false;
+    if ($.trim(actor_fn) !== "") {
+        actor_fn_added = true;
+        var part = " exists ( SELECT Prenom From Role r WHERE o.ID = r.OID and r.Prenom = '" + actor_fn + "'"
         if (!whereAdded) {
             whereAdded = true;
-            query += " WHERE" + part;
+            query += " WHERE" + part
         } else {
-            query += " AND" + part;
+            query += " AND" + part
         }
+    }
+    if ($.trim(actor_n) !== "") {
+        if (!actor_fn_added) {
+            var part = " exists ( SELECT Nom From Role r WHERE o.ID = r.OID and r.Nom = '" + actor_n + "')"
+            if (!whereAdded) {
+                whereAdded = true;
+                query += " WHERE" + part;
+            } else {
+                query += " AND" + part;
+            }
+        } else {
+            query += " AND r.Nom = '" + actor_n + "')";
+        }
+    } else if (actor_fn_added) {
+        query += ")";
     }
 
     //director
-
-    if ($.trim(director_n) !== "") {
-        var part = " exists ( SELECT Nom From DirigePar d WHERE o.ID = d.OID and MATCH (Prenom, Nom) AGAINST ('" + director_n + "' IN BOOLEAN MODE))";
+    var director_fn_added = false;
+    if ($.trim(director_fn) !== "") {
+        director_fn_added = true;
+        var part = " exists ( SELECT Prenom From DirigePar d WHERE o.ID = d.OID and d.Prenom = '" + director_fn + "'"
         if (!whereAdded) {
             whereAdded = true;
-            query += " WHERE" + part;
+            query += " WHERE" + part
         } else {
-            query += " AND" + part;
+            query += " AND" + part
         }
+    }
+    if ($.trim(director_n) !== "") {
+        if (!director_fn_added) {
+            var part = " exists ( SELECT Nom From DirigePar d WHERE o.ID = d.OID and d.Nom = '" + director_n + "')"
+            if (!whereAdded) {
+                whereAdded = true;
+                query += " WHERE" + part;
+            } else {
+                query += " AND" + part;
+            }
+        } else {
+            query += " AND d.Nom = '" + director_n + "')";
+        }
+    } else if (director_fn_added) {
+        query += ")";
     }
 
     //writer
-
-    if ($.trim(writer_n) !== "") {
-
-        var part = " exists ( SELECT Nom From EcritPar e WHERE o.ID = e.OID and MATCH (Prenom, Nom) AGAINST ('" + writer_n + "' IN BOOLEAN MODE))";
+    var writer_fn_added = false;
+    if ($.trim(writer_fn) !== "") {
+        writer_fn_added = true;
+        var part = " exists ( SELECT Prenom From EcritPar e WHERE o.ID = e.OID and e.Prenom = '" + writer_fn + "'"
         if (!whereAdded) {
             whereAdded = true;
-            query += " WHERE" + part;
+            query += " WHERE" + part
         } else {
-            query += " AND" + part;
+            query += " AND" + part
         }
+    }
+    if ($.trim(writer_n) !== "") {
+        if (!writer_fn_added) {
+            var part = " exists ( SELECT Nom From EcritPar e WHERE o.ID = e.OID and e.Nom = '" + writer_n + "')"
+            if (!whereAdded) {
+                whereAdded = true;
+                query += " WHERE" + part;
+            } else {
+                query += " AND" + part;
+            }
+        } else {
+            query += " AND e.Nom = '" + writer_n + "')";
+        }
+    } else if (writer_fn_added) {
+        query += ")";
     }
 
     query = addListOfElemToQuery(genres, "Genre", query, whereAdded);
@@ -124,17 +174,16 @@ function addListOfElemToQuery(list, name, query) {
 }
 
 function launch_advanced_search(query) {
-    console.log(query)
-    //var redirect = 'advanced_search_result.php';
-    //$.redirectPost(redirect, {query: query});
+    var redirect = 'advanced_search_result.php';
+    $.redirectPost(redirect, {query: query});
 
 }
 
 function all_fields_empty(genres, langages, countries) {
     const category = $('#category_select').find(":selected").text();
 
-    var cond = ($.trim($('#title').val() )=== "") && ($.trim($('#year').val()) === "") && ($.trim($('#actor_n').val()) === "")&&
-        ($.trim($('#director_n').val()) === "") && ($.trim($('#writer_n').val()) === "") &&
+    var cond = ($.trim($('#title').val() )=== "") && ($.trim($('#year').val()) === "") && ($.trim($('#actor_fn').val()) === "") && ($.trim($('#actor_n').val()) === "") &&
+        ($.trim($('#director_fn').val()) === "") && ($.trim($('#director_n').val()) === "") && ($.trim($('#writer_fn').val()) === "") && ($.trim($('#writer_n').val()) === "") &&
         category === "Toutes" && genres[0] === null && langages[0] === null && countries[0] === null;
     console.log(cond);
 
