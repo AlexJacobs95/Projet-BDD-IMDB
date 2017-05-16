@@ -17,7 +17,7 @@ if (isset($_GET['run_function_log_out'])) {
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
 <!-- Theme CSS -->
-<link href="test_css/agency.css" rel="stylesheet">
+<link href="css/agency.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,7 +65,7 @@ if (isset($_GET['run_function_log_out'])) {
                 }
                 ?>
                 <li>
-                    <form action="search_results_2.php">
+                    <form action="search_results.php">
                         <input type="text" name="search" placeholder="Recherche..." required>
                     </form>
                 </li>

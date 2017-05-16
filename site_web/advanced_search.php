@@ -57,9 +57,9 @@ if (!$database) {
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="test_css/agency.css" rel="stylesheet">
-    <link href="advanced_search.css" rel="stylesheet">
-    <link href="select2.min.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+    <link href="css/advanced_search.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -71,7 +71,7 @@ if (!$database) {
             crossorigin="anonymous"></script>
     <![endif]-->
 
-    <script src="advanced_search.js"></script>
+    <script src="js/advanced_search.js"></script>
 
 </head>
 
@@ -164,8 +164,8 @@ if (!$database) {
         crossorigin="anonymous"></script>
 
 <!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
-<script src="select2.full.min.js"></script>
+<script src="js/agency.min.js"></script>
+<script src="js/select2.full.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

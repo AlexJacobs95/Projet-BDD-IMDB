@@ -26,7 +26,7 @@ Page d'acceuill de site web.
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="test_css/agency.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,7 +60,7 @@ include 'menubar.php';
             <div class="intro-heading" id ="sous-titre">Recherchez un film, une série, un acteur et plus</div>
 
             <!-- search bar -->
-            <form action="search_results_2.php" style="display: inline-block">
+            <form action="search_results.php" style="display: inline-block">
 
                 <input type="text2" name="search" placeholder="Tapez ici votre recherche ..." style="display: block; height: 60px; margin-right: 20px; padding: 10px; float: left; border: 5px solid #fed136" required>
                 <button class="btn btn-primary" id="search-button" type="submit" value="Find" style="display: block; margin: 0px;  width: 90px; height: 62px; padding: 0px; ">
@@ -94,7 +94,7 @@ include 'menubar.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
 
 <!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
+<script src="js/agency.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

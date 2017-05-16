@@ -59,8 +59,8 @@ if (!$database) {
 
     <!-- Theme CSS -->
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="test_css/agency.css" rel="stylesheet">
-    <link href="test_css/search_results.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+    <link href="css/search_results.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -109,13 +109,13 @@ if (!$database) {
         crossorigin="anonymous"></script>
 
 <!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
+<script src="js/agency.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 </html>
 
-<script src="dynamic_part.js"></script>
+<script src="js/dynamic_part.js"></script>
 
 
 <script type="text/javascript">

@@ -18,7 +18,7 @@ Page de recherche avancé de site web.
 
 <!DOCTYPE html>
 
-<script src="dynamic_part.js"></script>
+<script src="js/dynamic_part.js"></script>
 
 <html>
 	<head>
@@ -37,7 +37,7 @@ Page de recherche avancé de site web.
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="test_css/agency.css" rel="stylesheet">
+        <link href="css/agency.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -284,7 +284,7 @@ Page de recherche avancé de site web.
             crossorigin="anonymous"></script>
 
     <!-- Theme JavaScript -->
-    <script src="test_js/agency.min.js"></script>
+    <script src="js/agency.min.js"></script>
 
 </html>
 

@@ -18,19 +18,20 @@ function getImagesMovie(title, date) {
 }
 
 function getTrailersMovie(title, date) {
-    theMovieDb.search.getMovie({"query": encodeURI(title), "year": date}, function(data) {
+    theMovieDb.search.getMovie({"query": encodeURI(title), "year": date}, function (data) {
         data = JSON.parse(data); //parse the data
         const id = data["results"][0]["id"];
-        theMovieDb.movies.getTrailers({"id": id}, function(datat){
+        theMovieDb.movies.getTrailers({"id": id}, function (datat) {
             data = JSON.parse(datat); //parse the data
-            const videoPath = "https://www.youtube.com/embed/"+ data["youtube"][0]["source"]+"?controls=1";
+            const videoPath = "https://www.youtube.com/embed/" + data["youtube"][0]["source"] + "?controls=1";
             if (data["youtube"][0]["source"] != null) {
                 $("#trailer-video").attr("src", videoPath);
                 $("#trailer-video").attr("height", '500');
                 $("#trailer-video").attr("width", "800");
                 $("#trailer-video").attr("align", "middle");
             }
-        }, function (error) {})
+        }, function (error) {
+        })
     }, function (error) {
     })
 }
@@ -46,7 +47,8 @@ function getImagesTvShow(title, date) {
             $('.poster').attr('src', posterPath);
 
 
-        } if (data_ok[0]["backdrop_path"] != null) {
+        }
+        if (data_ok[0]["backdrop_path"] != null) {
             const path = 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%), url(' + backDropPath + ')';
             $("header").css("background-image", path);
         }

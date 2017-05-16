@@ -147,7 +147,7 @@ function addAdminElements(section) {
         add.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADvUlEQVRYhbWWX0xaZxTAzxtrneCSsixtlplO6/6kky1Z19UF05JZtUO7roBQtYCKVVEKKbXMgvingjrTLf2LwfmwJbVdU13YVgQu6J5MfJhDkS6ZyN4aWq4vQyc0OXtoNGtzddyvepLf083vO+c733fvPQDpB1dwOFchOS9y6hyy6U6XJt5LaZO9lDbZ4dI81jlk05LzIud7R3LlAMBlse7mkbk7M0/SKhq2eRtXvvq1BdOhx9OwfNIoGuLyObkvknvnZw2HBuz+pif9k81Igp1qTJXUf9wPADvY7XoXZ59hWB7qm9TiVqD/Vhbk8jk5aSXf9QbvA8uP6kd9k024lVhGVTF+dpbgf3duHlM96p1oxO3APKqMbdaJDP2wLGSfaMDtRDckCTLeieKGgwP2iTPIhrHQIN6bu8nKsU+cwWLNgb7nW5/X7at7YgvUIxv+WvoDF+l5Vo4tUI/d3trUM0dxwlg43BPQIFueFhBm7fUENHj83CfOp9lfAZ7VrVq5FKhDtqwVQOK231cmACAT9h/eq7jkr0MS1gsg9N8WZsvguKHA2e2vRRLW7gCpLz57yAH118qmu/w1SEJ06QFG6Hkit8tfg5qr4ikwjSriXZQaSVgvgNBvvSuPgcVdneykVMjED7PXMEqHMbr0gJF/Usu4kkps+DxKh/FO8Arj2p2UCi3u6lUwu6uSHZQSmbgdvIIL8RBGaGZWUglcTv694fOFeAhv/f4149odlBLN7qpVMN6TPrZSp5GE6FIYI3SIyLVSp/HcXWkMaq+WTlt91UhClA5jJB4icq2+alR/UzIFYv1BZ7uvCklYpMO4EJ8jctt9VXjs7EcOeKvwdbnFV4kkrBVA6ucV7JECAHBNropli7cS2bJeAIF7wSVLAMDLAABwzHBgyOw9hWxZpOdxIT7H2jN7T2GJ7sPB9b8hl8/JNd2vSF30KpANEXoe/4zPsnIuehVo+kWW5LzKefOZmeBIjaC/zSNHNnw/M4Df/dbPymnzyFGo3G9jGsl21t48OtvmqcDtpObG0RkAeIlxKOTwOTm6O2WxLz0y3A5aRsoe8ni8vRsNpQAAkJWdIWi5LY6ZxqW4lTTfEj/M2pORv2ny/3ZCfePToGlcgluB+rpohseDzXfOEDsK1e/2GX8+kbowfhJJMP70eVKofMe24Zmn241i3ftO/Vh5otX9BaaDfqw8UdQsGOTwnnvVXjAy9xXslhVp8x2Vl4VTTSOlMYOrfNXgKl9tGimNVV4WThVp8x05Ba9JYe0Ll0b8CxNQdU/XcVuxAAAAAElFTkSuQmCC";
 
     }
-    if (section.id == "detail-title"){
+    if (section.id == "detail-title") {
         del.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC6klEQVRYhbWWO08bQRCAtwwkISWNC5QccQGY42aGCoRcgs1hGhD8ISQQPwDOiJ6OBikVIsDtRrawRZQag4+HHCiNDUTaFLEtP/Z86wuMNN3tft/Nzj4Y04wDwxhwAVY5QNolygjEB070XMt7lyjDAdIu4sqBYQzozhsYJ7FYlBPtCsTKj8lJqZMC8VEg7hyZ5nBocBagnyNuCsQ/umCFyIsA2NiLRPp6gh+Pj38VAL/CghUi54eWZWjBvwNYnOj3a8HryYlKp6ZpBv75W8CbJXwr8W1w8L1f2TMzMz3DsvG473Ioe4IjbqoGeI4jq54nc7atDc+nUvLp9lZ6juMnsd4CP4nFoqpu9xxH1kNXog6vh0pCIL60LAUn2lWVvXp9LZsjSCK/sCCrTXAppaxcXMjM1FRnPwCkGWOMZQE++R0yOdvWlvCDn83O+jVkeT8a/chcgNVuJdWRyNu2rN7ctMILBV94Q8KylhkHSAeuqwJQl1AJVi4v5dncXGC/CMQt5hJltDrbR0IFz2nAawKCCcQH7e2lkGiBX11pw2t9UGKc6Fl3gF+zSSllpViUuURCe56awNPrCiSToQTuteGplBIeVoITlfSbUAGvFIuyWiyGlhCIQm8bth2vjYZLJGQumQwt8W8bIq50hS8udsLbtlpYCW5ZS+zAMAYE4mNYeENifl5WPU9bghOV90ZGPjDGGBOIO+0fZOPxTnih0PWE85NQvSc40XbjNjwyzWGB+NL+UfN1HAT3k1Bdx5zo+XR09EvLm0AAbKgm9Byn662mlLBtWfU83weJS7TW8SLKAvS7RD9VA1T3eVBmpqfVnQ+Q3x0aeqd8Fx5alsGJSr3CdFMg3h2PjX1WwutxaprmW0gIxLvjiYnxrvDmSgjE81eDA+QD/7w99iKRPoG4rtodusmJnl2iNd81160GB0hzonIP4DIn2u7Yav8T+9HoR25ZywJxSyAKTlTiRE+1LAlEIRC3uGUtNU44jfgLUwkn+JzAd8QAAAAASUVORK5CYII="
     }
     button.appendChild(add);
@@ -176,7 +176,7 @@ function addAdminElements(section) {
 
     });
     button_del.addEventListener("click", function () {
-        if(section.id = "detail-title"){
+        if (section.id = "detail-title") {
             document.getElementById('formContainerDetailsDelete').style.display = "block";
         }
 
@@ -392,7 +392,7 @@ function edit_header_movie_episode(type) {
         if ($.trim(info) === "") {
             $('#titre').css("border-color", "red")
             invalid = true
-        }   else {
+        } else {
             $('#titre').css("border-color", "#fed136")
         }
 
@@ -408,7 +408,7 @@ function edit_header_movie_episode(type) {
         if ($.trim(info) === "" || !isNaN(invalid)) {
             $('#date').css("border-color", "red")
             invalid = true
-        }   else {
+        } else {
             $('#date').css("border-color", "#fed136")
         }
 
@@ -464,7 +464,6 @@ function edit_header_serie() {
         });
     }
 }
-
 
 
 function remove_person_from_work(_name, _fn, _num, type, row) {
@@ -527,10 +526,10 @@ function update_resume() {
 
 function add_written_or_directed_by(id, titre, option) {
     $.ajax({
-        url: "adminRequests.php?type=add_"+option+"_by_person",
+        url: "adminRequests.php?type=add_" + option + "_by_person",
         type: "POST",
         dataType: 'json', // add json datatype to get json
-        data: ({id:id}),
+        data: ({id: id}),
         error: function (xhr, status) {
             alert(status);
         },
@@ -651,7 +650,7 @@ function add_person_in_tb(name, fn, num, tbName) {
             alert(status);
         },
         success: function (data) {
-            if (tbName == "directedBy"){
+            if (tbName == "directedBy") {
                 alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
                 $('#formContainerDirector').css("display", "none");
                 location.reload();
@@ -681,7 +680,7 @@ function add_role_by_oeuvre_id(id, name) {
         url: "adminRequests.php?type=add_role_by_oeuvre_id",
         type: "POST",
         dataType: 'json', // add json datatype to get json
-        data: ({id:id, role: role}),
+        data: ({id: id, role: role}),
         error: function (xhr, status) {
             alert(status);
         },
@@ -762,21 +761,21 @@ function edit_actors_from_oeuvre() {
     if ($.trim(name) === "") {
         $('#actor_name').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#actor_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
         $('#actor_fn').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#actor_fn').css("border-color", "#fed136")
     }
 
     if ($.trim($('#actor_role').val()) === "") {
         $('#actor_role').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#actor_role').css("border-color", "#fed136")
     }
 
@@ -794,7 +793,7 @@ function edit_actors_from_oeuvre() {
         },
         success: function (data, textStatus, xhr) {
             if (data == "not found") {
-                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")) {
                     add_person(name, fn, genre, add_actor_role);
                 } else {
                     //TODO
@@ -830,14 +829,14 @@ function edit_directors_from_oeuvre() {
     if ($.trim(name) === "") {
         $('#director_name').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#director_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
         $('#director_fn').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#director_fn').css("border-color", "#fed136")
     }
 
@@ -853,7 +852,7 @@ function edit_directors_from_oeuvre() {
         },
         success: function (data, textStatus, xhr) {
             if (data == "not found") {
-                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")) {
                     add_person(name, fn, genre, add_director_directedBy);
                 }
 
@@ -885,14 +884,14 @@ function edit_writers_from_oeuvre() {
     if ($.trim(name) === "") {
         $('#writer_name').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#writer_name').css("border-color", "#fed136")
     }
 
     if ($.trim(fn) === "") {
         $('#writer_fn').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#writer_fn').css("border-color", "#fed136")
     }
 
@@ -911,7 +910,7 @@ function edit_writers_from_oeuvre() {
         },
         success: function (data, textStatus, xhr) {
             if (data == "not found") {
-                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")){
+                if (confirm("Cette personne n'est pas encore enregistrée.\nVoulez vous ajouter " + fn + " " + name + " à la base de donnée ?")) {
                     add_person(name, fn, genre, add_writer_writtenBy);
                 }
 
@@ -940,18 +939,18 @@ function edit_details() {
 
     console.log(genre, language, country);
 
-    if(!(genre.length === 0)){
+    if (!(genre.length === 0)) {
         add_details(genre, "genre");
     }
-    if(!(language.length === 0)){
+    if (!(language.length === 0)) {
         add_details(language, "language");
     }
-    if(!(country.length === 0)){
+    if (!(country.length === 0)) {
         add_details(country, "country");
     }
 }
 
-function add_details(field_data, field_type){
+function add_details(field_data, field_type) {
     $.ajax({
         url: "adminRequests.php?type=add_details",
         type: "POST",
@@ -979,26 +978,26 @@ function add_details(field_data, field_type){
     });
 }
 
-function remove_details(){
+function remove_details() {
     var genre = $('#genre_rm_detail').val();
     var language = $('#language_rm_detail').val();
     var country = $('#country_rm_detail').val();
 
     console.log(genre, language, country);
 
-    if(!(genre.length === 0)){
+    if (!(genre.length === 0)) {
         rm_details(genre, "genre");
     }
-    if(!(language.length === 0)){
+    if (!(language.length === 0)) {
         rm_details(language, "language");
     }
-    if(!(country.length === 0)){
+    if (!(country.length === 0)) {
         rm_details(country, "country");
     }
 
 }
 
-function rm_details(field_data, field_type){
+function rm_details(field_data, field_type) {
     console.log("in rm details")
     $.ajax({
         url: "adminRequests.php?type=remove_details",
@@ -1037,24 +1036,21 @@ function createList(data, type) {
     $("body").append(
         $('<div class="listContainer" id="persons_list_container" </div>').append(
             $('<div class="popupAdd form_popup" id="popupAddList"</div>').append(
-                $('<h2 class="h2popup">'+titre+'</h2>')
+                $('<h2 class="h2popup">' + titre + '</h2>')
             )
         )
     );
 
     $('#popupAddList').append(
         $('<hr class="hrpopup"></hr>')
-
     );
 
     $('#popupAddList').append(
         $('<ul class="list-group" id="list"></ul>')
-
     );
 
     $('#popupAddList').append(
         $('<button class="submit_form" id="cancel_button" onclick="cancel_persons_list()">Annuler</button>')
-
     );
 
     for (var i in data) {
@@ -1064,13 +1060,23 @@ function createList(data, type) {
             const prenom = data[i][0];
             const numero = data[i][2];
 
-            if (data[i][2] == "NA"){
+            if (data[i][2] == "NA") {
                 $("#list").append(
-                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "itemType":type})
+                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + '</button>').data({
+                        "prenom": prenom,
+                        "nom": nom,
+                        "numero": numero,
+                        "itemType": type
+                    })
                 );
             } else {
                 $("#list").append(
-                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + " " + numero+ '</button>').data({"prenom": prenom, "nom": nom, "numero":numero, "itemType":type})
+                    $('<button type="button" class="list-group-item list_elem">' + prenom + " " + nom + " " + numero + '</button>').data({
+                        "prenom": prenom,
+                        "nom": nom,
+                        "numero": numero,
+                        "itemType": type
+                    })
                 );
             }
         } else {
@@ -1079,7 +1085,12 @@ function createList(data, type) {
             const id = data[i][0];
 
             $("#list").append(
-                $('<button type="button" class="list-group-item list_elem">' + id + '</button>').data({"titre": titre, "date": date, "id": id, "itemType":type})
+                $('<button type="button" class="list-group-item list_elem">' + id + '</button>').data({
+                    "titre": titre,
+                    "date": date,
+                    "id": id,
+                    "itemType": type
+                })
             );
 
 
@@ -1108,10 +1119,10 @@ function createList(data, type) {
         } else if ($(this).data("itemType") === "role") {
             add_role_by_oeuvre_id($(this).data("id"), $(this).data("titre"));
 
-        } else if ($(this).data("itemType") === "writtenBy"){
+        } else if ($(this).data("itemType") === "writtenBy") {
             add_written_or_directed_by($(this).data("id"), $(this).data("titre"), "written");
 
-        } else if ($(this).data("itemType") === "directedBy"){
+        } else if ($(this).data("itemType") === "directedBy") {
             add_written_or_directed_by($(this).data("id"), $(this).data("titre"), "directed");
 
         }
@@ -1136,8 +1147,8 @@ function cancel_persons_list() {
 
 function checkForm(formID, num_required) {
     var counter = 0;
-    $(formID).filter(':input').each(function(){
-        if (!$.trim($(this).val())){
+    $(formID).filter(':input').each(function () {
+        if (!$.trim($(this).val())) {
             counter++;
         }
     });
@@ -1159,14 +1170,14 @@ function edit_actors_from_person() {
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_actor').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#oeuvre_name_actor').css("border-color", "#fed136")
     }
 
     if ($.trim($('#oeuvre_role')) === "") {
         $('#oeuvre_role').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#oeuvre_role').css("border-color", "#fed136")
     }
 
@@ -1183,7 +1194,7 @@ function edit_actors_from_person() {
         success: function (data, textStatus, xhr) {
             if (data == "not found") {
                 alert("Aucune Oeuvre n'a été trouvée pour le titre " + titreOeuvre + "\nVeuillez ajouter l'oeuvre depuis la page administrateur puis rééssayer.")
-                } else {
+            } else {
                 createList(data, "role");
             }
 
@@ -1208,7 +1219,7 @@ function edit_writers_from_person() {
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_writer').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#oeuvre_name_writer').css("border-color", "#fed136")
     }
 
@@ -1251,7 +1262,7 @@ function edit_directors_from_person() {
     if ($.trim(titreOeuvre) === "") {
         $('#oeuvre_name_director').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#oeuvre_name_director').css("border-color", "#fed136")
     }
 
@@ -1287,8 +1298,8 @@ function edit_directors_from_person() {
 
 function createSection(titre) {
     console.log("hey", "table_container_" + titre);
-    var $element = $('#'+titre);
-    if(!$element.length){
+    var $element = $('#' + titre);
+    if (!$element.length) {
 
         var oeuvre_section = document.createElement("SECTION");
         oeuvre_section.setAttribute('id', titre);
@@ -1326,25 +1337,25 @@ function addMovie() { //fct appelée lors du clique sur le bouton
     if ($.trim(title) === "") {
         $('#movie_name').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#movie_name').css("border-color", "#fed136")
     }
 
-    if ($.trim(date) === ""  || (isNaN(date))){
+    if ($.trim(date) === "" || (isNaN(date))) {
         $('#movie_date').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#movie_date').css("border-color", "#fed136")
     }
 
-    if($.trim(note) !== "") {
-        if(isNaN(note)){
+    if ($.trim(note) !== "") {
+        if (isNaN(note)) {
             $('#movie_note').css("border-color", "red")
             invalid = true
         } else {
-            if (note < 0 || note > 10){
+            if (note < 0 || note > 10) {
                 $('#movie_date').css("border-color", "red")
-                invalid=true;
+                invalid = true;
             } else {
                 $('#movie_date').css("border-color", "#fed136")
             }
@@ -1373,8 +1384,7 @@ function insert_movie(title, id, date) { //fct qui fait l insertion dans la db
     }
 
 
-
-        $.ajax({
+    $.ajax({
         url: "adminRequests.php?type=add_movie",
         type: "POST",
         dataType: 'json', // add json datatype to get json
@@ -1510,20 +1520,20 @@ function addSerie() { //fct appelée lors du clique sur le bouton
     if ($.trim(title) === "") {
         $('#serie_name').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#serie_name').css("border-color", "#fed136")
     }
 
-    if ($.trim(start_date) === ""  || isNaN(start_date)){
+    if ($.trim(start_date) === "" || isNaN(start_date)) {
         $('#serie_start_year').css("border-color", "red")
         invalid = true
-    }   else {
+    } else {
         $('#serie_start_year').css("border-color", "#fed136")
     }
 
-    if($.trim(end_date) !== "") {
-        if (!isNaN(end_date)){
-            if(end_date<start_date){
+    if ($.trim(end_date) !== "") {
+        if (!isNaN(end_date)) {
+            if (end_date < start_date) {
                 $('#serie_end_year').css("border-color", "red")
                 //TODO: show endYear < startDate
                 invalid = true
@@ -1534,7 +1544,7 @@ function addSerie() { //fct appelée lors du clique sur le bouton
             }
         } else {
             $('#serie_end_year').css("border-color", "red")
-            invalid=true;
+            invalid = true;
             //TODO: show endYear != int
 
         }
@@ -1544,14 +1554,14 @@ function addSerie() { //fct appelée lors du clique sur le bouton
 
     }
 
-    if($.trim(note) !== "") {
-        if(isNaN(note)){
+    if ($.trim(note) !== "") {
+        if (isNaN(note)) {
             $('#serie_note').css("border-color", "red")
             invalid = true
         } else {
-            if (note < 0 || note > 10){
+            if (note < 0 || note > 10) {
                 $('#serie_note').css("border-color", "red")
-                invalid=true;
+                invalid = true;
             } else {
                 $('#serie_note').css("border-color", "#fed136")
             }

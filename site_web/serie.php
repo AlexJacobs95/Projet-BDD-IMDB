@@ -101,7 +101,7 @@ if (!$database) {
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="test_css/film.css" rel="stylesheet">
+    <link href="css/film.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -113,7 +113,7 @@ if (!$database) {
             integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
             crossorigin="anonymous"></script>
     <![endif]-->
-    <script src="dynamic_part.js"></script>
+    <script src="js/dynamic_part.js"></script>
 
 
 
@@ -346,9 +346,9 @@ include "popUpForm.php";
         crossorigin="anonymous"></script>
 
 <!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
-<script src="themoviedb.js"></script>
-<script src="API.js"></script>
+<script src="js/agency.min.js"></script>
+<script src="js/themoviedb.js"></script>
+<script src="js/API.js"></script>
 
 <?php include "commentSection.php" ?>
 

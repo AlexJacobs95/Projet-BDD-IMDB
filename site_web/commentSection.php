@@ -35,7 +35,7 @@ if (!$database) {
 
 
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="commentSection.css">
+<link rel="stylesheet" type="text/css" href="css/commentSection.css">
 
 <section id="Comments" class="bg-light-gray">
     <div class="container" style="margin: auto">

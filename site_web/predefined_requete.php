@@ -25,8 +25,8 @@ include 'menubar.php';
 
     <!-- Theme CSS -->
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="test_css/agency.css" rel="stylesheet">
-    <link href="predefined_query.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+    <link href="css/predefined_query.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -76,7 +76,7 @@ include 'menubar.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
 
 <!-- Theme JavaScript -->
-<script src="test_js/agency.min.js"></script>
+<script src="js/agency.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
