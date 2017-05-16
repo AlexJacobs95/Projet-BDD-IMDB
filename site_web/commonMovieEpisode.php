@@ -19,10 +19,10 @@
                 echo "<table border=1 frame=void rules=rows id = \"actors_table\">";
 
                 while ($actors_row = mysqli_fetch_array($roles)) {
-                    $fn = $actors_row['Prenom'];
-                    $ln = $actors_row['Nom'];
-                    $num = $actors_row['Numero'];
-                    $role = $actors_row['Role'];
+                    $fn = utf8_encode($actors_row['Prenom']);
+                    $ln = utf8_encode($actors_row['Nom']);
+                    $num = utf8_encode($actors_row['Numero']);
+                    $role = utf8_encode($actors_row['Role']);
                     $nom = sprintf('%s %s', $fn, $ln);
                     echo "<tr class = 'row_t'>";
                     echo "<td >";
@@ -53,9 +53,9 @@
         echo "<table id = \"directors_table\" class='directorsAndWriters' border=1 frame=void rules=rows>";
 
         while ($directors_row = mysqli_fetch_array($directors)) {
-            $fn = $directors_row['Prenom'];
-            $ln = $directors_row['Nom'];
-            $num = $directors_row['Numero'];
+            $fn = utf8_encode($directors_row['Prenom']);
+            $ln = utf8_encode($directors_row['Nom']);
+            $num = utf8_encode($directors_row['Numero']);
             $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
             echo "<tr class = 'row_t'>";
             echo "<td >";
@@ -82,9 +82,9 @@
         echo "<table id = \"writers_table\" class='directorsAndWriters' >";
 
         while ($writers_row = mysqli_fetch_array($writers)) {
-            $fn = $writers_row['Prenom'];
-            $ln = $writers_row['Nom'];
-            $num = $writers_row['Numero'];
+            $fn = utf8_encode($writers_row['Prenom']);
+            $ln = utf8_encode($writers_row['Nom']);
+            $num = utf8_encode($writers_row['Numero']);
             $nom = sprintf('%s %s', $fn, $ln); //prenom + nom
             echo "<tr class = 'row_t'>";
             echo "<td >";

@@ -39,7 +39,7 @@ Page d'acceuill de site web.
 
 </head>
 
-<body>
+<body style="background-color: #126a9d">
 
 <!-- Navigation -->
 <?php
@@ -55,7 +55,7 @@ include 'menubar.php';
 <header>
 
     <div class="container">
-        <div class="intro-text" id="intro" style="display: none">
+        <div class="intro-text" id="intro" style="display: none; background-color: ">
             <div class="intro-lead-in" id="bienvenue"  >Bienvenue sur IMDB!</div>
             <div class="intro-heading" id ="sous-titre">Recherchez un film, une série, un acteur et plus</div>
 
@@ -73,13 +73,43 @@ include 'menubar.php';
     </div>
 
 
-
-
 </header>
 
 
 
-<!-- Stats Section -->
+<!-- Travel Section -->
+
+    <section id="travel" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                   <div class="stat-member">
+                       <h4>Films</h4>
+                   </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="stat-member">
+                        <h4>Séries</h4>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="stat-member">
+                        <h4>Acteurs</h4>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="stat-member">
+                        <h4>Auteurs</h4>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="stat-member">
+                        <h4>Directeurs</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 

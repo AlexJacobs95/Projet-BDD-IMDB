@@ -84,7 +84,7 @@ if (!$database) {
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="iso-8859-1">
     <title>IMD - International movie database</title>
 
     <!-- Bootstrap Core CSS -->
@@ -127,14 +127,14 @@ include 'menubar.php';
 <?php
 $movie_infos = mysqli_fetch_array($movie);
 $plot_info = mysqli_fetch_array($plot_res);
-$titre = $movie_infos['Titre'];
+$titre = utf8_encode($movie_infos['Titre']);
 $date = $movie_infos['AnneeSortie'];
 $note = $movie_infos['Note'];
 $titre_format = '%s (%d)';
 $note_fomat = '%g/10';
 $plot = $plot_info['Plot'];
-$nb_roles = mysqli_num_rows($roles);
-$havePlot = mysqli_num_rows($plot_res);
+$nb_roles = utf8_encode(mysqli_num_rows($roles));
+$havePlot = utf8_encode(mysqli_num_rows($plot_res));
 ?>
 <header>
     <div class="top">
