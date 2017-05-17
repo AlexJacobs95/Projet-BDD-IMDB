@@ -18,11 +18,12 @@ if ($database->connect_errno) {
 
             $res = $database->query($requete);
             $rows = array();
-            while($row = mysqli_fetch_array($res)) {
+            while ($row = mysqli_fetch_array($res)) {
                 $fn = utf8_encode($row["Prenom"]);
-                $n = utf8_encode($row["Nom"]);
+                $ln = utf8_encode($row["Nom"]);
                 $num = utf8_encode($row["Numero"]);
-                array_push($rows, [$fn, $n, $num]);
+                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+                array_push($rows, [$link, $num]);
             }
 
             echo json_encode($rows);
@@ -39,16 +40,17 @@ if ($database->connect_errno) {
 
             $res = $database->query($requete);
             $rows = array();
-            while($row = mysqli_fetch_array($res)) {
+            while ($row = mysqli_fetch_array($res)) {
                 $fn = utf8_encode($row["Prenom"]);
-                $n = utf8_encode($row["Nom"]);
+                $ln = utf8_encode($row["Nom"]);
                 $num = utf8_encode($row["Numero"]);
-                array_push($rows, [$fn, $n, $num]);
+                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+                array_push($rows, [$link, $num]);
             }
 
             echo json_encode($rows);
-        }
-        if ($_GET['requete'] == "Requete 3") {
+
+        } else if ($_GET['requete'] == "Requete 3") {
             $requete = "SELECT DISTINCT Nom, Prenom, Numero
                     FROM(
                         SELECT OID
@@ -70,30 +72,125 @@ if ($database->connect_errno) {
 
             $res = $database->query($requete);
             $rows = array();
-                while($row = mysqli_fetch_array($res)) {
+            while ($row = mysqli_fetch_array($res)) {
                 $fn = utf8_encode($row["Prenom"]);
-                $n = utf8_encode($row["Nom"]);
+                $ln = utf8_encode($row["Nom"]);
                 $num = utf8_encode($row["Numero"]);
-                array_push($rows, [$fn, $n, $num]);
+                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+                array_push($rows, [$link, $num]);
             }
 
             echo json_encode($rows);
-        }
-        if ($_GET['requete'] == "Requete 4") {
-            $requete = "SELECT DISTINCT EpisodeID
-                    FROM Episode e
-                    WHERE NOT EXISTS(
-                        SELECT Genre, EpisodeID
-                        FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
-                        WHERE genre = 'm' AND OID = e.EpisodeID)";
 
+        } else if ($_GET['requete'] == "Requete 4") {
+            $requete = "SELECT DISTINCT EpisodeID
+                        FROM Episode e
+                        WHERE NOT EXISTS(
+                            SELECT Genre, EpisodeID
+                            FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
+                            WHERE genre = 'm' AND OID = e.EpisodeID)";
+
+            $res = $database->query($requete);
+            $rows = array();
+            while ($row = mysqli_fetch_array($res)) {
+                $link = utf8_encode('<a href="' . "episode" . '.php?id=' . urlencode($row['EpisodeID']) . '">' . utf8_encode($row['EpisodeID']) . '</a>');
+                array_push($rows, [$link]);
+            }
+
+            echo json_encode($rows);
+
+        } else if ($_GET['requete'] == "Requete 5") {
+            $requete = "select Prenom, Nom, Numero, count(*)nb
+                        FROM(
+                            select SID, Prenom, Nom, Numero
+                            from Episode
+                            inner join Role on OID = EpisodeID
+                            group by  SID, Prenom, Nom, Numero)t
+                        group by  Prenom, Nom, Numero
+                        order by nb desc
+                        LIMIT 1";
 
             $res = $database->query($requete);
 
             $rows = array();
-            while($row = mysqli_fetch_array($res)) {
-                $id = utf8_encode($row["EpisodeID"]);
-                array_push($rows, [$id]);
+            while ($row = mysqli_fetch_array($res)) {
+                $fn = utf8_encode($row["Prenom"]);
+                $ln = utf8_encode($row["Nom"]);
+                $num = utf8_encode($row["Numero"]);
+                $nb = utf8_encode($row["nb"]);
+
+                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+                array_push($rows, [$link, $num, $nb]);
+            }
+
+            echo json_encode($rows);
+
+        } else if ($_GET['requete'] == "Requete 6") {
+            $requete = "SELECT T3.SID as SID, ep_num, avg_ep_by_year, avg_actor_by_season
+                        FROM (
+                            (SELECT ID, count(*) as ep_num
+                            FROM(
+                                SELECT ID, EpisodeID
+                                FROM(
+                                 SELECT ID
+                                 FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+                                 WHERE note >(
+                                     SELECT AVG(note)
+                                     FROM(
+                                     SELECT note
+                                     FROM Serie INNER Join Oeuvre on Oeuvre.ID = Serie.SerieID
+                                     WHERE note != -1 and AnneeSortie !=0) as t)) as Series_OK
+                                 INNER JOIN Episode ON Series_OK.ID = Episode.SID) as t
+                                 GROUP BY ID)T1
+                        
+                            inner join
+                        
+                             (
+                                 SELECT SID, avg(num) as avg_actor_by_season
+                                 FROM(
+                                    SELECT SID, count(*) as num
+                                    FROM(
+                                        SELECT Nom, Prenom, Numero, SID, Saison
+                                            FROM(
+                                            SELECT SID, EpisodeID, Saison
+                                            FROM Episode inner join Serie on SerieID = SID
+                                            WHERE Saison != -1)t
+                                        INNER Join Role on EpisodeID = OID
+                                        Group by Nom, Prenom, Numero, SID, Saison)t2
+                                    GROUP BY SID, Saison)t3
+                                Group By SID)T2
+                        
+                            on T1.ID = T2.SID
+                        
+                            inner join
+                        
+                            (
+                                SELECT t5.SID, AVG(num) as avg_ep_by_year
+                                FROM(
+                                 SELECT t6.SID, count(*) as num
+                                 FROM(
+                                     SELECT SID, ID, AnneeSortie
+                                     FROM Oeuvre
+                                     INNER Join Episode on EpisodeID = ID)t6
+                                 WHERE AnneeSortie != 0
+                                 GROUP BY t6.SID, AnneeSortie) as t5
+                                Group by t5.SID)T3
+                        
+                            on T1.ID = T3.SID
+                        )";
+
+            $res = $database->query($requete);
+
+            $rows = array();
+            while ($row = mysqli_fetch_array($res)) {
+                $serie = utf8_encode($row["SID"]);
+                $ep_num = utf8_encode($row["ep_num"]);
+                $avg_ep_by_year = utf8_encode($row["avg_ep_by_year"]);
+                $avg_actor_by_season = utf8_encode($row["avg_actor_by_season"]);
+
+
+                $link = utf8_encode('<a href="' . "serie" . '.php?id=' . urlencode($row['SID']) . '">' . utf8_encode($row['SID']) . '</a>');
+                array_push($rows, [$link, $ep_num, $avg_ep_by_year, $avg_actor_by_season]);
             }
 
             echo json_encode($rows);
