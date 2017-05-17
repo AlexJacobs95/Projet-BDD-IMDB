@@ -542,7 +542,7 @@ $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - PersonneRoleMEpisodes)$
     r2.Prenom = 'Willis \wedge \\
     r2.Numero = 'NA' \wedge \\
     r2.OID = r1.OID) \}
-    r3.OID = r2.OID
+    r2.OID \neq r3.OID
 \end{aligned}\]
 
 
@@ -592,9 +592,9 @@ et dans le cadre d'une personne de :
 
 \subsection{La recherche}
 
-L'utilisateur à la possibilité de rechercher des oeuvres (films, séries, épisodes) et des personnes au travers de notre moteur de recherche. Pour trouver un maximum de résultats le plus rapidement possible (et conserver leurs pertinence) nous avons choisit d'utiliser les requêtes \textit{MATCH (...) AGAINST (... IN BOOLEAN MODE)} utilisant des fulltext indexes. 
+L'utilisateur à la possibilité de rechercher des oeuvres (films, séries, épisodes) et des personnes au travers de notre moteur de recherche. Pour trouver un maximum de résultats le plus rapidement possible (et conserver leurs pertinences) nous avons choisit d'utiliser les requêtes \textit{MATCH (...) AGAINST (... IN BOOLEAN MODE)} utilisant des fulltext indexes. 
 \par 
-Le contenu de l'input entré par l'utilisateur est d'abord traité pour augmenté la pertinence des résultat en ajoutant des "+" devant chaque mots. de cette manière nous obligeons tous que tous le mots entré par l'utilisateur soient présent dans le résultat et évitons donc un nombre trop important de "match".
+Le contenu de l'input entré par l'utilisateur est d'abord traité pour augmenté la pertinence des résultat en ajoutant des "+" devant chaque mots, cela force tous les mots entrés à se trouver dans le résultat et nous évitons donc un nombre trop important de "matchs".
 \par
 Aussi, si jamais l'utilisateur entre des mots composés exclusivement d'une seule lettre, par exemple pour rechercher le film \textit{A (2002)} une simple requête \textit{WHERE = }
 sera exécutée pour éviter d'avoir un nombre aberrant de résultats.
