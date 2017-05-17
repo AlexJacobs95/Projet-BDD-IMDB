@@ -1,5 +1,3 @@
-from BaseParser import *
-
 def output_ratings(dico):
     of = open("../SQL_data_files/ratings_ok.txt", 'w')
     for key in dico:

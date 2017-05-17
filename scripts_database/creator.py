@@ -1,5 +1,4 @@
 import MySQLdb as mdb
-import subprocess
 
 
 def executeDDLFromFile(filename, cursor):

@@ -1,5 +1,5 @@
 ENDLINE = "--------------------------------------------------------------------------------\n"
-from BaseParser import *
+
 
 def output_langues(dico):
     of = open("../SQL_data_files/langues_ok.txt", 'w')
