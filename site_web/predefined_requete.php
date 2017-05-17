@@ -111,6 +111,7 @@ include 'menubar.php';
             },
             success: function (data) {
                 console.log(query + "termninée");
+                console.log(data);
                 data = (JSON.parse(data));
                 output_query(num, data);
 
@@ -143,6 +144,10 @@ include 'menubar.php';
 
         } else if (num === "4") {
             create_table_query_4(res)
+        } else if (num === "5") {
+            create_table_query_5(res)
+        } else if (num === "6") {
+            create_table_query_6(res)
         }
         $('#running_text'+num).css("display", "none");
 
@@ -156,8 +161,7 @@ include 'menubar.php';
             "aaSorting": [],
             data: data,
             columns: [
-                {title: "Nom"},
-                {title: "Prenom"},
+                {title: "Prénom, Nom"},
                 {title: "Numero"}
             ]
         });
@@ -166,6 +170,7 @@ include 'menubar.php';
     function create_table_query_4(data) {
         document.getElementById("table_container_Résultats de la requête 4").appendChild(table);
         $('#table_4').DataTable({
+            "deferRender": true,
             "aaSorting": [],
             data: data,
             columns: [
@@ -173,6 +178,42 @@ include 'menubar.php';
 
             ]
         });
+    }
+
+    function create_table_query_5(data) {
+        document.getElementById("table_container_Résultats de la requête 5").appendChild(table);
+        $('#table_5').DataTable({
+            "deferRender": true,
+            "aaSorting": [],
+            data: data,
+            columns: [
+                {title: "Prénom, Nom"},
+                {title: "Numero"},
+                {title: "Nombre de séries"},
+
+
+            ]
+        });
+
+
+    }
+
+    function create_table_query_6(data) {
+        document.getElementById("table_container_Résultats de la requête 6").appendChild(table);
+        $('#table_6').DataTable({
+            "deferRender": true,
+            "aaSorting": [],
+            data: data,
+            columns: [
+                {title: "ID de la série"},
+                {title: "Nombre d'épisodes"},
+                {title: "Nombre moyen d'épisodes par an"},
+                {title: "Nombre moyen d'acteurs par saison"},
+
+            ]
+        });
+
+
     }
 
 
