@@ -6,11 +6,12 @@ def pretty_print(dico):
     of_directed_by = open("../SQL_data_files/dirigePar.txt", 'w')
 
     for key in dico:
-        of.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"]+ "\n")
+        of.write(
+            dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + dico[key]["genre"] + "\n")
         print(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"])
         for id_oeuvre in dico[key]["oeuvres"]:
-            of_directed_by.write(dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre + "\n")
-
+            of_directed_by.write(
+                dico[key]["prenom"] + "|" + dico[key]["nom"] + "|" + dico[key]["numero"] + "|" + id_oeuvre + "\n")
 
 
 def test():
@@ -49,12 +50,12 @@ def parse(file):
                     director_done = True
                     director_data = get_nom_prenom(line)
                     current_director = {"ID": directorID,
-                                      "nom": director_data[0],
-                                      "prenom": director_data[1],
-                                      "numero": director_data[2],
-                                      "genre": genre,
-                                      "oeuvres": [],
-                                      }
+                                        "nom": director_data[0],
+                                        "prenom": director_data[1],
+                                        "numero": director_data[2],
+                                        "genre": genre,
+                                        "oeuvres": [],
+                                        }
                     id_oeuvre = getOeuvreID(line)
                     if isBetween2000and2017(id_oeuvre):
                         current_director["oeuvres"].append((id_oeuvre))

@@ -3,7 +3,7 @@ header .intro-text {
     padding-bottom: 10px;
 }
 
-section{
+section {
     padding: 50px;
 }
 
@@ -11,7 +11,7 @@ input[type="text3"] {
     width: 530px;
     height: 40px;
     box-sizing: border-box;
-    border: 1px solid rgb(170,170,170);
+    border: 1px solid rgb(170, 170, 170);
     border-radius: px;
     font-size: 16px;
     color: black;
@@ -27,7 +27,7 @@ input[type="text2"] {
     width: 250px;
     height: 40px;
     box-sizing: border-box;
-    border: 1px solid rgb(170,170,170);
+    border: 1px solid rgb(170, 170, 170);
     font-size: 16px;
     color: black;
     background-color: transparent;
@@ -45,14 +45,15 @@ input[type="text2"] {
 
 .custom-dropdown--large {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;}
+    text-transform: uppercase;
+}
 
 .custom-dropdown--small {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
 }
 
-.custom-dropdown__select{
+.custom-dropdown__select {
     font-size: inherit; /* inherit size from .custom-dropdown */
     padding: .5em; /* add some space*/
     margin: 0; /* remove default margins */
@@ -101,12 +102,15 @@ input[type="text2"] {
         font-size: .625em;
         line-height: 1;
         right: 1.2em;
-        top: 50%; margin-top: -.5em;
+        top: 50%;
+        margin-top: -.5em;
     }
 
     .custom-dropdown::before { /*  Custom dropdown arrow cover */
         width: 2em;
-        right: 0; top: 0; bottom: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         border-radius: 0 3px 3px 0;
 
     }
@@ -121,27 +125,33 @@ input[type="text2"] {
 
     /* White dropdown style */
     .custom-dropdown--white::before {
-        top: .5em; bottom: .5em;
+        top: .5em;
+        bottom: .5em;
         background-color: transparent;
         border-left: 1px solid transparent;
     }
 
     .custom-dropdown--white::after {
-        color: rgba(0,0,0,.9);
+        color: rgba(0, 0, 0, .9);
     }
 
     /* FF only temp fix */
     @-moz-document url-prefix() {
-        .custom-dropdown__select              { padding-right: .9em }
-        .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
-        .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
+        .custom-dropdown__select {
+            padding-right: .9em
+        }
+        .custom-dropdown--large .custom-dropdown__select {
+            padding-right: 1.3em
+        }
+        .custom-dropdown--small .custom-dropdown__select {
+            padding-right: .5em
+        }
     }
 }
 
-label{
+label {
     display: block;
 }
-
 
 .fn {
     display: inline-block;
@@ -151,7 +161,7 @@ label{
     margin-bottom: 30px;
 }
 
-::placeholder{
+::placeholder {
     color: white;
 }
 
@@ -166,12 +176,12 @@ label{
 
 }
 
-.select2-selection__choice{
+.select2-selection__choice {
     height: 30px;
 }
 
 td {
     text-align: center;
-    color:black;
+    color: black;
 
 }

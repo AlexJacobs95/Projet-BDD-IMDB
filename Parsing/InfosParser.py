@@ -4,7 +4,7 @@ ENDLINE = "---------------------------------------------------------------------
 def output_langues(dico):
     of = open("../SQL_data_files/langues_ok.txt", 'w')
     for key in dico:
-        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["language"]+ "\n")
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["language"] + "\n")
 
     of.close()
 
@@ -12,7 +12,7 @@ def output_langues(dico):
 def output_genres(dico):
     of = open("../SQL_data_files/genres_ok.txt", 'w')
     for key in dico:
-        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["genre"]+ "\n")
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["genre"] + "\n")
 
     of.close()
 
@@ -20,7 +20,7 @@ def output_genres(dico):
 def output_pays(dico):
     of = open("../SQL_data_files/pays_ok.txt", 'w')
     for key in dico:
-        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["country"]+ "\n")
+        of.write(dico[key]["OeuvreID"] + "|" + dico[key]["country"] + "\n")
 
     of.close()
 
@@ -75,6 +75,7 @@ def main():
     output_pays(countires)
     output_langues(languages)
     output_genres(genres)
+
 
 if __name__ == "__main__":
     main()

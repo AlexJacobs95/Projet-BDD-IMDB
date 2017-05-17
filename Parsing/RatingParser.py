@@ -28,8 +28,7 @@ def test():
             if line_counter == 284:
                 print(get_id(line))
 
-
-            line_counter +=1
+            line_counter += 1
 
 
 def parse():
@@ -41,7 +40,7 @@ def parse():
             ID += 1
             if line_counter > 27:
                 if line == "------------------------------------------------------------------------------\n" and \
-                   line_counter > 1000:
+                                line_counter > 1000:
                     return ratings
                 else:
                     if is_oeuvre(line):
@@ -49,9 +48,9 @@ def parse():
                                 "note": get_note(line)
                                 }
                         ratings[ID] = note
-            line_counter +=1
+            line_counter += 1
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     ratings = parse()
     output_ratings(ratings)

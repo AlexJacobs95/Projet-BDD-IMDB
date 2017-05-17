@@ -14,7 +14,7 @@ def get_nom_prenom(line):
             # ex : Herry, thierry (IV)
             begin = nom.index('(')
             end = nom.index(')')
-            numero = nom[begin+1:end]
+            numero = nom[begin + 1:end]
             nom = nom.replace(nom[begin:end + 1], "")
     else:
         if len(nom_prenom.split(',')) == 2:
@@ -28,7 +28,7 @@ def get_nom_prenom(line):
             # ex : Herry, thierry (IV)
             begin = prenom.index('(')
             end = prenom.index(')')
-            numero = prenom[begin+1:end]
+            numero = prenom[begin + 1:end]
             prenom = prenom.replace(prenom[begin:end + 1], "")
 
     return nom.strip(), prenom.strip(), numero.strip()
@@ -39,7 +39,7 @@ def getOeuvreID(line):
     for i in range(1, len(data)):
         if data[i] != "":
             long_id = data[i]
-            if long_id[0] == '"' and '{' in long_id and '}' in long_id :
+            if long_id[0] == '"' and '{' in long_id and '}' in long_id:
                 # Si l oeuvre est une serie (le nom des series commence par des guillemets
                 index = long_id.index('}')
                 long_id = long_id[0:index + 1]
@@ -73,8 +73,9 @@ def getIndexOfDateEnd(long_id):
         if char == '(':
             begin_index = i
             end_index = i + 5
-            if (long_id[begin_index + 1:end_index].isdigit() or long_id[begin_index + 1:end_index] == '????') and (long_id[
-                end_index] in ("/", ")")):
+            if (long_id[begin_index + 1:end_index].isdigit() or long_id[begin_index + 1:end_index] == '????') and (
+                long_id[
+                    end_index] in ("/", ")")):
                 # Si on a une une date
                 if long_id[end_index] == '/':
                     return long_id.index(')', end_index, len(long_id))

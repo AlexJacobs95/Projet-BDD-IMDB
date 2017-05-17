@@ -74,7 +74,7 @@ if (!$database) {
     $ep_infos = $database->query($query);
 
     //fetch serie title
-    $query="SELECT Titre
+    $query = "SELECT Titre
             FROM Oeuvre
             WHERE ID = (
               SELECT SID
@@ -154,7 +154,7 @@ $havePlot = mysqli_num_rows($plot_res);
 
 <header>
     <div class="container">
-        <div class="intro-text" id = "intro">
+        <div class="intro-text" id="intro">
             <div class="intro-heading-with-no-margin" id="titre"><?php echo $titre; ?></div>
             <div class="intro-heading" id="date"><?php echo $date; ?></div>
             <div class="infos"><?php extractEpInfos($ep_infos, $serie_title); ?></div>
@@ -211,7 +211,7 @@ $havePlot = mysqli_num_rows($plot_res);
                 $('#nav_bar').addClass('navbar-top');
             }
 
-            if ($(window).scrollTop() < 892 -60) {
+            if ($(window).scrollTop() < 892 - 60) {
                 $('#nav_bar').removeClass('navbar-top');
             }
         });

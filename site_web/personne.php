@@ -81,9 +81,6 @@ function printCategories($roles, $directed, $written)
 }
 
 
-
-
-
 ?>
 
 
@@ -305,7 +302,7 @@ include "popUpForm.php";
                 $('#nav_bar').addClass('navbar-top');
             }
 
-            if ($(window).scrollTop() < 892 -170) {
+            if ($(window).scrollTop() < 892 - 170) {
                 $('#nav_bar').removeClass('navbar-top');
             }
         });

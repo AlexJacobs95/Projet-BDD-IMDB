@@ -28,6 +28,7 @@ def createDB():
     cur.execute("CREATE DATABASE IMDB;")
     conn.close();
 
+
 if __name__ == '__main__':
     createDB()
 
@@ -36,4 +37,3 @@ if __name__ == '__main__':
     cur = conn.cursor()
     executeDDLFromFile("ddl.sql", cur)
     conn.close();
-

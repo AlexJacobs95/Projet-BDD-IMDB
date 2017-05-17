@@ -51,7 +51,7 @@ def main():
                     plot_counter += 1
 
                 elif is_plot(line):
-                    current_plot["plot"] +=get_text(line) + " "
+                    current_plot["plot"] += get_text(line) + " "
 
                 else:
                     pass

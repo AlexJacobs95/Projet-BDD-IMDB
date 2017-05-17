@@ -6,15 +6,16 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="actor_form_popup">
         <!-- Contact Us Form -->
-        <form class="form_popup" action="" id="formActor" method="post" name="form" >
+        <form class="form_popup" action="" id="formActor" method="post" name="form">
             <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerActor')">
             <h2 class="h2popup">Ajouter un acteur </h2>
             <hr class="hrpopup">
-            <input id="actor_name" name="name" placeholder="Nom"  type="text3" >
-            <input id="actor_fn" name="fn" placeholder="Prénom"  type="text3" >
-            <input id="actor_role" name="role" placeholder="Role"  type="text3" >
+            <input id="actor_name" name="name" placeholder="Nom" type="text3">
+            <input id="actor_fn" name="fn" placeholder="Prénom" type="text3">
+            <input id="actor_role" name="role" placeholder="Role" type="text3">
 
-            <select class="form-control" id="actor_genre" style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;";>
+            <select class="form-control" id="actor_genre"
+                    style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;" ;>
                 <option>Homme</option>
                 <option>Femme</option>
             </select>
@@ -26,7 +27,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
 </div>
 
 
-<div class="formContainer" id="formContainerDirector" style="display: none" >
+<div class="formContainer" id="formContainerDirector" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="director_form_popup">
         <!-- Contact Us Form -->
@@ -34,19 +35,21 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerDirector')">
             <h2 class="h2popup">Ajouter un directeur </h2>
             <hr class="hrpopup">
-            <input id="director_name" name="name" placeholder="Nom" type="text3" >
-            <input id="director_fn" name="fn" placeholder="Prénom" type="text3" >
-            <select class="form-control" id="director_genre" style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;";>
+            <input id="director_name" name="name" placeholder="Nom" type="text3">
+            <input id="director_fn" name="fn" placeholder="Prénom" type="text3">
+            <select class="form-control" id="director_genre"
+                    style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;" ;>
                 <option>Homme</option>
                 <option>Femme</option>
             </select>
-            <button type='button' class="submit_form" id="submitDirector" onclick="edit_directors_from_oeuvre()">Send</button>
+            <button type='button' class="submit_form" id="submitDirector" onclick="edit_directors_from_oeuvre()">Send
+            </button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->
 </div>
 
-<div class="formContainer" id="formContainerWriter" style="display: none" >
+<div class="formContainer" id="formContainerWriter" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="writer_form_popup">
         <!-- Contact Us Form -->
@@ -54,19 +57,21 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerWriter')">
             <h2 class="h2popup">Ajouter un auteur </h2>
             <hr class="hrpopup">
-            <input id="writer_name" name="name" placeholder="Nom" type="text3" >
-            <input id="writer_fn" name="fn" placeholder="Prénom" type="text3" >
-            <select class="form-control" id="writer_genre" style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;";>
+            <input id="writer_name" name="name" placeholder="Nom" type="text3">
+            <input id="writer_fn" name="fn" placeholder="Prénom" type="text3">
+            <select class="form-control" id="writer_genre"
+                    style="margin-top: 30px; height: 50px; width: 400px; border: 2px solid #fed136;" ;>
                 <option>Homme</option>
                 <option>Femme</option>
             </select>
-            <button type='button' class="submit_form" id="submitWriter" onclick="edit_writers_from_oeuvre()">Send</button>
+            <button type='button' class="submit_form" id="submitWriter" onclick="edit_writers_from_oeuvre()">Send
+            </button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->
 </div>
 
-<div class="formContainer" id="formContainerDetails" style="display: none" >
+<div class="formContainer" id="formContainerDetails" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="details_form_popup">
         <!-- Contact Us Form -->
@@ -84,24 +89,24 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
 </div>
 
 <div class="formContainer" id="formContainerDetailsDelete" style="display: none">
-<!-- Popup Div Starts Here -->
-<div class="popupAdd" id="details_form_popup">
-    <!-- Contact Us Form -->
-    <form class="form_popup" action="#" id="formDetails" method="post" name="form">
-        <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerDetailsDelete')">
-        <h2 class="h2popup">Supprimer des details </h2>
-        <hr class="hrpopup">
-        <input id="genre_rm_detail" name="genre" placeholder="Genre" type="text3">
-        <input id="language_rm_detail" name="language" placeholder="Langue" type="text3">
-        <input id="country_rm_detail" name="country" placeholder="Pays" type="text3">
-        <button type="button" class="submit_form" id="submitDetails" onclick="remove_details()">Send</button>
-    </form>
-</div>
-<!-- Popup Div Ends Here -->
+    <!-- Popup Div Starts Here -->
+    <div class="popupAdd" id="details_form_popup">
+        <!-- Contact Us Form -->
+        <form class="form_popup" action="#" id="formDetails" method="post" name="form">
+            <img class="close" src= <?php echo $close; ?> onclick ="div_hide('formContainerDetailsDelete')">
+            <h2 class="h2popup">Supprimer des details </h2>
+            <hr class="hrpopup">
+            <input id="genre_rm_detail" name="genre" placeholder="Genre" type="text3">
+            <input id="language_rm_detail" name="language" placeholder="Langue" type="text3">
+            <input id="country_rm_detail" name="country" placeholder="Pays" type="text3">
+            <button type="button" class="submit_form" id="submitDetails" onclick="remove_details()">Send</button>
+        </form>
+    </div>
+    <!-- Popup Div Ends Here -->
 </div>
 
 
-<div class="formContainer" id="formContainerResume" style="display: none" >
+<div class="formContainer" id="formContainerResume" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="resume_form_popup">
         <!-- Contact Us Form -->
@@ -110,7 +115,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <h2 class="h2popup">Ajouter des details </h2>
             <hr class="hrpopup">
             <textarea class="textarea-resume" id="resume" name="resume"></textarea>
-            <button type='button' class="submit_form"  id="submitResume" onclick="edit_plot(<?php echo $havePlot; ?>)">
+            <button type='button' class="submit_form" id="submitResume" onclick="edit_plot(<?php echo $havePlot; ?>)">
                 Send
             </button>
             <img src="squares.gif" id="load_spinner" style="display: none">
@@ -122,19 +127,20 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="writer_form_popup">
         <!-- Contact Us Form -->
-        <form class="form_popup" action="#" id="formActorPerson" method="post" name="form" >
+        <form class="form_popup" action="#" id="formActorPerson" method="post" name="form">
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerActorPerson')">
             <h2 class="h2popup">Ajouter un rôle </h2>
             <hr class="hrpopup">
             <input id="oeuvre_name_actor" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3">
             <input id="oeuvre_role" name="role" placeholder="Rôle" type="text3">
-            <button type='button' class="submit_form" id="submitActorPerson" onclick="edit_actors_from_person()">Send</button>
+            <button type='button' class="submit_form" id="submitActorPerson" onclick="edit_actors_from_person()">Send
+            </button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->
 </div>
 
-<div class="formContainer" id="formContainerWriterPerson" style="display: none" >
+<div class="formContainer" id="formContainerWriterPerson" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="writer_form_popup">
         <!-- Contact Us Form -->
@@ -143,13 +149,15 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <h2 class="h2popup">Ajouter une oeuvre</h2>
             <hr class="hrpopup">
             <input id="oeuvre_name_writer" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3">
-            <button type='button' class="submit_form"  id="submitWriterPerson" onclick="edit_writers_from_person()">Send</button>
+            <button type='button' class="submit_form" id="submitWriterPerson" onclick="edit_writers_from_person()">
+                Send
+            </button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->
 </div>
 
-<div class="formContainer" id="formContainerDirectorPerson" style="display: none" >
+<div class="formContainer" id="formContainerDirectorPerson" style="display: none">
     <!-- Popup Div Starts Here -->
     <div class="popupAdd" id="writer_form_popup">
         <!-- Contact Us Form -->
@@ -157,8 +165,10 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerDirectorPerson')">
             <h2 class="h2popup">Ajouter une oeuvre</h2>
             <hr class="hrpopup">
-            <input id="oeuvre_name_director" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3" >
-            <button type='button' class="submit_form" id="submitWriterPerson" onclick="edit_directors_from_person()">Send</button>
+            <input id="oeuvre_name_director" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3">
+            <button type='button' class="submit_form" id="submitWriterPerson" onclick="edit_directors_from_person()">
+                Send
+            </button>
         </form>
     </div>
     <!-- Popup Div Ends Here -->

@@ -18,7 +18,7 @@ if (!$database) {
     $res = $database->query($query);
 
     $rows = array();
-    while($row = mysqli_fetch_array($res)) {
+    while ($row = mysqli_fetch_array($res)) {
         $author = utf8_encode($row["Auteur"]);
         $comment = utf8_encode($row["Texte"]);
         $date = utf8_encode($row["DateComplete"]);
@@ -28,9 +28,7 @@ if (!$database) {
 }
 
 
-
 ?>
-
 
 
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -47,44 +45,47 @@ if (!$database) {
                     </div>
                 </div>
                 <div class="col-lg-12">
-                <div class="post-footer">
-                    <div class="input-group">
-                        <fieldset id="stars" class="rating"
-                                  style="background-color: white; border: 1px solid lightgrey;">
-                            <input type="radio" id="star5" name="rating" value="5"/><label class="input-elem full"
-                                                                                           for="star5"
-                                                                                           title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half"/><label
-                                    class="input-elem half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4"/><label class="input-elem full"
-                                                                                           for="star4"
-                                                                                           title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half"/><label
-                                    class="input-elem half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3"/><label class="input-elem full"
-                                                                                           for="star3"
-                                                                                           title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half"/><label
-                                    class="input-elem half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2"/><label class="input-elem full"
-                                                                                           for="star2"
-                                                                                           title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half"/><label
-                                    class="input-elem half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1"/><label class="input-elem full"
-                                                                                           for="star1"
-                                                                                           title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half"/><label class="input-elem half"
-                                                                                                 for="starhalf"
-                                                                                                 title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                        <input class="form-control input_comments" placeholder="Pseudo" type="text_" id="new_comm_pseudo">
-                        <input class="form-control input_comments" placeholder="Ajouter un commentaire...." type="text_" id="new_comm_text">
-                        <span class="input-group-addon">
+                    <div class="post-footer">
+                        <div class="input-group">
+                            <fieldset id="stars" class="rating"
+                                      style="background-color: white; border: 1px solid lightgrey;">
+                                <input type="radio" id="star5" name="rating" value="5"/><label class="input-elem full"
+                                                                                               for="star5"
+                                                                                               title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4half" name="rating" value="4 and a half"/><label
+                                        class="input-elem half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4"/><label class="input-elem full"
+                                                                                               for="star4"
+                                                                                               title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3half" name="rating" value="3 and a half"/><label
+                                        class="input-elem half" for="star3half" title="Meh - 3.5 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3"/><label class="input-elem full"
+                                                                                               for="star3"
+                                                                                               title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2half" name="rating" value="2 and a half"/><label
+                                        class="input-elem half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2"/><label class="input-elem full"
+                                                                                               for="star2"
+                                                                                               title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1half" name="rating" value="1 and a half"/><label
+                                        class="input-elem half" for="star1half" title="Meh - 1.5 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1"/><label class="input-elem full"
+                                                                                               for="star1"
+                                                                                               title="Sucks big time - 1 star"></label>
+                                <input type="radio" id="starhalf" name="rating" value="half"/><label
+                                        class="input-elem half"
+                                        for="starhalf"
+                                        title="Sucks big time - 0.5 stars"></label>
+                            </fieldset>
+                            <input class="form-control input_comments" placeholder="Pseudo" type="text_"
+                                   id="new_comm_pseudo">
+                            <input class="form-control input_comments" placeholder="Ajouter un commentaire...."
+                                   type="text_" id="new_comm_text">
+                            <span class="input-group-addon">
                         <a href="javascript:send_comment()"><i class="fa fa-edit"></i></a>
                     </span>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -144,10 +145,10 @@ if (!$database) {
 
     function addCommentInList(author, comment, time, rating) {
         console.log("rating : ", rating);
-        var id = "comment"+i;
+        var id = "comment" + i;
         $('#comments_container').append(
             $('<div class="col-lg-12"></div>').append(
-                $('<div class="panel panel-white post panel-shadow" id='+i+'></div>').append(
+                $('<div class="panel panel-white post panel-shadow" id=' + i + '></div>').append(
                     $('<div class="post-heading"></div>').append(
                         $('<div class="title h5"></div>').append(
                             $('<a style="margin-bottom: 5px;display: block;" href="#"><b>' + author + '</b></a>'),
@@ -159,7 +160,7 @@ if (!$database) {
         );
 
 
-        $('#'+i).append(
+        $('#' + i).append(
             $('<div class="post-description"></div>').append([
                 '<p style="display: block;padding-top: 20px;">' + comment + '</p>',
                 '<div class="stats">',
