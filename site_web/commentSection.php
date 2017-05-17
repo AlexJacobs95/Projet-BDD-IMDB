@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 $id = urldecode($_GET['id']);
 $_SESSION['id'] = $id;
 $database = new mysqli("localhost", "root", "imdb", "IMDB");
