@@ -22,7 +22,7 @@
         \parbox[b][\paperheight]{\paperwidth}{%
             \vfill
             \centering
-            {\transparent{0.09}\includegraphics[width=1.15 \textwidth]{logo_ulb.jpg}}%
+            {\transparent{0.09}\includegraphics[width=1.10 \textwidth]{logo_ulb.jpg}}%
             \vfill
         }
     }
@@ -81,25 +81,24 @@ En plus de devoir faire une base de donnée, nous avons dû faire les scripts qu
 \subsubsection{Contraintes et hypothèses}
 
 \noindent\underline{Contraintes}
-\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. Un numéro d’épisode ne peut pas être négaif. Une note doit être compris entre 0 et 10.
+\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. \\ Un numéro d’épisode ne peut pas être négaif. Une note doit être compris entre 0 et 10. \\
 La date de sortie d’un épisode doit être postérieure ou égale à la date de sortie de la série auquel il appartient.
 \\
 \\
 \noindent\underline{Hypothèses}
 \\ \\ Une personne (Auteur, Producteur, Directeur, Acteur) peut n’avoir participé à aucune œuvre.
-Une oeuve peut avoir été tournée dans plusieurs pays, avoir plusieurs langues et avoir différents genres.
-Une saison possède au moins un épisode.
-L’année de sortie d’une œuvre peut être inconnue.
-Si un pays se trouve dans la base de donnée c’est qu’au moins une Œuvre y a été tournée.
-Si un genre se trouve dans la base de donnée c’est qu’il existe au moins une Œuvre de ce genre.
-Si une langue se trouve dans la base de donnée, c’est qu’elle est parlée dans au moins une œuvre.
-Un acteur peut jouer plusieurs rôles dans une même œuvre.
-Un rôle peut être jouer plusieurs acteurs (exemple: enfant et adulte).
-Plusieurs personnes peuvent avoir le même nom et le même prénom, dans ce cas nous leur attribuons également un numéro pour les différencier.
+Une oeuvre peut avoir été tournée dans plusieurs pays, avoir plusieurs langues et avoir différents genres.\\
+L’année de sortie d’une œuvre peut être inconnue. \\
+Si un pays se trouve dans la base de donnée c’est qu’au moins une Œuvre y a été tournée. \\
+Si un genre se trouve dans la base de donnée c’est qu’il existe au moins une Œuvre de ce genre. \\
+Si une langue se trouve dans la base de donnée, c’est qu’elle est parlée dans au moins une œuvre. \\
+Un acteur peut jouer plusieurs rôles dans une même œuvre. \\
+Un rôle peut être jouer plusieurs acteurs (exemple: enfant et adulte). \\
+Plusieurs personnes peuvent avoir le même nom et le même prénom, dans ce cas nous leur attribuons également un numéro pour les différencier.\\
 Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en même temps.
 
 \subsection{Modèle relationnel}
-
+\noindent
 \textbf{Personne}(\underline{Nom, Prénom, Numéro}, Genre)
 \\
 \\
@@ -526,19 +525,28 @@ $R4 \leftarrow \pi_{EpisodeID, SID}(Episode - PersonneRoleMEpisodes)$
 \item Requête 3 (exemple avec Bruce Willis)
 \noindent
 \[\begin{aligned}
-\{r1.Nom, r1.Prenom, r1.Numero | Role(r1) \wedge \exists f1 \exists f2 \exists f3 \exists r2 \exists r3 (\\
+\{ r1.Nom, r1.Prenom, r1.Numero | Role(r1) \wedge \exists f1 \exists f2 \exists f3 \exists r2 \exists r3\exists r4 \exists r5(\\
 	Role(r2) \wedge \\
     Role(r3) \wedge \\
+    Role(r4) \wedge \\
+    Role(r5) \wedge \\
     Film(f1) \wedge \\
     Film(f2) \wedge \\
     Film(f3) \wedge \\
     r1.OID = f1.FilmID \wedge \\
     r2.OID = f2.FilmID \wedge \\
-    r2.Nom = 'Bruce' \wedge \\
-    r2.Prenom = 'Willis \wedge \\
-    r2.Numero = 'NA' \wedge \\
-    r2.OID = r1.OID) \}
-    r2.OID \neq r3.OID
+    r3.OID = f3.FilmID \wedge \\
+    r4.OID = r2.OID \wedge \\
+    r4.Nom = r1.Nom \wedge \\
+    r4.Prenom = r1.Prenom \wedge \\
+    r4.Numero = r1.Numero \wedge \\
+    r5.OID = r3.OID \wedge \\
+    r5.Nom = r2.Nom \wedge \\
+    r5.Prenom = r2.Prenom \wedge \\
+    r5.Numero = r2.Numero \wedge \\
+    r3.Nom = 'Bruce' \wedge \\
+    r3.Prenom = 'Willis \wedge \\
+    r3.Numero = 'NA'\}
 \end{aligned}\]
 
 
@@ -558,7 +566,7 @@ Le site est divisé en 4 parties principales :
 \vskip 3pt
 \begin{itemize}
 \item La page d’accueil, d'où un utilisateur peut lancer une recherche pour une Œuvre ou des personnes.
-\item L'espace administrateur, permettant d'ajouter des oeuvres et personnes à la base de donnée.
+\item L'espace administrateur, permettant d'ajouter des oeuvres et personnes à la base de données.
 \item La recherche avancée.
 \item La page de statistique, offrant quelques informations intéressantes sur les données stockés dans la base de donnée.
 \end{itemize}
@@ -597,24 +605,24 @@ sera exécutée pour éviter d'avoir un nombre aberrant de résultats.
 
 \subsection{API}
 Nous nous sommes servi de l'api du site www.themoviedb.org pour ajouter du contenu à notre site web. \\
-Pour les films ainsi que les séries nous avons récupéré le poster et une image de fond. Nous avons également pu récupéré les photos des personnes et les trailers des films. Par contre nous n'avons pas pu certifié la concordance du contenu récupéré avec l'oeuvre ou la personne car l'API utilise un système d'id différent du notre. Il se peut donc que du contenu non cohérent apparaisse dans le cas ou 2 oeuvres on le même titre et la même année de sortie ou lorsque 2 personnes ont le même nom.
+Pour les films ainsi que les séries nous avons récupéré le poster et une image de fond. Nous avons également pu récupéré les photos des personnes et les trailers des films. Par contre nous n'avons pas pu certifié la concordance du contenu récupéré avec l'oeuvre ou la personne car l'API utilise un système d'id différent du notre. Il se peut donc que du contenu non cohérent apparaisse dans le cas ou 2 oeuvres on le même titre et la même année de sortie ou lorsque 2 personnes ont le même nom. Les posters sont disponibles pour les films et les series alors que les trailers sont uniquement disponibles pour les films
 
 \newpage
 \subsection{Statistiques}
-La section statistiques permet à l'utilisateur d'obtenir des information intéressantes sur les données stockées dans la base de données. Ces informations sont illustré grâce à des graphiques. \\
+La section statistiques permet à l'utilisateur d'obtenir des informations intéressantes sur les données stockées dans la base de données. Ces informations sont illustrés grâce à des graphiques. \\
 
 Dans cette section sont disponibles les informations suivantes : 
 \vskip 3pt
 \begin{itemize}
 \item Le proportion acteurs/actrices.
 \item La proportion de films/séries/épisodes.
-\item Le nombre d'oeuvre par pays (top 30).
+\item Le nombre d'oeuvres par pays (top 30).
 \item L'évolution des notes en fonction du temps.
 \item L'évolution du nombre de films et séries tournés chaque année.
 \end{itemize}
 
 \subsection{Commentaires}
-Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoile.
+Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoiles.
 
 
 
