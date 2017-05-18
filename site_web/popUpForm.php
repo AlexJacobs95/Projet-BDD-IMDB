@@ -123,13 +123,14 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
     <!-- Popup Div Ends Here -->
 </div>
 
+
 <div class="formContainer" id="formContainerActorPerson" style="display: none">
     <!-- Popup Div Starts Here -->
-    <div class="popupAdd" id="writer_form_popup">
+    <div class="popupAdd" id="role_form_popup">
         <!-- Contact Us Form -->
         <form class="form_popup" action="#" id="formActorPerson" method="post" name="form">
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerActorPerson')">
-            <h2 class="h2popup">Ajouter un rôle </h2>
+            <h2 class="h2popup">Ajouter un rôle</h2>
             <hr class="hrpopup">
             <input id="oeuvre_name_actor" name="oeuvre" placeholder="Titre de l'oeuvre" type="text3">
             <input id="oeuvre_role" name="role" placeholder="Rôle" type="text3">
