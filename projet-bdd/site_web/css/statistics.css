@@ -1,0 +1,30 @@
+header .intro-text {
+    padding-top: 120px;
+    padding-bottom: 10px;
+}
+
+section h2.section-heading {
+    display: inline-block;
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 60px;
+
+}
+
+section h3.section-heading {
+    display: inline-block;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+#titre_acteur_actrices {
+    text-align: center;
+    width: 469px;
+}
+
+#loader_act {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}
