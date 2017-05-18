@@ -26,8 +26,7 @@ if (!$database) {
     //fetch the episodes
     $querry = "SELECT * 
                FROM Episode
-               WHERE SID ='$id'"
-;
+               WHERE SID ='$id'";
     $episodes = $database->query($querry);
 
     //fetch saisons number
@@ -75,7 +74,7 @@ if (!$database) {
 
     $plot_res = $database->query($querry);
 
-
+    $database->close();
 }
 
 ?>
@@ -116,7 +115,6 @@ if (!$database) {
     <script src="js/dynamic_part.js"></script>
 
 
-
 </head>
 
 <body id="page-top" class="index">
@@ -153,7 +151,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
     $sn = utf8_encode($episodes_row['Saison']);
     $eID = utf8_encode($episodes_row['EpisodeID']);
     $eNum = utf8_encode($episodes_row['NumeroE']);
-    if ($sn != -1 ) {
+    if ($sn != -1) {
         $title = titleFromID($eID, $database);
         $res[$sn][(string)$eNum] = array();
         $res[$sn][(string)$eNum]["id"] = utf8_encode($eID);
@@ -208,7 +206,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
 </header>
 
 <script>
-add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons"], ["Commentaires", "Comments"]]);
+    add_navbar([["Résumé", "Resume"], ["Détails", "Details"], ["Saisons", "Saisons"], ["Commentaires", "Comments"]]);
 </script>
 
 <section id="Resume">
@@ -234,7 +232,11 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
         <div class="col-sm-4">
             <div class="details-member">
                 <h3>Saisons</h3>
-                <h4><?php if ($num != -1){echo sprintf("%d", $num );} else {echo "1";} ?></h4>
+                <h4><?php if ($num != -1) {
+                        echo sprintf("%d", $num);
+                    } else {
+                        echo "1";
+                    } ?></h4>
             </div>
         </div>
         <div class="col-sm-4">
@@ -272,7 +274,7 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
                 echo "<li><a data-toggle=\"pill\" onClick=getEpisodes($current)>$current</a></li>";
 
             }
-            if ($inconnue){
+            if ($inconnue) {
                 echo "<li><a data-toggle=\"pill\" onClick=getEpisodes(\"inconnue\")>Inconnue</a></li>";
 
 
@@ -289,8 +291,7 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
         <script>
 
             console.log(<?php echo json_encode($res); ?>);
-            function getEpisodes(saison)
-            {
+            function getEpisodes(saison) {
 
                 var array = <?php echo json_encode($res); ?>;
                 console.log(array[saison]);
@@ -322,7 +323,6 @@ add_navbar([["Résumé", "Resume"], ["Détails","Details"], ["Saisons", "Saisons
 
             }
         </script>
-
 
 
     </div>
@@ -366,7 +366,7 @@ include "popUpForm.php";
                 $('#nav_bar').addClass('navbar-top');
             }
 
-            if ($(window).scrollTop() < 892 -60) {
+            if ($(window).scrollTop() < 892 - 60) {
                 $('#nav_bar').removeClass('navbar-top');
             }
         });

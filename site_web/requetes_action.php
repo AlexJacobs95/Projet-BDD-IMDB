@@ -5,8 +5,8 @@ if ($database->connect_errno) {
 
 } else {
 
-        if ($_GET['requete'] == "Requete 1") {
-            $requete = "SELECT Nom, Prenom, Numero
+    if ($_GET['requete'] == "Requete 1") {
+        $requete = "SELECT Nom, Prenom, Numero
                         FROM Acteur a
                         WHERE (SELECT count(distinct AnneeSortie)
                                FROM (
@@ -16,20 +16,20 @@ if ($database->connect_errno) {
                                     WHERE AnneeSortie BETWEEN 2003 AND 2007) t
                                WHERE t.Prenom = a.Prenom and t.Nom = a.Nom and t.Numero = a.Numero) = 5";
 
-            $res = $database->query($requete);
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $fn = utf8_encode($row["Prenom"]);
-                $ln = utf8_encode($row["Nom"]);
-                $num = utf8_encode($row["Numero"]);
-                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
-                array_push($rows, [$link, $num]);
-            }
-
-            echo json_encode($rows);
+        $res = $database->query($requete);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $fn = utf8_encode($row["Prenom"]);
+            $ln = utf8_encode($row["Nom"]);
+            $num = utf8_encode($row["Numero"]);
+            $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+            array_push($rows, [$link, $num]);
         }
-        if ($_GET['requete'] == "Requete 2") {
-            $requete = "SELECT DISTINCT Nom, Prenom, Numero
+
+        echo json_encode($rows);
+    }
+    if ($_GET['requete'] == "Requete 2") {
+        $requete = "SELECT DISTINCT Nom, Prenom, Numero
                     FROM(
 	                  SELECT AnneeSortie, Nom,Prenom, Numero
 	                  FROM Oeuvre o
@@ -38,20 +38,20 @@ if ($database->connect_errno) {
                       GROUP BY AnneeSortie, Nom, Prenom, Numero
                       HAVING count(*) >=2 )t";
 
-            $res = $database->query($requete);
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $fn = utf8_encode($row["Prenom"]);
-                $ln = utf8_encode($row["Nom"]);
-                $num = utf8_encode($row["Numero"]);
-                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
-                array_push($rows, [$link, $num]);
-            }
+        $res = $database->query($requete);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $fn = utf8_encode($row["Prenom"]);
+            $ln = utf8_encode($row["Nom"]);
+            $num = utf8_encode($row["Numero"]);
+            $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+            array_push($rows, [$link, $num]);
+        }
 
-            echo json_encode($rows);
+        echo json_encode($rows);
 
-        } else if ($_GET['requete'] == "Requete 3") {
-            $requete = "SELECT DISTINCT Nom, Prenom, Numero
+    } else if ($_GET['requete'] == "Requete 3") {
+        $requete = "SELECT DISTINCT Nom, Prenom, Numero
                     FROM(
                         SELECT OID
                         FROM(
@@ -70,37 +70,37 @@ if ($database->connect_errno) {
                         INNER JOIN Film F2 ON F2.FilmID = T4.OID) AS T5
                     JOIN Role R3 ON T5.OID = R3.OID";
 
-            $res = $database->query($requete);
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $fn = utf8_encode($row["Prenom"]);
-                $ln = utf8_encode($row["Nom"]);
-                $num = utf8_encode($row["Numero"]);
-                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
-                array_push($rows, [$link, $num]);
-            }
+        $res = $database->query($requete);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $fn = utf8_encode($row["Prenom"]);
+            $ln = utf8_encode($row["Nom"]);
+            $num = utf8_encode($row["Numero"]);
+            $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+            array_push($rows, [$link, $num]);
+        }
 
-            echo json_encode($rows);
+        echo json_encode($rows);
 
-        } else if ($_GET['requete'] == "Requete 4") {
-            $requete = "SELECT DISTINCT EpisodeID
+    } else if ($_GET['requete'] == "Requete 4") {
+        $requete = "SELECT DISTINCT EpisodeID
                         FROM Episode e
                         WHERE NOT EXISTS(
                             SELECT Genre, EpisodeID
                             FROM Role INNER JOIN Personne ON  Personne.Nom = Role.Nom AND Personne.Prenom = Role.Prenom AND Personne.Numero  = Role.Numero
                             WHERE genre = 'm' AND OID = e.EpisodeID)";
 
-            $res = $database->query($requete);
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $link = utf8_encode('<a href="' . "episode" . '.php?id=' . urlencode($row['EpisodeID']) . '">' . utf8_encode($row['EpisodeID']) . '</a>');
-                array_push($rows, [$link]);
-            }
+        $res = $database->query($requete);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $link = utf8_encode('<a href="' . "episode" . '.php?id=' . urlencode($row['EpisodeID']) . '">' . utf8_encode($row['EpisodeID']) . '</a>');
+            array_push($rows, [$link]);
+        }
 
-            echo json_encode($rows);
+        echo json_encode($rows);
 
-        } else if ($_GET['requete'] == "Requete 5") {
-            $requete = "select Prenom, Nom, Numero, count(*)nb
+    } else if ($_GET['requete'] == "Requete 5") {
+        $requete = "select Prenom, Nom, Numero, count(*)nb
                         FROM(
                             select SID, Prenom, Nom, Numero
                             from Episode
@@ -110,23 +110,23 @@ if ($database->connect_errno) {
                         order by nb desc
                         LIMIT 1";
 
-            $res = $database->query($requete);
+        $res = $database->query($requete);
 
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $fn = utf8_encode($row["Prenom"]);
-                $ln = utf8_encode($row["Nom"]);
-                $num = utf8_encode($row["Numero"]);
-                $nb = utf8_encode($row["nb"]);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $fn = utf8_encode($row["Prenom"]);
+            $ln = utf8_encode($row["Nom"]);
+            $num = utf8_encode($row["Numero"]);
+            $nb = utf8_encode($row["nb"]);
 
-                $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
-                array_push($rows, [$link, $num, $nb]);
-            }
+            $link = utf8_encode("<a href='personne.php?id=" . urlencode($fn . ";" . $ln . ";" . $num) . "'>" . $fn . ' ' . $ln . "</a>");
+            array_push($rows, [$link, $num, $nb]);
+        }
 
-            echo json_encode($rows);
+        echo json_encode($rows);
 
-        } else if ($_GET['requete'] == "Requete 6") {
-            $requete = "SELECT T3.SID as SID, ep_num, avg_ep_by_year, avg_actor_by_season
+    } else if ($_GET['requete'] == "Requete 6") {
+        $requete = "SELECT T3.SID as SID, ep_num, avg_ep_by_year, avg_actor_by_season
                         FROM (
                             (SELECT ID, count(*) as ep_num
                             FROM(
@@ -179,22 +179,22 @@ if ($database->connect_errno) {
                             on T1.ID = T3.SID
                         )";
 
-            $res = $database->query($requete);
+        $res = $database->query($requete);
 
-            $rows = array();
-            while ($row = mysqli_fetch_array($res)) {
-                $serie = utf8_encode($row["SID"]);
-                $ep_num = utf8_encode($row["ep_num"]);
-                $avg_ep_by_year = utf8_encode($row["avg_ep_by_year"]);
-                $avg_actor_by_season = utf8_encode($row["avg_actor_by_season"]);
+        $rows = array();
+        while ($row = mysqli_fetch_array($res)) {
+            $serie = utf8_encode($row["SID"]);
+            $ep_num = utf8_encode($row["ep_num"]);
+            $avg_ep_by_year = utf8_encode($row["avg_ep_by_year"]);
+            $avg_actor_by_season = utf8_encode($row["avg_actor_by_season"]);
 
 
-                $link = utf8_encode('<a href="' . "serie" . '.php?id=' . urlencode($row['SID']) . '">' . utf8_encode($row['SID']) . '</a>');
-                array_push($rows, [$link, $ep_num, $avg_ep_by_year, $avg_actor_by_season]);
-            }
-
-            echo json_encode($rows);
+            $link = utf8_encode('<a href="' . "serie" . '.php?id=' . urlencode($row['SID']) . '">' . utf8_encode($row['SID']) . '</a>');
+            array_push($rows, [$link, $ep_num, $avg_ep_by_year, $avg_actor_by_season]);
         }
+
+        echo json_encode($rows);
+    }
 
 }
 /*

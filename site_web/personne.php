@@ -48,6 +48,8 @@ if (!$database) {
     $written = $database->query($querry);
 
 
+    $database->close();
+
 }
 
 
@@ -79,9 +81,6 @@ function printCategories($roles, $directed, $written)
 
     echo $string;
 }
-
-
-
 
 
 ?>
@@ -118,7 +117,7 @@ function printCategories($roles, $directed, $written)
             integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo"
             crossorigin="anonymous"></script>
     <![endif]-->
-    <script src="dynamic_part.js"></script>
+    <script src="./js/dynamic_part.js"></script>
 
 
 </head>
@@ -305,7 +304,7 @@ include "popUpForm.php";
                 $('#nav_bar').addClass('navbar-top');
             }
 
-            if ($(window).scrollTop() < 892 -170) {
+            if ($(window).scrollTop() < 892 - 170) {
                 $('#nav_bar').removeClass('navbar-top');
             }
         });
@@ -313,8 +312,8 @@ include "popUpForm.php";
 
 </script>
 
-<script src="themoviedb.js"></script>
-<script src="API.js"></script>
+<script src="./js/themoviedb.js"></script>
+<script src="./js/API.js"></script>
 
 <script>
 

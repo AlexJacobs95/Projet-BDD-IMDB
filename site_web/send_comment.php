@@ -24,6 +24,8 @@ if (!$database) {
         $res = $database->query($query);
         echo json_encode($res === TRUE);
     }
+
+    $database->close();
 }
 
 ?>

@@ -46,7 +46,6 @@ $database = new mysqli("localhost", "root", "imdb", "IMDB");
 $search_content = mysqli_real_escape_string($database, $_GET["search"]);
 
 
-
 if (!$database) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
@@ -87,8 +86,6 @@ if (!$database) {
                              AGAINST ('$search' IN BOOLEAN MODE)";
 
 
-
-
     }
 
     $result_oeuvres = $database->query($requete_oeuvre);
@@ -99,6 +96,8 @@ if (!$database) {
 
 
     $duration = (round(microtime(true) * 1000) - $start_time) / 1000;
+
+    $database->close();
 }
 ?>
 
@@ -188,13 +187,13 @@ while ($row = mysqli_fetch_array($result_personnes)) {
     <div class="container">
         <div class="intro-text">
             <div class="intro-heading">
-            <?php
-            echo $nb_res_oeuvre;
-            echo ' Oeuvres | ';
-            echo $nb_res_personnes;
-            echo ' Personnes ';
+                <?php
+                echo $nb_res_oeuvre;
+                echo ' Oeuvres | ';
+                echo $nb_res_personnes;
+                echo ' Personnes ';
 
-            ?>
+                ?>
             </div>
         </div>
     </div>
@@ -271,7 +270,6 @@ while ($row = mysqli_fetch_array($result_personnes)) {
         }
 
     });
-
 
 
 </script>
