@@ -1,57 +1,68 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
+SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
+SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 SET @@global.innodb_large_prefix = 1;
 
 
 CREATE TABLE IF NOT EXISTS Personne (
-  Prenom   varchar(128) NOT NULL,
-  Nom      varchar(128) NOT NULL,
-  Numero   VARCHAR(10),
-  Genre    CHAR(2)      NOT NULL,
-  PRIMARY KEY (Prenom, Nom, Numero))
-  CHARACTER SET latin1 COLLATE latin1_bin
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
+  Numero VARCHAR(10),
+  Genre  CHAR(2)      NOT NULL,
+  PRIMARY KEY (Prenom, Nom, Numero)
+)
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Auteur (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10),
-  PRIMARY KEY (Prenom, Nom, Numero),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero) ON UPDATE CASCADE ON DELETE CASCADE)
-  CHARACTER SET latin1 COLLATE latin1_bin
-  ENGINE = InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS Directeur (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
-  Numero VARCHAR(10),
-  PRIMARY KEY (Prenom, Nom, Numero),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne(Prenom, Nom, Numero) ON UPDATE CASCADE ON DELETE CASCADE)
-  CHARACTER SET latin1 COLLATE latin1_bin
-  ENGINE = InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS Acteur (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
   Numero VARCHAR(10),
   PRIMARY KEY (Prenom, Nom, Numero),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne (Prenom, Nom, Numero)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
+  ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS Directeur (
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
+  Numero VARCHAR(10),
+  PRIMARY KEY (Prenom, Nom, Numero),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne (Prenom, Nom, Numero)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  CHARACTER SET latin1
+  COLLATE latin1_bin
+  ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS Acteur (
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
+  Numero VARCHAR(10),
+  PRIMARY KEY (Prenom, Nom, Numero),
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Personne (Prenom, Nom, Numero)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS EcritPar (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
   Numero VARCHAR(10),
-  OID VARCHAR(512) NOT NULL,
+  OID    VARCHAR(512) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID),
   FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Auteur (Prenom, Nom, Numero)
     ON UPDATE CASCADE
@@ -60,48 +71,57 @@ CREATE TABLE IF NOT EXISTS EcritPar (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS DirigePar (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
   Numero VARCHAR(10),
-  OID VARCHAR(512) NOT NULL,
+  OID    VARCHAR(512) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Directeur(Prenom, Nom, Numero) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Directeur (Prenom, Nom, Numero)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (OID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Role (
-  Prenom varchar(128) NOT NULL,
-  Nom varchar(128) NOT NULL,
+  Prenom VARCHAR(128) NOT NULL,
+  Nom    VARCHAR(128) NOT NULL,
   Numero VARCHAR(10),
-  OID VARCHAR(512) NOT NULL,
-  Role varchar(128) NOT NULL,
+  OID    VARCHAR(512) NOT NULL,
+  Role   VARCHAR(128) NOT NULL,
   PRIMARY KEY (Prenom, Nom, Numero, OID, Role),
-  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Acteur(Prenom, Nom, Numero) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (Prenom, Nom, Numero) REFERENCES Acteur (Prenom, Nom, Numero)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (OID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Oeuvre (
-  ID VARCHAR(512) NOT NULL,
-  Titre VARCHAR(256) NOT NULL,
-  AnneeSortie INT NOT NULL,
-  Note FLOAT,
-  PRIMARY KEY (ID))
-  CHARACTER SET latin1 COLLATE latin1_bin
+  ID          VARCHAR(512) NOT NULL,
+  Titre       VARCHAR(256) NOT NULL,
+  AnneeSortie INT          NOT NULL,
+  Note        FLOAT,
+  PRIMARY KEY (ID)
+)
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
@@ -112,27 +132,29 @@ CREATE TABLE IF NOT EXISTS Film (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Serie (
-  SerieID VARCHAR(512) NOT NULL,
+  SerieID  VARCHAR(512) NOT NULL,
   AnneeFin INT,
   PRIMARY KEY (SerieID),
   FOREIGN KEY (SerieID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Episode (
   EpisodeID VARCHAR(512) NOT NULL,
-  NumeroE INT,
-  Saison INT,
-  SID VARCHAR(256) NOT NULL,
+  NumeroE   INT,
+  Saison    INT,
+  SID       VARCHAR(256) NOT NULL,
   PRIMARY KEY (EpisodeID),
   FOREIGN KEY (EpisodeID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
@@ -141,65 +163,72 @@ CREATE TABLE IF NOT EXISTS Episode (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Pays (
-  ID VARCHAR(512) NOT NULL,
+  ID   VARCHAR(512) NOT NULL,
   Pays VARCHAR(256) NOT NULL,
   PRIMARY KEY (ID, Pays),
   FOREIGN KEY (ID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Genre (
-  ID VARCHAR(512) NOT NULL,
-  Genre VARCHAR(64) NOT NULL,
+  ID    VARCHAR(512) NOT NULL,
+  Genre VARCHAR(64)  NOT NULL,
   PRIMARY KEY (ID, Genre),
   FOREIGN KEY (ID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Langue (
-  ID VARCHAR(512) NOT NULL,
+  ID     VARCHAR(512) NOT NULL,
   Langue VARCHAR(256) NOT NULL,
   PRIMARY KEY (ID, Langue),
   FOREIGN KEY (ID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Administrateur (
   AdresseMail VARCHAR(64) NOT NULL,
-  motDePasse VARCHAR(64) NULL,
-  PRIMARY KEY (AdresseMail))
-  CHARACTER SET latin1 COLLATE latin1_bin
+  motDePasse  VARCHAR(64) NULL,
+  PRIMARY KEY (AdresseMail)
+)
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS Plots (
-  ID VARCHAR(512) NOT NULL,
-  Plot TEXT NOT NULL,
+  ID   VARCHAR(512) NOT NULL,
+  Plot TEXT         NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (ID) REFERENCES Oeuvre (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS Commentaires(
+CREATE TABLE IF NOT EXISTS Commentaires (
   OID          VARCHAR(512) NOT NULL,
   Texte        TEXT         NOT NULL,
   Auteur       VARCHAR(512) NOT NULL,
@@ -210,9 +239,9 @@ CREATE TABLE IF NOT EXISTS Commentaires(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  CHARACTER SET latin1 COLLATE latin1_bin
+  CHARACTER SET latin1
+  COLLATE latin1_bin
   ENGINE = InnoDB;
-
 
 
 DELIMITER $$
@@ -222,11 +251,14 @@ FOR EACH ROW
   BEGIN
     DECLARE beginDate INT;
     DECLARE msg VARCHAR(255);
-    SET beginDate = (SELECT AnneeSortie FROM Oeuvre WHERE ID=NEW.SerieID);
+    SET beginDate = (SELECT AnneeSortie
+                     FROM Oeuvre
+                     WHERE ID = NEW.SerieID);
     IF NEW.AnneeFin < beginDate || NEW.AnneeFin < 0
     THEN
-      set msg = "La date de fin doit être inférieur à la date de sortie et positive";
-      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+      SET msg = "La date de fin doit être inférieur à la date de sortie et positive";
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = msg;
     END IF;
   END;
 $$
@@ -239,11 +271,14 @@ FOR EACH ROW
   BEGIN
     DECLARE beginDate INT;
     DECLARE msg VARCHAR(255);
-    SET beginDate = (SELECT AnneeSortie FROM Oeuvre WHERE ID=NEW.SerieID);
+    SET beginDate = (SELECT AnneeSortie
+                     FROM Oeuvre
+                     WHERE ID = NEW.SerieID);
     IF NEW.AnneeFin < beginDate || NEW.AnneeFin < 0
     THEN
-      set msg = "La date de fin doit être inférieur à la date de sortie et positive";
-      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+      SET msg = "La date de fin doit être inférieur à la date de sortie et positive";
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = msg;
     END IF;
   END;
 $$

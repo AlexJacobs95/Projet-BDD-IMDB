@@ -85,8 +85,8 @@ if (!$database) {
     </div>
 </header>
 
-<section style="background-color: white" >
-    <div class="container text-center" >
+<section style="background-color: white">
+    <div class="container text-center">
 
         <form name="search" id="searchForm" novalidate>
 
@@ -193,47 +193,55 @@ if (!$database) {
         var array_genres = (<?php echo json_encode($res_genres); ?>);
         console.log("genres", array_genres);
 
-        array_genres.forEach(function (entry) {
-            $('#genre_select').append(
-                $('<option>' + entry + '</option>')
-            );
+        array_genres.forEach((entry) = > {
+            $('#genre_select'
+        ).
+        append(
+            $('<option>' + entry + '</option>')
+        );
 
-        });
+    })
+        ;
         $("#genre_select").select2();
 
         var array_langages = (<?php echo json_encode($res_langages); ?>);
         console.log("langages", array_langages);
 
-        array_langages.forEach(function (entry1) {
-            $('#langage_select').append(
-                $('<option>' + entry1 + '</option>')
-            );
+        array_langages.forEach((entry1) = > {
+            $('#langage_select'
+        ).
+        append(
+            $('<option>' + entry1 + '</option>')
+        );
 
-        });
+    })
+        ;
         $("#langage_select").select2();
 
 
         var array_countries = (<?php echo json_encode($res_countries); ?>);
         console.log("countries", array_countries);
-        array_countries.forEach(function (entry2) {
-            $('#country_select').append(
-                $('<option>' + entry2 + '</option>')
-            );
+        array_countries.forEach((entry2) = > {
+            $('#country_select'
+        ).
+        append(
+            $('<option>' + entry2 + '</option>')
+        );
 
-        });
+    })
+        ;
         $("#country_select").select2();
 
         $("#category_select").select2();
 
         $.extend(
             {
-                redirectPost: function(location, args)
-                {
+                redirectPost: function (location, args) {
                     var form = $('<form></form>');
                     form.attr("method", "post");
                     form.attr("action", location);
 
-                    $.each( args, function( key, value ) {
+                    $.each(args, function (key, value) {
                         var field = $('<input></input>');
 
                         field.attr("type", "hidden");

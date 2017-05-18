@@ -2,7 +2,6 @@
     display: none;
 }
 
-
 div.top {
     filter: opacity(92%);
 }
@@ -82,8 +81,6 @@ tr:last-child {
     padding-right: 0;
 }
 
-
-
 .details-member {
     text-align: center;
     margin-bottom: 50px;
@@ -102,7 +99,6 @@ tr:last-child {
     background-color: #fed136;
 
 }
-
 
 #div_1 {
     width: 200px;
@@ -150,7 +146,7 @@ a:active {
     text-align: center;
 }
 
-.nav-pills a{
+.nav-pills a {
 
     color: black;
     font-size: 1.6em;
@@ -173,7 +169,7 @@ a:active {
     padding-bottom: 100px;
 }
 
-.profil_pic{
+.profil_pic {
     height: 500px;
     width: auto;
     display: block;
@@ -212,9 +208,6 @@ tr {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
-
-
-
 
 .content {
     font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -301,7 +294,6 @@ div.popupAdd {
     background-color: #fff
 }
 
-
 p {
     margin-top: 30px
 }
@@ -330,7 +322,7 @@ input[type=text3] {
     font-family: raleway
 }
 
-input[type=text3]:invalid{
+input[type=text3]:invalid {
     border: 2px solid red;
 }
 
@@ -361,16 +353,15 @@ input[type=text3]:invalid{
     cursor: pointer;
     border-radius: 5px
 }
+
 .navbar-top {
     background-color: #fed136;
     z-index: 100;
-    top:35px;
+    top: 35px;
     position: fixed;
     left: 50%;
     transform: translate(-50%, 35px);
 }
-
-
 
 .td#hidden {
     display: none;

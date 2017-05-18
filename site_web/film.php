@@ -166,9 +166,9 @@ $havePlot = utf8_encode(mysqli_num_rows($plot_res));
 
 <script>
     add_navbar([["Trailer", "Trailer"],
-                ["Résumé", "Resume"], ["Acteur", "Acteurs"],
-                ["Directeur", "Directeurs"], ["Auteurs", "Auteurs"],
-                ["Détails", "Details"], ["Commentaires", "Comments"]])
+        ["Résumé", "Resume"], ["Acteur", "Acteurs"],
+        ["Directeur", "Directeurs"], ["Auteurs", "Auteurs"],
+        ["Détails", "Details"], ["Commentaires", "Comments"]])
 </script>
 
 
@@ -224,7 +224,7 @@ $havePlot = utf8_encode(mysqli_num_rows($plot_res));
                 $('#nav_bar').addClass('navbar-top');
             }
 
-            if ($(window).scrollTop() < 892 -60) {
+            if ($(window).scrollTop() < 892 - 60) {
                 $('#nav_bar').removeClass('navbar-top');
             }
         });

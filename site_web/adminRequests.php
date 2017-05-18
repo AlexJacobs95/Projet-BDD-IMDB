@@ -5,7 +5,8 @@ session_start();
 include "roman.php";
 
 
-function execute_add_query($query, $db) {
+function execute_add_query($query, $db)
+{
     if ($db->query($query) === TRUE) {
         return ("Succes");
     } else {
@@ -64,14 +65,14 @@ function get_numero($num_array)
 {
     $cleaned_nums = array();
     foreach ($num_array as $num) {
-        if ($num != "NA"){
+        if ($num != "NA") {
             $num = toNumber($num);
             array_push($cleaned_nums, $num);
         }
 
     }
 
-    if (sizeof($cleaned_nums) > 0){
+    if (sizeof($cleaned_nums) > 0) {
         return toRoman(max($cleaned_nums) + 1);
     } else {
         return "NA";
@@ -102,7 +103,7 @@ function check_for_person($nom, $prenom, $db)
 function add_person($nom, $prenom, $numero, $genre, $db)
 {
     $fullname = $prenom . ' ' . $nom;
-    if ($genre == "Homme"){
+    if ($genre == "Homme") {
         $genre = "m";
     } else {
         $genre = "f";
@@ -142,21 +143,23 @@ function add_director($nom, $prenom, $numero, $db)
 
 }
 
-function add_directedBy($nom, $prenom, $numero,$OID, $db) {
+function add_directedBy($nom, $prenom, $numero, $OID, $db)
+{
     $query = "INSERT INTO DirigePar(OID, Nom, Prenom, Numero)
               VALUE ('$OID', '$nom', '$prenom', '$numero')";
 
     return execute_add_query($query, $db);
 }
 
-function add_writtenBy($nom, $prenom, $numero, $OID, $db) {
+function add_writtenBy($nom, $prenom, $numero, $OID, $db)
+{
     $query = "INSERT INTO EcritPar(OID, Nom, Prenom, Numero)
               VALUE ('$OID', '$nom', '$prenom', '$numero')";
 
     return execute_add_query($query, $db);
 }
 
-function add_role($nom, $prenom, $numero, $role,$OID, $db)
+function add_role($nom, $prenom, $numero, $role, $OID, $db)
 {
     $query = "INSERT INTO Role(OID, Nom, Prenom, Numero, Role)
               VALUE ('$OID', '$nom', '$prenom', '$numero','$role')";
@@ -165,7 +168,8 @@ function add_role($nom, $prenom, $numero, $role,$OID, $db)
 
 }
 
-function check_for_oeuvre($titre, $db) {
+function check_for_oeuvre($titre, $db)
+{
     $query = "SELECT *
               FROM Oeuvre
               WHERE Titre = '$titre'";
@@ -557,16 +561,14 @@ if (!$database) {
         $id = $_SESSION['id'];
         $type = mysqli_real_escape_string($database, $_POST["type_field"]);
         $data = mysqli_real_escape_string($database, $_POST["data_field"]);
-        if ($type === "genre"){
-            $query ="INSERT INTO Genre(ID, Genre)
+        if ($type === "genre") {
+            $query = "INSERT INTO Genre(ID, Genre)
                   VALUE ('$id', '$data')";
-        }
-        elseif ($type === "language"){
-            $query ="INSERT INTO Langue(ID, Langue)
+        } elseif ($type === "language") {
+            $query = "INSERT INTO Langue(ID, Langue)
                   VALUE ('$id', '$data')";
-        }
-        elseif ($type === "country"){
-            $query ="INSERT INTO Pays(ID, Pays)
+        } elseif ($type === "country") {
+            $query = "INSERT INTO Pays(ID, Pays)
                   VALUE ('$id', '$data')";
         }
         if ($database->query($query) === TRUE) {
@@ -607,8 +609,7 @@ if (!$database) {
         add_oeuvre($id, $title, $start_date, $note, $database);
         echo json_encode(add_serie($id, $end_date, $database));
 
-    }
-    elseif ($_GET['type'] === "remove_details") {
+    } elseif ($_GET['type'] === "remove_details") {
         $id = $_SESSION['id'];
         $type = mysqli_real_escape_string($database, $_POST["type_field"]);
         $data = mysqli_real_escape_string($database, $_POST["data_field"]);
@@ -692,7 +693,6 @@ if (!$database) {
 
     $database->close();
 }
-
 
 
 ?>

@@ -19,7 +19,8 @@ function extractGenres($array)
     echo $genres;
 }
 
-function extractEpInfos($ep_infos, $serie_title) {
+function extractEpInfos($ep_infos, $serie_title)
+{
     $episode_infos = mysqli_fetch_array($ep_infos);
     $serie_ID = $episode_infos['SID'];
     $epNum = $episode_infos['NumeroE'];
@@ -29,9 +30,9 @@ function extractEpInfos($ep_infos, $serie_title) {
     $titreS = $titre['Titre'];
 
 
-    $string = '<a style= "color: white;" href="serie.php?id=' . urlencode($serie_ID) .'">' . $titreS . '</a>';
+    $string = '<a style= "color: white;" href="serie.php?id=' . urlencode($serie_ID) . '">' . $titreS . '</a>';
     if ($epNum != -1) {
-        $string .=  ' | episode ' .$epNum;
+        $string .= ' | episode ' . $epNum;
     }
     if ($saisonNum != -1) {
         $string .= ' | saison ' . $saisonNum;
@@ -106,4 +107,5 @@ function DateFromID($id, $db)
 
     return $row['AnneeSortie'];
 }
+
 ?>

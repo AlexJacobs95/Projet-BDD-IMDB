@@ -134,6 +134,7 @@ if (!$database) {
 
             document.getElementById("table_container_Oeuvres").appendChild(table);
             $('#oeuvres_table').DataTable({
+                "deferRender": true,
                 "aaSorting": [],
                 data: oeuvres_array,
                 columns: [

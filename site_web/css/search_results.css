@@ -3,16 +3,14 @@
     margin: 0;
 }
 
-select{
+select {
     margin: 0;
     color: black;
 }
 
-
-h2{
+h2 {
     padding-bottom: 20px;
 }
-
 
 header .intro-text {
     padding-top: 120px;
@@ -25,8 +23,7 @@ header .intro-text {
     color: black;
 }
 
-
-#more_personnes_button, #more_oeuvres_button, #back_personnes_button, #back_oeuvres_button{
+#more_personnes_button, #more_oeuvres_button, #back_personnes_button, #back_oeuvres_button {
     margin-top: 30px;
     margin-bottom: 50px;
     margin-left: 10px;
@@ -43,7 +40,7 @@ section {
 }
 
 #buttons_div_personnes, #buttons_div_oeuvres {
-    display:inline-block;
+    display: inline-block;
     padding-bottom: 20px;
 }
 
@@ -62,24 +59,23 @@ table {
 
 }
 
-
-#table_container_Oeuvres.tblHeaders{
+#table_container_Oeuvres.tblHeaders {
     background-color: white;
-    color:black;
+    color: black;
 
 }
 
-th{
+th {
     text-align: center;
 }
 
 tr {
-    color:black;
+    color: black;
 }
 
 td {
     text-align: center;
-    color:black;
+    color: black;
 
 }
 
@@ -91,14 +87,13 @@ td {
     background-color: #eeeeee;
 }
 
-
-
 #table_container_Oeuvres {
     background-color: white;
     padding-left: 40px;
     padding-right: 40px;
     margin-bottom: 50px;
 }
+
 #table_container_Personnes {
     margin-top: 20px;
     margin-bottom: 80px;
@@ -107,28 +102,27 @@ td {
     padding-right: 40px;
 }
 
-
-#Oeuvres{
+#Oeuvres {
     padding-top: 30px;
 }
 
-#table_container_Personnes.tblHeaders{
+#table_container_Personnes.tblHeaders {
     color: #eeeeee;
 }
 
-#table_container_Oeuvres table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+#table_container_Oeuvres table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
     background-color: white;
 }
 
-#table_container_Oeuvres table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+#table_container_Oeuvres table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
     background-color: white;
 }
 
-#table_container_Personnes table tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+#table_container_Personnes table tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
     background-color: #eeeeee;
 }
 
-#table_container_Personnes table#table_container_Personnes tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+#table_container_Personnes table#table_container_Personnes tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
     background-color: #eeeeee;
 }
 

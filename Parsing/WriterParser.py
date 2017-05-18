@@ -53,9 +53,9 @@ def parse(file):
                     writer_done = True
                     writer_data = get_nom_prenom(line)
                     current_writer = {"ID": writerID,
-                                      "nom":writer_data[0],
-                                      "prenom":writer_data[1],
-                                      "numero":writer_data[2],
+                                      "nom": writer_data[0],
+                                      "prenom": writer_data[1],
+                                      "numero": writer_data[2],
                                       "genre": genre,
                                       "oeuvres": [],
                                       }

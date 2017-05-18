@@ -23,14 +23,14 @@ function build_advanced_query() {
         countries.push($(this).val());
     });
 
-    if (all_fields_empty(genres, langages, countries)){
+    if (all_fields_empty(genres, langages, countries)) {
         if (!alertAdded) {
             $('#form_section').prepend(
                 '<div class="alert alert-danger"><strong>Veuillez remplir au moins un champ !</strong></div>'
             );
-            alertAdded=true
+            alertAdded = true
         }
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         return;
     }
 
@@ -151,23 +151,25 @@ function build_advanced_query() {
 
 function addListOfElemToQuery(list, name, query) {
     if (list[0] !== null) {
-        list.forEach(function (entry) {
-            entry.forEach(function (entry) {
-                var part = " exists ( SELECT "+ name +" From " +name+ " g WHERE o.ID = g.ID and " +name+ " = '" + entry + "')";
+        list.forEach((entry) = > {
+            entry.forEach((entry) = > {
+            var part = " exists ( SELECT " + name + " From " + name + " g WHERE o.ID = g.ID and " + name + " = '" + entry + "')";
 
-                if (entry === list[0][0]){
-                    if (!whereAdded) {
-                        whereAdded = true;
-                        query += " WHERE" + part;
-                    } else {
-                        query += " AND" + part;
-                    }
+        if (entry === list[0][0]) {
+            if (!whereAdded) {
+                whereAdded = true;
+                query += " WHERE" + part;
+            } else {
+                query += " AND" + part;
+            }
 
-                } else {
-                    query += " AND" + part;
-                }
-            });
-        });
+        } else {
+            query += " AND" + part;
+        }
+    })
+        ;
+    })
+        ;
 
     }
     return query;
@@ -182,7 +184,7 @@ function launch_advanced_search(query) {
 function all_fields_empty(genres, langages, countries) {
     const category = $('#category_select').find(":selected").text();
 
-    var cond = ($.trim($('#title').val() )=== "") && ($.trim($('#year').val()) === "") && ($.trim($('#actor_fn').val()) === "") && ($.trim($('#actor_n').val()) === "") &&
+    var cond = ($.trim($('#title').val()) === "") && ($.trim($('#year').val()) === "") && ($.trim($('#actor_fn').val()) === "") && ($.trim($('#actor_n').val()) === "") &&
         ($.trim($('#director_fn').val()) === "") && ($.trim($('#director_n').val()) === "") && ($.trim($('#writer_fn').val()) === "") && ($.trim($('#writer_n').val()) === "") &&
         category === "Toutes" && genres[0] === null && langages[0] === null && countries[0] === null;
     console.log(cond);

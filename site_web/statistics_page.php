@@ -52,7 +52,7 @@ include 'menubar.php';
             <div class="col-md-6 text-center">
                 <h2 class="section-heading">Film - Serie - Episode</h2>
                 <canvas id="compare_nb_work" width="100" height="100"></canvas>
-                <image id = "loader_oeuvres" src="ripple.svg" style="display: none"></image>
+                <image id="loader_oeuvres" src="ripple.svg" style="display: none"></image>
             </div>
 
             <div class="col-md-6 text-center" id="col_actices_acteurs">
@@ -121,7 +121,7 @@ include 'menubar.php';
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <image  id="loader_evol" src="ripple.svg" style="display: none"></image>
+                <image id="loader_evol" src="ripple.svg" style="display: none"></image>
                 <canvas id="evolution" width="100" height="50"></canvas>
             </div>
 
