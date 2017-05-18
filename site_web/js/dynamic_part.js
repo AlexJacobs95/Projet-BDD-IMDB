@@ -442,6 +442,8 @@ function edit_header_movie_episode(type) {
 
 function edit_header_serie() {
 
+    const start_date = $("#start_date").val();
+    const end_date = $("#end_date").val();
 
     if (confirm("Etes vous sûr de vouloir modifier ce champ ? ")) {
 
@@ -454,7 +456,7 @@ function edit_header_serie() {
                 alert(status);
             },
             success: function (data) {
-                form.css("display", "none");
+                $("formContainerEditDateSerie").css("display", "none");
                 location.reload();
             },
             fail: function () {
