@@ -200,7 +200,7 @@ $close = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC
             <img class="close" src=<?php echo $close; ?> onclick ="div_hide('formContainerEditDate')">
             <h2 class="h2popup">Modifier la Date </h2>
             <hr class="hrpopup">
-            <input id="date_f" name="date" placeholder="Date" type="date">
+            <input id="date_f" name="date" placeholder="Date" type="text3">
             <button type='button' class="submit_form" onclick="edit_header_movie_episode('date')" id="submitDate">Send
             </button>
         </form>

@@ -383,7 +383,7 @@ function remove_person() {
 
 function edit_header_movie_episode(type) {
 
-    if (type == "title") {
+    if (type === "title") {
         var form = $("#formContainerEditTitle");
         var info = $('#title_f').val();
         var to_modify = $("#titre");
@@ -399,17 +399,17 @@ function edit_header_movie_episode(type) {
         if (invalid) return;
 
 
-    } else if (type == "date") {
+    } else if (type === "date") {
+        console.log("hi")
         var form = $("#formContainerEditDate");
         var info = $('#date_f').val();
-        var to_modify = $("#date");
 
         var invalid = false;
-        if ($.trim(info) === "" || !isNaN(invalid)) {
-            $('#date').css("border-color", "red")
+        if ($.trim(info) === "" || isNaN(info)) {
+            $('#date_f').css("border-color", "red")
             invalid = true
         } else {
-            $('#date').css("border-color", "#fed136")
+            $('#date_f').css("border-color", "#fed136")
         }
 
         if (invalid) return;

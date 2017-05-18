@@ -90,7 +90,7 @@ function titleFromID($id, $db)
     $result = $db->query($querry);
     $row = mysqli_fetch_array($result);
 
-    return $row['Titre'];
+    return utf8_encode($row['Titre']);
 }
 
 function DateFromID($id, $db)
