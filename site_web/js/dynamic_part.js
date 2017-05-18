@@ -633,7 +633,7 @@ function add_role_by_actor_name(name, fn, num, role) {
                 $('#formContainerActor').css("display", "none");
                 location.reload();
             } else {
-                alert("Une Erreur s'est produite")
+                alert("Une Erreur est survenue")
             }
 
 
@@ -660,17 +660,22 @@ function add_person_in_tb(name, fn, num, tbName) {
             alert(status);
         },
         success: function (data) {
-            if (tbName == "directedBy") {
-                alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
-                $('#formContainerDirector').css("display", "none");
-                location.reload();
+            if(data === "Success") {
+                if (tbName == "directedBy") {
+                    alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
+                    $('#formContainerDirector').css("display", "none");
+                    location.reload();
 
-            } else if (tbName == "writtenBy") {
-                alert(fn + " " + name + " a bien été ajouté dans les auteurs.");
-                $('#formContainerWriter').css("display", "none");
-                location.reload();
+                } else if (tbName == "writtenBy") {
+                    alert(fn + " " + name + " a bien été ajouté dans les auteurs.");
+                    $('#formContainerWriter').css("display", "none");
+                    location.reload();
 
+                }
+            } else {
+                alert("Une erreur est surevenue.")
             }
+
 
         },
         fail: function () {
@@ -695,10 +700,14 @@ function add_role_by_oeuvre_id(id, name) {
             alert(status);
         },
         success: function (data) {
-            console.log(data);
-            alert(name + " a bien été ajouté dans les rôles.");
-            $('#formContainerActorPerson').css("display", "none");
-            location.reload();
+            if(data === "Success") {
+                alert(name + " a bien été ajouté dans les rôles.");
+                $('#formContainerActorPerson').css("display", "none");
+                location.reload();
+            } else {
+                alert("Une erreur est survenue.")
+            }
+
 
         },
         fail: function () {
