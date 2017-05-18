@@ -200,11 +200,11 @@ Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’
 
 \subsection{Méthode d'extraction des données}
 
-Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers télécharger, nous avons réaliser un autre script de bash qui lui fait appel à du code python permettant de formater les fichiers selon un standard que nous nous sommes fixé grâce a différents parsers et ainsi permettre l'insertion des données dans la base de donnée.
+Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers téléchargé, nous avons réalisé un autre script bash qui lui fait appel à différents parsers écrit en Python permettant de formater les fichiers selon un standard que nous nous sommes fixé et ainsi permettre l'insertion des données dans la base de donnée. Lors du Parsing, nous avons choisis de garder uniquement les oeuvres tournées entre 2000 et 2017.
 
 \subsection{Méthode d'insertion dans la base de donnée}
 
-Pour insérer toutes nos donnée le plus rapidement possible, nous avons choisis d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultants de notre parsing.
+Pour insérer toutes nos données le plus rapidement possible, nous avons choisis d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultants de notre parsing.
 
 
 \subsection{Requêtes demandées}
@@ -627,9 +627,6 @@ Dans cette section sont disponibles les informations suivantes :
 
 \subsection{Commentaires}
 Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un commentaire et d'évaluer l'oeuvre en question grâce à un système d'étoiles.
-
-
-
 
 
 \section{Conclusion}
