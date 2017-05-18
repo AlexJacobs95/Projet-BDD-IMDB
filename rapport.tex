@@ -200,12 +200,15 @@ Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’
 
 \subsection{Méthode d'extraction des données}
 
-Pour l'extraction des données qui seront insérées dans notre base de données, nous avons tout d'abord réalisé un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers téléchargés, nous avons réalisé un autre script bash qui lui fait appel à différents parsers écrit en Python. Ces scripts servent à formater les fichiers selon un standard que nous nous sommes fixés et ainsi permettre l'insertion des données dans la base de données. Lors du Parsing, nous avons choisi de garder uniquement les oeuvres tournées entre 2000 et 2017.
+Pour l'extraction des données qui seront insérées dans notre base de données, nous avons tout d'abord réalisé un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers téléchargés, nous avons réalisé un autre script bash qui lui fait appel à différents parsers écrit en Python. Ces scripts servent à formater les fichiers selon un standard que nous nous sommes fixés et ainsi permettre l'insertion des données dans la base de données. Lors du Parsing, nous avons choisi de garder uniquement les oeuvres tournées entre 2000 et 2017. Quand la date de sortie d'un film ou d'une série était inconnue, nous ne l'avons pas retenue. Lorsqu'une série commençait avant 2017, nous avons pris tous ses épisodes.
 
 \subsection{Méthode d'insertion dans la base de données}
 
-Pour insérer toutes nos données le plus rapidement possible, nous avons choisi d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultant de notre parsing.
-
+Pour insérer toutes nos données le plus rapidement possible, nous avons choisi d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultant de notre parsing. Si des épisodes avaient une date inconnue, nous leur avons attribué la valeur 0. Pour les notes nous avons choisit -1 car 0 n'était pas une valeur aberrante.
+\vskip 10pt
+Pour garantir l'intégrité des données, nous avons utilisé un trigger lors de la mofication des dates. Ce trigger permet de s'assurer que la date de fin d'une série est inférieure ou égale à la date de début.
+\vskip 10pt
+Pour accélérer, certaines reqêtes, nous avons également créer des index à des endroits clés.
 
 \subsection{Requêtes demandées}
 Les requêtes demandées étaient les suivantes:
@@ -281,7 +284,7 @@ FROM(
 	group by AnneeSortie, Nom, Prenom, Numero
 	having count(*) >=2 )t;
 \end{lstlisting}
-\newpage
+
 \begin{lstlisting}[
            language=SQL,
            backgroundcolor=\color{backcolour},
