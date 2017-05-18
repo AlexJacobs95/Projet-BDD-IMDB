@@ -72,8 +72,6 @@ if (!$database) {
 
     $plot_res = $database->query($querry);
 
-
-    $database->close();
 }
 
 ?>
@@ -246,6 +244,8 @@ $logged = 0;
 if (isset($_SESSION['logged'])) {
     $logged = 1;
 }
+
+$database->close();
 ?>
 
 <script>
