@@ -13,7 +13,9 @@
   - exemple 1 : tous les films d'action tournés au usa avec Bruce Willis
   - exemple 2 : tous les films qui s'appellent Inception avec Christopher Nolan comme Director
 
-5) Montrer la requete predefinie 2 (c'est la plus rapide)
+5) Montrer la requete predefinie 2 en live (c'est la plus rapide)
+  -Avant la présentation on aura executer toutes les autres requetes dans un autre onglet et donc on les montrera aussi.
+
 
 6) Monter le mode Administrateur
   -Creer un film qui s appelle "Projet IMDB"
