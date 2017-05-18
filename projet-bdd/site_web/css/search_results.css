@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+select {
+    margin: 0;
+    color: black;
+}
+
+h2 {
+    padding-bottom: 20px;
+}
+
+header .intro-text {
+    padding-top: 120px;
+    padding-bottom: 10px;
+}
+
+.titre-section {
+    margin-top: 40px;
+    font-size: 40px;
+    color: black;
+}
+
+#more_personnes_button, #more_oeuvres_button, #back_personnes_button, #back_oeuvres_button {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+section {
+    padding: 0px 0;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+
+#buttons_div_personnes, #buttons_div_oeuvres {
+    display: inline-block;
+    padding-bottom: 20px;
+}
+
+#back_oeuvre_button {
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+}
+
+table {
+    color: black;
+    font-size: 24px;
+    max-width: 1500px;
+    margin: 0 auto;
+    table-layout: fixed;
+
+}
+
+#table_container_Oeuvres.tblHeaders {
+    background-color: white;
+    color: black;
+
+}
+
+th {
+    text-align: center;
+}
+
+tr {
+    color: black;
+}
+
+td {
+    text-align: center;
+    color: black;
+
+}
+
+#table_container_Oeuvres td {
+    background-color: white;
+}
+
+#table_container_Personnes td {
+    background-color: #eeeeee;
+}
+
+#table_container_Oeuvres {
+    background-color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 50px;
+}
+
+#table_container_Personnes {
+    margin-top: 20px;
+    margin-bottom: 80px;
+    background-color: #eeeeee;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#Oeuvres {
+    padding-top: 30px;
+}
+
+#table_container_Personnes.tblHeaders {
+    color: #eeeeee;
+}
+
+#table_container_Oeuvres table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+    background-color: white;
+}
+
+#table_container_Oeuvres table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: white;
+}
+
+#table_container_Personnes table tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+    background-color: #eeeeee;
+}
+
+#table_container_Personnes table#table_container_Personnes tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: #eeeeee;
+}
+
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: #fec503;
+}
+
+/* selected link */
+a:active {
+    color: #fec503;
+}
+
+

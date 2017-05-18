@@ -1,0 +1,387 @@
+#intro {
+    display: none;
+}
+
+div.top {
+    filter: opacity(92%);
+}
+
+header .intro-text .intro-lead-in {
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 22px;
+    margin-bottom: 10px;
+
+}
+
+header .intro-text .intro-heading {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+header .intro-text .intro-heading-with-no-margin {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 75px;
+    margin-bottom: 0px;
+}
+
+header .intro-text .infos {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+table {
+    border: 1px solid transparent;
+    border-collapse: collapse;
+    color: black;
+    font-size: 24px;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+table.directorsAndWriters {
+    width: 250px;
+    text-align: center;
+
+}
+
+th {
+    display: none;
+}
+
+.center {
+    margin: auto;
+}
+
+tr {
+    height: 50px;
+    padding-top: 0px;
+    padding-bottom: 100px;
+    padding-right: 0px;
+    width: 50%;
+}
+
+tr:last-child {
+    padding-top: 0px;
+    padding-bottom: 200px;
+    padding-left: 0px;
+    padding-right: 0;
+}
+
+.details-member {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.details-member h4 {
+    margin-top: 15px;
+    margin-bottom: 0;
+    text-transform: none;
+}
+
+#Tabs {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: auto;
+    background-color: #fed136;
+
+}
+
+#div_1 {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    position: relative;
+    left: 50%;
+    margin-left: -200px;
+    float: left;
+    clear: none;
+}
+
+#div_2 {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    position: relative;
+    right: 50%;
+    margin-right: -200px;
+    float: right;
+    clear: none;
+}
+
+/* unvisited link */
+a:link {
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: #fec503;
+}
+
+/* selected link */
+a:active {
+    color: #fec503;
+}
+
+.ul {
+    text-align: center;
+}
+
+.nav-pills a {
+
+    color: black;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.episode {
+    cursor: pointer;
+    color: black;
+
+}
+
+.poster {
+    position: absolute;
+    left: 0%;
+    height: 750px;
+    width: auto;
+    display: block;
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+.profil_pic {
+    height: 500px;
+    width: auto;
+    display: block;
+    padding-bottom: 100px;
+    padding-left: 25%;
+}
+
+td {
+    width: 250px;
+    text-align: center;
+}
+
+tr {
+    border: solid;
+    border-width: 1px 0;
+}
+
+.deleteFromDB {
+    background-color: #c43131;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 200px;
+    font-size: 24px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.addEpisode {
+    background-color: #83BD62;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 200px;
+    font-size: 24px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.content {
+    font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.hideContent-actors {
+    overflow: hidden;
+    line-height: 2em;
+    height: 20em;
+}
+
+.hideContent-plot {
+    overflow: hidden;
+    line-height: 2em;
+    height: 8em;
+}
+
+.showContent {
+    line-height: 2em;
+    height: auto;
+}
+
+.show-more {
+    margin-top: 15px;
+    padding: 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.addButton {
+    background: transparent;
+    padding: 10px;
+    border: none;
+}
+
+.formContainer {
+    width: 100%;
+    height: 100%;
+    opacity: .95;
+    top: 0;
+    left: 0;
+    display: none;
+    position: fixed;
+    background-color: #313131;
+    overflow: auto
+}
+
+.listContainer {
+    width: 100%;
+    height: 100%;
+    opacity: .95;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: #313131;
+    overflow: auto
+}
+
+img.close {
+    position: absolute;
+    right: -17px;
+    top: -15px;
+    cursor: pointer
+}
+
+div.popupAdd {
+    position: absolute;
+    left: 50%;
+    top: 17%;
+    margin-left: -202px;
+    font-family: 'Raleway', sans-serif
+}
+
+.form_popup {
+    max-width: 500px;
+    min-width: 250px;
+    padding: 10px 50px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    font-family: raleway;
+    background-color: #fff
+}
+
+p {
+    margin-top: 30px
+}
+
+.h2popup {
+    background-color: #D7D7D7;
+    padding: 20px 35px;
+    margin: -10px -50px;
+    text-align: center;
+    border-radius: 10px 10px 0 0
+}
+
+.hrpopup {
+    margin: 10px -50px;
+    border: 0;
+    border-top: 1px solid #ccc
+}
+
+input[type=text3] {
+    padding: 10px;
+    color: black;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    padding-left: 40px;
+    font-size: 16px;
+    font-family: raleway
+}
+
+input[type=text3]:invalid {
+    border: 2px solid red;
+}
+
+.textarea-resume {
+
+    background-repeat: no-repeat;
+    background-position: 5px 7px;
+    min-width: 400px;
+    height: 300px;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: raleway;
+    margin-bottom: 30px
+}
+
+.submit_form {
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+    background-color: #FFBC00;
+    color: #fff;
+    border: 1px solid #FFCB00;
+    padding: 10px 0;
+    margin-top: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px
+}
+
+.navbar-top {
+    background-color: #fed136;
+    z-index: 100;
+    top: 35px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 35px);
+}
+
+.td#hidden {
+    display: none;
+}
+
+.deleteButton {
+    background: transparent;
+    border: none;
+}
+
+div#link_trailer {
+    padding-bottom: 100px;
+}
+
+h2#text-watch-trailer {
+    font-size: 22px;
+}
+
+.editButton {
+    background: none;
+    border: none;
+}
+

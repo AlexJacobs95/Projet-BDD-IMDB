@@ -1,0 +1,187 @@
+header .intro-text {
+    padding-top: 120px;
+    padding-bottom: 10px;
+}
+
+section {
+    padding: 50px;
+}
+
+input[type="text3"] {
+    width: 530px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: px;
+    font-size: 16px;
+    color: black;
+    background-color: transparent;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 0px 20px 0px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type="text2"] {
+    width: 250px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid rgb(170, 170, 170);
+    font-size: 16px;
+    color: black;
+    background-color: transparent;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 0px 20px 0px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    position: relative;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.custom-dropdown--large {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.custom-dropdown--small {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.custom-dropdown__select {
+    font-size: inherit; /* inherit size from .custom-dropdown */
+    padding: .5em; /* add some space*/
+    margin: 0; /* remove default margins */
+}
+
+.custom-dropdown__select--white {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-left: 40px;
+    font-size: 16px;
+    background-color: transparent;
+    border: 2px solid #fed503;
+    color: black;
+    width: 600px;
+    height: 50px;
+
+}
+
+@supports (pointer-events: none) and
+      ((-webkit-appearance: none) or
+      (-moz-appearance: none) or
+      (appearance: none)) {
+
+    .custom-dropdown {
+        position: relative;
+        vertical-align: middle;
+    }
+
+    .custom-dropdown__select {
+        padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
+        border-radius: 3px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .custom-dropdown::before,
+    .custom-dropdown::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .custom-dropdown::after { /*  Custom dropdown arrow */
+        content: "\25BC";
+        height: 3em;
+        font-size: .625em;
+        line-height: 1;
+        right: 1.2em;
+        top: 50%;
+        margin-top: -.5em;
+    }
+
+    .custom-dropdown::before { /*  Custom dropdown arrow cover */
+        width: 2em;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 0 3px 3px 0;
+
+    }
+
+    .custom-dropdown__select[disabled] {
+        color: transparent;
+    }
+
+    .custom-dropdown.custom-dropdown--disabled::after {
+        color: transparent;
+    }
+
+    /* White dropdown style */
+    .custom-dropdown--white::before {
+        top: .5em;
+        bottom: .5em;
+        background-color: transparent;
+        border-left: 1px solid transparent;
+    }
+
+    .custom-dropdown--white::after {
+        color: rgba(0, 0, 0, .9);
+    }
+
+    /* FF only temp fix */
+    @-moz-document url-prefix() {
+        .custom-dropdown__select {
+            padding-right: .9em
+        }
+        .custom-dropdown--large .custom-dropdown__select {
+            padding-right: 1.3em
+        }
+        .custom-dropdown--small .custom-dropdown__select {
+            padding-right: .5em
+        }
+    }
+}
+
+label {
+    display: block;
+}
+
+.fn {
+    display: inline-block;
+}
+
+.row {
+    margin-bottom: 30px;
+}
+
+::placeholder {
+    color: white;
+}
+
+.select2-container .select2-choice, .select2-result-label {
+    font-size: 1.5em;
+    height: 41px;
+    overflow: auto;
+}
+
+.select2-selection select2-selection--single {
+    height: 40px;
+
+}
+
+.select2-selection__choice {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    color: black;
+
+}
