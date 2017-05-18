@@ -25,5 +25,7 @@
 	-Writer
   - Supprimer Inception
 
+  - Ajouter une personne
+
 7) Montrer les graphiques 
            
