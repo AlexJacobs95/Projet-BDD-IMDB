@@ -1,0 +1,27 @@
+1) Recherche Batman
+  - expliquer la pages de résultats
+  - aller sur la page de batman begins et expliquer la page d'un film
+  - laisser un commentaire pour montrer comment ça marche
+
+2) Recherche The Flash
+  - expliquer la page d'une série 
+  - aller sur la la page d'un episode la série (+exlplquer)
+
+3) Montrer et expliquer la page d'une Personne (ex avec un acteur de the flash)
+
+4) Montrer la recherche avancée
+  - exemple 1 : tous les films d'action tournés au usa avec Bruce Willis
+  - exemple 2 : tous les films qui s'appellent Inception avec Christopher Nolan comme Director
+
+5) Montrer la requete predefinie 2 (c'est la plus rapide)
+
+6) Monter le mode Administrateur
+  -Creer un film qui s appelle "Projet IMDB"
+  - Ajouter:
+	-Acteurs
+	-Directeurs
+	-Writer
+  - Supprimer Inception
+
+7) Montrer les graphiques 
+           
