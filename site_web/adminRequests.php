@@ -8,7 +8,7 @@ include "roman.php";
 function execute_add_query($query, $db)
 {
     if ($db->query($query) === TRUE) {
-        return ("Succes");
+        return ("Success");
     } else {
         return ("Error");
     }
@@ -313,7 +313,7 @@ if (!$database) {
     if ($_GET['type'] === 'edit_plot') {
 
 
-        $content = mysqli_real_escape_string($database, $_POST['content']);
+        $content = mysqli_real_escape_string($database, $_GET['content']);
         $id = $_SESSION['id'];
 
         $query = "UPDATE Plots
@@ -327,8 +327,8 @@ if (!$database) {
             echo json_encode("Error updating record: " . $database->error);
         }
     } elseif ($_GET['type'] === 'check_person') {
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
 
 
         $res_check_query = check_for_person($nom, $prenom, $database);
@@ -342,9 +342,9 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_person') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $genre = mysqli_real_escape_string($database, $_POST['genre']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $genre = mysqli_real_escape_string($database, $_GET['genre']);
         $all_nums = get_all_nums_for_name($nom, $prenom, $database)->fetch_all();
         $numero = get_numero($all_nums);
 
@@ -354,17 +354,17 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_in_tb_actor') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         echo json_encode(add_actor($nom, $prenom, $numero, $database));
 
     } elseif ($_GET['type'] === 'add_role_by_actor_name') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
-        $role = mysqli_real_escape_string($database, $_POST['role']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
+        $role = mysqli_real_escape_string($database, $_GET['role']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
         echo json_encode(add_role($nom, $prenom, $numero, $role, $OID, $database));
@@ -372,7 +372,7 @@ if (!$database) {
     } elseif ($_GET['type'] === 'add_plot') {
 
 
-        $content = mysqli_real_escape_string($database, $_POST['content']);
+        $content = mysqli_real_escape_string($database, $_GET['content']);
         $id = $_SESSION['id'];
         echo json_encode($id);
 
@@ -387,9 +387,9 @@ if (!$database) {
         }
     } elseif ($_GET['type'] === 'remove_actor_from_work') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
 
@@ -397,9 +397,9 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'remove_director_from_work') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
 
@@ -407,9 +407,9 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'remove_writer_from_work') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
 
@@ -417,7 +417,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'remove_role_from_person') {
 
-        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $OID = mysqli_real_escape_string($database, $_GET['id']);
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
         $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
@@ -428,7 +428,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'remove_directed_from_person') {
 
-        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $OID = mysqli_real_escape_string($database, $_GET['id']);
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
         $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
@@ -439,7 +439,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'remove_written_from_person') {
 
-        $OID = mysqli_real_escape_string($database, $_POST['id']);
+        $OID = mysqli_real_escape_string($database, $_GET['id']);
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
         $prenom = mysqli_real_escape_string($database, $prenom_nom_numero[0]);
@@ -450,32 +450,32 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_in_tb_director') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         echo json_encode(add_director($nom, $prenom, $numero, $database));
 
     } elseif ($_GET['type'] === 'add_in_tb_directedBy') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
         echo json_encode(add_directedBy($nom, $prenom, $numero, $OID, $database));
 
     } elseif ($_GET['type'] === 'add_in_tb_writer') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         echo json_encode(add_writer($nom, $prenom, $numero, $database));
 
     } elseif ($_GET['type'] === 'add_in_tb_writtenBy') {
 
-        $nom = mysqli_real_escape_string($database, $_POST['name']);
-        $prenom = mysqli_real_escape_string($database, $_POST['fn']);
-        $numero = mysqli_real_escape_string($database, $_POST['num']);
+        $nom = mysqli_real_escape_string($database, $_GET['name']);
+        $prenom = mysqli_real_escape_string($database, $_GET['fn']);
+        $numero = mysqli_real_escape_string($database, $_GET['num']);
         $OID = mysqli_real_escape_string($database, $_SESSION['id']);
 
         echo json_encode(add_writtenBy($nom, $prenom, $numero, $OID, $database));
@@ -509,7 +509,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'check_oeuvre') {
 
-        $titreOeuvre = mysqli_real_escape_string($database, $_POST['titreOeuvre']);
+        $titreOeuvre = mysqli_real_escape_string($database, $_GET['titreOeuvre']);
 
         $res = check_for_oeuvre($titreOeuvre, $database);
 
@@ -517,8 +517,8 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_role_by_oeuvre_id') {
 
-        $id = mysqli_real_escape_string($database, $_POST['id']);
-        $role = mysqli_real_escape_string($database, $_POST['role']);
+        $id = mysqli_real_escape_string($database, $_GET['id']);
+        $role = mysqli_real_escape_string($database, $_GET['role']);
 
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
@@ -531,7 +531,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_written_by_person') {
 
-        $id = mysqli_real_escape_string($database, $_POST['id']);
+        $id = mysqli_real_escape_string($database, $_GET['id']);
 
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
@@ -545,7 +545,7 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_directed_by_person') {
 
-        $id = mysqli_real_escape_string($database, $_POST['id']);
+        $id = mysqli_real_escape_string($database, $_GET['id']);
 
         $prenom_nom_numero = $_SESSION['id'];
         $prenom_nom_numero = explode(";", $prenom_nom_numero);
@@ -559,8 +559,8 @@ if (!$database) {
 
     } elseif ($_GET['type'] === "add_details") {
         $id = $_SESSION['id'];
-        $type = mysqli_real_escape_string($database, $_POST["type_field"]);
-        $data = mysqli_real_escape_string($database, $_POST["data_field"]);
+        $type = mysqli_real_escape_string($database, $_GET["type_field"]);
+        $data = mysqli_real_escape_string($database, $_GET["data_field"]);
         if ($type === "genre") {
             $query = "INSERT INTO Genre(ID, Genre)
                   VALUE ('$id', '$data')";
@@ -578,8 +578,8 @@ if (!$database) {
         }
     } elseif ($_GET['type'] === 'check_nb_works') {
 
-        $title = mysqli_real_escape_string($database, $_POST['title']);
-        $date = mysqli_real_escape_string($database, $_POST['date']);
+        $title = mysqli_real_escape_string($database, $_GET['title']);
+        $date = mysqli_real_escape_string($database, $_GET['date']);
 
 
         $res = mysqli_fetch_array(number_movies($title, $date, $database));
@@ -588,10 +588,10 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_movie') {
 
-        $id = mysqli_real_escape_string($database, $_POST['id']);
-        $title = mysqli_real_escape_string($database, $_POST['title']);
-        $date = mysqli_real_escape_string($database, $_POST['date']);
-        $note = mysqli_real_escape_string($database, $_POST['note']);
+        $id = mysqli_real_escape_string($database, $_GET['id']);
+        $title = mysqli_real_escape_string($database, $_GET['title']);
+        $date = mysqli_real_escape_string($database, $_GET['date']);
+        $note = mysqli_real_escape_string($database, $_GET['note']);
 
 
         add_oeuvre($id, $title, $date, $note, $database);
@@ -599,11 +599,11 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'add_serie') {
 
-        $id = mysqli_real_escape_string($database, $_POST['id']);
-        $title = mysqli_real_escape_string($database, $_POST['title']);
-        $start_date = mysqli_real_escape_string($database, $_POST['start_date']);
-        $end_date = mysqli_real_escape_string($database, $_POST['end_date']);
-        $note = mysqli_real_escape_string($database, $_POST['note']);
+        $id = mysqli_real_escape_string($database, $_GET['id']);
+        $title = mysqli_real_escape_string($database, $_GET['title']);
+        $start_date = mysqli_real_escape_string($database, $_GET['start_date']);
+        $end_date = mysqli_real_escape_string($database, $_GET['end_date']);
+        $note = mysqli_real_escape_string($database, $_GET['note']);
 
 
         add_oeuvre($id, $title, $start_date, $note, $database);
@@ -611,8 +611,8 @@ if (!$database) {
 
     } elseif ($_GET['type'] === "remove_details") {
         $id = $_SESSION['id'];
-        $type = mysqli_real_escape_string($database, $_POST["type_field"]);
-        $data = mysqli_real_escape_string($database, $_POST["data_field"]);
+        $type = mysqli_real_escape_string($database, $_GET["type_field"]);
+        $data = mysqli_real_escape_string($database, $_GET["data_field"]);
         if ($type === "genre") {
             $query = "Delete
               FROM Genre
@@ -635,22 +635,22 @@ if (!$database) {
     } elseif ($_GET['type'] === 'edit_title') {
 
         $id = mysqli_real_escape_string($database, $_SESSION['id']);
-        $title = mysqli_real_escape_string($database, $_POST['info']);
+        $title = mysqli_real_escape_string($database, $_GET['info']);
 
         echo json_encode(edit_title($id, $title, $database));
 
     } elseif ($_GET['type'] === 'edit_date') {
 
         $id = mysqli_real_escape_string($database, $_SESSION['id']);
-        $date = mysqli_real_escape_string($database, $_POST['info']);
+        $date = mysqli_real_escape_string($database, $_GET['info']);
 
         echo json_encode(edit_date($id, $date, $database));
 
     } elseif ($_GET['type'] === 'edit_date_serie') {
 
         $id = mysqli_real_escape_string($database, $_SESSION['id']);
-        $start_date = mysqli_real_escape_string($database, $_POST['start_date']);
-        $end_date = mysqli_real_escape_string($database, $_POST['end_date']);
+        $start_date = mysqli_real_escape_string($database, $_GET['start_date']);
+        $end_date = mysqli_real_escape_string($database, $_GET['end_date']);
 
         if (strip_tags($start_date) !== "") {
             edit_date($id, $start_date, $database);
@@ -663,8 +663,8 @@ if (!$database) {
     } elseif ($_GET['type'] === 'check_if_episode_exist') {
 
         $sid = mysqli_real_escape_string($database, $_SESSION['sid']);
-        $saison = mysqli_real_escape_string($database, $_POST['saison']);
-        $numero = mysqli_real_escape_string($database, $_POST['numero']);
+        $saison = mysqli_real_escape_string($database, $_GET['saison']);
+        $numero = mysqli_real_escape_string($database, $_GET['numero']);
 
         $res = mysqli_fetch_array(number_episodes($sid, $saison, $numero, $database));
         $num = $res['num'];
@@ -676,13 +676,13 @@ if (!$database) {
 
     } elseif ($_GET['type'] === 'insert_episode') {
 
-        $sid = mysqli_real_escape_string($database, $_POST['sid']);
-        $saison = mysqli_real_escape_string($database, $_POST['saison']);
-        $numero = mysqli_real_escape_string($database, $_POST['numero']);
-        $title = mysqli_real_escape_string($database, $_POST['title']);
-        $date = mysqli_real_escape_string($database, $_POST['date']);
-        $note = mysqli_real_escape_string($database, $_POST['note']);
-        $episode_id = mysqli_real_escape_string($database, $_POST['episode_id']);
+        $sid = mysqli_real_escape_string($database, $_GET['sid']);
+        $saison = mysqli_real_escape_string($database, $_GET['saison']);
+        $numero = mysqli_real_escape_string($database, $_GET['numero']);
+        $title = mysqli_real_escape_string($database, $_GET['title']);
+        $date = mysqli_real_escape_string($database, $_GET['date']);
+        $note = mysqli_real_escape_string($database, $_GET['note']);
+        $episode_id = mysqli_real_escape_string($database, $_GET['episode_id']);
 
         add_oeuvre($episode_id, $title, $date, $note, $database);
         echo json_encode(add_episode($episode_id, $numero, $saison, $sid, $database));

@@ -78,6 +78,7 @@ function add_dynamic_part_person(number_roles, number_written, number_directed) 
 
 function add_dynamic_part_series(havePlot, hideContent) {
     add_plots(havePlot);
+    add_showMore_link_action(hideContent, $(".show-more-plot a"));
 }
 
 function add_dynamic_part_filmAndEp(havePlot, number_roles, hideContent_plot, hideContent_actors) {
@@ -292,7 +293,7 @@ function modifyRows() {
 
 
     $(".deleteButton").click(function () {
-        if (confirm("Etes vous sûr de vouloir supprimer cette personne ?")) {
+        if (confirm("Etes vous sûr de vouloir supprimer cet élément ?")) {
             const table = $(this).parent().parent().parent().parent().attr('id');
             const id = $(this).parent().prev().text();
             const row = $(this).parent().parent();
@@ -322,7 +323,7 @@ function remove_elem_from_person(_id, type, row) {
 
     $.ajax({
         url: "adminRequests.php?type=remove_" + type + "_from_person", //This is the current doc
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({id: _id}),
         error: function (xhr, status) {
@@ -419,7 +420,7 @@ function edit_header_movie_episode(type) {
 
         $.ajax({
             url: "adminRequests.php?type=edit_" + type,
-            type: "POST",
+            type: "GET",
             dataType: 'json', // add json datatype to get json
             data: ({info: info}),
             error: function (xhr, status) {
@@ -449,7 +450,7 @@ function edit_header_serie() {
 
         $.ajax({
             url: "adminRequests.php?type=edit_date_serie",
-            type: "POST",
+            type: "GET",
             dataType: 'json', // add json datatype to get json
             data: ({start_date: start_date, end_date: end_date}),
             error: function (xhr, status) {
@@ -475,7 +476,7 @@ function remove_person_from_work(_name, _fn, _num, type, row) {
 
     $.ajax({
         url: "adminRequests.php?type=remove_" + type + "_from_work",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: _name, fn: _fn, num: _num}),
         error: function (xhr, status) {
@@ -529,7 +530,7 @@ function update_resume() {
 function add_written_or_directed_by(id, titre, option) {
     $.ajax({
         url: "adminRequests.php?type=add_" + option + "_by_person",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({id: id}),
         error: function (xhr, status) {
@@ -537,9 +538,15 @@ function add_written_or_directed_by(id, titre, option) {
         },
         success: function (data) {
             console.log(data);
-            alert(titre + " a bien été ajouté dans la liste.");
-            $('#formContainerWriterPerson').css("display", "none");
-            location.reload();
+            if (data === "Success") {
+                alert(titre + " a bien été ajouté dans la liste.");
+                $('#formContainerWriterPerson').css("display", "none");
+                location.reload();
+            } else {
+                alert("Une erreur est survenue.");
+
+            }
+
 
         },
         fail: function () {
@@ -559,11 +566,12 @@ function add_written_or_directed_by(id, titre, option) {
 function edit_plot(havePlot) {
     var text = $('#resume').val();
     console.log(havePlot);
+    console.log("fsiiefsjesi");
 
     if (havePlot !== 0) {
         $.ajax({
             url: "adminRequests.php?type=edit_plot",
-            type: "POST",
+            type: "GET",
             dataType: 'json', // add json datatype to get json
             data: ({content: text}),
             error: function (xhr, status) {
@@ -585,7 +593,7 @@ function edit_plot(havePlot) {
     } else {
         $.ajax({
             url: "adminRequests.php?type=add_plot",
-            type: "POST",
+            type: "GET",
             dataType: 'json', // add json datatype to get json
             data: ({content: text}),
             error: function (xhr, status) {
@@ -612,20 +620,20 @@ function edit_plot(havePlot) {
 function add_role_by_actor_name(name, fn, num, role) {
     $.ajax({
         url: "adminRequests.php?type=add_role_by_actor_name",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn, role: role, num: num}),
         error: function (xhr, status) {
             alert(status);
         },
         success: function (data) {
-            if (data === "Succes") {
+            if (data === "Success") {
                 console.log(data);
                 alert(fn + " " + name + " a bien été ajouté dans les acteurs.\nRole : " + role)
                 $('#formContainerActor').css("display", "none");
                 location.reload();
             } else {
-                alert("Une Erreur s'est produite")
+                alert("Une Erreur est survenue")
             }
 
 
@@ -645,24 +653,29 @@ function add_person_in_tb(name, fn, num, tbName) {
     console.log("add_person_in_tb: ", name, fn, num)
     $.ajax({
         url: "adminRequests.php?type=add_in_tb_" + tbName,
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn, num: num}),
         error: function (xhr, status) {
             alert(status);
         },
         success: function (data) {
-            if (tbName == "directedBy") {
-                alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
-                $('#formContainerDirector').css("display", "none");
-                location.reload();
+            if(data === "Success") {
+                if (tbName == "directedBy") {
+                    alert(fn + " " + name + " a bien été ajouté dans les directeurs.");
+                    $('#formContainerDirector').css("display", "none");
+                    location.reload();
 
-            } else if (tbName == "writtenBy") {
-                alert(fn + " " + name + " a bien été ajouté dans les auteurs.");
-                $('#formContainerWriter').css("display", "none");
-                location.reload();
+                } else if (tbName == "writtenBy") {
+                    alert(fn + " " + name + " a bien été ajouté dans les auteurs.");
+                    $('#formContainerWriter').css("display", "none");
+                    location.reload();
 
+                }
+            } else {
+                alert("Une erreur est surevenue.")
             }
+
 
         },
         fail: function () {
@@ -680,17 +693,21 @@ function add_role_by_oeuvre_id(id, name) {
     var role = $('#oeuvre_role').val();
     $.ajax({
         url: "adminRequests.php?type=add_role_by_oeuvre_id",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({id: id, role: role}),
         error: function (xhr, status) {
             alert(status);
         },
         success: function (data) {
-            console.log(data);
-            alert(name + " a bien été ajouté dans les rôles.");
-            $('#formContainerActorPerson').css("display", "none");
-            location.reload();
+            if(data === "Success") {
+                alert(name + " a bien été ajouté dans les rôles.");
+                $('#formContainerActorPerson').css("display", "none");
+                location.reload();
+            } else {
+                alert("Une erreur est survenue.")
+            }
+
 
         },
         fail: function () {
@@ -708,7 +725,7 @@ function add_role_by_oeuvre_id(id, name) {
 function add_person(name, fn, genre, callback) {
     $.ajax({
         url: "adminRequests.php?type=add_person",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn, genre: genre}),
         error: function (xhr, status) {
@@ -787,7 +804,7 @@ function edit_actors_from_oeuvre() {
 
     $.ajax({
         url: "adminRequests.php?type=check_person",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn}),
         error: function (xhr, status) {
@@ -846,7 +863,7 @@ function edit_directors_from_oeuvre() {
 
     $.ajax({
         url: "adminRequests.php?type=check_person",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn}),
         error: function (xhr, status) {
@@ -904,7 +921,7 @@ function edit_writers_from_oeuvre() {
 
     $.ajax({
         url: "adminRequests.php?type=check_person",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({name: name, fn: fn}),
         error: function (xhr, status) {
@@ -955,7 +972,7 @@ function edit_details() {
 function add_details(field_data, field_type) {
     $.ajax({
         url: "adminRequests.php?type=add_details",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({type_field: field_type, data_field: field_data}),
         error: function (xhr, status) {
@@ -1003,7 +1020,7 @@ function rm_details(field_data, field_type) {
     console.log("in rm details")
     $.ajax({
         url: "adminRequests.php?type=remove_details",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({type_field: field_type, data_field: field_data}),
         error: function (xhr, status) {
@@ -1187,7 +1204,7 @@ function edit_actors_from_person() {
 
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({titreOeuvre: titreOeuvre}),
         error: function (xhr, status) {
@@ -1230,7 +1247,7 @@ function edit_writers_from_person() {
 
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({titreOeuvre: titreOeuvre}),
         error: function (xhr, status) {
@@ -1272,7 +1289,7 @@ function edit_directors_from_person() {
 
     $.ajax({
         url: "adminRequests.php?type=check_oeuvre",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({titreOeuvre: titreOeuvre}),
         error: function (xhr, status) {
@@ -1388,7 +1405,7 @@ function insert_movie(title, id, date) { //fct qui fait l insertion dans la db
 
     $.ajax({
         url: "adminRequests.php?type=add_movie",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({id: id, title: title, date: date, note: note}),
         error: function (xhr, status) {
@@ -1423,7 +1440,7 @@ function insert_serie(title, id, date) {
 
     $.ajax({
         url: "adminRequests.php?type=add_serie",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({id: id, title: title, start_date: date, end_date: end_date, note: note}),
         error: function (xhr, status) {
@@ -1483,7 +1500,7 @@ function check_nb_works(title, date, work_type) {
     console.log("checking nb works", title, date)
     $.ajax({
         url: "adminRequests.php?type=check_nb_works",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({title: title, date: date}),
         error: function (xhr, status) {
@@ -1620,7 +1637,7 @@ function check_if_episode_exist(saison, numero, sid) {
     console.log("checking if episode exist");
     $.ajax({
         url: "adminRequests.php?type=check_if_episode_exist",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({saison: saison, numero: numero, sid: sid}),
         error: function (xhr, status) {
@@ -1659,7 +1676,7 @@ function insert_episode(title, saison, numero, episode_id, date, note, sid) {
     console.log("inserting episode");
     $.ajax({
         url: "adminRequests.php?type=insert_episode",
-        type: "POST",
+        type: "GET",
         dataType: 'json', // add json datatype to get json
         data: ({
             saison: saison,
