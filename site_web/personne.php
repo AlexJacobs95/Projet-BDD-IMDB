@@ -48,6 +48,8 @@ if (!$database) {
     $written = $database->query($querry);
 
 
+    $database->close();
+
 }
 
 

@@ -26,6 +26,9 @@ if (!$database) {
         $stars = $row["Etoiles"];
         array_push($rows, [$author, $comment, $date, $stars]);
     }
+
+
+    $database->close();
 }
 
 

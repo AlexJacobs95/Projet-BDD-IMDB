@@ -688,6 +688,9 @@ if (!$database) {
 
 
     }
+
+
+    $database->close();
 }
 
 

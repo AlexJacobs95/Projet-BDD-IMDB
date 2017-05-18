@@ -75,7 +75,7 @@ if (!$database) {
 
     $plot_res = $database->query($querry);
 
-
+    $database->close();
 }
 
 ?>

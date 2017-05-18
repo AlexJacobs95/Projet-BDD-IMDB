@@ -99,6 +99,8 @@ if (!$database) {
 
 
     $duration = (round(microtime(true) * 1000) - $start_time) / 1000;
+
+    $database->close();
 }
 ?>
 

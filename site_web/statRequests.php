@@ -123,4 +123,7 @@ if (!$database) {
         echo json_encode($data);
     }
 
+
+    $database->close();
+
 }
