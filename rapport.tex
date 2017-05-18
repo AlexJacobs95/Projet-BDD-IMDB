@@ -65,11 +65,11 @@
 \newpage
 
 \section{Introduction}
-Dans le cadre du cours de "Base de donnée", nous avons du réaliser un projet mettant en applications les différents concepts vus en cours et lors des séances de travaux pratiques.
+Dans le cadre du cours de "Base de données", nous avons dû réaliser un projet mettant en application les différents concepts vus en cours et lors des séances de travaux pratiques.
 \subsection{Objectif du projet}
-L'objectif du projets fût à partir de fichiers disponible sur internet de récréer un base de donnée sur le concept de "IMDB: Internet Movie Database". Le projet fut divisé en deux grandes parties, la première partie (section \ref{première partie}) étant la création d'un diagramme entité-association et un diagramme relationnel. La seconde partie (section \ref{deuxieme partie}) fut la plus pratique qui était l'implémentation de la base de donnée et la création du site web. \\
+L'objectif du projet était de recréer une base de données du type de "IMDB: Internet Movie Database" à partir de fichiers disponibles sur internet. Le projet était divisé en deux grandes parties. La première partie (section \ref{première partie}) consistait en la création d'un diagramme entité-association et d'un diagramme relationnel. La seconde partie (section \ref{deuxieme partie}), la plus pratique, était l'implémentation de la base de données et la création du site web. \\
 
-En plus de devoir faire une base de donnée, nous avons dû faire les scripts qui permettaient la création de la base de donnée et l'extraction des données qui y sont stockés. Aussi à fin de pouvoir utiliser notre base de donnée, nous avons crée un site web permettant de rechercher sur des critère simple ou avancés des œuvres(film, série ou épisodes), des personnes(acteur, directeur, auteur).
+En plus de devoir faire une base de données, nous avons dû faire les scripts qui permettaient la création de la celle-ci et l'extraction des données qui y sont stockées. Aussi, afin de pouvoir utiliser notre base de données, nous avons créé un site web permettant de rechercher en fonction de critères simples ou avancés des œuvres(film, série ou épisodes) ou des personnes(acteur, directeur, auteur).
 
 \newpage
 \section{Première Partie}\label{première partie}
@@ -81,19 +81,19 @@ En plus de devoir faire une base de donnée, nous avons dû faire les scripts qu
 \subsubsection{Contraintes et hypothèses}
 
 \noindent\underline{Contraintes}
-\\ \\ L'année de fin d'une série doît être postérieur à l'année de commencement de la série. \\ Un numéro d’épisode ne peut pas être négaif. Une note doit être compris entre 0 et 10. \\
+\\ \\ L'année de fin d'une série doit être postérieure à l'année de commencement de la série. \\ Un numéro d’épisode ne peut pas être négatif. Une note doit être comprise entre 0 et 10. \\
 La date de sortie d’un épisode doit être postérieure ou égale à la date de sortie de la série auquel il appartient.
 \\
 \\
 \noindent\underline{Hypothèses}
 \\ \\ Une personne (Auteur, Producteur, Directeur, Acteur) peut n’avoir participé à aucune œuvre.
-Une oeuvre peut avoir été tournée dans plusieurs pays, avoir plusieurs langues et avoir différents genres.\\
+Une oeuvre peut avoir été tournée dans plusieurs pays, avoir plusieurs langues ainsi que différents genres.\\
 L’année de sortie d’une œuvre peut être inconnue. \\
-Si un pays se trouve dans la base de donnée c’est qu’au moins une Œuvre y a été tournée. \\
-Si un genre se trouve dans la base de donnée c’est qu’il existe au moins une Œuvre de ce genre. \\
-Si une langue se trouve dans la base de donnée, c’est qu’elle est parlée dans au moins une œuvre. \\
+Si un pays se trouve dans la base de données, c’est qu’au moins une Œuvre y a été tournée. \\
+Si un genre se trouve dans la base de données, c’est qu’il existe au moins une Œuvre de ce genre. \\
+Si une langue se trouve dans la base de données, c’est qu’elle est parlée dans au moins une œuvre. \\
 Un acteur peut jouer plusieurs rôles dans une même œuvre. \\
-Un rôle peut être jouer plusieurs acteurs (exemple: enfant et adulte). \\
+Un rôle peut être joué par plusieurs acteurs (exemple: enfant et adulte). \\
 Plusieurs personnes peuvent avoir le même nom et le même prénom, dans ce cas nous leur attribuons également un numéro pour les différencier.\\
 Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en même temps.
 
@@ -177,7 +177,7 @@ Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en m�
 	Série.SerieID référence Œuvre.SerieID
 \\
 \\
-\textbf{Episode}(\underline{EpisodeID},TitreE, NuméroE, Date de sortie, SID)
+\textbf{Episode}(\underline{EpisodeID},TitreE, NuméroE, SID)
 \\
 		Episode.EpisodeID référence Œuvre.ID
         \\
@@ -187,20 +187,20 @@ Le nom ou le prénom d’une personne peut être inconnu mais pas les deux en m�
 \textbf{Administrateur}(\underline{Adresse mail}, mot de passe)
 \subsubsection{Contraintes modèle relationnel}
 \noindent Episode.Date de sortie >= Serie.Date de sortie \\
-RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série) \\
-RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison) \\
-Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’à une Œuvre)
+RéférenceS est unique dans la relation saison (une saison ne peut appartenir qu’à une série). \\
+RéférenceS est unique dans la relation Episode (un Episode ne peut appartenir qu’à une saison). \\
+Référence est unique dans la relation Rôle (un Rôle ne peut appartenir qu’à une Œuvre).
 
 \newpage
 \section{Deuxième Partie}\label{deuxieme partie}
 
 \subsection{Méthode d'extraction des données}
 
-Pour l'extraction des données qui seront insérer dans notre base de donnée. Nous avons tout d'abord réaliser un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers téléchargé, nous avons réalisé un autre script bash qui lui fait appel à différents parsers écrit en Python permettant de formater les fichiers selon un standard que nous nous sommes fixé et ainsi permettre l'insertion des données dans la base de donnée. Lors du Parsing, nous avons choisis de garder uniquement les oeuvres tournées entre 2000 et 2017.
+Pour l'extraction des données qui seront insérées dans notre base de données, nous avons tout d'abord réalisé un script bash permettant le téléchargement des fichiers qui nous étaient nécessaires. En ce qui concerne le traitement des fichiers téléchargés, nous avons réalisé un autre script bash qui lui fait appel à différents parsers écrit en Python. Ces scripts servent à formater les fichiers selon un standard que nous nous sommes fixés et ainsi permettre l'insertion des données dans la base de données. Lors du Parsing, nous avons choisi de garder uniquement les oeuvres tournées entre 2000 et 2017.
 
-\subsection{Méthode d'insertion dans la base de donnée}
+\subsection{Méthode d'insertion dans la base de données}
 
-Pour insérer toutes nos données le plus rapidement possible, nous avons choisis d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultants de notre parsing.
+Pour insérer toutes nos données le plus rapidement possible, nous avons choisi d'utiliser la commande SQL "LOAD DATA INTO", utilisant les fichiers résultant de notre parsing.
 
 
 \subsection{Requêtes demandées}
@@ -568,11 +568,11 @@ Le site est divisé en 4 parties principales :
 \item La page d’accueil, d'où un utilisateur peut lancer une recherche pour une Œuvre ou des personnes.
 \item L'espace administrateur, permettant d'ajouter des oeuvres et personnes à la base de données.
 \item La recherche avancée.
-\item La page de statistique, offrant quelques informations intéressantes sur les données stockés dans la base de donnée.
+\item La page de statistiques, offrant quelques informations intéressantes sur les données stockées dans la base de données.
 \end{itemize}
 
 \subsection{L'administrateur}
-Lorsque un administrateur s'identifie celui-ci profite de nombreuses options supplémentaires. Outre le fait de posséder le droit d'insertion dans la base donnée, aussi bien pour une oeuvre qu'une personne, celui-ci peut également complètement modifier les pages du site. En effet, l'interface des pages change lorsque un administrateur est identifié. Cette interface lui permet pour une oeuvre de :
+Lorsqu'un administrateur s'identifie, celui-ci profite de nombreuses options supplémentaires. Outre le fait de posséder le droit d'insertion dans la base données, aussi bien pour une oeuvre qu'une personne, celui-ci peut également complètement modifier les pages du site. En effet, l'interface des pages change lorsque un administrateur est identifié. Cette interface lui permet pour une oeuvre de :
 \vskip 3pt
 \begin{itemize}
 \item Modifier le titre.
@@ -586,30 +586,30 @@ Lorsque un administrateur s'identifie celui-ci profite de nombreuses options sup
 \end{itemize}
 
 \vskip 10pt
-et dans le cadre d'une personne de :
+Et dans le cadre d'une personne de :
 \begin{itemize}
 \item Modifier ses rôles.
-\item Modifier (ajouter et supprimer) les film dont elle est l’auteur.
-\item Modifier (ajouter et supprimer) les film dont elle est le directeur.
+\item Modifier (ajouter et supprimer) les films dont elle est l’auteur.
+\item Modifier (ajouter et supprimer) les films dont elle est le directeur.
 \item Supprimer la personne.
 \end{itemize}
 
 \subsection{La recherche}
 
-L'utilisateur à la possibilité de rechercher des oeuvres (films, séries, épisodes) et des personnes au travers de notre moteur de recherche. Pour trouver un maximum de résultats le plus rapidement possible (et conserver leurs pertinences) nous avons choisit d'utiliser les requêtes \textit{MATCH (...) AGAINST (... IN BOOLEAN MODE)} utilisant des fulltext indexes. 
+L'utilisateur a la possibilité de rechercher des oeuvres (films, séries, épisodes) et des personnes au travers de notre moteur de recherche. Pour trouver un maximum de résultats le plus rapidement possible (et conserver leur pertinence), nous avons choisi d'utiliser les requêtes \textit{MATCH (...) AGAINST (... IN BOOLEAN MODE)} utilisant des fulltext indexes. 
 \par 
-Le contenu de l'input entré par l'utilisateur est d'abord traité pour augmenté la pertinence des résultat en ajoutant des "+" devant chaque mots, cela force tous les mots entrés à se trouver dans le résultat et nous évitons donc un nombre trop important de "matchs".
+Le contenu de l'input entré par l'utilisateur est d'abord traité pour augmenter la pertinence des résultats en ajoutant des "+" devant chaque mot, cela force tous les mots entrés à se trouver dans le résultat et nous évitons donc un nombre trop important de "matchs".
 \par
-Aussi, si jamais l'utilisateur entre des mots composés exclusivement d'une seule lettre, par exemple pour rechercher le film \textit{A (2002)} une simple requête \textit{WHERE = }
+Aussi, si jamais l'utilisateur entre des mots composés exclusivement d'une seule lettre, par exemple pour rechercher le film \textit{A (2002)}, une simple requête \textit{WHERE = }
 sera exécutée pour éviter d'avoir un nombre aberrant de résultats.
 
 \subsection{API}
-Nous nous sommes servi de l'api du site www.themoviedb.org pour ajouter du contenu à notre site web. \\
-Pour les films ainsi que les séries nous avons récupéré le poster et une image de fond. Nous avons également pu récupéré les photos des personnes et les trailers des films. Par contre nous n'avons pas pu certifié la concordance du contenu récupéré avec l'oeuvre ou la personne car l'API utilise un système d'id différent du notre. Il se peut donc que du contenu non cohérent apparaisse dans le cas ou 2 oeuvres on le même titre et la même année de sortie ou lorsque 2 personnes ont le même nom. Les posters sont disponibles pour les films et les séries alors que les trailers sont uniquement disponibles pour les films
+Nous nous sommes servis de l'api du site www.themoviedb.org pour ajouter du contenu à notre site web. \\
+Pour les films ainsi que les séries, nous avons récupéré le poster et une image de fond. Nous avons également pu récupérer les photos des personnes et les trailers des films. Par contre, nous n'avons pas pu certifier la concordance du contenu récupéré avec l'oeuvre ou la personne car l'API utilise un système d'id différent du notre. Il se peut donc que du contenu non cohérent apparaisse dans le cas où 2 oeuvres ont le même titre et la même année de sortie ou lorsque 2 personnes ont le même nom. Les posters sont disponibles pour les films et les séries alors que les trailers sont uniquement disponibles pour les films.
 
 \newpage
 \subsection{Statistiques}
-La section statistiques permet à l'utilisateur d'obtenir des informations intéressantes sur les données stockées dans la base de données. Ces informations sont illustrés grâce à des graphiques. \\
+La section statistiques permet à l'utilisateur d'obtenir des informations intéressantes sur les données stockées dans la base de données. Ces informations sont illustrées grâce à des graphiques. \\
 
 Dans cette section sont disponibles les informations suivantes : 
 \vskip 3pt
@@ -627,7 +627,7 @@ Sur chaque page d'oeuvre, les utilisateurs ont la possibilité de laisser un com
 
 \section{Conclusion}
 
-Pour conclure, ce projet nous aura permis de mettre en pratique les éléments vu aux cours théorique ainsi que d'approfondir et conforter nos compétences acquises lors des travaux pratiques. Ce projet nous auras également permis d'apprendre à réaliser un site web et fut un excellent moyen pour nous faire découvrir les concepts de bases de php et javaScript. C'est au final un des projets les plus complets que nous avons du réaliser car il nécessitait l'utilisation de différentes technologies, formant un tout. 
+Pour conclure, ce projet nous aura permis de mettre en pratique les éléments vus au cours théorique ainsi que d'approfondir et conforter nos compétences acquises lors des travaux pratiques. Ce projet nous aura également permis d'apprendre à réaliser un site web et a été un excellent moyen pour nous faire découvrir les concepts de base de php et javaScript. C'est, au final, un des projets les plus complets que nous avons dû réaliser car il nécessitait l'utilisation de différentes technologies qui mises ensemble forment un tout. 
 
 
 
