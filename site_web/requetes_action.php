@@ -196,6 +196,8 @@ if ($database->connect_errno) {
         echo json_encode($rows);
     }
 
+    $database->close();
+
 }
 /*
 "SELECT DISTINCT EpisodeID
