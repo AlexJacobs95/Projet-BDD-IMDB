@@ -212,7 +212,7 @@ while ($episodes_row = mysqli_fetch_array($episodes)) {
         <div class="row">
             <div class="col-lg-12 text-center" id=resume_block>
                 <h2 class="section-heading" id="resume-title">Résumé</h2>
-                <div class="content hideContent-plot" id="plot"><span> <?php echo $plot ?> </span></div>
+                <div class="content hideContent-plot" id="plot"><span id = "text_plot"> <?php echo $plot ?> </span></div>
 
             </div>
         </div>

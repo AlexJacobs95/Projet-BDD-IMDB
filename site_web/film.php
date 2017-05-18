@@ -260,3 +260,7 @@ $database->close();
 </script>
 
 </html>
+
+<?php
+$database->close();
+?>
