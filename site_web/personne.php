@@ -47,9 +47,6 @@ if (!$database) {
                WHERE Prenom = '$firstname_escape' AND Nom = '$lastname_escape'AND Numero = '$numero'";
     $written = $database->query($querry);
 
-
-    $database->close();
-
 }
 
 
@@ -338,6 +335,8 @@ $logged = 0;
 if (isset($_SESSION['logged'])) {
     $logged = 1;
 }
+
+$database->close();
 ?>
 
 <script>
